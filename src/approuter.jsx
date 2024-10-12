@@ -113,7 +113,7 @@ import Profile from "./components/pages/login/Profile";
 import EditProfile from "./components/pages/login/EditProfile";
 import BlankPage from "./components/pages/login/BlankPage";
 import Doctor_Dashboard from "./components/Dashboard/Doctor_Dashboard/Doctor_Dashboard";
-import Admin_Dashboard from "./components/Dashboard/Admin_Dashboard/Admin_Dashboard";
+// import Admin_Dashboard from "./components/Dashboard/Admin_Dashboard/Admin_Dashboard";
 import Patient_Dashboard from "./components/Dashboard/Patient_Dashboard/Patient_Dashboard";
 import Doctor_Settings from "./components/Dashboard/Doctor_Dashboard/Doctor_Settings";
 import Patient_Settings from "./components/patients/Patient_Settings";
@@ -125,6 +125,8 @@ import Edit_Payment from "./components/accounts/Edit_Payment";
 import Payslip from "./components/Payroll/Payslip";
 import Setting from "./components/settings/Setting";
 import GalleryImage from "./components/pages/Gallery/Gallery";
+import Dashboard from "./components/pages/Dashboard";
+// import Dashboard from "./components/Dashboard/Dashboard";
 
 //Accounts
 const Approuter = () => {
@@ -276,7 +278,8 @@ const Approuter = () => {
           {/* Calender */}
           <Route path="/calender" element={<Calender />} />
           {/* Dashboard */}
-          <Route path="/admin-dashboard" element={<Admin_Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          {/* <Route path="/admin-dashboard" element={<Admin_Dashboard />} /> */}
           <Route path="/doctor-dashboard" element={<Doctor_Dashboard />} />
           <Route path="/patient-dashboard" element={<Patient_Dashboard />} />
         </Routes>

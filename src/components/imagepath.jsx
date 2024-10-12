@@ -6,6 +6,7 @@ export { default as loginicon03 } from "../assets/img/icons/login-icon-03.svg";
 export { default as logout } from "../assets/img/icons/logout.svg";
 
 export { default as logo } from "../assets/img/logo.png";
+export {default as user_profile } from "../assets/img/user-profile.png";
 
 export { default as baricon } from "../assets/img/icons/bar-icon.svg";
 export { default as baricon1 } from "../assets/img/icons/bar-icon.svg";
@@ -244,6 +245,11 @@ export {default as timericon} from "../assets/img/icons/timer.svg";
 export {default as profileicon} from "../assets/img/icons/profile.svg";
 export {default as imgicon} from "../assets/img/icons/edit.svg";
 export {default as calendar} from "../assets/img/icons/calendar.svg";
+export {default as profile_hospitals} from "../assets/img/icons/profile-hospitals.svg";
+export {default as doctors} from "../assets/img/icons/doctors.svg";
+export {default as fasttag} from "../assets/img/icons/fasttag.svg";
+export {default as fasttag_revenue} from "../assets/img/icons/fasttag-revenue.svg";
+
 export {default as profile_add} from "../assets/img/icons/profile-add.svg";
 export {default as scissor} from "../assets/img/icons/scissor.svg";
 export {default as empty_wallet} from "../assets/img/icons/empty-wallet.svg";

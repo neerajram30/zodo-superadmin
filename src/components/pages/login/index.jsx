@@ -83,7 +83,7 @@ const Login = () => {
                         </div>
                         <div className="form-group login-btn">
                           <Link
-                            to="/admin-dashboard"
+                            to="/dashboard"
                             className="btn btn-primary btn-block"
                           >
                             Login

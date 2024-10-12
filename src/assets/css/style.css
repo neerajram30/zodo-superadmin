@@ -1618,7 +1618,7 @@ textarea.form-control {
   margin-bottom: 20px;
 }
 .dash-content h2 {
-  color: #2e37a4;
+  color: #347D73;
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 20px;
@@ -1634,6 +1634,23 @@ textarea.form-control {
 }
 .dash-content p .passive-view {
   color: #00d3c7;
+}
+.dash-table h6{
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+.dash-table p{
+    color: rgba(51, 52, 72, 0.5);
+    font-size: 10px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+.table-link p{
+  font-size: 13px;
+}
+.table-action p {
+  font-size: 13px;
 }
 .comman-flex-center {
   display: -webkit-box;
@@ -1901,7 +1918,7 @@ ul.chat-user-total li i.old-users {
   font-weight: 600;
 }
 .morning-user h2 span {
-  color: #2e37a4;
+  color: #347D73;
 }
 .morning-user p {
   font-size: 15px;
@@ -2367,7 +2384,7 @@ table.dataTable thead .sorting_desc_disabled:after {
 }
 .dash-content h5 {
   font-size: 24px;
-  color: #2e37a4;
+  color: #347D73;
   font-weight: 600;
   margin-bottom: 20px;
 }

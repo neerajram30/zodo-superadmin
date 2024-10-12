@@ -1,32 +1,34 @@
 import React, { useState } from "react";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-import DonutChart from "../DonutChart";
-import Sidebar from "../../Sidebar";
-import Header from "../../Header";
-import PatientChart from "../PaitentChart";
+import DonutChart from "./DonutChart";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import PatientChart from "./PaitentChart";
 import Select from "react-select";
 import {
   Avatar2,
   Avatar3,
   Avatar4,
   Avatar5,
-  calendar,
+//   calendar,
   dep_icon1,
   dep_icon2,
   dep_icon3,
   dep_icon4,
   dep_icon5,
-  empty_wallet,
+//   empty_wallet,
   imagesend,
-  morning_img_01,
-  profile_add,
-  scissor,
+//   morning_img_01,
+//   profile_add,
+//   scissor,
   user001,
-} from "../../imagepath";
+} from "../imagepath";
 import { Link } from "react-router-dom";
-import CountUp from "react-countup";
+// import CountUp from "react-countup";
+import Hero from "./hero";
+import InfoCards from "./Info_cards";
 
-const Admin_Dashboard = () => {
+function Dashboard() {
   const [selectedOption, setSelectedOption] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [year, setyear] = useState([
@@ -35,7 +37,6 @@ const Admin_Dashboard = () => {
     { value: 3, label: "2020" },
     { value: 4, label: "2019" },
   ]);
-
   return (
     <>
       <Header />
@@ -65,115 +66,8 @@ const Admin_Dashboard = () => {
                 </div>
               </div>
             </div>
-            {/* /Page Header */}
-            <div className="good-morning-blk">
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="morning-user">
-                    <h2>
-                      Good Morning, <span>Daniel Bruk</span>
-                    </h2>
-                    <p>Have a nice day at work</p>
-                  </div>
-                </div>
-                <div className="col-md-6 position-blk">
-                  <div className="morning-img">
-                    <img src={morning_img_01} alt="#" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                <div className="dash-widget">
-                  <div className="dash-boxs comman-flex-center">
-                    <img src={calendar} alt="#" />
-                  </div>
-                  <div className="dash-content dash-count flex-grow-1">
-                    <h4>Appointments</h4>
-                    <h2>
-                      {" "}
-                      <CountUp delay={0.4} end={250} duration={0.6} />
-                    </h2>
-                    <p>
-                      <span className="passive-view">
-                        <i className="feather-arrow-up-right me-1">
-                          <FeatherIcon icon="arrow-up-right" />
-                        </i>
-                        40%
-                      </span>{" "}
-                      vs last month
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                <div className="dash-widget">
-                  <div className="dash-boxs comman-flex-center">
-                    <img src={profile_add} alt="#" />
-                  </div>
-                  <div className="dash-content dash-count">
-                    <h4>New Patients</h4>
-                    <h2>
-                      <CountUp delay={0.4} end={140} duration={0.6} />
-                    </h2>
-                    <p>
-                      <span className="passive-view">
-                        <i className="feather-arrow-up-right me-1">
-                          <FeatherIcon icon="arrow-up-right" />
-                        </i>
-                        20%
-                      </span>{" "}
-                      vs last month
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                <div className="dash-widget">
-                  <div className="dash-boxs comman-flex-center">
-                    <img src={scissor} alt="#" />
-                  </div>
-                  <div className="dash-content dash-count">
-                    <h4>Operations</h4>
-                    <h2>
-                      <CountUp delay={0.4} end={56} duration={0.6} />
-                    </h2>
-                    <p>
-                      <span className="negative-view">
-                        <i className="feather-arrow-down-right me-1">
-                          <FeatherIcon icon="arrow-down-right" />
-                        </i>
-                        15%
-                      </span>{" "}
-                      vs last month
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                <div className="dash-widget">
-                  <div className="dash-boxs comman-flex-center">
-                    <img src={empty_wallet} alt="#" />
-                  </div>
-                  <div className="dash-content dash-count">
-                    <h4>Earnings</h4>
-                    <h2>
-                      $<CountUp delay={0.4} end={20250} duration={0.6} />
-                    </h2>
-                    <p>
-                      <span className="passive-view">
-                        <i className="feather-arrow-up-right me-1">
-                          <FeatherIcon icon="arrow-up-right" />
-                        </i>
-                        30%
-                      </span>{" "}
-                      vs last month
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Hero/>
+            <InfoCards/>
             <div className="row">
               <div className="col-12 col-md-12 col-lg-6 col-xl-9">
                 <div className="card">
@@ -326,6 +220,7 @@ const Admin_Dashboard = () => {
                       Show all
                     </Link>
                   </div>
+
                   <div className="card-body p-0 table-dash">
                     <div className="table-responsive">
                       <table className="table mb-0 border-0 datatable custom-table">
@@ -657,6 +552,8 @@ const Admin_Dashboard = () => {
                       </table>
                     </div>
                   </div>
+
+                  
                 </div>
               </div>
             </div>
@@ -1004,6 +901,6 @@ const Admin_Dashboard = () => {
       </>
     </>
   );
-};
+}
 
-export default Admin_Dashboard;
+export default Dashboard;
