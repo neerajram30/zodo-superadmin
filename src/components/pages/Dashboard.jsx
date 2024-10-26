@@ -35,7 +35,7 @@ function Dashboard() {
 
   
   return (
-    <Layout>
+    <Layout activeClassName="dashboard">
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb />

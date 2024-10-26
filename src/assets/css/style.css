@@ -49,7 +49,8 @@ Version      : 1.0
 40. Chat Sidebar
 41. Gallery
 42. Settings
-43. Responsive
+43. Manage
+44. Responsive
 
 ========================================*/
 
@@ -627,6 +628,12 @@ table.table td h2 span {
 .dropdown-menu {
   font-size: 13px;
 }
+.dropdown-menu .dropdown-menu-icon{
+  /* font-size: 10px; */
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
 .btn-link,
 .btn-link:hover,
 .btn-link:focus,
@@ -966,7 +973,7 @@ textarea.form-control {
 -----------------------*/
 
 .sidebar {
-  top: 90px;
+  top: 80px;
   width: 250px;
   z-index: 1039;
   background-color: #fff;
@@ -975,7 +982,7 @@ textarea.form-control {
   position: fixed;
   left: 0;
   transition: all 0.2s ease-in-out;
-  border-top-right-radius: 40px;
+  /* border-top-right-radius: 40px; */
   box-shadow: 5px 20px 14px rgba(46, 55, 164, 0.05);
   overflow-y: hidden;
   height: 100vh;
@@ -1307,7 +1314,7 @@ textarea.form-control {
   transition: all 0.4s ease;
 }
 .page-wrapper > .content {
-  padding: 30px;
+  padding: 15px;
   padding-bottom: 0;
 }
 
@@ -1622,6 +1629,11 @@ textarea.form-control {
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 20px;
+}
+.dash-content h6 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
 }
 .dash-content p {
   color: rgba(51, 52, 72, 0.5);
@@ -2965,15 +2977,33 @@ table.dataTable thead .sorting_desc_disabled:after {
   position: absolute;
   width: 120px;
   background: #fff;
+  /* background: #00318b; */
   overflow: hidden;
 }
+
+.hospital-img-wrap{
+  height: 90px;
+  /* position: absolute; */
+  width: 90px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hospital-img-wrap img {
+  width: 90px;
+  height: auto;
+}
+
 .profile-basic {
   margin-left: 140px;
+  /* margin-left: 100px; */
 }
 .profile-img-wrap img {
   width: 120px;
   height: 120px;
 }
+
 .fileupload.btn {
   position: absolute;
   right: 0;
@@ -3260,6 +3290,7 @@ table.dataTable thead .sorting_desc_disabled:after {
   left: 0;
   right: inherit;
 }
+
 .top-liv-search.top-chat-search .form-control {
   padding-left: 40px;
   background: rgba(46, 55, 164, 0.05);
@@ -5046,6 +5077,9 @@ a.vert-icon:hover {
   position: relative;
   width: 80px;
 }
+
+
+
 .profile-img .avatar {
   font-size: 24px;
   height: 80px;
@@ -5053,6 +5087,24 @@ a.vert-icon:hover {
   margin: 0;
   width: 80px;
 }
+
+.hospital-img {
+  cursor: pointer;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+  width: 80px;
+}
+
+.hospital-img .avatar {
+  font-size: 24px;
+  height: 80px;
+  line-height: 80px;
+  margin: 0;
+  width: 80px;
+}
+
+
 .mobile-no > a {
   color: #777;
   display: inline-block;
@@ -5243,24 +5295,57 @@ a.fc-event:not([href]) {
   float: left;
   font-weight: 500;
   margin-right: 30px;
-  width: 30%;
+  width: 10%;
   font-size: 14px;
 }
+
+
+
+.payment-info li .payment-title {
+  color: #515365;
+  float: left;
+  font-weight: 500;
+  margin-right: 0px;
+  width: 45%;
+  font-size: 14px;
+}
+
 .personal-info li .text {
   color: #888da8;
   display: block;
   overflow: hidden;
   font-size: 14px;
 }
-.personal-info li {
-  margin-bottom: 10px;
+
+.payment-info li .payment-text {
+  color: #888da8;
+  display: block;
+  overflow: hidden;
+  font-size: 14px;
 }
+
+.personal-info li {
+  margin-bottom: 0px;
+}
+.payment-info li {
+  margin-bottom: 0px;
+}
+
 .personal-info {
   list-style: none;
   margin-bottom: 0;
   padding: 0;
 }
+.payment-info {
+  list-style: none;
+  margin-bottom: 0;
+  padding: 0;
+}
 .personal-info .text > a {
+  color: #2e37a4;
+  font-size: 14px;
+}
+.payment-info .payment-text > a {
   color: #2e37a4;
   font-size: 14px;
 }
@@ -5280,7 +5365,8 @@ a.fc-event:not([href]) {
   width: 150px;
 }
 .profile-view .profile-basic {
-  margin-left: 170px;
+  /* margin-left: 170px; */
+  margin-left: 110px;
 }
 .staff-msg {
   margin-top: 30px;
@@ -5360,7 +5446,7 @@ a.fc-event:not([href]) {
   text-align: center;
 }
 .profile-info-left {
-  border-right: 2px dashed #ccc;
+  /* border-right: 2px dashed #ccc; */
 }
 .profile-info-left h3 {
   font-size: 20px;
@@ -10005,12 +10091,147 @@ textarea.form-control {
   border: 2px solid rgba(46, 55, 164, 0.1)!important;
 }
 
+/*-----------------
+	43. Manage
+-----------------------*/
+.hospital-card{
+  cursor: pointer;
+}
+.hospital-card h5{
+  font-size: 15px;
+}
+.hospital-card p{
+  font-size: 12px;
+}
 
+.hospital-search {
+  float: left;
+  margin-left: 22px;
+}
+.hospital-search form {
+  margin-top: 13px;
+  position: relative;
+  width: 270px;
+}
+.hospital-search .form-control {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #DBDBDC;
+  height: 40px;
+  padding: 10px 15px 10px 40px;
+}
+.hospital-search .btn {
+  background-color: transparent;
+  /* border-color: transparent; */
+  min-height: 45px;
+  padding: 7px 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.hospital-search .form-control::-webkit-input-placeholder {
+  color: #77A8A1;
+  font-weight: 500;
+}
+.hospital-search .form-control::-moz-placeholder {
+  color: #77A8A1;
+  font-weight: 500;
+}
+.hospital-search .form-control:-ms-input-placeholder {
+  color: #77A8A1;
+  font-weight: 500;
+}
+.hospital-search .form-control::-ms-input-placeholder {
+  color: #77A8A1;
+  font-weight: 500;
+}
+.hospital-search .form-control::placeholder {
+  color: #77A8A1;
+  font-weight: 500;
+}
 
+.hospital-draft-btn{
+  background: transparent;
+  border: 1px solid #008f64;
+}
+
+.hospital-draft-btn:hover{
+  background: transparent;
+  border: 1px solid #008f64;
+}
+.hospital-add-btn{
+  background: #008f64;
+}
+.hospital-add-btn:hover{
+  background: #008f64;
+}
+
+.hospital-modal-backdrop{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.edit-hospital p {
+  color: rgba(51, 52, 72, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+.hospital-file-upload{
+  background-color: #F3F6FB;
+  border: 1px solid gray;
+  border-style: dashed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+.hospital-file-upload p{
+  color: #6C757D;
+  font-size: 14px;
+  font-weight: 500;
+}
+.fastag-switch{
+  width: 50px;
+  height: 30px;
+}
+
+.input-group {
+  width: 200px; /* Adjust the width as needed */
+}
+
+.input-group-text {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+.choose-file-btn{
+  height: 30px;
+  width: 200px;
+  border: 1px solid #008f64;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #008f64;
+}
+.upload-preview{
+  width: 100px;
+  height: 100px;
+  background-color: gainsboro;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 /*-----------------
-	43. Responsive
+	44. Responsive
 -----------------------*/
 
 @media only screen and (min-width: 991px) {
@@ -10164,6 +10385,7 @@ textarea.form-control {
   .nav-tabs-justified.nav-tabs-top > li > a:focus {
     border-width: 2px 0 0 0;
   }
+  
 }
 @media only screen and (max-width: 1199.98px) {
   .invoices-view {
@@ -11026,6 +11248,7 @@ textarea.form-control {
   .invoice-item-box {
     float: left;
   }
+  
 }
 @media only screen and (max-width: 479px) {
   .compose-btn button {
@@ -11213,3 +11436,5 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   top: 26%;
 
 }
+
+

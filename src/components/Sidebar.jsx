@@ -71,7 +71,7 @@ const Sidebar = (props) => {
               onMouseOver={expandMenuOpen}
             >
               <ul>
-                <li className="menu-title">Main</li>
+                {/* <li className="menu-title">Main</li> */}
                 <li className="submenu">
                   {/* <Link to="#" id="menu-item" onClick={(e) => {
 
@@ -85,14 +85,16 @@ const Sidebar = (props) => {
                   </Link> */}
 
                   <Link
-                    className={props?.activeClassName === 'dashboard' ? 'active' : ''}
+                    className={
+                      props?.activeClassName === "dashboard" ? "active" : ""
+                    }
                     id="menu-item"
                     to="/dashboard"
                   >
-                     <span className="menu-side">
+                    <span className="menu-side">
                       <img src={dashboard} alt="" />
                     </span>{" "}
-                    <span> Dashboard </span> 
+                    <span> Dashboard </span>
                     {/* <span className="menu-arrow" /> */}
                   </Link>
 
@@ -110,7 +112,7 @@ const Sidebar = (props) => {
                     </li> */}
                   </ul>
                 </li>
-                <li className="submenu">
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item1"
@@ -122,39 +124,39 @@ const Sidebar = (props) => {
                     <span className="menu-side">
                       <img src={doctor} alt="" />
                     </span>{" "}
-                    <span> Doctors </span> <span className="menu-arrow" />
+                    <span> Manage </span> <span className="menu-arrow" />
                   </Link>
                   <ul
                     style={{
-                      display: sidebar === "Doctors" ? "block" : "none",
+                      display: sidebar === "Manage" ? "block" : "none",
                     }}
                     className="menu-items1"
                   >
                     <li>
                       <Link
                         className={
-                          props?.activeClassName === "doctor-list"
+                          props?.activeClassName === "manage-hospitals"
                             ? "active"
                             : ""
                         }
-                        to="/doctorlist"
+                        to="/manage-hospitals"
                       >
-                        Doctor List
+                        Hospitals
                       </Link>
                     </li>
                     <li>
                       <Link
                         className={
-                          props?.activeClassName === "add-doctor"
+                          props?.activeClassName === "manage-doctors"
                             ? "active"
                             : ""
                         }
-                        to="/add-doctor"
+                        to="/manage-doctors"
                       >
-                        Add Doctor
+                        Doctors
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "edit-doctor"
@@ -163,10 +165,10 @@ const Sidebar = (props) => {
                         }
                         to="/editdoctor"
                       >
-                        Edit Doctor
+                        Manage App
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "doctor-profile"
@@ -177,23 +179,24 @@ const Sidebar = (props) => {
                       >
                         Doctor Profile
                       </Link>
-                    </li>
-                  </ul>
-                </li>
-                <li className="submenu">
+                    </li> */}
+                {/* </ul>
+                </li> */}
+
+                {/* <li className="submenu">
                   <Link
                     to="#"
-                    id="menu-item2"
-                    onClick={(e) => handleClick(e, "menu-item2", "menu-items2")}
+                    id="menu-item1"
+                    onClick={(e) => handleClick(e, "menu-item1", "menu-items1")}
                   >
                     <span className="menu-side">
                       <img src={patients} alt="" />
                     </span>{" "}
-                    <span>Patients </span> <span className="menu-arrow" />
+                    <span>Manage </span> <span className="menu-arrow" />
                   </Link>
-                  <ul style={{ display: "none" }} className="menu-items2">
-                    <li>
-                      <Link
+                  <ul style={{ display: "none" }} className="menu-items1">
+                    <li> */}
+                {/* <Link
                         className={
                           props?.activeClassName === "patient-list"
                             ? "active"
@@ -202,10 +205,21 @@ const Sidebar = (props) => {
                         to="/patientslist"
                       >
                         Patients List
+                      </Link> */}
+
+                {/* <Link
+                        className={
+                          props?.activeClassName === "manage-hospitals"
+                            ? "active"
+                            : ""
+                        }
+                        to="/manage-hospitals"
+                      >
+                        Hospitals
                       </Link>
                     </li>
-                    <li>
-                      <Link
+                    <li> */}
+                {/* <Link
                         className={
                           props?.activeClassName === "add-patient"
                             ? "active"
@@ -214,9 +228,19 @@ const Sidebar = (props) => {
                         to="/addpatients"
                       >
                         Add Patients
+                      </Link> */}
+                {/* <Link
+                        className={
+                          props?.activeClassName === "manage-doctors"
+                            ? "active"
+                            : ""
+                        }
+                        to="/manage-doctors"
+                      >
+                        Doctors
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "edit-patient"
@@ -227,8 +251,8 @@ const Sidebar = (props) => {
                       >
                         Edit Patients
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "patient" ? "active" : ""
@@ -237,9 +261,9 @@ const Sidebar = (props) => {
                       >
                         Patients Profile
                       </Link>
-                    </li>
-                  </ul>
-                </li>
+                    </li> */}
+                {/* </ul>
+                </li> */}
                 <li className="submenu">
                   <Link
                     to="#"
@@ -249,32 +273,34 @@ const Sidebar = (props) => {
                     <span className="menu-side">
                       <img src={menuicon08} alt="" />
                     </span>{" "}
-                    <span> Staff </span> <span className="menu-arrow" />
+                    <span> Manage </span> <span className="menu-arrow" />
                   </Link>
                   <ul style={{ display: "none" }} className="menu-items3">
                     <li>
                       <Link
                         className={
-                          props?.activeClassName === "staff-list"
+                          props?.activeClassName === "manage-hospitals"
                             ? "active"
                             : ""
                         }
-                        to="/stafflist"
+                        to="/manage-hospitals"
                       >
-                        Staff List
+                        Hospitals
                       </Link>
                     </li>
                     <li>
                       <Link
                         className={
-                          props?.activeClassName === "add-staff" ? "active" : ""
+                          props?.activeClassName === "manage-doctors"
+                            ? "active"
+                            : ""
                         }
-                        to="/addstaff"
+                        to="/manage-doctors"
                       >
-                        Add Staff
+                        Doctors
                       </Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "staff-profile"
@@ -285,8 +311,8 @@ const Sidebar = (props) => {
                       >
                         Staff Profile
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "leaves" ? "active" : ""
@@ -295,8 +321,8 @@ const Sidebar = (props) => {
                       >
                         Leaves
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "holidays" ? "active" : ""
@@ -305,8 +331,8 @@ const Sidebar = (props) => {
                       >
                         Holidays
                       </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <Link
                         className={
                           props?.activeClassName === "attendance"
@@ -317,7 +343,7 @@ const Sidebar = (props) => {
                       >
                         Attendance
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </li>
                 <li className="submenu">

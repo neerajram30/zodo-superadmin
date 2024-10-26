@@ -126,6 +126,10 @@ import Payslip from "./components/Payroll/Payslip";
 import Setting from "./components/settings/Setting";
 import GalleryImage from "./components/pages/Gallery/Gallery";
 import Dashboard from "./components/pages/Dashboard";
+import Hospitals from "./components/pages/Hospitals/Hospitals";
+import Doctors from "./components/pages/Doctors";
+import HospitalDetails from "./components/pages/Hospitals/HospitalDetails";
+import EditHospital from "./components/pages/Hospitals/EditHospital";
 // import Dashboard from "./components/Dashboard/Dashboard";
 
 //Accounts
@@ -176,7 +180,12 @@ const Approuter = () => {
           <Route path="/addasset" element={<AddAsset />} />
           <Route path="/edit-assets" element={<Edit_Assets />} />
           {/* Doctor  */}
+
           <Route path="/doctorlist" element={<DoctorList />} />
+          <Route path="/manage-hospitals" element={<Hospitals />} />
+          <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />
+          <Route path="/manage-hospitals/:id/edit" element={<EditHospital />} />
+          <Route path="/manage-doctors" element={<Doctors />} />
           <Route path="/add-doctor" element={<AddDoctor />} />
           <Route path="/editdoctor" element={<EditDoctor />} />
           <Route path="/doctorprofile" element={<DoctorProfile />} />

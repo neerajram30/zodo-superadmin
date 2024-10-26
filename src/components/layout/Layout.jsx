@@ -7,9 +7,9 @@ function Layout(props) {
     <>
       <Header />
       <Sidebar
-        id="menu-item"
-        id1="menu-items"
-        activeClassName="admin-dashboard"
+        id={props.id}
+        id1={props.id1}
+        activeClassName={props?.activeClassName}
       />
       <div>{props.children}</div>
     </>
@@ -18,6 +18,10 @@ function Layout(props) {
 
 Layout.propTypes = {
   children: PropTypes.node,
+  activeClassName:PropTypes.node,
+  id:PropTypes.node,
+  id1:PropTypes.node,
+
 };
 
 export default Layout;
