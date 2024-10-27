@@ -102,6 +102,16 @@ function Hospitals() {
       todayBookings: 221,
     },
   ];
+  const breadCrumpData = [
+    {
+      name:"Manage",
+      status:"inactive"
+    },
+    {
+      name:"Hospitals",
+      status:"active"
+    }
+  ]
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -110,7 +120,7 @@ function Hospitals() {
     >
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb />
+          <Breadcrumb data={breadCrumpData}/>
           <HospitalHeader/>
           <HospitalsList hospitalDetails={hospitalDetails}/>
           <LoadMore/>

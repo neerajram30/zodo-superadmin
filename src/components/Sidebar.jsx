@@ -346,7 +346,7 @@ const Sidebar = (props) => {
                     </li> */}
                   </ul>
                 </li>
-                <li className="submenu">
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item4"
@@ -395,8 +395,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item5"
@@ -446,8 +446,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item6"
@@ -496,8 +496,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item7"
@@ -564,8 +564,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item8"
@@ -604,8 +604,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link
                     className={
                       props?.activeClassName === "chat" ? "active" : ""
@@ -617,8 +617,8 @@ const Sidebar = (props) => {
                     </span>{" "}
                     <span>Chat</span>
                   </Link>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item9"
@@ -667,8 +667,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item10"
@@ -715,8 +715,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item11"
@@ -773,8 +773,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link
                     className={
                       props?.activeClassName === "assests" ? "active" : ""
@@ -783,8 +783,8 @@ const Sidebar = (props) => {
                   >
                     <i className="fa fa-cube" /> <span>Assets</span>
                   </Link>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link
                     className={
                       props?.activeClassName === "activity" ? "active" : ""
@@ -796,8 +796,8 @@ const Sidebar = (props) => {
                     </span>{" "}
                     <span>Activities</span>
                   </Link>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item12"
@@ -836,8 +836,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item13"
@@ -930,17 +930,17 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link to="/settings">
                     <span className="menu-side">
                       <img src={menuicon16} alt="" />
                     </span>{" "}
                     <span>Settings</span>
                   </Link>
-                </li>
-                <li className="menu-title">UI Elements</li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="menu-title">UI Elements</li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item14"
@@ -985,8 +985,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item15"
@@ -1047,8 +1047,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item16"
@@ -1085,8 +1085,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <Link
                     className={
                       props?.activeClassName === "calendar" ? "active" : ""
@@ -1095,9 +1095,9 @@ const Sidebar = (props) => {
                   >
                     <i className="fa fa-calendar" /> <span>Calendar</span>
                   </Link>
-                </li>
-                <li className="menu-title">Extras</li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="menu-title">Extras</li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item17"
@@ -1218,8 +1218,8 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
-                <li className="submenu">
+                </li> */}
+                {/* <li className="submenu">
                   <Link
                     to="#"
                     id="menu-item18"
@@ -1284,7 +1284,7 @@ const Sidebar = (props) => {
                       </Link>
                     </li>
                   </ul>
-                </li>
+                </li> */}
               </ul>
               <div className="logout-btn">
                 <Link to="/login">

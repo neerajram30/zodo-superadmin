@@ -4,8 +4,27 @@ import Breadcrumb from "../../breadcrump/Breadcrumb";
 import UploadFiles from "../../Hospitals/UploadFiles";
 import FastTag from "../../Hospitals/FastTag";
 import ChooseFile from "../../Hospitals/ChooseFile";
+import { useParams } from "react-router-dom";
 function EditHospital() {
-  
+  const { id } = useParams();
+  const breadCrumpData = [
+    {
+      name:"Manage",
+      status:"inactive"
+    },
+    {
+      name:"Hospitals",
+      status:"inactive"
+    },
+    {
+      name:id,
+      status:"inactive"
+    },
+    {
+      name:"Edit",
+      status:"active"
+    }
+  ]
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -14,7 +33,7 @@ function EditHospital() {
     >
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb />
+          <Breadcrumb data={breadCrumpData}/>
           <div className="bg-white rounded p-4">
             <h4>Hospital Onboarding</h4>
             {/* <div className="row"> */}

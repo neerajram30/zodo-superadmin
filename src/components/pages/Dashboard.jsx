@@ -32,13 +32,18 @@ function Dashboard() {
       percentageUp:40
     }
   ] 
-
+  const breadCrumpData = [
+    {
+      name:"Dashboard",
+      status:"active"
+    }
+  ]
   
   return (
     <Layout activeClassName="dashboard">
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb />
+          <Breadcrumb data={breadCrumpData}/>
           <Hero/>
           <InfoCards info={basicInformation}/>
           <RevenueInfo/>

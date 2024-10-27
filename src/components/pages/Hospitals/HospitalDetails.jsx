@@ -3,9 +3,24 @@ import Breadcrumb from "../../breadcrump/Breadcrumb";
 // import { useParams } from "react-router-dom";
 import HospitalDetailsCard from "../../Hospitals/HospitalDetailsCard";
 import Layout from "../../layout/Layout";
+import { useParams } from "react-router-dom";
 
 function HospitalDetails() {
-  // const { id } = useParams();
+  const { id } = useParams();
+  const breadCrumpData = [
+    {
+      name:"Manage",
+      status:"inactive"
+    },
+    {
+      name:"Hospitals",
+      status:"inactive"
+    },
+    {
+      name:id,
+      status:"active"
+    }
+  ]
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -14,7 +29,7 @@ function HospitalDetails() {
     >
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb />
+          <Breadcrumb data={breadCrumpData}/>
           <HospitalDetailsCard />
         </div>
       </div>
