@@ -3,6 +3,7 @@ import { fasttag, fasttag_revenue } from "../imagepath";
 import CountUp from "react-countup";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from 'react-select'
+import { Link } from "react-router-dom";
 
 function RevenueInfo() {
   const [bookingType] = useState([
@@ -75,7 +76,7 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
           </div>
         </div>
 
-        <div className="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+        <Link className="col-md-6 col-sm-6 col-lg-6 col-xl-6" to='fasttag-revenue'>
           <div className="dash-widget">
             <div className="dash-boxs comman-flex-center">
               <img src={fasttag_revenue} alt="#" />
@@ -97,7 +98,7 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
               </p>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     </>
   );

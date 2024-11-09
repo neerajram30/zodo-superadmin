@@ -130,6 +130,7 @@ import Hospitals from "./components/pages/Hospitals/Hospitals";
 import Doctors from "./components/pages/Doctors";
 import HospitalDetails from "./components/pages/Hospitals/HospitalDetails";
 import EditHospital from "./components/pages/Hospitals/EditHospital";
+import FasttagRevenue from "./components/pages/FasttagRevenue";
 // import Dashboard from "./components/Dashboard/Dashboard";
 
 //Accounts
@@ -181,6 +182,7 @@ const Approuter = () => {
           <Route path="/edit-assets" element={<Edit_Assets />} />
           {/* Doctor  */}
 
+          <Route path="/dashboard/fasttag-revenue" element={<FasttagRevenue/>}/>
           <Route path="/doctorlist" element={<DoctorList />} />
           <Route path="/manage-hospitals" element={<Hospitals />} />
           <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />
