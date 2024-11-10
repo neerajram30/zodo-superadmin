@@ -83,14 +83,31 @@ function Finance() {
 
       <div className="card-box mt-0">
         <h5>Transactions</h5>
-
-        <div className="col-12 col-md-6 col-xl-3">
-          <div className="form-group local-forms cal-icon">
-            <DatePicker
-              className="form-control datetimepicker"
-              // onChange={onChange}
-              suffixIcon={null}
-            />
+        <div className="row mt-4">
+          <div className="col-12 col-md-6 col-xl-3">
+            <div className="form-group local-forms cal-icon">
+              <DatePicker
+                className="form-control datetimepicker"
+                // onChange={onChange}
+                suffixIcon={null}
+              />
+            </div>
+          </div>
+          <div className="col-12 col-md-6 col-xl-3">
+            <div className="form-group local-forms">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search"
+                />
+            </div>
+          </div>
+          <div className="col-12 col-md-6 col-xl-3">
+            <div className="form-group local-forms">
+                <div className="outlined-btn form-control">
+                  Export
+                </div>
+            </div>
           </div>
         </div>
         <TransactionTable />
