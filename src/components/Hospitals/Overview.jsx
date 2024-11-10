@@ -38,7 +38,7 @@ function Overview() {
     },
   ];
   return (
-    <div className="row">
+    <div className="row pt-2">
       {revenueOverview.map((item) => (
         <OverViewCard
           varient="col-md-4 col-sm-6 col-lg-4 col-xl-4"

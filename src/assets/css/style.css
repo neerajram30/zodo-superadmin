@@ -8186,7 +8186,7 @@ blockquote p {
   margin-top: 0;
 }
 .tab-content {
-  padding-top: 20px;
+  padding-top: 5px;
 }
 
 /*-----------------
@@ -8610,6 +8610,28 @@ blockquote p {
   min-width: 160px;
   position: relative;
 }
+
+
+.invoices-create-btn-table .invoices-preview-link {
+  font-weight: 500;
+  color: #2e37a4;
+  /* margin-right: 30px; */
+  font-size: 10px;
+}
+.invoices-create-btn-table .delete-invoice-btn {
+  background: #6c757d;
+  /* margin-right: 10px; */
+}
+.invoices-create-btn-table .btn {
+  font-weight: 500;
+  font-size: 10px;
+  color: #fff;
+  border-radius: 8px;
+  padding: 5px 0px;
+  min-width: 80px;
+  position: relative;
+}
+
 .check:checked + .checktoggle {
   background-color: #009efb;
   border: 1px solid #009efb;
@@ -10200,7 +10222,10 @@ textarea.form-control {
   width: 50px;
   height: 30px;
 }
-
+.fastag-switch-table{
+  width: 35px;
+  height: 20px;
+}
 .input-group {
   width: 200px; /* Adjust the width as needed */
 }
@@ -10227,6 +10252,13 @@ textarea.form-control {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.fasttag-table h6 {
+  color: rgba(51, 52, 72, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0px;
 }
 
 

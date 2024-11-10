@@ -1,0 +1,77 @@
+import { Table } from "antd";
+import React, { useState } from "react";
+import { hospitalTransactions } from "../../configs/hospitalTransactions";
+import { itemRender, onShowSizeChange } from "../../Pagination";
+function TransactionTable() {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+  const columns = [
+    {
+      title: "DATE ISSUED",
+      dataIndex: "date",
+      sorter: (a, b) => a.date.length - b.date.length,
+    },
+    {
+      title: "INVOICE#",
+      dataIndex: "invoiceNumber",
+      sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+    },
+    {
+      title: "TRANSACTION NAME",
+      dataIndex: "transactionName",
+      sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+    },
+    {
+      title: "DUE DATE",
+      dataIndex: "dueDate",
+      sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+    },
+    {
+      title: "STATUS",
+      dataIndex: "status",
+      sorter: (a, b) => a.status.length - b.status.length,
+    },
+    {
+      title: "TOTAL",
+      dataIndex: "total",
+      sorter: (a, b) => a.total.length - b.total.length,
+    },
+    {
+        title: "BALANCE",
+        dataIndex: "balance",
+        sorter: (a, b) => a.balance.length - b.balance.length,
+      },{
+        title: "ACTIONS",
+        dataIndex: "actions",
+        sorter: (a, b) => a.actions.length - b.actions.length,
+      },
+  ];
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+  return (
+    <div>
+      <Table
+        pagination={{
+          total: hospitalTransactions.length,
+          showTotal: (total, range) =>
+            `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+          // showSizeChanger: true,
+          onShowSizeChange: onShowSizeChange,
+          itemRender: itemRender,
+        }}
+        columns={columns}
+        dataSource={hospitalTransactions}
+        rowSelection={rowSelection}
+        rowKey={(record) => record.id}
+      />
+    </div>
+  );
+}
+
+export default TransactionTable;

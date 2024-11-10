@@ -1,11 +1,10 @@
 import React from 'react'
 import Layout from '../layout/Layout'
 import Breadcrumb from '../breadcrump/Breadcrumb'
-import Analytics from '../Dashboard/Analytics'
-import FasttagDetails from '../FasttagRevenue/FasttagDetails'
 import BasicHero from '../heros/BasicHero'
+import SettlementList from '../settlements/SettlementList'
 
-function FasttagRevenue() {
+function SettlementRequests() {
     const breadCrumpData = [
         {
           name:"Dashboard",
@@ -21,14 +20,12 @@ function FasttagRevenue() {
         <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData}/>
-          {/* <FasttagRevenueHeader/> */}
-          <BasicHero title="Fast Tag Revenue"/>
-          <Analytics/>
-          <FasttagDetails/>
+          <BasicHero title="Settlement Requests"/>
+          <SettlementList/>
         </div>
       </div>
     </Layout>
   )
 }
 
-export default FasttagRevenue
+export default SettlementRequests

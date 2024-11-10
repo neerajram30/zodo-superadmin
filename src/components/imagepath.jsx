@@ -99,6 +99,7 @@ export { default as favicon1 } from "../assets/img/favicon.png";
 export { default as image1 } from "../assets/img/logo-dark.png";
 export { default as image2 } from "../assets/img/favicon.png";
 //Assests
+export {default as pencil_notebook} from "../assets/img/icons/pencil-notebook.svg";
 export { default as serchimage } from "../assets/img/icons/search-normal.svg";
 export { default as plusicon } from "../assets/img/icons/plus.svg";
 export { default as refreshicon } from "../assets/img/icons/re-fresh.svg";
@@ -126,6 +127,7 @@ export { default as drafticon } from "../assets/img/icons/draft.svg";
 export { default as staricon } from "../assets/img/icons/star.svg";
 // export { default as drafticon } from "../assets/img/icons/draft.svg";
 export { default as trashicon } from "../assets/img/icons/trash.svg";
+export { default as deleteicon } from "../assets/img/icons/delete_icon.svg";
 export { default as tagicon01 } from "../assets/img/icons/tag-icon-01.svg";
 export { default as tagicon02 } from "../assets/img/icons/tag-icon-02.svg";
 export { default as tagicon03 } from "../assets/img/icons/tag-icon-03.svg";
@@ -190,6 +192,7 @@ export { default as Avatar28 } from "../assets/img/profiles/avatar-28.jpg";
 export { default as Avatar29 } from "../assets/img/profiles/avatar-29.jpg";
 export { default as Avatar30 } from "../assets/img/profiles/avatar-30.jpg";
 export { default as apollo_logo } from "../assets/img/apollo_logo.png";
+export { default as kims_logo } from "../assets/img/kims.png";
 
 export { default as chaticon1 } from "../assets/img/icons/chat-icon-01.svg";
 export { default as chaticon2 } from "../assets/img/icons/chat-icon-02.svg";

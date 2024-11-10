@@ -14,6 +14,9 @@ import { apollo_logo, three_dots_menu } from "../imagepath";
 import Overview from "./Overview";
 import HospitalModal from "./HospitalModal";
 import FastTag from "./FastTag";
+import Finance from "./Finance";
+import TotalBookings from "./TotalBookings";
+import Reviews from "./Reviews";
 function HospitalDetailsCard() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -21,14 +24,14 @@ function HospitalDetailsCard() {
   const [show, setShow] = useState(false);
   const tabData = [
     { id: "overview", title: "Overview", content: <Overview /> },
-    { id: "finance", title: "Finance", content: <div>contnt2</div> },
-    { id: "reviews", title: "Reviews", content: <div>contnt3</div> },
+    { id: "finance", title: "Finance", content: <Finance/> },
     {
       id: "total-bookings",
       title: "Total Bookings",
-      content: <div>contnt4</div>,
+      content: <TotalBookings/>,
     },
-    { id: "history", title: "History", content: <div>contnt5</div> },
+    { id: "reviews", title: "Reviews", content: <Reviews/> },
+    // { id: "history", title: "History", content: <div>contnt5</div> },
   ];
 
   return (

@@ -131,6 +131,7 @@ import Doctors from "./components/pages/Doctors";
 import HospitalDetails from "./components/pages/Hospitals/HospitalDetails";
 import EditHospital from "./components/pages/Hospitals/EditHospital";
 import FasttagRevenue from "./components/pages/FasttagRevenue";
+import SettlementRequests from "./components/pages/SettlementRequests";
 // import Dashboard from "./components/Dashboard/Dashboard";
 
 //Accounts
@@ -183,6 +184,7 @@ const Approuter = () => {
           {/* Doctor  */}
 
           <Route path="/dashboard/fasttag-revenue" element={<FasttagRevenue/>}/>
+          <Route path="/dashboard/settlement-requests" element={<SettlementRequests/>}/>
           <Route path="/doctorlist" element={<DoctorList />} />
           <Route path="/manage-hospitals" element={<Hospitals />} />
           <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />

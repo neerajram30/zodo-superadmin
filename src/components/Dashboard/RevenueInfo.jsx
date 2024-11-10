@@ -58,7 +58,7 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
                 />
               </div>
             </div>
-            <div className="dash-content dash-count flex-grow-1">
+            <Link className="dash-content dash-count flex-grow-1" to="settlement-requests"> 
               <h4>Settlement Request</h4>
               <h2>
                 {" "}
@@ -72,7 +72,7 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
                   See All Request
                 </span>{" "}
               </p>
-            </div>
+            </Link>
           </div>
         </div>
 
