@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import HospitalList from "./HospitalList";
 import RequestedHospitals from "./RequestedHospitals";
-
+// fasttag
 function FasttagDetails() {
   const tabData = [
     {
