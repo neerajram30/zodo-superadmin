@@ -1,6 +1,7 @@
 import React from "react";
 import { right_chevron } from "../imagepath";
 import TransactionTable from "./Transactions/TransactionTable";
+import { DatePicker } from "antd";
 
 function Finance() {
   return (
@@ -79,10 +80,20 @@ function Finance() {
           </div>
         </div>
       </div>
-      
+
       <div className="card-box mt-0">
         <h5>Transactions</h5>
-        <TransactionTable/>
+
+        <div className="col-12 col-md-6 col-xl-3">
+          <div className="form-group local-forms cal-icon">
+            <DatePicker
+              className="form-control datetimepicker"
+              // onChange={onChange}
+              suffixIcon={null}
+            />
+          </div>
+        </div>
+        <TransactionTable />
       </div>
     </div>
   );
