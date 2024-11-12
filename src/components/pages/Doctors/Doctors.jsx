@@ -1,6 +1,7 @@
 import React from 'react'
 import Breadcrumb from '../../breadcrump/Breadcrumb'
 import Layout from '../../layout/Layout'
+import DoctorsList from '../../Doctors/DoctorsList'
 
 function Doctors() {
   const breadCrumpData = [
@@ -18,6 +19,7 @@ function Doctors() {
         <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData}/>
+          <DoctorsList/>
         </div>
       </div>
     </Layout>
