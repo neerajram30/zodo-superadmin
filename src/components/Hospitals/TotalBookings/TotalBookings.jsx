@@ -1,5 +1,6 @@
 import React from "react";
 import BookingsCard from "./BookingsCard";
+import BookingTabs from "./BookingTabs";
 
 function TotalBookings() {
   const bookinsDetails = [
@@ -20,12 +21,20 @@ function TotalBookings() {
     },
   ];
   return (
-    <div className="row mt-2">
-      {bookinsDetails.map((item) => (
-        <div key={item.id + item.operation} className="col-md-4 col-sm-6 col-lg-4 col-xl-4">
-          <BookingsCard data={item} />
-        </div>
-      ))}
+    <div>
+      <div className="row mt-2">
+        {bookinsDetails.map((item) => (
+          <div
+            key={item.id + item.operation}
+            className="col-md-4 col-sm-6 col-lg-4 col-xl-4"
+          >
+            <BookingsCard data={item} />
+          </div>
+        ))}
+      </div>
+      <div className="card-box">
+        <BookingTabs />
+      </div>
     </div>
   );
 }
