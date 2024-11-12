@@ -45,8 +45,7 @@ function TransactionTable() {
         sorter: (a, b) => a.balance.length - b.balance.length,
       },{
         title: "ACTIONS",
-        dataIndex: "actions",
-        sorter: (a, b) => a.actions.length - b.actions.length,
+        dataIndex: "actions"
       },
   ];
 
@@ -59,9 +58,9 @@ function TransactionTable() {
       <Table
         pagination={{
           total: hospitalTransactions.length,
-          showTotal: (total, range) =>
-            `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-          // showSizeChanger: true,
+          showSizeChanger: true,
+          // showTotal: (total, range) =>
+          //   `Showing ${range[0]} to ${range[1]} of ${total} entries`,
           onShowSizeChange: onShowSizeChange,
           itemRender: itemRender,
         }}

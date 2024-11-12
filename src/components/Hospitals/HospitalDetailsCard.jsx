@@ -15,8 +15,8 @@ import Overview from "./Overview";
 import HospitalModal from "./HospitalModal";
 import FastTag from "./FastTag";
 import Finance from "./Finance";
-import TotalBookings from "./TotalBookings";
 import Reviews from "./Reviews";
+import TotalBookings from "./TotalBookings/TotalBookings";
 function HospitalDetailsCard() {
   const navigate = useNavigate();
   const { id } = useParams();

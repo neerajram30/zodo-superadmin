@@ -81,7 +81,7 @@ function Finance() {
         </div>
       </div>
 
-      <div className="card-box mt-0">
+      <div className="card-box">
         <h5>Transactions</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">
@@ -95,22 +95,27 @@ function Finance() {
           </div>
           <div className="col-12 col-md-6 col-xl-3">
             <div className="form-group local-forms">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search"
-                />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+              />
             </div>
           </div>
           <div className="col-12 col-md-6 col-xl-3">
             <div className="form-group local-forms">
-                <div className="outlined-btn form-control">
-                  Export
-                </div>
+              <div className="outlined-btn form-control">Export</div>
             </div>
           </div>
         </div>
-        <TransactionTable />
+        <div>
+          <h5>{232} results found</h5>
+        </div>
+
+
+        <div className="table-responsive">
+          <TransactionTable />
+        </div>
       </div>
     </div>
   );
