@@ -236,6 +236,7 @@ function DoctorsList() {
                           </Link>
                         </form>
                       </div>
+                      
                       <div className="add-group">
                         <Link
                           to="/add-doctor"
@@ -253,7 +254,37 @@ function DoctorsList() {
                     </div>
                   </div>
                 </div>
+                
                 <div className="col-auto text-end float-end ms-auto download-grp">
+
+
+                <div className="invoices-create-btn">
+            {/* <Link
+              className="invoices-preview-link"
+              to="#"
+              data-bs-toggle="modal"
+              data-bs-target="#invoices_preview"
+            >
+              <i className="fa fa-eye" /> Preview
+            </Link> */}
+            <Link
+              to="#"
+              data-bs-toggle="modal"
+              data-bs-target="#delete_invoices_details"
+              className="btn hospital-draft-btn rounded-pill text-primary"
+            >
+              My Draft
+            </Link>
+            <Link
+              to="#"
+              data-bs-toggle="modal"
+              data-bs-target="#save_invocies_details"
+              className="btn hospital-add-btn rounded-pill ms-1"
+            >
+              Add Hospital
+            </Link>
+          </div>
+
                   <Link to="#" className=" me-2">
                     <img src={pdficon} alt="#" />
                   </Link>
