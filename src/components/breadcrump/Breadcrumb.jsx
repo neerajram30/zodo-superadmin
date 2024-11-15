@@ -18,7 +18,7 @@ function Breadcrumb(props) {
                   </li>
                   {item.status !== "active" && (
                     <li className="breadcrumb-item">
-                      <i className="feather-chevron-right">
+                      <i className="feather-chevron-right breadcrump-chervron">
                         <FeatherIcon icon="chevron-right" />
                       </i>
                     </li>
