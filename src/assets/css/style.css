@@ -5317,7 +5317,7 @@ a.fc-event:not([href]) {
 
 .payment-info li .payment-title {
   color: #515365;
-  float: left;
+  /* float: left; */
   font-weight: 500;
   margin-right: 0px;
   width: 45%;
@@ -9525,7 +9525,7 @@ td.add-remove {
   -ms-flex-pack: center;
 }
 .page-header {
-  margin-bottom: 1.875rem;
+  /* margin-bottom: 1.875rem; */
 }
 .invoices-table.custom-table tbody tr {
   box-shadow: none;
@@ -9882,8 +9882,8 @@ span.rti--tag {
   transition: left 300ms ease, transform 300ms ease;
 }
 .check:checked + .checktoggle {
-  background-color: #347D73;
-  border: 1px solid #347D73;
+  background-color: #34C759;
+  border: 1px solid #34C759;
 }
 .star-red {
   color: #ff0000;

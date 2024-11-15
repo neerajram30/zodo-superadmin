@@ -60,18 +60,18 @@ function HospitalHeader() {
             >
               <i className="fa fa-eye" /> Preview
             </Link> */}
-            <Link
+            {/* <Link
               to="#"
               data-bs-toggle="modal"
               data-bs-target="#delete_invoices_details"
               className="btn hospital-draft-btn rounded-pill text-primary"
             >
               My Draft
-            </Link>
+            </Link> */}
             <Link
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#save_invocies_details"
+              to="/manage-hospitals/add-hospital"
+              // data-bs-toggle="modal"
+              // data-bs-target="#save_invocies_details"
               className="btn hospital-add-btn rounded-pill ms-1"
             >
               Add Hospital

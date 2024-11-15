@@ -1,8 +1,12 @@
 import React from 'react'
+import SearchHero from '../heros/SearchHero'
 
 function Reviews() {
   return (
-    <div>Reviews</div>
+    <div>
+      <SearchHero/>
+    </div>
+    
   )
 }
 

@@ -7,16 +7,19 @@ function TotalBookings() {
     {
       id: 1,
       bookings: "12,000",
+      dueStatus:"",
       operation: "Total Bookings",
     },
     {
       id: 2,
       bookings: "5000",
+      dueStatus:"",
       operation: "Total Fast Tag Booking",
     },
     {
       id: 3,
       bookings: "12",
+      dueStatus:"No Dues",
       operation: "Cancellation",
     },
   ];

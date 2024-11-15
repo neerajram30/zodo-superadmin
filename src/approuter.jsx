@@ -132,6 +132,7 @@ import HospitalDetails from "./components/pages/Hospitals/HospitalDetails";
 import EditHospital from "./components/pages/Hospitals/EditHospital";
 import FasttagRevenue from "./components/pages/FasttagRevenue";
 import SettlementRequests from "./components/pages/SettlementRequests";
+import AddHospital from "./components/pages/Hospitals/AddHospital";
 // import Dashboard from "./components/Dashboard/Dashboard";
 
 //Accounts
@@ -188,6 +189,7 @@ const Approuter = () => {
           <Route path="/doctorlist" element={<DoctorList />} />
           {/* Manage Hospital */}
           <Route path="/manage-hospitals" element={<Hospitals />} />
+          <Route path="/manage-hospitals/add-hospital" element={<AddHospital/>}/>
           <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />
           <Route path="/manage-hospitals/:id/edit" element={<EditHospital />} />
           {/* Manage Doctors */}

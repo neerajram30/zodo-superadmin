@@ -27,7 +27,7 @@ function Finance() {
                   data-bs-target="#save_invocies_details"
                   className="btn hospital-add-btn rounded-pill text-white mt-2"
                 >
-                  Paid fully
+                  Mark as Paid
                 </button>
               </div>
             </div>

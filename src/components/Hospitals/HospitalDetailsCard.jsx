@@ -6,7 +6,6 @@ import {
   email_icon,
   pencil_icon,
   phone_icon,
-  qr_code,
   search_outline_icon,
   toggle_icon,
 } from "../imagepath";
@@ -17,6 +16,7 @@ import FastTag from "./FastTag";
 import Finance from "./Finance";
 import Reviews from "./Reviews";
 import TotalBookings from "./TotalBookings/TotalBookings";
+import Department from "./Department";
 function HospitalDetailsCard() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -24,6 +24,7 @@ function HospitalDetailsCard() {
   const [show, setShow] = useState(false);
   const tabData = [
     { id: "overview", title: "Overview", content: <Overview /> },
+    { id: "department", title: "Department", content: <Department /> },
     { id: "finance", title: "Finance", content: <Finance/> },
     {
       id: "total-bookings",
@@ -193,34 +194,32 @@ function HospitalDetailsCard() {
 
           <div className="col-md-5">
             <div className="row border border-secondary-subtle pt-3 pb-1">
-              <div className="col-md-4">
-                <img src={qr_code} alt="qr" />
-              </div>
               <div className="col">
                 <ul className="payment-info w-1">
                   <li>
-                    <span className="payment-title">Account Number:</span>
-                    <span className="payment-text">
+                    <span className="payment-title">Account Number: <span>111234567900</span></span>
+                    {/* <span className="payment-text">
                       <p className="">111234567900</p>
-                    </span>
+                    </span> */}
                   </li>
+                  <li className="mt-3 mb-3">
+                    <span className="payment-title">Bank Name: Federal</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="col">
+                <ul className="payment-info">
                   <li>
-                    <span className="payment-title">Bank Name:</span>
-                    <span className="payment-text">
+                    <span className="payment-title">IFSC Code: 111234567900</span>
+                    {/* <span className="payment-text">
+                      <p className="">111234567900</p>
+                    </span> */}
+                  </li>
+                  <li className="mt-3 mb-3">
+                    <span className="payment-title">UPI ID: 123@oksbi</span>
+                    {/* <span className="payment-text">
                       <p className="">Federal</p>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="payment-title">IFSC Code:</span>
-                    <span className="payment-text">
-                      <p className="">FDRL124</p>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="payment-title">UPI ID:</span>
-                    <span className="payment-text">
-                      <p className="">1234@oksbi</p>
-                    </span>
+                    </span> */}
                   </li>
                 </ul>
               </div>
