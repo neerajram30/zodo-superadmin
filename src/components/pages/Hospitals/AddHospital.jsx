@@ -4,6 +4,7 @@ import Layout from "../../layout/Layout";
 import ChooseFile from "../../Hospitals/ChooseFile";
 import FastTag from "../../Hospitals/FastTag";
 import UploadFiles from "../../Hospitals/UploadFiles";
+import { useNavigate } from "react-router-dom";
 
 function AddHospital() {
   const breadCrumpData = [
@@ -20,6 +21,7 @@ function AddHospital() {
       status: "active",
     },
   ];
+  const navigate = useNavigate();
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -29,7 +31,7 @@ function AddHospital() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          <div className="bg-white rounded p-4">
+          <div className="bg-white rounded p-4 mt-3">
             <h4>Hospital Onboarding</h4>
             {/* <div className="row"> */}
             <div className="row mt-4">
@@ -249,6 +251,34 @@ function AddHospital() {
                 <div className="col-md-4 mt-2">
                   <UploadFiles />
                 </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="settings-btns col-md-6 col-sm-12">
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary"
+                  onClick={()=>navigate(-1)}
+                >
+                  Back
+                </button>
+                &nbsp;&nbsp;
+              </div>
+
+              <div className="settings-btns col-md-6 col-sm-12 mt-md-0 mt-2">
+                <div className="d-flex justify-content-md-end justify-content-center">
+                <button type="submit" className="btn btn-secondary btn-main-secondary">
+                  Cancel
+                </button>
+                &nbsp;&nbsp;
+                <button
+                  type="submit"
+                  className="border-0 btn btn-primary btn-main-primary"
+                  >
+                  Save
+                </button>
+                  </div>
               </div>
             </div>
           </div>

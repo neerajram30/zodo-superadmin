@@ -470,8 +470,8 @@ table.table td h2 span {
 .btn-primary.active,
 .btn-primary:active,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #00d3c7;
-  border: 1px solid #00d3c7;
+  background-color: #347D73;
+  border: 1px solid #347D73;
   color: #fff;
 }
 .btn-primary.active.focus,
@@ -489,30 +489,31 @@ table.table td h2 span {
 .btn-primary.active:not(:disabled):not(.disabled),
 .btn-primary:active:not(:disabled):not(.disabled),
 .show > .btn-primary.dropdown-toggle {
-  background-color: #009efb;
-  border-color: #009efb;
+  background-color: #347D73;
+  border-color: #347D73;
   color: #fff;
 }
 .btn-outline-primary {
-  border-color: #009efb;
-  color: #009efb;
+  border-color:#347D73;
+  color: #347D73;
 }
 .btn-outline-primary:hover {
-  background-color: #009efb;
-  border-color: #009efb;
+  background-color: #347D73;
+  border-color: #347D73;
   color: #fff;
 }
 .btn-outline-primary.active:not(:disabled):not(.disabled),
 .btn-outline-primary:active:not(:disabled):not(.disabled),
 .show > .btn-outline-primary.dropdown-toggle {
-  background-color: #009efb;
-  border-color: #009efb;
+  background-color: #347D73;
+  border-color: #347D73;
   color: #fff;
 }
 .btn-success {
   background-color: #55ce63;
   border: 1px solid #55ce63;
 }
+
 .btn-success:hover,
 .btn-success:focus,
 .btn-success.active,
@@ -6350,7 +6351,7 @@ h2.card-middle-avatar:hover > a {
   background-color: #00d3c7;
 }
 .settings-btns button:nth-child(1):hover {
-  background-color: #00d3c7;
+  /* background-color: #347D73; */
 }
 .settings-btn:hover .upload {
   background-color: #00d3c7;
@@ -6446,6 +6447,7 @@ a.btn.add-links:hover {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  width: 200px;
 }
 .doctor-search-blk {
   display: -webkit-box;
@@ -6454,6 +6456,15 @@ a.btn.add-links:hover {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+.doctor-list-search{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
 }
 .doctor-search-blk .top-nav-search {
   margin-left: 15px;
@@ -9893,6 +9904,12 @@ form .btn-gradient-primary {
   padding: 8px 40px;
   color: #fff;
 }
+.btn-main-primary{
+  padding: 10px 40px;
+}
+.btn-main-secondary{
+  padding: 8px 30px;
+}
 form .btn-secondary {
   font-size: 14px;
   padding: 7px 30px;
@@ -11539,6 +11556,7 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 
 .has-search .form-control {
   padding-left: 2.375rem;
+  margin-top: 20px;
 }
 .search-container{
   width: 100%;
