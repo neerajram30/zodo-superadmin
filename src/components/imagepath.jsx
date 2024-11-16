@@ -79,6 +79,10 @@ export { default as search_outline_icon } from "../assets/img/icons/search-outli
 //edit blog
 export { default as imagesend } from "../assets/img/sent.png";
 export { default as favicon } from "../assets/img/favicon.png";
+
+//report
+export { default as user_profile_1 } from "../assets/img/profile.png";
+
 ///for blog view
 export { default as blogimg1 } from "../assets/img/blog/blog-1.jpg";
 export { default as blogimg2 } from "../assets/img/profiles/avatar-01.jpg";

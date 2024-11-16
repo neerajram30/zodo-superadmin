@@ -51,7 +51,7 @@ Version      : 1.0
 42. Settings
 43. Manage
 44. Responsive
-
+45. Assets
 ========================================*/
 
 /*-----------------
@@ -10130,7 +10130,27 @@ textarea.form-control {
 /*-----------------
 	43. Manage
 -----------------------*/
-
+.review-card p{
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  line-height: 12px;
+}
+.review-description p{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.review-card i{
+  font-size: 12px;
+  color: #C0C0C0;
+  
+}
+.review-card .active{
+  font-size: 12px;
+  color: #FFC107;
+  
+}
 .hospital-card{
   cursor: pointer;
 }
@@ -11496,4 +11516,25 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 
 }
 
+/*-----------------
+	45. Assets
+-----------------------*/
 
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+.search-container{
+  width: 40%;
+}
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+  padding-top: 4px;
+}
