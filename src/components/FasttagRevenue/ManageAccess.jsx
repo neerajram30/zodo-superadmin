@@ -7,8 +7,8 @@ function ManageAccess() {
       <div className="invoices-create-btn-table">
         <Link
           to="#"
-          data-bs-toggle="modal"
-          data-bs-target="#delete_invoices_details"
+          // data-bs-toggle="modal"
+          // data-bs-target="#delete_invoices_details"
           className="btn hospital-draft-btn rounded-pill text-primary"
         >
           Contact them

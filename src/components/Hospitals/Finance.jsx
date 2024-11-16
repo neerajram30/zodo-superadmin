@@ -2,8 +2,45 @@ import React from "react";
 import { right_chevron } from "../imagepath";
 import TransactionTable from "./Transactions/TransactionTable";
 import { DatePicker } from "antd";
+import OverViewCard from "./OverViewCard";
 
 function Finance() {
+  const financeData = [
+    {
+      id: 1,
+      amount: "$ 20,000",
+      status: "No Dues",
+      operation: "Settlement",
+    },
+    {
+      id: 2,
+      amount: "$ 20,000",
+      status: "No Dues",
+      operation: "Total Revenue In Month",
+    },
+    {
+      id: 3,
+      amount: "$ 2000",
+      status: "No Dues",
+      operation: "Total Balance",
+    },
+    {
+      id: 4,
+      amount: "20%",
+      status: "No Dues",
+      operation: "Fast Tag Commission %",
+    },{
+      id: 5,
+      amount: "4",
+      status: "",
+      operation: "Department",
+    },{
+      id: 6,
+      amount: "$ 20,000",
+      status: "No Dues",
+      operation: "Fast Tag Revenue",
+    },
+  ];
   return (
     <div>
       <div className="row pt-2">
@@ -81,6 +118,18 @@ function Finance() {
         </div>
       </div>
 
+      {/* Finance details */}
+
+      <div className="row">
+        {financeData.map((item) => (
+          <OverViewCard
+            varient="col-md-4 col-sm-6 col-lg-4 col-xl-4"
+            data={item}
+            key={item.id}
+          />
+        ))}
+      </div>
+
       <div className="card-box">
         <h5>Transactions</h5>
         <div className="row mt-4">
@@ -111,7 +160,6 @@ function Finance() {
         <div>
           <h5>{232} results found</h5>
         </div>
-
 
         <div className="table-responsive">
           <TransactionTable />

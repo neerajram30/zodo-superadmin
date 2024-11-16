@@ -438,7 +438,7 @@ table.table td h2 span {
 }
 .text-primary,
 .dropdown-menu > li > a.text-primary {
-  color: #00d3c7 !important;
+  color: #347D73 !important;
 }
 .text-success,
 .dropdown-menu > li > a.text-success {
@@ -10130,6 +10130,19 @@ textarea.form-control {
 /*-----------------
 	43. Manage
 -----------------------*/
+.department-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+.department-card h6{
+  margin-top: auto;
+  height: 45px;
+  font-size: 18px;
+  font-weight: 500;
+}
 .review-card p{
   font-size: 16px;
   font-weight: 500;
@@ -10223,10 +10236,10 @@ textarea.form-control {
   border: 1px solid #008f64;
 }
 .hospital-add-btn{
-  background: #008f64;
+  background: #347D73;
 }
 .hospital-add-btn:hover{
-  background: #008f64;
+  background: #347D73;
 }
 
 .hospital-modal-backdrop{
@@ -10379,6 +10392,7 @@ textarea.form-control {
   }
 }
 @media only screen and (min-width: 768px) {
+  
   .modal-md {
     width: 500px;
   }
@@ -10736,6 +10750,7 @@ textarea.form-control {
   }
 }
 @media only screen and (max-width: 767.98px) {
+ 
   .table .invoice-link {
     font-size: 14px;
   }
@@ -11520,11 +11535,13 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 	45. Assets
 -----------------------*/
 
+
+
 .has-search .form-control {
   padding-left: 2.375rem;
 }
 .search-container{
-  width: 40%;
+  width: 100%;
 }
 .has-search .form-control-feedback {
   position: absolute;
