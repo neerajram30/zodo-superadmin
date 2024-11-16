@@ -35,7 +35,7 @@ function BookingsCard(props) {
           
         </div> */}
         <div className={`dash-content dash-count flex-grow-1 ${!data.dueStatus && 'pt-2 pb-2 mt-1'}`}>
-          <h6>{data.bookings}</h6>
+          <h6 className="text-black">{data.bookings}</h6>
           <p>
             <span className="passive-view">{data.dueStatus}</span>
           </p>

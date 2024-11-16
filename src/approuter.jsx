@@ -133,6 +133,9 @@ import EditHospital from "./components/pages/Hospitals/EditHospital";
 import FasttagRevenue from "./components/pages/FasttagRevenue";
 import SettlementRequests from "./components/pages/SettlementRequests";
 import AddHospital from "./components/pages/Hospitals/AddHospital";
+import DoctorDetails from "./components/pages/Doctors/DoctorDetails";
+import AddDoctors from "./components/pages/Doctors/AddDoctors";
+import Specialization from "./components/pages/Doctors/Specialization";
 // import Dashboard from "./components/Dashboard/Dashboard";
 
 //Accounts
@@ -194,7 +197,10 @@ const Approuter = () => {
           <Route path="/manage-hospitals/:id/edit" element={<EditHospital />} />
           {/* Manage Doctors */}
           <Route path="/manage-doctors" element={<Doctors />} />
-          
+          <Route path="/manage-doctors/:id" element={<DoctorDetails />} />
+          <Route path="/manage-doctors/add-doctors" element={<AddDoctors/>}/>
+          <Route path="/manage-doctors/specialization" element={<Specialization/>}/>
+  
           
           <Route path="/add-doctor" element={<AddDoctor />} />
           <Route path="/editdoctor" element={<EditDoctor />} />

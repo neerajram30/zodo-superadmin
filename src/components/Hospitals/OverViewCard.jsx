@@ -8,7 +8,7 @@ function OverViewCard(props) {
     <div className={varient}>
       <div className="dash-widget h-75">
         <div className="dash-content dash-count flex-grow-1">
-          <h6 className={`${data.status ? "" : "pt-3"}`}>{data.amount}</h6>
+          <h6 className={`text-black ${data.status ? "" : "pt-3"}`}>{data.amount}</h6>
           <p>
             <span className="passive-view">{data.status}</span>
           </p>

@@ -1,5 +1,8 @@
-import { Table } from "antd";
 import React, { useState } from "react";
+import SearchBox from "../searchbox/SearchBox";
+import { Link } from "react-router-dom";
+import { Table } from "antd";
+import { itemRender, onShowSizeChange } from "../Pagination";
 import {
   blogimg10,
   blogimg12,
@@ -13,11 +16,7 @@ import {
   // plusicon,
   // refreshicon,
 } from "../imagepath";
-import { Link } from "react-router-dom";
-import { itemRender, onShowSizeChange } from "../Pagination";
-import SearchBox from "../searchbox/SearchBox";
-
-function DoctorsList() {
+function DoctorRequests() {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
@@ -29,10 +28,6 @@ function DoctorsList() {
     selectedRowKeys,
     onChange: onSelectChange,
   };
-  //   const onChange = (date, dateString) => {
-  //     // console.log(date, dateString);
-  //   };
-
   const datasource = [
     {
       id: 1,
@@ -43,7 +38,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
     {
@@ -55,7 +49,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
     {
@@ -67,7 +60,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
     {
@@ -79,7 +71,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
     {
@@ -91,7 +82,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
     {
@@ -103,7 +93,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
     {
@@ -115,7 +104,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
     {
@@ -127,7 +115,6 @@ function DoctorsList() {
       Degree: "MBBS, MS",
       Mobile: "+1 23 456890",
       Email: "example@email.com",
-      JoiningDate: "01.10.2022",
       FIELD9: "",
     },
   ];
@@ -138,7 +125,10 @@ function DoctorsList() {
       render: (text, record) => (
         <>
           <h2 className="profile-image">
-            <Link to={`/manage-doctors/${record.id}`} className="avatar avatar-sm me-2">
+            <Link
+              to={`/manage-doctors/${record.id}`}
+              className="avatar avatar-sm me-2"
+            >
               <img
                 className="avatar-img rounded-circle"
                 src={record.Img}
@@ -182,46 +172,17 @@ function DoctorsList() {
       sorter: (a, b) => a.Email.length - b.Email.length,
     },
     {
-      title: "JoiningDate",
-      dataIndex: "JoiningDate",
-      sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length,
-    },
-    {
-      title: "",
+      title: "Action",
       dataIndex: "FIELD8",
       render: () => (
         <>
-          <div className="text-end">
-            <div className="dropdown dropdown-action">
-              <Link
-                to="#"
-                className="action-icon dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="fas fa-ellipsis-v" />
-              </Link>
-              <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to="/editdoctor">
-                  <i className="far fa-edit me-2" />
-                  Edit
-                </Link>
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#delete_patient"
-                >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
-                </Link>
-              </div>
-            </div>
-          </div>
+          <button className="btn hospital-draft-btn rounded-pill text-primary ps-3 pe-3">
+            view
+          </button>
         </>
       ),
     },
   ];
-
   return (
     <div className="row">
       <div className="col-sm-12">
@@ -232,37 +193,17 @@ function DoctorsList() {
               <div className="row align-items-center">
                 <div className="col-12  col-md-1">
                   <div className="doctor-table-blk">
-                    <h3>Doctors List</h3>
+                    <h3>Doctors Requests</h3>
                   </div>
                 </div>
-                <div className="col-12 col-md-3 ms-md-3">
-                  <div className="doctor-list-search">
+                <div className="col-12 col-md-3 ms-md-5">
+                  <div className="doctor-list-search ms-md-4">
                     <div className="search-container">
                       <SearchBox />
                     </div>
                   </div>
                 </div>
 
-                <div className="col-md col-sm-12">
-                  <div className="invoices-create-btn d-flex justify-content-md-end">
-                    <Link
-                      to="/manage-doctors/specialization"
-                      // data-bs-toggle="modal"
-                      // data-bs-target="#delete_invoices_details"
-                      className="btn hospital-draft-btn rounded-pill text-primary ps-3 pe-3"
-                    >
-                      Manage Specialization
-                    </Link>
-                    <Link
-                      to="/manage-doctors/add-doctors"
-                      // data-bs-toggle="modal"
-                      // data-bs-target="#save_invocies_details"
-                      className="btn hospital-add-btn rounded-pill ms-1"
-                    >
-                      Add Doctor
-                    </Link>
-                  </div>
-                </div>
                 <div className="col-md-auto text-end float-md-end ms-auto download-grp mt-3 mt-md-0">
                   <Link to="#" className=" me-2">
                     <img src={pdficon} alt="#" />
@@ -304,4 +245,4 @@ function DoctorsList() {
   );
 }
 
-export default DoctorsList;
+export default DoctorRequests;

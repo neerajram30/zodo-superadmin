@@ -115,6 +115,7 @@ export { default as proavatar } from "../assets/img/profiles/avatar-01.jpg";
 
 //Profile
 export { default as profilebg } from "../assets/img/profile-bg.jpg";
+export { default as dr_profile } from "../assets/img/dr_profile.png";
 export { default as Profileuser } from "../assets/img/profile-user.jpg";
 export { default as cameraicon } from "../assets/img/icons/camera-icon.svg";
 export { default as medalicon } from "../assets/img/icons/medal-01.svg";
@@ -125,6 +126,9 @@ export { default as profileuser02 } from "../assets/img/profile-user-02.jpg";
 export { default as doctor03 } from "../assets/img/doctor-03.jpg";
 
 export { default as editicon2 } from "../assets/img/icons/edit-2.svg";
+export { default as pdf_icon } from "../assets/img/icons/pdf_icon.svg";
+export { default as eye_icon } from "../assets/img/icons/eye_icon.svg";
+export { default as cross_icon } from "../assets/img/icons/cross_icon.svg";
 export { default as inboxicon } from "../assets/img/icons/inbox.svg";
 export { default as sendicon } from "../assets/img/icons/sent.svg";
 export { default as drafticon } from "../assets/img/icons/draft.svg";

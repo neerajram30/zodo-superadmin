@@ -3010,6 +3010,20 @@ table.dataTable thead .sorting_desc_disabled:after {
   height: auto;
 }
 
+.doctor-img-wrap{
+  height: 90px;
+  /* position: absolute; */
+  width: 90px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.doctor-img-wrap img {
+  width: 80px;
+  height: auto;
+}
+
 .profile-basic {
   margin-left: 140px;
   /* margin-left: 100px; */
@@ -6441,6 +6455,15 @@ a.btn.add-links:hover {
   margin-bottom: 0;
 }
 .doctor-table-blk {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 200px;
+}
+.doctor-table-request{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11551,9 +11574,27 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 /*-----------------
 	45. Assets
 -----------------------*/
-
-
-
+.file-upload-card h5{
+  font-size: 16px;
+  font-weight: 600;
+}
+.file-upload-details{
+  height: 40px;
+  background-color: #F3F6FB;
+}
+.file-upload-details h6{
+  font-size: 12px;
+  padding-top: 12px;
+  /* line-height: 10px; */
+}
+.file-upload-details p{
+  font-size: 10px;
+  line-height: 1px;
+  color: #878BA8;
+}
+.file-details{
+  height: 40px;
+}
 .has-search .form-control {
   padding-left: 2.375rem;
   margin-top: 20px;
