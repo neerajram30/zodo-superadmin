@@ -9,6 +9,7 @@ function FasttagDetails() {
       id: "all-hospitals",
       title: "All Hospitals",
       content: <HospitalList/>,
+      
     },
     {
       id: "requested-hospitals",

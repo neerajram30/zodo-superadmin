@@ -5,12 +5,12 @@ import React from "react";
 import { morning_img_01 } from "../imagepath";
 function Hero() {
   return (
-    <div className="good-morning-blk">
+    <div className="good-morning-blk mt-3">
       <div className="row">
         <div className="col-md-6">
           <div className="morning-user">
             <h2>
-              Good Morning, <span>Daniel Bruk</span>
+              Good Morning, <span>User</span>
             </h2>
             <p>Have a nice day at work</p>
           </div>

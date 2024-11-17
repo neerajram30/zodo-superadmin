@@ -49,7 +49,7 @@ function Finance() {
             <div className="dash-content dash-count flex-grow-1">
               <h6>$ 20,000</h6>
               <p>
-                <span className="text-warning">REQUESTED AMOUNT</span>
+                <span className="custom-badge status-orange">REQUESTED AMOUNT</span>
               </p>
               <div className="row">
                 <p className="col">Requested On 24-11-2024</p>

@@ -4,7 +4,7 @@ import Breadcrumb from "../../breadcrump/Breadcrumb";
 import HospitalsList from "../../Hospitals/HospitalsList";
 import { apollo_logo } from "../../imagepath";
 import LoadMore from "../../Hospitals/LoadMore";
-import HospitalHeader from "../../Hospitals/HospitalHeader";
+import HospitalHero from "../../heros/HospitalHero";
 
 function Hospitals() {
   const hospitalDetails = [
@@ -121,7 +121,7 @@ function Hospitals() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData}/>
-          <HospitalHeader/>
+          <HospitalHero/>
           <HospitalsList hospitalDetails={hospitalDetails}/>
           <LoadMore/>
         </div>

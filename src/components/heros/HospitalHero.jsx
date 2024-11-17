@@ -2,16 +2,16 @@ import React from "react";
 import SearchBox from "../searchbox/SearchBox";
 import { Link } from "react-router-dom";
 
-function DepartmentHero() {
+function HospitalHero() {
   return (
     <div className="page-header invoices-page-header mt-2">
       <div className="row align-items-center">
         <div className="col-12 col-md-1 hero-title">
-          <h5>All Departments</h5>
+          <h5>All Hospitals</h5>
         </div>
         <div className="col-12 col-md-3 ms-md-3">
           <div className="doctor-list-search">
-            <div className="search-container ms-md-4">
+            <div className="search-container">
               <SearchBox />
             </div>
           </div>
@@ -19,12 +19,12 @@ function DepartmentHero() {
         <div className="col-md col-sm-12">
           <div className="invoices-create-btn d-flex justify-content-md-end">
             <Link
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#save_invocies_details"
+              to="/manage-hospitals/add-hospital"
+              // data-bs-toggle="modal"
+              // data-bs-target="#save_invocies_details"
               className="btn hospital-add-btn rounded-pill ms-1"
             >
-              Add Department
+              Add Hospital
             </Link>
           </div>
         </div>
@@ -33,4 +33,4 @@ function DepartmentHero() {
   );
 }
 
-export default DepartmentHero;
+export default HospitalHero;

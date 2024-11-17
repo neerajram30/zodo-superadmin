@@ -2,20 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SearchBox from "../searchbox/SearchBox";
 
-function SearchHero() {
+function ReviewHero() {
   return (
     <div className="page-header invoices-page-header mt-2">
       <div className="row align-items-center">
-        <div className="col-1">
+        <div className="col-12 col-md-1 hero-title">
           <h5>All Reviews</h5>
         </div>
-        <div className="col-12 col-md">
-          <div className="w-50">
-            <SearchBox />
+        <div className="col-12 col-md-3 ms-md-3">
+          <div className="doctor-list-search">
+            <div className="search-container">
+              <SearchBox />
+            </div>
           </div>
         </div>
-        <div className="col-auto">
-          <div className="invoices-create-btn">
+        <div className="col-md col-sm-12">
+          <div className="invoices-create-btn d-flex justify-content-md-end">
             <Link
               to="#"
               // data-bs-toggle="modal"
@@ -31,4 +33,4 @@ function SearchHero() {
   );
 }
 
-export default SearchHero;
+export default ReviewHero;

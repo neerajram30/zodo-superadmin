@@ -9749,7 +9749,7 @@ span.rti--tag {
   padding: 10px 20px;
   border-radius: 5px;
   color: #fff;
-  background: rgb(46 55 164 / 53%);
+  background: rgba(52, 125, 115, 0.5);
 }
 .card .card-header .card-title {
   margin-bottom: 0;
@@ -11574,6 +11574,12 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 /*-----------------
 	45. Assets
 -----------------------*/
+
+.hero-title h5{
+  width: 200px;
+  font-size: 16px;
+  font-weight: 500;
+}
 .file-upload-card h5{
   font-size: 16px;
   font-weight: 600;

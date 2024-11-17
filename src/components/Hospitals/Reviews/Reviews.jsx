@@ -1,11 +1,11 @@
 import React from 'react'
-import SearchHero from '../../heros/SearchHero'
 import Review from './Review'
+import ReviewHero from '../../heros/ReviewHero'
 
 function Reviews() {
   return (
     <div>
-      <SearchHero/>
+      <ReviewHero/>
       <Review/>
     </div>
     

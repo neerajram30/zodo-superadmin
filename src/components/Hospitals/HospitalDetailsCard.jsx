@@ -25,18 +25,18 @@ function HospitalDetailsCard() {
   const tabData = [
     { id: "overview", title: "Overview", content: <Overview /> },
     { id: "department", title: "Department", content: <Department /> },
-    { id: "finance", title: "Finance", content: <Finance/> },
+    { id: "finance", title: "Finance", content: <Finance /> },
     {
       id: "total-bookings",
       title: "Total Bookings",
-      content: <TotalBookings/>,
+      content: <TotalBookings />,
     },
-    { id: "reviews", title: "Reviews", content: <Reviews/> },
+    { id: "reviews", title: "Reviews", content: <Reviews /> },
     // { id: "history", title: "History", content: <div>contnt5</div> },
   ];
 
   return (
-    <div>
+    <div className="mt-3">
       <div className="card-box profile-header">
         <div className="row">
           <div className="d-flex justify-content-between">
@@ -197,10 +197,9 @@ function HospitalDetailsCard() {
               <div className="col">
                 <ul className="payment-info w-1">
                   <li>
-                    <span className="payment-title">Account Number: <span>111234567900</span></span>
-                    {/* <span className="payment-text">
-                      <p className="">111234567900</p>
-                    </span> */}
+                    <span className="payment-title">
+                      Account Number: <span>111234567900</span>
+                    </span>
                   </li>
                   <li className="mt-3 mb-3">
                     <span className="payment-title">Bank Name: Federal</span>
@@ -210,16 +209,12 @@ function HospitalDetailsCard() {
               <div className="col">
                 <ul className="payment-info">
                   <li>
-                    <span className="payment-title">IFSC Code: 111234567900</span>
-                    {/* <span className="payment-text">
-                      <p className="">111234567900</p>
-                    </span> */}
+                    <span className="payment-title">
+                      IFSC Code: 111234567900
+                    </span>
                   </li>
                   <li className="mt-3 mb-3">
                     <span className="payment-title">UPI ID: 123@oksbi</span>
-                    {/* <span className="payment-text">
-                      <p className="">Federal</p>
-                    </span> */}
                   </li>
                 </ul>
               </div>
@@ -228,26 +223,6 @@ function HospitalDetailsCard() {
 
           <div className="col mt-4 mt-md-0">
             <FastTag />
-            {/* <h5 className="ms-md-5">FAST TAG</h5>
-            <div className="fastag-switch ms-md-5">
-              <SwitchSelector
-                onChange={onChange}
-                options={options}
-                initialSelectedIndex={initialSelectedIndex}
-                backgroundColor={"#34C759"}
-                fontColor={"#f5f6fa"}
-              />
-            </div>
-            <div className="mt-5 ps-md-5">
-              <h5>Select Fast Tag Count Per Day</h5>
-              <div className="w-75">
-                <Select
-                  defaultValue={selectedOption}
-                  onChange={setSelectedOption}
-                  options={tagsCount}
-                />
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
@@ -265,26 +240,6 @@ function HospitalDetailsCard() {
               </Link>
             </li>
           ))}
-
-          {/* <li className="nav-item">
-            <Link
-              className="nav-link active"
-              to="#about-cont"
-              data-bs-toggle="tab"
-            >
-              About
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#bottom-tab2" data-bs-toggle="tab">
-              Profile
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#bottom-tab3" data-bs-toggle="tab">
-              Messages
-            </Link>
-          </li> */}
         </ul>
         <div className="tab-content">
           {tabData.map((tabItem, i) => (

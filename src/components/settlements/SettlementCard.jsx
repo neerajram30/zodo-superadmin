@@ -26,7 +26,7 @@ function SettlementCard(props) {
 
             <div className="row mt-2">
               <div className="col text-secondary align-middle">
-                <p className="text-warning">REQUESTED AMOUNT</p>
+                <p className={`${data.dueStatus === "OVER DUE" ? "custom-badge status-red" :"custom-badge status-orange"}`}>{data.dueStatus}</p>
               </div>
               <div className="col-auto">
                 <h5>{data.requestedAmount}</h5>

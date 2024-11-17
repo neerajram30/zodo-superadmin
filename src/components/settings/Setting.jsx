@@ -52,54 +52,15 @@ const Setting = () => {
           {/* /Page Header */}
           <div className="settings-menu-links">
             <ul className="nav nav-tabs menu-tabs">
-              <li className="nav-item active">
-                <Link className="nav-link " to="/settings">
-                  General Settings
-                </Link>
-              </li>
-              <li className="nav-item ">
-                <Link className="nav-link" to="/localization">
-                  Localization
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/paymentsetting">
-                  Payment Settings
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/settingsemail">
-                  Email Settings
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/settingssocialmedia">
-                  Social Media Login
-                </Link>
-              </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/settingssociallink">
                   Social Links
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/settingsseo">
-                  SEO Settings
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/settingsthem">
-                  Theme Settings
-                </Link>
-              </li>
+
               <li className="nav-item">
                 <Link className="nav-link" to="/settingschangepassword">
                   Change Password
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/settingsothers">
-                  Others
                 </Link>
               </li>
             </ul>
@@ -340,29 +301,36 @@ const Setting = () => {
                               options={country}
                               id="search-commodity"
                               components={{
-                                IndicatorSeparator: () => null
+                                IndicatorSeparator: () => null,
                               }}
                               styles={{
                                 control: (baseStyles, state) => ({
                                   ...baseStyles,
-                                  borderColor: state.isFocused ?'none' : '2px solid rgba(46, 55, 164, 0.1);',
-                                   boxShadow: state.isFocused ? '0 0 0 1px #2e37a4' : 'none',
-                                  '&:hover': {
-                                    borderColor: state.isFocused ? 'none' : '2px solid rgba(46, 55, 164, 0.1)',
+                                  borderColor: state.isFocused
+                                    ? "none"
+                                    : "2px solid rgba(46, 55, 164, 0.1);",
+                                  boxShadow: state.isFocused
+                                    ? "0 0 0 1px #2e37a4"
+                                    : "none",
+                                  "&:hover": {
+                                    borderColor: state.isFocused
+                                      ? "none"
+                                      : "2px solid rgba(46, 55, 164, 0.1)",
                                   },
-                                  borderRadius: '10px',
+                                  borderRadius: "10px",
                                   fontSize: "14px",
-                                    minHeight: "45px",
+                                  minHeight: "45px",
                                 }),
                                 dropdownIndicator: (base, state) => ({
                                   ...base,
-                                  transform: state.selectProps.menuIsOpen ? 'rotate(-180deg)' : 'rotate(0)',
-                                  transition: '250ms',
-                                  width: '35px',
-                                  height: '35px',
+                                  transform: state.selectProps.menuIsOpen
+                                    ? "rotate(-180deg)"
+                                    : "rotate(0)",
+                                  transition: "250ms",
+                                  width: "35px",
+                                  height: "35px",
                                 }),
                               }}
-
                             />
                             {/* <select className="select form-control">
                                                             <option selected="selected">Select</option>

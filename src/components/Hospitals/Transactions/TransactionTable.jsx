@@ -54,7 +54,7 @@ function TransactionTable() {
     onChange: onSelectChange,
   };
   return (
-    <div>
+    <div className="table-responsive">
       <Table
         pagination={{
           total: hospitalTransactions.length,

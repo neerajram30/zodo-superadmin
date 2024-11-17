@@ -21,7 +21,7 @@ function HospitalList() {
       fastTagsPerday:30,
       monthlySales:300,
       revenuePerMonth:"$ 20,000",
-      fastTag:<FasttagToggle/>,
+      fastTag:<FasttagToggle index={1}/>,
       action:<EditFasttag/>,
     },
     {
@@ -31,7 +31,7 @@ function HospitalList() {
       fastTagsPerday:30,
       monthlySales:300,
       revenuePerMonth:"$ 20,000",
-      fastTag:<FasttagToggle/>,
+      fastTag:<FasttagToggle index={2}/>,
       action:<EditFasttag/>,
     },
     {
@@ -41,7 +41,7 @@ function HospitalList() {
       fastTagsPerday:30,
       monthlySales:300,
       revenuePerMonth:"$ 20,000",
-      fastTag:<FasttagToggle/>,
+      fastTag:<FasttagToggle index={3}/>,
       action:<EditFasttag/>,
     }
   ];

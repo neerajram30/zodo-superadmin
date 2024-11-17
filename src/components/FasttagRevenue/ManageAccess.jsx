@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function ManageAccess() {
   return (
-    <div className="row mt-2">
+    <div className="row mt-2 w-75">
       <div className="invoices-create-btn-table">
         <Link
           to="#"
@@ -15,9 +15,9 @@ function ManageAccess() {
         </Link>
         <Link
           to="#"
-          data-bs-toggle="modal"
-          data-bs-target="#save_invocies_details"
-          className="btn hospital-add-btn rounded-pill ms-1"
+          // data-bs-toggle="modal"
+          // data-bs-target="#save_invocies_details"
+          className="btn hospital-add-btn rounded-pill ms-md-1"
         >
           Approve
         </Link>
