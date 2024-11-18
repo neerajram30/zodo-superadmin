@@ -37,7 +37,7 @@ function HospitalDetailsCard() {
 
   return (
     <div className="mt-3">
-      <div className="card-box profile-header">
+      <div className="card-box profile-header rounded-bottom-0">
         <div className="row">
           <div className="d-flex justify-content-between">
             <h5>

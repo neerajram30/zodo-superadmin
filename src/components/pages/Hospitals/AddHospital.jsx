@@ -2,9 +2,10 @@ import React from "react";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Layout from "../../layout/Layout";
 import ChooseFile from "../../Hospitals/ChooseFile";
-import FastTag from "../../Hospitals/FastTag";
 import UploadFiles from "../../Hospitals/UploadFiles";
 import { useNavigate } from "react-router-dom";
+import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
+import Select from "react-select";
 
 function AddHospital() {
   const breadCrumpData = [
@@ -38,9 +39,9 @@ function AddHospital() {
               <div className="col-md-8 ms-md-3">
                 <ChooseFile />
               </div>
-              <div className="col mt-md-0 mt-4">
+              {/* <div className="col mt-md-0 mt-4">
                 <FastTag />
-              </div>
+              </div> */}
             </div>
             <div className="w-100 mt-4 mt-md-0">
               <div className="form-group">
@@ -56,15 +57,30 @@ function AddHospital() {
             </div>
 
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <div className="form-group">
                   <label>Admin Name</label>
                   <input type="text" className="form-control" />
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <div className="form-group">
                   <label>Admin Email ID</label>
+                  <input type="text" className="form-control" />
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="form-group">
+                  <label>Passsword</label>
+                  <input type="password" className="form-control" />
+                </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Website</label>
                   <input type="text" className="form-control" />
                 </div>
               </div>
@@ -77,7 +93,38 @@ function AddHospital() {
               </div>
             </div>
 
-            <h4 className="card-title">Company Locations</h4>
+            <h4 className="card-title">Fast Tag</h4>
+            <div className="d-flex">
+              <label className="">Enable Fast Tag</label>
+              <div className="ms-2">
+                <FasttagToggle />
+              </div>
+            </div>
+
+            <div className="row mt-4">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Choose Percentage of Profit</label>
+                  <Select
+                  // defaultValue={selectedOption}
+                  // onChange={setSelectedOption}
+                  // options={option}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label>Fast tag Issue Per Day</label>
+                  <Select
+                  // defaultValue={selectedOption}
+                  // onChange={setSelectedOption}
+                  // options={option}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <h4 className="card-title mt-4">Company Locations</h4>
             <div className="row">
               <div className="col-md-4">
                 <div className="form-group">
@@ -259,7 +306,7 @@ function AddHospital() {
                 <button
                   type="submit"
                   className="btn btn-outline-primary"
-                  onClick={()=>navigate(-1)}
+                  onClick={() => navigate(-1)}
                 >
                   Back
                 </button>
@@ -268,17 +315,20 @@ function AddHospital() {
 
               <div className="settings-btns col-md-6 col-sm-12 mt-md-0 mt-2">
                 <div className="d-flex justify-content-md-end justify-content-center">
-                <button type="submit" className="btn btn-secondary btn-main-secondary">
-                  Cancel
-                </button>
-                &nbsp;&nbsp;
-                <button
-                  type="submit"
-                  className="border-0 btn btn-primary btn-main-primary"
+                  <button
+                    type="submit"
+                    className="btn btn-secondary btn-main-secondary"
                   >
-                  Save
-                </button>
-                  </div>
+                    Cancel
+                  </button>
+                  &nbsp;&nbsp;
+                  <button
+                    type="submit"
+                    className="border-0 btn btn-primary btn-main-primary"
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
           </div>

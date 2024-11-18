@@ -23,9 +23,13 @@ function DoctorDetailsCard() {
   //   const { id } = useParams();
   const [show, setShow] = useState(false);
   const tabData = [
-    { id: "dr_overview", title: "Overview", content: <DoctorsOverview/> },
-    { id: "dr_finance", title: "Finance", content: <DoctorsFinance/> },
-    { id: "dr_bookings", title: "Total Bookings", content: <DoctorsBookings/> },
+    { id: "dr_overview", title: "Overview", content: <DoctorsOverview /> },
+    { id: "dr_finance", title: "Finance", content: <DoctorsFinance /> },
+    {
+      id: "dr_bookings",
+      title: "Total Bookings",
+      content: <DoctorsBookings />,
+    },
   ];
   return (
     <div>
@@ -99,7 +103,7 @@ function DoctorDetailsCard() {
                 <div className="doctor-img-wrap">
                   <div className="profile-img">
                     {/* <Link to="#"> */}
-                      <img className="" src={dr_profile} alt="#" />
+                    <img className="" src={dr_profile} alt="#" />
                     {/* </Link> */}
                   </div>
                 </div>
@@ -147,7 +151,7 @@ function DoctorDetailsCard() {
           <div className="col-md-12">
             <ul className="personal-info">
               <li>
-                <span className="title">Address  :</span>
+                <span className="title">Address :</span>
                 <span className="text">
                   <p className="w-md-75 ">
                     Lorem ipsum dolor sit amet consectetur
@@ -155,13 +159,13 @@ function DoctorDetailsCard() {
                 </span>
               </li>
               <li>
-                <span className="title">District  :</span>
+                <span className="title">District :</span>
                 <span className="text">
                   <p className="w-md-75">Hydrabad</p>
                 </span>
               </li>
               <li>
-                <span className="title">State  :</span>
+                <span className="title">State :</span>
                 <span className="text">
                   <p className="w-md-75">Telengana</p>
                 </span>
@@ -234,8 +238,8 @@ function DoctorDetailsCard() {
             {[1, 2, 3].map((item) => {
               return (
                 <div className="row mt-2" key={`row${item}`}>
-                  <div className="col-2 pt-2">Documents 0{item}</div>
-                  <div className="col-10">
+                  <div className="col-12 pt-2 col-md-2">Documents 0{item}</div>
+                  <div className="col-12 col-md-10 md:mt-0 mt-1">
                     <div className="d-flex justify-content-between align-items-center file-upload-details ps-3 pe-3">
                       <div className="d-flex align-items-center">
                         <img src={pdf_icon} alt="pdf_icon" />
