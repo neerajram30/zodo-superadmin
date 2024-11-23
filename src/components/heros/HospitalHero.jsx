@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBox from "../searchbox/SearchBox";
 import { Link } from "react-router-dom";
+import { addicon } from "../imagepath";
 
 function HospitalHero() {
   return (
@@ -22,9 +23,10 @@ function HospitalHero() {
               to="/manage-hospitals/add-hospital"
               // data-bs-toggle="modal"
               // data-bs-target="#save_invocies_details"
-              className="btn hospital-add-btn rounded-pill ms-1"
+              className="hospital-add-btn rounded-pill ms-1 text-white ps-4 pe-4 pt-2 pb-2"
             >
-              Add Hospital
+              <img src={addicon} alt="add" />
+              <span className="ms-2 me-2">Add Hospital</span>
             </Link>
           </div>
         </div>

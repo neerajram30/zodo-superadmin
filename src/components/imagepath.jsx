@@ -126,6 +126,9 @@ export { default as profileuser02 } from "../assets/img/profile-user-02.jpg";
 export { default as doctor03 } from "../assets/img/doctor-03.jpg";
 
 export { default as editicon2 } from "../assets/img/icons/edit-2.svg";
+export { default as exporticon } from "../assets/img/icons/export.svg";
+export { default as uploadfiles_icon } from "../assets/img/icons/document-upload.svg";
+export { default as addicon } from "../assets/img/icons/add.svg";
 export { default as pdf_icon } from "../assets/img/icons/pdf_icon.svg";
 export { default as eye_icon } from "../assets/img/icons/eye_icon.svg";
 export { default as cross_icon } from "../assets/img/icons/cross_icon.svg";

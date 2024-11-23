@@ -44,7 +44,7 @@ function AddSpecialization(props) {
           to="#"
         //   data-bs-toggle="modal"
         //   data-bs-target="#delete_invoices_details"
-          className="btn hospital-draft-btn text-primary"
+          className="hospital-draft-btn text-primary pt-1 pb-1 ps-3 pe-3 rounded"
           onClick={() => setShow(false)}
         >
           Cancel
@@ -53,7 +53,7 @@ function AddSpecialization(props) {
           to="#"
         //   data-bs-toggle="modal"
         //   data-bs-target="#save_invocies_details"
-          className="btn hospital-add-btn ms-1 text-white"
+          className="hospital-add-btn ms-1 text-white border-0 pt-1 pb-1 ps-3 pe-3 rounded"
         >
           Save
         </button>

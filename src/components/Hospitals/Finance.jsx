@@ -3,6 +3,7 @@ import { right_chevron } from "../imagepath";
 import TransactionTable from "./Transactions/TransactionTable";
 import { DatePicker } from "antd";
 import OverViewCard from "./OverViewCard";
+import ExportTable from "../assests/ExportTable";
 
 function Finance() {
   const financeData = [
@@ -29,12 +30,14 @@ function Finance() {
       amount: "20%",
       status: "No Dues",
       operation: "Fast Tag Commission %",
-    },{
+    },
+    {
       id: 5,
       amount: "4",
       status: "",
       operation: "Department",
-    },{
+    },
+    {
       id: 6,
       amount: "$ 20,000",
       status: "No Dues",
@@ -49,7 +52,9 @@ function Finance() {
             <div className="dash-content dash-count flex-grow-1">
               <h6>$ 20,000</h6>
               <p>
-                <span className="custom-badge status-orange">REQUESTED AMOUNT</span>
+                <span className="custom-badge status-orange">
+                  REQUESTED AMOUNT
+                </span>
               </p>
               <div className="row">
                 <p className="col">Requested On 24-11-2024</p>
@@ -62,9 +67,9 @@ function Finance() {
                   to="#"
                   data-bs-toggle="modal"
                   data-bs-target="#save_invocies_details"
-                  className="btn hospital-add-btn rounded-pill text-white mt-2"
+                  className="hospital-add-btn rounded-pill text-white mt-2 border-0 text ps-3 pe-3 pt-1 pb-1"
                 >
-                  Mark as Paid
+                  Paid Fully
                 </button>
               </div>
             </div>
@@ -152,9 +157,7 @@ function Finance() {
             </div>
           </div>
           <div className="col-12 col-md-6 col-xl-3">
-            <div className="form-group local-forms">
-              <div className="outlined-btn form-control">Export</div>
-            </div>
+            <ExportTable />
           </div>
         </div>
         <div>

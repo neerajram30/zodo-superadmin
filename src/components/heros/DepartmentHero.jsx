@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBox from "../searchbox/SearchBox";
 import { Link } from "react-router-dom";
+import { addicon } from "../imagepath";
 
 function DepartmentHero() {
   return (
@@ -20,11 +21,12 @@ function DepartmentHero() {
           <div className="invoices-create-btn d-flex justify-content-md-end">
             <Link
               to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#save_invocies_details"
-              className="btn hospital-add-btn rounded-pill ms-1"
+              // data-bs-toggle="modal"
+              // data-bs-target="#save_invocies_details"
+              className="hospital-add-btn rounded-pill ms-1 text-white ps-4 pe-4 pt-2 pb-2"
             >
-              Add Department
+              <img src={addicon} alt="add" />
+              <span className="ms-2 me-2"> Add Department</span>
             </Link>
           </div>
         </div>

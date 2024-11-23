@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import React, { useState } from "react";
 import {
+  addicon,
   blogimg10,
   blogimg12,
   blogimg2,
@@ -138,7 +139,10 @@ function DoctorsList() {
       render: (text, record) => (
         <>
           <h2 className="profile-image">
-            <Link to={`/manage-doctors/${record.id}`} className="avatar avatar-sm me-2">
+            <Link
+              to={`/manage-doctors/${record.id}`}
+              className="avatar avatar-sm me-2"
+            >
               <img
                 className="avatar-img rounded-circle"
                 src={record.Img}
@@ -249,7 +253,7 @@ function DoctorsList() {
                       to="/manage-doctors/specialization"
                       // data-bs-toggle="modal"
                       // data-bs-target="#delete_invoices_details"
-                      className="btn hospital-draft-btn rounded-pill text-primary ps-3 pe-3"
+                      className="hospital-draft-btn rounded-pill text-primary ps-4 pe-4 pt-2 pb-2"
                     >
                       Manage Specialization
                     </Link>
@@ -257,9 +261,11 @@ function DoctorsList() {
                       to="/manage-doctors/add-doctors"
                       // data-bs-toggle="modal"
                       // data-bs-target="#save_invocies_details"
-                      className="btn hospital-add-btn rounded-pill ms-1"
+                      // className="hospital-add-btn rounded-pill ms-1"
+                      className="hospital-add-btn rounded-pill ms-1 text-white ps-4 pe-4 pt-2 pb-2"
                     >
-                      Add Doctor
+                      <img src={addicon} alt="add" />
+                      <span className="ms-2 me-2">Add Doctor</span>
                     </Link>
                   </div>
                 </div>

@@ -2,6 +2,7 @@ import { DatePicker } from "antd";
 import React from "react";
 import DataTable from "../../DataTables/DataTable";
 import PropTypes from "prop-types";
+import ExportTable from "../../assests/ExportTable";
 
 function BookingsTable(props) {
   const { data, columns } = props;
@@ -23,15 +24,13 @@ function BookingsTable(props) {
           </div>
         </div>
         <div className="col-12 col-md-6 col-xl-3">
-          <div className="form-group local-forms">
-            <div className="outlined-btn form-control">Export</div>
-          </div>
+          <ExportTable/>
         </div>
       </div>
       <div>{/* <h5>{232} results found</h5> */}</div>
 
       <div className="table-responsive">
-        <DataTable data={data} columns={columns}/>
+        <DataTable data={data} columns={columns} />
       </div>
     </div>
   );

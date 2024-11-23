@@ -175,6 +175,8 @@ textarea.form-control {
 .btn.focus,
 .btn:focus {
   box-shadow: inherit !important;
+  /* border: inherit;
+  background-color: inherit; */
 }
 .list-group-item {
   border: 1px solid #eaeaea;
@@ -10327,7 +10329,7 @@ textarea.form-control {
   color: #fff;
 }
 .choose-file-btn{
-  height: 30px;
+  height: 40px;
   width: 200px;
   border: 1px solid #008f64;
   display: flex;

@@ -2,6 +2,7 @@ import React from "react";
 import BookingsCard from "../../Hospitals/TotalBookings/BookingsCard";
 import { DatePicker } from "antd";
 import TransactionTable from "../../Hospitals/Transactions/TransactionTable";
+import ExportTable from "../../assests/ExportTable";
 
 function DoctorsBookings() {
   const bookinsDetails = [
@@ -59,9 +60,7 @@ function DoctorsBookings() {
             </div>
           </div>
           <div className="col-12 col-md-6 col-xl-3">
-            <div className="form-group local-forms">
-              <div className="outlined-btn form-control">Export</div>
-            </div>
+            <ExportTable/>
           </div>
         </div>
         <div>

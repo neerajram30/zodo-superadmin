@@ -17,7 +17,7 @@ function ChooseFile() {
           <small className="w-25 text-muted">size less than 2 MB</small>
         </div>
         <button
-          className="btn choose-file-btn mt-2"
+          className="choose-file-btn mt-2 bg-white"
           onClick={handleButtonClick}
         >
           <input

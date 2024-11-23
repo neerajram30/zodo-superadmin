@@ -160,7 +160,7 @@ function HospitalDetailsCard() {
             <h6>
               <span>GSTIN</span> GSTIN567890128347
             </h6>
-            <button className="btn hospital-draft-btn text-primary w-75 mt-1">
+            <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
               Active
             </button>
           </div>

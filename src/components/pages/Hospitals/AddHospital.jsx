@@ -151,7 +151,7 @@ function AddHospital() {
                   type="text"
                   className="form-control"
                   defaultValue=""
-                  placeholder="gstNumber"
+                  placeholder="GST Number"
                   name="gstnumber"
                   value={formDetails["gstnumber"]}
                   onChange={handelForm}

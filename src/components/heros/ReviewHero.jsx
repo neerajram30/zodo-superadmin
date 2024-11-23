@@ -22,7 +22,7 @@ function ReviewHero() {
               to="#"
               // data-bs-toggle="modal"
               // data-bs-target="#save_invocies_details"
-              className="btn hospital-draft-btn rounded-pill text-primary"
+              className="hospital-draft-btn rounded-pill text-primary ps-5 pe-5 pt-2 pb-2"
             >
               Sort By
             </Link>

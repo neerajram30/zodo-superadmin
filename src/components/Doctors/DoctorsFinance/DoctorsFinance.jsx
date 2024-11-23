@@ -2,6 +2,7 @@ import React from "react";
 import OverViewCard from "../../Hospitals/OverViewCard";
 import { DatePicker } from "antd";
 import TransactionTable from "../../Hospitals/Transactions/TransactionTable";
+import ExportTable from "../../assests/ExportTable";
 
 function DoctorsFinance() {
   const financeData = [
@@ -57,9 +58,7 @@ function DoctorsFinance() {
             </div>
           </div>
           <div className="col-12 col-md-6 col-xl-3">
-            <div className="form-group local-forms">
-              <div className="outlined-btn form-control">Export</div>
-            </div>
+            <ExportTable/>
           </div>
         </div>
         <div>
