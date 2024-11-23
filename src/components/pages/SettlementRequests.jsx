@@ -11,7 +11,7 @@ function SettlementRequests() {
           status:"inactive"
         },
         {
-          name:"Fasttag Revenue",
+          name:"Settlement Requests",
           status:"active"
         }
       ]

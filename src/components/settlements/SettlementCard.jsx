@@ -6,7 +6,7 @@ function SettlementCard(props) {
   const { data } = props;
   return (
     <div className="card invoices-grid-card w-100">
-      <Link>
+      <Link to={`/dashboard/settlement-requests/${data.id}`}>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">

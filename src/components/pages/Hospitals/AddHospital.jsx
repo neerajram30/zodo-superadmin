@@ -463,7 +463,7 @@ function AddHospital() {
                   &nbsp;&nbsp;
                   <button
                     type="submit"
-                    className="border-0 btn btn-primary btn-main-primary"
+                    className="border-0 btn-primary btn-main-primary text-white"
                   >
                     Save
                   </button>

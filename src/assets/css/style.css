@@ -496,6 +496,7 @@ table.table td h2 span {
   color: #fff;
 }
 .btn-outline-primary {
+  border: 1px solid #347D73;
   border-color:#347D73;
   color: #347D73;
 }

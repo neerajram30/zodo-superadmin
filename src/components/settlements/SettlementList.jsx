@@ -89,7 +89,7 @@ function SettlementList() {
   return (
     <div className="row">
       {settlementData.map((item) => (
-        <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item}>
+        <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
           <SettlementCard data={item} />
         </div>
       ))}
