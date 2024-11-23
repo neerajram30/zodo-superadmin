@@ -6034,6 +6034,7 @@ html.menu-opened body {
   top: 2px;
   color: #ffffff;
   font-size: 9px;
+  color:#347D73;
 }
 #checkBoxes .btn,
 #checkBox .btn {
@@ -6112,9 +6113,11 @@ html.menu-opened body {
   border: 1px solid #e7eafc;
 }
 .custom_check input:checked ~ .checkmark {
-  background-color: #347D73;
+  background-color: #C0D7D4;
   border-color: #347D73;
+  accent-color: #347D73;
 }
+
 .invoices-tabs-card {
   background: transparent;
   box-shadow: none;

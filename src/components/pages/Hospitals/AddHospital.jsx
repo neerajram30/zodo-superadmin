@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Layout from "../../layout/Layout";
 import ChooseFile from "../../Hospitals/ChooseFile";
@@ -23,6 +23,36 @@ function AddHospital() {
     },
   ];
   const navigate = useNavigate();
+  const [formDetails, setFormDetails] = useState({});
+  const [checked, setchecked] = useState(false);
+  const handelForm = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormDetails({ ...formDetails, [name]: value });
+  };
+  const handleCheck = (e) => {
+    const checked = e.target.checked;
+    if (checked) {
+      setFormDetails({
+        ...formDetails,
+        billingAccountHoldername: formDetails["companyName"] ?? "",
+        billingStreet: formDetails["street"] ?? "",
+        billingAddress: formDetails["address"] ?? "",
+        billingTown: formDetails["town"] ?? "",
+        billingState: formDetails["state"] ?? "",
+      });
+    } else {
+      setFormDetails({
+        ...formDetails,
+        billingAccountHoldername: "",
+        billingStreet: "",
+        billingAddress: "",
+        billingTown: "",
+        billingState: "",
+      });
+    }
+    setchecked(checked);
+  };
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -52,6 +82,9 @@ function AddHospital() {
                   type="text"
                   className="form-control"
                   defaultValue="Apollo"
+                  name="hospitalName"
+                  onChange={handelForm}
+                  value={formDetails["hospitalName"]}
                 />
               </div>
             </div>
@@ -60,19 +93,37 @@ function AddHospital() {
               <div className="col-md-4">
                 <div className="form-group">
                   <label>Admin Name</label>
-                  <input type="text" className="form-control" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="adminName"
+                    value={formDetails["adminName"]}
+                    onChange={handelForm}
+                  />
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="form-group">
                   <label>Admin Email ID</label>
-                  <input type="text" className="form-control" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="adminEmail"
+                    value={formDetails["adminEmail"]}
+                    onChange={handelForm}
+                  />
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="form-group">
                   <label>Passsword</label>
-                  <input type="password" className="form-control" />
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="adminPassword"
+                    value={formDetails["adminPassword"]}
+                    onChange={handelForm}
+                  />
                 </div>
               </div>
             </div>
@@ -81,7 +132,14 @@ function AddHospital() {
               <div className="col-md-6">
                 <div className="form-group">
                   <label>Website</label>
-                  <input type="text" className="form-control" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Website"
+                    name="website"
+                    value={formDetails["website"]}
+                    onChange={handelForm}
+                  />
                 </div>
               </div>
             </div>
@@ -89,7 +147,15 @@ function AddHospital() {
             <div className="w-50">
               <div className="form-group">
                 <label>GST Number</label>
-                <input type="text" className="form-control" defaultValue="" />
+                <input
+                  type="text"
+                  className="form-control"
+                  defaultValue=""
+                  placeholder="gstNumber"
+                  name="gstnumber"
+                  value={formDetails["gstnumber"]}
+                  onChange={handelForm}
+                />
               </div>
             </div>
 
@@ -129,99 +195,13 @@ function AddHospital() {
               <div className="col-md-4">
                 <div className="form-group">
                   {/* <label>Address line:</label> */}
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-8">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group">
-              {/* <label>Your message:</label> */}
-              <textarea
-                rows={5}
-                cols={5}
-                className="form-control"
-                placeholder="Enter"
-                defaultValue={""}
-              />
-            </div>
-
-            <div className="row">
-              <div className="col-md-7">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-5">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-            </div>
-
-            <h4 className="card-title">Add Bank Account</h4>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Account Number"
-                  />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Verify Account Number"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-md-8">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Account Holder Name"
-                  />
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="IFSC"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <h4 className="card-title">Billing Address</h4>
-            <div className="row">
-              <div className="col-md-4">
-                <div className="form-group">
-                  {/* <label>Address line:</label> */}
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Account Holder Name"
+                    placeholder="Company Name"
+                    name="companyName"
+                    value={formDetails["companyName"]}
+                    onChange={handelForm}
                   />
                 </div>
               </div>
@@ -232,6 +212,9 @@ function AddHospital() {
                     type="text"
                     className="form-control"
                     placeholder="Area / Street / Sector"
+                    name="street"
+                    value={formDetails["street"]}
+                    onChange={handelForm}
                   />
                 </div>
               </div>
@@ -245,6 +228,153 @@ function AddHospital() {
                 className="form-control"
                 placeholder="Enter Address"
                 defaultValue={""}
+                name="address"
+                value={formDetails["address"]}
+                onChange={handelForm}
+              />
+            </div>
+
+            <div className="row">
+              <div className="col-md-7">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Town"
+                    name="town"
+                    value={formDetails["town"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+              <div className="col-md-5">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="State"
+                    name="state"
+                    value={formDetails["state"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <h4 className="card-title">Add Bank Account</h4>
+            <div className="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Account Number"
+                    name="accountNumber"
+                    value={formDetails["accountNumber"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Verify Account Number"
+                    name="verifyAccountnumber"
+                    value={formDetails["verifyAccountnumber"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-md-8">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Account Holder Name"
+                    name="accountHoldername"
+                    value={formDetails["accountHoldername"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="IFSC"
+                    name="ifsc"
+                    value={formDetails["ifsc"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="d-flex justify-content-between">
+              <h4 className="card-title">Billing Address</h4>
+              <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
+                {" "}
+                Same as Company Address
+                <input
+                  type="checkbox"
+                  name="radio"
+                  onChange={handleCheck}
+                  checked={checked}
+                />
+                <span className="checkmark" />
+              </label>
+            </div>
+            <div className="row">
+              <div className="col-md-4">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Account Holder Name"
+                    name="billingAccountHoldername"
+                    value={formDetails["billingAccountHoldername"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+              <div className="col-md-8">
+                <div className="form-group">
+                  {/* <label>Address line:</label> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Area / Street / Sector"
+                    name="billingStreet"
+                    value={formDetails["billingStreet"]}
+                    onChange={handelForm}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group">
+              {/* <label>Your message:</label> */}
+              <textarea
+                rows={5}
+                cols={5}
+                className="form-control"
+                placeholder="Enter Address"
+                defaultValue={""}
+                name="billingAddress"
+                value={formDetails["billingAddress"]}
+                onChange={handelForm}
               />
             </div>
 
@@ -256,6 +386,9 @@ function AddHospital() {
                     type="text"
                     className="form-control"
                     placeholder="Town / City"
+                    name="billingTown"
+                    value={formDetails["billingTown"]}
+                    onChange={handelForm}
                   />
                 </div>
               </div>
@@ -266,6 +399,9 @@ function AddHospital() {
                     type="text"
                     className="form-control"
                     placeholder="State"
+                    name="billingState"
+                    value={formDetails["billingState"]}
+                    onChange={handelForm}
                   />
                 </div>
               </div>
@@ -279,6 +415,9 @@ function AddHospital() {
                   className="form-control"
                   defaultValue=""
                   placeholder="Enter Company Website"
+                  name="companyWebsite"
+                  value={formDetails["companyWebsite"]}
+                  onChange={handelForm}
                 />
               </div>
             </div>
