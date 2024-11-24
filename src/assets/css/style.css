@@ -8240,7 +8240,7 @@ blockquote p {
   margin-top: 0;
 }
 .tab-content {
-  padding-top: 5px;
+  padding-top: 2px;
 }
 
 /*-----------------
@@ -11625,4 +11625,11 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   pointer-events: none;
   color: #aaa;
   padding-top: 4px;
+}
+
+.details-card{
+  margin-top: -20px;
+}
+.bookings-card{
+  margin-top: -5px;
 }

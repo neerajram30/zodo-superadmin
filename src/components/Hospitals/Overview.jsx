@@ -49,7 +49,7 @@ function Overview() {
 
       {tagDetails.map((item) => (
         <OverViewCard
-          varient="col-md-6 col-sm-6 col-lg-6 col-xl-6"
+          varient="col-md-6 col-sm-6 col-lg-6 col-xl-6 details-card"
           data={item}
           key={item.id}
         />

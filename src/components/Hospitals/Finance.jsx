@@ -45,7 +45,7 @@ function Finance() {
     },
   ];
   return (
-    <div>
+    <div className="pb-3">
       <div className="row pt-2">
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget h-75">
@@ -128,14 +128,14 @@ function Finance() {
       <div className="row">
         {financeData.map((item) => (
           <OverViewCard
-            varient="col-md-4 col-sm-6 col-lg-4 col-xl-4"
+            varient="col-md-4 col-sm-6 col-lg-4 col-xl-4 details-card"
             data={item}
             key={item.id}
           />
         ))}
       </div>
 
-      <div className="card-box">
+      <div className="card-box details-card">
         <h5>Transactions</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">

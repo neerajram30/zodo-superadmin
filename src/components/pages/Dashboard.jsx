@@ -11,44 +11,47 @@ import DashboardTables from "../Dashboard/DashboardTables";
 function Dashboard() {
   const basicInformation = [
     {
-      id:1,
-      title:'Total hospitals',
-      icon:profile_hospitals,
-      count:140,
-      percentageUp:20
+      id: 1,
+      title: "Total hospitals",
+      icon: profile_hospitals,
+      count: 140,
+      percentageUp: 20,
+      link: "",
     },
     {
-      id:2,
-      title:'Total Doctors ( online )',
-      icon:doctors,
-      count:250,
-      percentageUp:40
+      id: 2,
+      title: "Total Doctors ( online )",
+      icon: doctors,
+      count: 250,
+      percentageUp: 40,
+      link: "",
     },
     {
-      id:3,
-      title:'Fast tag Issued',
-      icon:fasttag,
-      count:121,
-      percentageUp:40
-    }
-  ] 
+      id: 3,
+      title: "Fast tag Issued",
+      icon: fasttag,
+      count: 121,
+      percentageUp: 40,
+      link: "/dashboard/fasttag-issued",
+    },
+  ];
   const breadCrumpData = [
     {
-      name:"Dashboard",
-      status:"active"
-    }
-  ]
-  
+      name: "Dashboard",
+      status: "active",
+    },
+  ];
+
   return (
     <Layout activeClassName="dashboard">
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb data={breadCrumpData}/>
-          <Hero/>
-          <InfoCards info={basicInformation}/>
-          <RevenueInfo/>
-          <Analytics/>
-          <DashboardTables/>
+          <Breadcrumb data={breadCrumpData} />
+          <Hero />
+          <InfoCards info={basicInformation} />
+          <RevenueInfo />
+          <Analytics />
+          <DashboardTables />
         </div>
       </div>
     </Layout>

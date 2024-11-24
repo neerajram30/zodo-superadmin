@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
-import { itemRender, onShowSizeChange } from "../Pagination";
+import { itemRender } from "../Pagination";
 
 function DataTable(props) {
   const { columns, data } = props;
@@ -18,11 +18,12 @@ function DataTable(props) {
     <div className="table-responsive">
       <Table
         pagination={{
-          total: data.length,
           showSizeChanger: true,
-          // showTotal: (total, range) =>
-          //   `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-          onShowSizeChange: onShowSizeChange,
+          showQuickJumper: true,
+          defaultPageSize: 25,
+          pageSizeOptions: ["25", "50", "100"],
+          position: ["bottomRight"],
+          size: "default",
           itemRender: itemRender,
         }}
         columns={columns}
@@ -35,9 +36,8 @@ function DataTable(props) {
 }
 
 DataTable.propTypes = {
-    columns: PropTypes.node,
-    data: PropTypes.node,
-  };
-  
+  columns: PropTypes.node,
+  data: PropTypes.node,
+};
 
 export default DataTable;

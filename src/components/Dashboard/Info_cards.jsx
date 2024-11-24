@@ -2,6 +2,7 @@ import React from "react";
 import CountUp from "react-countup";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function InfoCards(props) {
   const { info } = props;
@@ -9,7 +10,8 @@ function InfoCards(props) {
     <div className="row">
       {info.map((item) => {
         return (
-          <div
+          <Link
+            to={item.link}
             className="col-md-3 col-sm-3 col-lg-4 col-xl-4"
             key={item.id + item.title}
           >
@@ -34,7 +36,7 @@ function InfoCards(props) {
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

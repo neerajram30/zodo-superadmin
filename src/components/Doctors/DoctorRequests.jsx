@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchBox from "../searchbox/SearchBox";
 import { Link } from "react-router-dom";
-import { Table } from "antd";
-import { itemRender, onShowSizeChange } from "../Pagination";
 import {
   blogimg10,
   blogimg12,
@@ -16,18 +14,8 @@ import {
   // plusicon,
   // refreshicon,
 } from "../imagepath";
+import DataTable from "../DataTables/DataTable";
 function DoctorRequests() {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
   const datasource = [
     {
       id: 1,
@@ -186,7 +174,7 @@ function DoctorRequests() {
   return (
     <div className="row">
       <div className="col-sm-12">
-        <div className="card card-table show-entire">
+        <div className="card card-table show-entire rounded-0">
           <div className="card-body">
             {/* Table Header */}
             <div className="page-table-header mb-2">
@@ -219,24 +207,8 @@ function DoctorRequests() {
               </div>
             </div>
             {/* /Table Header */}
-            <div className="table-responsive doctor-list">
-              <Table
-                pagination={{
-                  total: datasource.length,
-                  showTotal: (total, range) =>
-                    `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-                  // showSizeChanger: true,
-                  onShowSizeChange: onShowSizeChange,
-                  itemRender: itemRender,
-                }}
-                columns={columns}
-                dataSource={datasource}
-                rowSelection={rowSelection}
-                rowKey={(record) => record.id}
-                style={{
-                  backgroundColor: "#f2f2f2", // Replace with your desired background color for the table
-                }}
-              />
+            <div className="doctor-list">
+              <DataTable data={datasource} columns={columns} />
             </div>
           </div>
         </div>

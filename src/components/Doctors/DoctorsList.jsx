@@ -1,5 +1,4 @@
-import { Table } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import {
   addicon,
   blogimg10,
@@ -15,25 +14,10 @@ import {
   // refreshicon,
 } from "../imagepath";
 import { Link } from "react-router-dom";
-import { itemRender, onShowSizeChange } from "../Pagination";
 import SearchBox from "../searchbox/SearchBox";
+import DataTable from "../DataTables/DataTable";
 
 function DoctorsList() {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  //   const onChange = (date, dateString) => {
-  //     // console.log(date, dateString);
-  //   };
-
   const datasource = [
     {
       id: 1,
@@ -284,24 +268,8 @@ function DoctorsList() {
               </div>
             </div>
             {/* /Table Header */}
-            <div className="table-responsive doctor-list">
-              <Table
-                pagination={{
-                  total: datasource.length,
-                  showTotal: (total, range) =>
-                    `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-                  // showSizeChanger: true,
-                  onShowSizeChange: onShowSizeChange,
-                  itemRender: itemRender,
-                }}
-                columns={columns}
-                dataSource={datasource}
-                rowSelection={rowSelection}
-                rowKey={(record) => record.id}
-                style={{
-                  backgroundColor: "#f2f2f2", // Replace with your desired background color for the table
-                }}
-              />
+            <div className="doctor-list">
+              <DataTable data={datasource} columns={columns} />
             </div>
           </div>
         </div>

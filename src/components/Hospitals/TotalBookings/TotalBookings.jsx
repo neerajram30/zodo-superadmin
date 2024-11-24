@@ -24,7 +24,7 @@ function TotalBookings() {
     },
   ];
   return (
-    <div>
+    <div className="pb-3">
       <div className="row mt-2">
         {bookinsDetails.map((item) => (
           <div
@@ -35,7 +35,7 @@ function TotalBookings() {
           </div>
         ))}
       </div>
-      <div className="card-box">
+      <div className="card-box bookings-card">
         <BookingTabs />
       </div>
     </div>
