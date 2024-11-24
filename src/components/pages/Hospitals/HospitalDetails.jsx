@@ -9,16 +9,15 @@ function HospitalDetails() {
   const { id } = useParams();
   const breadCrumpData = [
     {
-      name:"Manage",
-      status:"inactive"
-    },
-    {
       name:"Hospitals",
-      status:"inactive"
+      status:"inactive",
+      link: "/manage-hospitals",
     },
     {
       name:id,
-      status:"active"
+      status:"active",
+      link: `/manage-hospitals/${id}`,
+
     }
   ]
   return (

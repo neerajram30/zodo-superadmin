@@ -14,10 +14,10 @@ function Breadcrumb(props) {
               {data?.map((item) => (
                 <>
                   <li className={`breadcrumb-item ${item.status === "active" ? "active" : ""}`}>
-                    <Link to="#">{item.name}</Link>
+                    <Link to={item.link}>{item.name}</Link>
                   </li>
                   {item.status !== "active" && (
-                    <li className="breadcrumb-item">
+                    <li className="breadcrumb-item text-secondary">
                       <i className="feather-chevron-right breadcrump-chervron">
                         <FeatherIcon icon="chevron-right" />
                       </i>

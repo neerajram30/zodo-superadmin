@@ -164,9 +164,43 @@ function DoctorRequests() {
       dataIndex: "FIELD8",
       render: () => (
         <>
-          <button className="btn hospital-draft-btn rounded-pill text-primary ps-3 pe-3">
+          <button className="hospital-draft-btn rounded-pill text-primary ps-3 pe-3">
             view
           </button>
+        </>
+      ),
+    },
+    {
+      title: "",
+      dataIndex: "FIELD8",
+      render: () => (
+        <>
+          <div className="text-end">
+            <div className="dropdown dropdown-action">
+              <Link
+                to="#"
+                className="action-icon dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="fas fa-ellipsis-v" />
+              </Link>
+              <div className="dropdown-menu dropdown-menu-end">
+                <Link className="dropdown-item" to="/editdoctor">
+                  <i className="far fa-edit me-2" />
+                  Edit
+                </Link>
+                <Link
+                  className="dropdown-item"
+                  to="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#delete_patient"
+                >
+                  <i className="fa fa-trash-alt m-r-5"></i> Delete
+                </Link>
+              </div>
+            </div>
+          </div>
         </>
       ),
     },

@@ -7,16 +7,14 @@ import SpecializationList from "../../Doctors/Specialization/SpecializationList"
 function Specialization() {
   const breadCrumpData = [
     {
-      name: "Manage",
-      status: "inactive",
-    },
-    {
       name: "Doctors",
       status: "inactive",
+      link:"/manage-doctors",
     },
     {
       name: "Specialization",
       status: "active",
+      link:"/manage-doctors/specialization",
     },
   ];
   return (

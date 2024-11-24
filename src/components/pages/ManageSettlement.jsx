@@ -14,14 +14,18 @@ function ManageSettlement() {
     {
       name: "Dashboard",
       status: "inactive",
+      link: "/dashboard",
     },
     {
       name: "Settlement Requests",
       status: "inactive",
+      link: "/dashboard/settlement-requests",
     },
     {
       name: id,
       status: "active",
+      link: `/dashboard/settlement-requests/${id}`,
+
     },
   ];
   return (

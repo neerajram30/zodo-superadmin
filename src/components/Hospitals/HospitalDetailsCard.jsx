@@ -241,7 +241,7 @@ function HospitalDetailsCard() {
             </li>
           ))}
         </ul>
-        <div className="tab-content">
+        <div className="tab-content mt-1">
           {tabData.map((tabItem, i) => (
             <div
               className={`tab-pane ${i == 0 ? "show active" : ""}`}

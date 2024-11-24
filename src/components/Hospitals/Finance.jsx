@@ -1,5 +1,5 @@
 import React from "react";
-import { right_chevron } from "../imagepath";
+import { bin_icon_red, right_chevron } from "../imagepath";
 import TransactionTable from "./Transactions/TransactionTable";
 import { DatePicker } from "antd";
 import OverViewCard from "./OverViewCard";
@@ -81,7 +81,9 @@ function Finance() {
             <div className="dash-content dash-count flex-grow-1">
               <h6>$ 0</h6>
               <p>
-                <span className="text-danger">NO DUES</span>
+                <span className="text-danger custom-badge status-red">
+                  NO DUES
+                </span>
               </p>
             </div>
           </div>
@@ -161,12 +163,22 @@ function Finance() {
           </div>
         </div>
         <div>
-          <h5>{232} results found</h5>
+          <h5>
+            {232} results found{" "}
+            <span className="custom-badge status-red ms-1">
+              <img
+                src={bin_icon_red}
+                alt="delete"
+                className="dropdown-menu-icon"
+                width={15}
+                height={15}
+              />
+              <span className="mt-5 ps-2">CLEAR</span>
+            </span>
+          </h5>
         </div>
 
-        <div className="table-responsive">
-          <TransactionTable />
-        </div>
+        <TransactionTable />
       </div>
     </div>
   );

@@ -2,16 +2,20 @@ import React from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import DoctorDetailsCard from "../../Doctors/DoctorDetailsCard";
+import { useParams } from "react-router-dom";
 
 function DoctorDetails() {
+  const { id } = useParams();
   const breadCrumpData = [
     {
-      name: "Manage",
+      name: "Doctors",
       status: "inactive",
+      link: "/manage-doctors",
     },
     {
-      name: "Doctors",
+      name: id,
       status: "active",
+      link: `/manage-doctors/${id}`,
     },
   ];
   return (
@@ -19,7 +23,7 @@ function DoctorDetails() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          <DoctorDetailsCard/>
+          <DoctorDetailsCard />
         </div>
       </div>
     </Layout>

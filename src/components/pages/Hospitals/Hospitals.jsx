@@ -104,12 +104,9 @@ function Hospitals() {
   ];
   const breadCrumpData = [
     {
-      name:"Manage",
-      status:"inactive"
-    },
-    {
       name:"Hospitals",
-      status:"active"
+      status:"active",
+      link: "/manage-hospitals",
     }
   ]
   return (

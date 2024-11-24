@@ -1,6 +1,6 @@
-import React from 'react'
-import BookingsTable from './BookingsTable';
-import { fastTagList } from '../../configs/fastTagList';
+import React from "react";
+import BookingsTable from "./BookingsTable";
+import { fastTagList } from "../../configs/fastTagList";
 function FastTags() {
   const columns = [
     {
@@ -21,7 +21,17 @@ function FastTags() {
     {
       title: "STATUS",
       dataIndex: "status",
-      //   sorter: (a, b) => a.status.length - b.status.length,
+      render: (item) => (
+        <div
+          className={`${
+            (item === "Overdue" && "custom-badge status-red") ||
+            (item === "Refunded" && "custom-badge status-orange") ||
+            (item === "Paid" && "custom-badge status-green")
+          }`}
+        >
+          {item}
+        </div>
+      ),
     },
     {
       title: "AMOUNT",
@@ -37,7 +47,7 @@ function FastTags() {
     <div>
       <BookingsTable columns={columns} data={fastTagList} />
     </div>
-  )
+  );
 }
 
-export default FastTags
+export default FastTags;

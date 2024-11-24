@@ -8,17 +8,18 @@ import DoctorRequests from "../../Doctors/DoctorRequests";
 function Doctors() {
   const breadCrumpData = [
     {
-      name: "Manage",
-      status: "inactive",
-    },
-    {
       name: "Doctors",
       status: "active",
+      link: "/manage-doctors",
     },
   ];
   const tabData = [
     { id: "dr_list", title: "All Doctors", content: <DoctorsList /> },
-    { id: "dr_request", title: "Doctor Request (10)", content: <DoctorRequests /> },
+    {
+      id: "dr_request",
+      title: "Doctor Request (10)",
+      content: <DoctorRequests />,
+    },
     // { id: "dr_finance", title: "Finance", content: <DoctorsFinance/> },
     // { id: "dr_bookings", title: "Total Bookings", content: <DoctorsBookings/> },
   ];

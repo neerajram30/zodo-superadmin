@@ -8,10 +8,12 @@ function FasttagIssued() {
     {
       name: "Dashboard",
       status: "inactive",
+      link:"/dashboard"
     },
     {
       name: "Fasttag Issued",
       status: "active",
+      link:"/dashboard/fasttag-issued",
     },
   ];
   return (

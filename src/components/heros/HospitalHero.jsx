@@ -5,7 +5,7 @@ import { addicon } from "../imagepath";
 
 function HospitalHero() {
   return (
-    <div className="page-header invoices-page-header mt-2">
+    <div className="page-header invoices-page-header mt-3">
       <div className="row align-items-center">
         <div className="col-12 col-md-1 hero-title">
           <h5>All Hospitals</h5>

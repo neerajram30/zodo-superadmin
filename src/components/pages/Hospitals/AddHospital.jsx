@@ -10,16 +10,14 @@ import Select from "react-select";
 function AddHospital() {
   const breadCrumpData = [
     {
-      name: "Manage",
-      status: "inactive",
-    },
-    {
       name: "Hospitals",
       status: "inactive",
+      link: "/manage-hospitals",
     },
     {
       name: "Add Hospitals",
       status: "active",
+      link: "/manage-hospitals/add-hospital",
     },
   ];
   const navigate = useNavigate();

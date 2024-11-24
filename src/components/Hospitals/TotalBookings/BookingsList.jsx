@@ -22,6 +22,17 @@ function BookingsList() {
     {
       title: "STATUS",
       dataIndex: "status",
+      render: (item) => (
+        <div
+          className={`${
+            (item === "Overdue" && "custom-badge status-red") ||
+            (item === "Refunded" && "custom-badge status-orange") ||
+            (item === "Paid" && "custom-badge status-green")
+          }`}
+        >
+          {item}
+        </div>
+      ),
       //   sorter: (a, b) => a.status.length - b.status.length,
     },
     {

@@ -39,6 +39,7 @@ function Dashboard() {
     {
       name: "Dashboard",
       status: "active",
+      link:"/dashboard",
     },
   ];
 

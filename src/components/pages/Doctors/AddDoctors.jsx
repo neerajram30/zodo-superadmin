@@ -8,16 +8,14 @@ import UploadFiles from "../../Hospitals/UploadFiles";
 function AddDoctors() {
   const breadCrumpData = [
     {
-      name: "Manage",
-      status: "inactive",
-    },
-    {
       name: "Doctors",
       status: "inactive",
+      link:"/manage-doctors",
     },
     {
       name: "Add Doctors",
       status: "active",
+      link:"/manage-doctors/add-doctors",
     },
   ];
   const navigate = useNavigate();

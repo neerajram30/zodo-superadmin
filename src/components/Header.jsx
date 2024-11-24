@@ -103,12 +103,12 @@ const Header = () => {
               </span>
             </Link>
             <div className="dropdown-menu">
-              <Link className="dropdown-item" to="/profile">
+              {/* <Link className="dropdown-item" to="/profile">
                 My Profile
-              </Link>
-              <Link className="dropdown-item" to="/edit-profile">
+              </Link> */}
+              {/* <Link className="dropdown-item" to="/edit-profile">
                 Edit Profile
-              </Link>
+              </Link> */}
               <Link className="dropdown-item" to="/settings">
                 Settings
               </Link>

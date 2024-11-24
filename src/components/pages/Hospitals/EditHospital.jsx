@@ -9,22 +9,21 @@ function EditHospital() {
   const { id } = useParams();
   const breadCrumpData = [
     {
-      name:"Manage",
-      status:"inactive"
+      name: "Hospitals",
+      status: "inactive",
+      link: "/manage-hospitals",
     },
     {
-      name:"Hospitals",
-      status:"inactive"
+      name: id,
+      status: "inactive",
+      link: `/manage-hospitals/${id}`,
     },
     {
-      name:id,
-      status:"inactive"
+      name: "Edit",
+      status: "active",
+      link: `/manage-hospitals/${id}/edit`,
     },
-    {
-      name:"Edit",
-      status:"active"
-    }
-  ]
+  ];
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -33,13 +32,13 @@ function EditHospital() {
     >
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb data={breadCrumpData}/>
-          <div className="bg-white rounded p-4">
+          <Breadcrumb data={breadCrumpData} />
+          <div className="bg-white rounded p-4 mt-3">
             <h4>Hospital Onboarding</h4>
             {/* <div className="row"> */}
             <div className="row mt-4">
               <div className="col-md-8 ms-md-3">
-                <ChooseFile/>
+                <ChooseFile />
               </div>
               <div className="col mt-md-0 mt-4">
                 <FastTag />
