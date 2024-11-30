@@ -1,12 +1,12 @@
 import React from "react";
-import Layout from "../layout/Layout";
-import Hero from "../Dashboard/hero";
-import InfoCards from "../Dashboard/Info_cards";
-import { fasttag, profile_hospitals, doctors } from "../imagepath";
-import RevenueInfo from "../Dashboard/RevenueInfo";
-import Breadcrumb from "../breadcrump/Breadcrumb";
-import Analytics from "../Dashboard/Analytics";
-import DashboardTables from "../Dashboard/DashboardTables";
+import Layout from "../../layout/Layout";
+import Hero from "../../Dashboard/hero";
+import InfoCards from "../../Dashboard/Info_cards";
+import { fasttag, profile_hospitals, doctors } from "../../imagepath";
+import RevenueInfo from "../../Dashboard/RevenueInfo";
+import Breadcrumb from "../../breadcrump/Breadcrumb";
+import Analytics from "../../Dashboard/Analytics";
+import DashboardTables from "../../Dashboard/DashboardTables";
 
 function Dashboard() {
   const basicInformation = [

@@ -1,9 +1,9 @@
 import React from "react";
-import Layout from "../layout/Layout";
-import Breadcrumb from "../breadcrump/Breadcrumb";
-import Analytics from "../Dashboard/Analytics";
-import FasttagDetails from "../FasttagRevenue/FasttagDetails";
-import BasicHero from "../heros/BasicHero";
+import Breadcrumb from "../../breadcrump/Breadcrumb";
+import Analytics from "../../Dashboard/Analytics";
+import FasttagDetails from "../../FasttagRevenue/FasttagDetails";
+import BasicHero from "../../heros/BasicHero";
+import Layout from "../../layout/Layout";
 
 function FasttagRevenue() {
   const breadCrumpData = [

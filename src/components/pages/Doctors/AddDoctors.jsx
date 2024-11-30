@@ -35,9 +35,6 @@ function AddDoctors() {
               <div className="col-md-8 ms-md-3">
                 <ChooseFile />
               </div>
-              {/* <div className="col mt-md-0 mt-4">
-                <FastTag />
-              </div> */}
             </div>
 
             <div className="row mt-4">

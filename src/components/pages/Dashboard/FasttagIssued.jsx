@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../layout/Layout";
-import Breadcrumb from "../breadcrump/Breadcrumb";
-import BasicHero from "../heros/BasicHero";
+import Layout from "../../layout/Layout";
+import Breadcrumb from "../../breadcrump/Breadcrumb";
+import BasicHero from "../../heros/BasicHero";
 
 function FasttagIssued() {
   const breadCrumpData = [

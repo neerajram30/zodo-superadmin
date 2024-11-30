@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "../layout/Layout";
-import Breadcrumb from "../breadcrump/Breadcrumb";
-import BasicHero from "../heros/BasicHero";
-import SettlementList from "../settlements/SettlementList";
+import Layout from "../../layout/Layout";
+import Breadcrumb from "../../breadcrump/Breadcrumb";
+import BasicHero from "../../heros/BasicHero";
+import SettlementList from '../../settlements/SettlementList';
 
 function SettlementRequests() {
   const breadCrumpData = [
