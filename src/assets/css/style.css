@@ -1070,7 +1070,7 @@ textarea.form-control {
   position: relative;
 }
 .sidebar-menu ul .submenu ul .submenu-active:before {
-  background-image: url(../img/icons/right-icon.svg);
+  background-image: url(../img/icons/right-icon-green.svg);
   content: "";
   position: absolute;
   width: 10px;
@@ -1081,6 +1081,21 @@ textarea.form-control {
   -webkit-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
+}
+
+.sidebar-menu ul .submenu ul .submenu-normal:before{
+  background-image: url(../img/icons/right-icon-gray.svg);
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 35px;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  
 }
 .sidebar-menu ul ul a.submenu-active {
   color: #347D73;
@@ -8690,6 +8705,10 @@ blockquote p {
   background-color: #009efb;
   border: 1px solid #009efb;
 }
+.check:checked + .checktoggle-small {
+  background-color: #009efb;
+  border: 1px solid #009efb;
+}
 .payment-details {
   width: 266px;
   border-radius: 4px;
@@ -9908,6 +9927,18 @@ span.rti--tag {
   position: relative;
   width: 48px;
 }
+.checktoggle-small{
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  cursor: pointer;
+  display: block;
+  font-size: 0 !important;
+  height: 16px;
+  margin-bottom: 0;
+  position: relative;
+  width: 24px;
+}
 .checktoggle:after {
   content: " ";
   display: block;
@@ -9921,7 +9952,26 @@ span.rti--tag {
   border-radius: 50%;
   transition: left 300ms ease, transform 300ms ease;
 }
+
+.checktoggle-small:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(5px, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  transition: left 300ms ease, transform 300ms ease;
+}
 .check:checked + .checktoggle {
+  background-color: #34C759;
+  border: 1px solid #34C759;
+}
+
+.check:checked + .checktoggle-small0 {
   background-color: #34C759;
   border: 1px solid #34C759;
 }
@@ -9945,6 +9995,12 @@ form .btn-secondary {
   color: #fff;
 }
 .check:checked + .checktoggle:after {
+  background-color: #fff;
+  left: 100%;
+  transform: translate(calc(-100% - 5px), -50%);
+}
+
+.check:checked + .checktoggle-small:after {
   background-color: #fff;
   left: 100%;
   transform: translate(calc(-100% - 5px), -50%);
@@ -11580,7 +11636,10 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 /*-----------------
 	45. Assets
 -----------------------*/
-
+.small-toggle{
+  height: 5px;
+  width: 25px;
+}
 .hero-title h5{
   width: 200px;
   font-size: 16px;

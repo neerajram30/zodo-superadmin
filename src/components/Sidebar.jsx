@@ -96,7 +96,7 @@ const Sidebar = (props) => {
                         className={
                           props?.activeClassName === "manage-hospitals"
                             ? "submenu-active"
-                            : ""
+                            : "submenu-normal"
                         }
                         to="/manage-hospitals"
                       >
@@ -108,7 +108,7 @@ const Sidebar = (props) => {
                         className={
                           props?.activeClassName === "manage-doctors"
                             ? "submenu-active"
-                            : ""
+                            : "submenu-normal"
                         }
                         to="/manage-doctors"
                       >

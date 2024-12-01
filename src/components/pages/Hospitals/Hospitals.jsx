@@ -3,7 +3,7 @@ import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import HospitalsList from "../../Hospitals/HospitalsList";
 import { apollo_logo } from "../../imagepath";
-import LoadMore from "../../Hospitals/LoadMore";
+// import LoadMore from "../../Hospitals/LoadMore";
 import HospitalHero from "../../heros/HospitalHero";
 
 function Hospitals() {
@@ -120,7 +120,7 @@ function Hospitals() {
           <Breadcrumb data={breadCrumpData}/>
           <HospitalHero/>
           <HospitalsList hospitalDetails={hospitalDetails}/>
-          <LoadMore/>
+          {/* <LoadMore/> */}
         </div>
       </div>
     </Layout>

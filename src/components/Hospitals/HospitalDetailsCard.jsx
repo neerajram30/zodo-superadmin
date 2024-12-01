@@ -7,7 +7,8 @@ import {
   pencil_icon,
   phone_icon,
   search_outline_icon,
-  toggle_icon,
+  // toggle_icon,
+  // toggle_icon,
 } from "../imagepath";
 import { apollo_logo, three_dots_menu } from "../imagepath";
 import Overview from "./Overview";
@@ -17,10 +18,10 @@ import Finance from "./Finance";
 import Reviews from "./Reviews/Reviews";
 import TotalBookings from "./TotalBookings/TotalBookings";
 import Department from "./Departments/Department";
+
 function HospitalDetailsCard() {
   const navigate = useNavigate();
   const { id } = useParams();
-
   const [show, setShow] = useState(false);
   const tabData = [
     { id: "overview", title: "Overview", content: <Overview /> },
@@ -32,8 +33,12 @@ function HospitalDetailsCard() {
       content: <TotalBookings />,
     },
     { id: "reviews", title: "Reviews", content: <Reviews /> },
-    // { id: "history", title: "History", content: <div>contnt5</div> },
   ];
+
+  const handleTogglebtn = (e) => {
+    e.stopPropagation();
+    console.log("btn clicked");
+  };
 
   return (
     <div className="mt-3">
@@ -48,16 +53,15 @@ function HospitalDetailsCard() {
             </h5>
             <div className="dropdown">
               <Link
-                // className="dropdown-toggle"
                 to="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                id="customdropdown"
               >
-                {/* <span className="bi bi-chevron-up"></span> */}
                 <img src={three_dots_menu} alt="" />
               </Link>
-              <div className="dropdown-menu">
+              <div className="dropdown-menu" aria-labelledby="customdropdown">
                 <Link
                   className="dropdown-item"
                   to={`/manage-hospitals/${id}/edit`}
@@ -71,16 +75,28 @@ function HospitalDetailsCard() {
                 </Link>
                 <div className="dropdown-divider" />
                 <Link
-                  className="dropdown-item"
-                  to="#"
-                  onClick={() => setShow(true)}
+                  className="dropdown-item d-flex"
+                  // to="#"
+                  // onClick={() => setShow(true)}
+                  // onClick={handleTogglebtn}
                 >
-                  <img
+                  {/* <img
                     src={toggle_icon}
                     alt="disable"
                     className="dropdown-menu-icon"
-                  />
-                  <span>Disable</span>
+                  /> */}
+
+                  <div
+                  onClick={handleTogglebtn}
+                    
+                    className="status-toggle d-flex justify-content-between align-items-center"
+                  >
+                    <input type="checkbox" id="status" className="check" />
+                    <label htmlFor="status" className="checktoggle-small">
+                      checkbox
+                    </label>
+                  </div>
+                  <span className="ms-1">Disable</span>
                 </Link>
                 <div className="dropdown-divider" />
                 <Link

@@ -58,9 +58,6 @@ function Finance() {
               </p>
               <div className="row">
                 <p className="col">Requested On 24-11-2024</p>
-                {/* <div className="col-auto">
-                  <img src={right_chevron} alt="#" />
-                </div> */}
               </div>
               <div>
                 <button
