@@ -2,113 +2,24 @@ import React from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import HospitalsList from "../../Hospitals/HospitalsList";
-import { apollo_logo } from "../../imagepath";
 // import LoadMore from "../../Hospitals/LoadMore";
 import HospitalHero from "../../heros/HospitalHero";
+import AllHospitals from "../../Hospitals/AllHospitals";
+import HospitalRequest from "../../Hospitals/HospitalRequest";
 
 function Hospitals() {
-  const hospitalDetails = [
-    {
-      id: 1,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 2,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 3,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 4,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 5,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 6,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 7,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 8,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-    {
-      id: 9,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },{
-      id: 10,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },{
-      id:11,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },{
-      id: 12,
-      name: "Apollo",
-      logo: apollo_logo,
-      status: "Active",
-      totalFasttags: 30,
-      todayBookings: 221,
-    },
-  ];
   const breadCrumpData = [
     {
-      name:"Hospitals",
-      status:"active",
+      name: "Hospitals",
+      status: "active",
       link: "/manage-hospitals",
-    }
-  ]
+    },
+  ];
+  const tabData = [
+    { id: "allhospitals", title: "All Hosptitals", content: <AllHospitals/> },
+    { id: "requested", title: "Requested Hospitals", content: <HospitalRequest/> },
+  ];
+
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -117,9 +28,9 @@ function Hospitals() {
     >
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb data={breadCrumpData}/>
-          <HospitalHero/>
-          <HospitalsList hospitalDetails={hospitalDetails}/>
+          <Breadcrumb data={breadCrumpData} />
+          <HospitalHero tabData={tabData} />
+          <HospitalsList tabData={tabData} />
           {/* <LoadMore/> */}
         </div>
       </div>

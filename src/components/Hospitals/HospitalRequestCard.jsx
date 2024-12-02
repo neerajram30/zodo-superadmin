@@ -7,7 +7,7 @@ function HospitalRequestCard(props) {
   const { hospitalData } = props;
   return (
     <div className="card invoices-grid-card w-100" key={hospitalData.id}>
-      <Link to={`/manage-hospitals/${hospitalData.id}`}>
+      <Link to>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
@@ -28,20 +28,20 @@ function HospitalRequestCard(props) {
             </div>
 
             <div className="row mt-2">
-              <div className="invoices-create-btn">
+              <div className="d-flex justify-content-center">
                 <Link
-                  to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#delete_invoices_details"
-                  className="btn hospital-draft-btn rounded-pill text-primary"
+                  to={`/manage-hospitals/manage-request/${hospitalData.id}`}
+                  // data-bs-toggle="modal"
+                  // data-bs-target="#delete_invoices_details"
+                  className="hospital-draft-btn rounded-pill text-primary ms-1 pt-2 pb-2 ps-4 pe-4 me-2"
                 >
                   Approve
                 </Link>
                 <Link
-                  to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#save_invocies_details"
-                  className="btn hospital-add-btn rounded-pill ms-1"
+                  to={`/manage-hospitals/manage-request/${hospitalData.id}`}
+                  // data-bs-toggle="modal"
+                  // data-bs-target="#save_invocies_details"
+                  className="text-white hospital-add-btn rounded-pill ms-1 pt-2 pb-2 ps-5 pe-5 ms-2"
                 >
                   Review Now
                 </Link>

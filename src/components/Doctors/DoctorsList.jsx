@@ -237,7 +237,7 @@ function DoctorsList() {
                       to="/manage-doctors/specialization"
                       // data-bs-toggle="modal"
                       // data-bs-target="#delete_invoices_details"
-                      className="hospital-draft-btn rounded-pill text-primary ps-4 pe-4 pt-2 pb-2"
+                      className="hospital-draft-btn rounded-pill text-primary ps-4 pe-4 pt-2 pb-2 me-3"
                     >
                       Manage Specialisation
                     </Link>

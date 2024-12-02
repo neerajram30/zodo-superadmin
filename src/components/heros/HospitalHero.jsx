@@ -2,14 +2,14 @@ import React from "react";
 import SearchBox from "../searchbox/SearchBox";
 import { Link } from "react-router-dom";
 import { addicon } from "../imagepath";
+import PropTypes from "prop-types";
 
-function HospitalHero() {
+function HospitalHero(props) {
+  const {tabData} = props;
+
   return (
     <div className="page-header invoices-page-header mt-3">
       <div className="row align-items-center">
-        <div className="col-12 col-md-1 hero-title">
-          <h5>All Hospitals</h5>
-        </div>
         <div className="col-12 col-md-3 ms-md-3">
           <div className="doctor-list-search">
             <div className="search-container">
@@ -31,8 +31,29 @@ function HospitalHero() {
           </div>
         </div>
       </div>
+      <div>
+        <div className="profile-tabs">
+          <ul className="nav nav-tabs nav-tabs-bottom border-0">
+            {tabData.map((tabItem, i) => (
+              <li key={tabItem.id + i}>
+                <Link
+                  className={`nav-link ${i == 0 ? "active" : ""}`}
+                  to={`#${tabItem.id}`}
+                  data-bs-toggle="tab"
+                >
+                  {tabItem.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
+
+HospitalHero.propTypes = {
+  tabData: PropTypes.node,
+};
 
 export default HospitalHero;

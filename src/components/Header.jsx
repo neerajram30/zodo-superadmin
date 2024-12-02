@@ -95,8 +95,8 @@ const Header = () => {
               data-bs-toggle="dropdown"
             >
               <div className="user-names">
-                <h5>Liam Michael </h5>
-                <span>Admin</span>
+                <h5>User </h5>
+                <span>Super Admin</span>
               </div>
               <span className="user-img">
                 <img src={user06} alt="Admin" />
@@ -109,7 +109,7 @@ const Header = () => {
               {/* <Link className="dropdown-item" to="/edit-profile">
                 Edit Profile
               </Link> */}
-              <Link className="dropdown-item" to="/settings">
+              <Link className="dropdown-item" to="/settingssociallink">
                 Settings
               </Link>
               <Link className="dropdown-item" to="/login">
@@ -117,11 +117,11 @@ const Header = () => {
               </Link>
             </div>
           </li>
-          <li className="nav-item ">
+          {/* <li className="nav-item ">
             <Link to="/settings" className="hasnotifications nav-link">
               <img src={settingicon01} alt="" />{" "}
             </Link>
-          </li>
+          </li> */}
         </ul>
         <div className="dropdown mobile-user-menu float-end">
           <Link

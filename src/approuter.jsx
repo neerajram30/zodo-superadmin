@@ -27,6 +27,7 @@ import FasttagRevenue from "./components/pages/Dashboard/FasttagRevenue";
 import SettlementRequests from "./components/pages/Dashboard/SettlementRequests";
 import ManageSettlement from "./components/pages/Dashboard/ManageSettlement";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
+import ManageRequest from "./components/pages/Hospitals/ManageRequest";
 
 //Accounts
 const Approuter = () => {
@@ -74,6 +75,7 @@ const Approuter = () => {
             element={<AddHospital />}
           />
           <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />
+          <Route path="/manage-hospitals/manage-request/:id" element={<ManageRequest />} />
           <Route path="/manage-hospitals/:id/edit" element={<EditHospital />} />
           {/* Manage Doctors */}
           <Route path="/manage-doctors" element={<Doctors />} />

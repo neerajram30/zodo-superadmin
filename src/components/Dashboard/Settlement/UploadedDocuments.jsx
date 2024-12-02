@@ -1,7 +1,9 @@
 import React from "react";
 import { cross_icon, eye_icon, pdf_icon, pencil_icon } from "../../imagepath";
+import { Link, useParams } from "react-router-dom";
 
 function UploadedDocuments() {
+  const { id } = useParams(); 
   return (
     <div className="card-box">
       <div className="row">
@@ -10,7 +12,9 @@ function UploadedDocuments() {
             <h4 className="">Uploaded Documents</h4>
           </div>
           <div className="col d-flex justify-content-end">
-            <img src={pencil_icon} alt="edit" width={20} height={20} />
+            <Link to={`/manage-hospitals/${id}/edit`}>
+              <img src={pencil_icon} alt="edit" width={18} height={18} />
+            </Link>
           </div>
         </div>
         <div className="mt-2">

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import Select from "react-select";
 import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
 import { pencil_icon } from "../../imagepath";
+import { Link, useParams } from "react-router-dom";
 
 function ReviewFasttag() {
+  const { id } = useParams(); 
   const [selectedOption, setSelectedOption] = useState({
     label: "10",
     value: "10",
@@ -21,7 +23,9 @@ function ReviewFasttag() {
           <h4 className="card-title">About Fast Tag</h4>
         </div>
         <div className="col d-flex justify-content-end">
-          <img src={pencil_icon} alt="edit" width={20} height={20} />
+          <Link to={`/manage-hospitals/${id}/edit`}>
+            <img src={pencil_icon} alt="edit" width={18} height={18} />
+          </Link>
         </div>
       </div>
 

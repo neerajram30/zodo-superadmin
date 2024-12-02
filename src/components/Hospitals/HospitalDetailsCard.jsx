@@ -87,8 +87,7 @@ function HospitalDetailsCard() {
                   /> */}
 
                   <div
-                  onClick={handleTogglebtn}
-                    
+                    onClick={handleTogglebtn}
                     className="status-toggle d-flex justify-content-between align-items-center"
                   >
                     <input type="checkbox" id="status" className="check" />
@@ -249,7 +248,7 @@ function HospitalDetailsCard() {
             <li key={tabItem.id + i}>
               <Link
                 className={`nav-link ${i == 0 ? "active" : ""}`}
-                to={`#${tabItem.id}`}
+                to={`/manage-hospitals/${id}/#${tabItem.id}`}
                 data-bs-toggle="tab"
               >
                 {tabItem.title}

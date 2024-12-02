@@ -1,7 +1,9 @@
 import React from "react";
 import { pencil_icon } from "../../imagepath";
+import { Link, useParams } from "react-router-dom";
 
 function ReviewBank() {
+  const { id } = useParams(); 
   return (
     <div className="card-box">
       <div className="row">
@@ -9,7 +11,9 @@ function ReviewBank() {
           <h4 className="card-title">Bank Info</h4>
         </div>
         <div className="col d-flex justify-content-end">
-          <img src={pencil_icon} alt="edit" width={20} height={20} />
+          <Link to={`/manage-hospitals/${id}/edit`}>
+            <img src={pencil_icon} alt="edit" width={18} height={18} />
+          </Link>
         </div>
       </div>
       <div className="row pt-3 pb-1">

@@ -16,7 +16,7 @@ function Dashboard() {
       icon: profile_hospitals,
       count: 140,
       percentageUp: 20,
-      link: "",
+      link: "/manage-hospitals",
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ function Dashboard() {
       icon: doctors,
       count: 250,
       percentageUp: 40,
-      link: "",
+      link: "/manage-doctors",
     },
     {
       id: 3,
