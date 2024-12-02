@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { dashboard, logout, menuicon08 } from "./imagepath";
+import { Link} from "react-router-dom";
+import { dashboard, logout_01, menuicon08 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
 
 const Sidebar = (props) => {
@@ -16,8 +16,7 @@ const Sidebar = (props) => {
     e?.target?.className
       ? div.classList.remove("subdrop")
       : div.classList.add("subdrop");
-      console.log("Item3 ",item3);
-      
+    console.log("Item3 ", item3);
   };
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const Sidebar = (props) => {
   const expandMenuOpen = () => {
     document.body.classList.add("expand-menu");
   };
-  
+
   return (
     <>
       <div className="sidebar" id="sidebar">
@@ -71,7 +70,6 @@ const Sidebar = (props) => {
                     {/* <span className="menu-arrow" /> */}
                   </Link>
                 </li>
-
 
                 <li className="submenu">
                   <Link
@@ -118,10 +116,15 @@ const Sidebar = (props) => {
                   </ul>
                 </li>
               </ul>
-              <div className="logout-btn">
-                <Link to="/login">
+              <div className="logout-btn submenu">
+                <Link
+                  to="/login"
+                  className={
+                    props?.activeClassName === "dashboard" ? "active" : ""
+                  }
+                >
                   <span className="menu-side">
-                    <img src={logout} alt="" />
+                    <img src={logout_01} alt="" />
                   </span>{" "}
                   <span>Logout</span>
                 </Link>

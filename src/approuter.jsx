@@ -33,6 +33,7 @@ import ManageRequest from "./components/pages/Hospitals/ManageRequest";
 const Approuter = () => {
   // eslint-disable-next-line no-unused-vars
   // const config = "/react/template"
+  
   return (
     <>
       <BrowserRouter basename="/">
@@ -67,15 +68,27 @@ const Approuter = () => {
             path="/dashboard/settlement-requests/:id"
             element={<ManageSettlement />}
           />
+          {/* <Route
+            path="/dashboard/fasttag-issued/:id"
+            element={<FasttagDetails />}
+          /> */}
           <Route path="/doctorlist" element={<DoctorList />} />
           {/* Manage Hospital */}
           <Route path="/manage-hospitals" element={<Hospitals />} />
+
           <Route
             path="/manage-hospitals/add-hospital"
             element={<AddHospital />}
           />
           <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />
-          <Route path="/manage-hospitals/manage-request/:id" element={<ManageRequest />} />
+          <Route
+            path="/manage-hospitals/manage-request/:id"
+            element={<ManageRequest />}
+          />
+          <Route
+            path="/manage-hospitals/manage-request/:id/edit"
+            element={<EditHospital />}
+          />
           <Route path="/manage-hospitals/:id/edit" element={<EditHospital />} />
           {/* Manage Doctors */}
           <Route path="/manage-doctors" element={<Doctors />} />

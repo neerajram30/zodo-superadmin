@@ -28,30 +28,32 @@ function Doctors() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          <div className="profile-tabs mt-3">
-            <ul className="nav nav-tabs nav-tabs-bottom">
-              {tabData.map((tabItem, i) => (
-                <li key={tabItem.id + i}>
+          <div className="card-box mt-3">
+            <div className="profile-tabs">
+              <ul className="nav nav-tabs nav-tabs-bottom">
+                {tabData.map((tabItem, i) => (
+                  <li key={tabItem.id + i}>
+                    <Link
+                      className={`nav-link ${i == 0 ? "active" : ""}`}
+                      to={`#${tabItem.id}`}
+                      data-bs-toggle="tab"
+                    >
+                      {tabItem.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="tab-content">
+                {tabData.map((tabItem, i) => (
                   <Link
-                    className={`nav-link ${i == 0 ? "active" : ""}`}
-                    to={`#${tabItem.id}`}
-                    data-bs-toggle="tab"
+                    className={`tab-pane ${i == 0 ? "show active" : ""}`}
+                    id={tabItem.id}
+                    key={tabItem.id + i}
                   >
-                    {tabItem.title}
+                    {tabItem.content}
                   </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="tab-content">
-              {tabData.map((tabItem, i) => (
-                <Link
-                  className={`tab-pane ${i == 0 ? "show active" : ""}`}
-                  id={tabItem.id}
-                  key={tabItem.id + i}
-                >
-                  {tabItem.content}
-                </Link>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

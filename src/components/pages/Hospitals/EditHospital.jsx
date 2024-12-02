@@ -4,9 +4,12 @@ import Breadcrumb from "../../breadcrump/Breadcrumb";
 import UploadFiles from "../../Hospitals/UploadFiles";
 import FastTag from "../../Hospitals/FastTag";
 import ChooseFile from "../../Hospitals/ChooseFile";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 function EditHospital() {
   const { id } = useParams();
+  const locations = useLocation();
+  const patharray = locations.pathname.split('/');
+ 
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -24,6 +27,29 @@ function EditHospital() {
       link: `/manage-hospitals/${id}/edit`,
     },
   ];
+
+  const manageBreadcrump = [
+    {
+      name: "Hospitals",
+      status: "inactive",
+      link: "/manage-hospitals",
+    },
+    {
+      name: "Hospital Requests",
+      status: "inactive",
+      link: `/manage-hospitals/manage-request`,
+    },
+    {
+      name: id,
+      status: "inactive",
+      link: `/manage-hospitals/manage-request/${id}`,
+    },
+    {
+      name: "Edit",
+      status: "active",
+      link: `/manage-hospitals/manage-request/${id}/edit`,
+    },
+  ];
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -32,7 +58,7 @@ function EditHospital() {
     >
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb data={breadCrumpData} />
+          <Breadcrumb data={patharray.includes("manage-request") ? manageBreadcrump :  breadCrumpData} />
           <div className="bg-white rounded p-4 mt-3">
             <h4>Hospital Onboarding</h4>
             {/* <div className="row"> */}

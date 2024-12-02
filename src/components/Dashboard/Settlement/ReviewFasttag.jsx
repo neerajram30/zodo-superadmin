@@ -23,7 +23,7 @@ function ReviewFasttag() {
           <h4 className="card-title">About Fast Tag</h4>
         </div>
         <div className="col d-flex justify-content-end">
-          <Link to={`/manage-hospitals/${id}/edit`}>
+          <Link to={`/manage-hospitals/manage-request/${id}/edit`}>
             <img src={pencil_icon} alt="edit" width={18} height={18} />
           </Link>
         </div>

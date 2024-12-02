@@ -19,6 +19,7 @@ export { default as user06 } from "../assets/img/user-06.jpg";
 export { default as settingicon01 } from "../assets/img/icons/setting-icon-01.svg";
 
 export { default as menuicon08 } from "../assets/img/icons/menu-icon-08.svg";
+export { default as logout_01 } from "../assets/img/icons/logout_01.svg";
 export { default as menuicon04 } from "../assets/img/icons/menu-icon-04.svg";
 export { default as menuicon06 } from "../assets/img/icons/menu-icon-06.svg";
 export { default as menuicon09 } from "../assets/img/icons/menu-icon-09.svg";

@@ -1,9 +1,17 @@
 import React from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
-import BasicHero from "../../heros/BasicHero";
+import HospitalHero from "../../heros/HospitalHero";
+
+import HospitalsList from "../../Hospitals/HospitalsList";
+import HospitalRequest from "../../Hospitals/HospitalRequest";
+import FasttagHospitals from "../../fasttag/FasttagHospitals";
 
 function FasttagIssued() {
+  const tabData = [
+    { id: "allhospitals", title: "All Hosptitals", content: <FasttagHospitals/> },
+    { id: "requested", title: "Requested Hospitals", content: <HospitalRequest/> },
+  ];
   const breadCrumpData = [
     {
       name: "Dashboard",
@@ -22,7 +30,8 @@ function FasttagIssued() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           {/* <FasttagRevenueHeader/> */}
-          <BasicHero title="Fast Tag Issued" />
+          <HospitalHero tabData={tabData}/>
+          <HospitalsList tabData={tabData} />
         </div>
       </div>
     </Layout>

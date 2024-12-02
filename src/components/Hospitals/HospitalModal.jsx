@@ -19,11 +19,11 @@ function HospitalModal(props) {
       <Modal.Body className="border-0">
         <div className="form-group">
           <label className="col-form-label col-md-4">Reason For Deleting</label>
-          <div className="col-md-10">
+          <div className="">
             <textarea
               rows={5}
               cols={5}
-              className="form-control"
+              className="form-control modal-input"
               placeholder="Write Here.."
               defaultValue={""}
             />

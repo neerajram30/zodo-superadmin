@@ -15,22 +15,7 @@ function Analytics() {
               <div className="chart-title patient-visit">
                 <h4>Analytics</h4>
                 <div>
-                  {/* <ul className="nav chat-user-total">
-                    <li>
-                      <i
-                        className="fa fa-circle current-users"
-                        aria-hidden="true"
-                      />
-                      Male 75%
-                    </li>
-                    <li>
-                      <i
-                        className="fa fa-circle old-users"
-                        aria-hidden="true"
-                      />{" "}
-                      Female 25%
-                    </li>
-                  </ul> */}
+                  
                   <h6>Total bookings <span>300</span></h6>
                 </div>
                 <div className="form-group mb-0">

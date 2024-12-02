@@ -9,46 +9,48 @@ function BookingTabs() {
     {
       id: "totalBookings",
       title: "Total Bookings",
-      content: <BookingsList/>,
+      content: <BookingsList />,
     },
     {
       id: "fastTags",
       title: "Fast Tags",
-      content: <FastTags/>,
+      content: <FastTags />,
     },
     {
       id: "cancellations",
       title: "Cancellations",
-      content: <Cancellation/>,
+      content: <Cancellation />,
     },
   ];
   return (
     <div>
-      <div className="profile-tabs">
-        <ul className="nav nav-tabs nav-tabs-bottom">
-          {tabData.map((tabItem, i) => (
-            <li key={tabItem.id + i}>
-              <Link
-                className={`nav-link ${i == 0 ? "active" : ""}`}
-                to={`#${tabItem.id}`}
-                data-bs-toggle="tab"
-              >
-                {tabItem.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className="card-box">
+        <div className="profile-tabs">
+          <ul className="nav nav-tabs nav-tabs-bottom">
+            {tabData.map((tabItem, i) => (
+              <li key={tabItem.id + i}>
+                <Link
+                  className={`nav-link ${i == 0 ? "active" : ""}`}
+                  to={`#${tabItem.id}`}
+                  data-bs-toggle="tab"
+                >
+                  {tabItem.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        <div className="tab-content">
-          {tabData.map((tabItem, i) => (
-            <div
-              className={`tab-pane ${i == 0 ? "show active" : ""}`}
-              id={tabItem.id}
-              key={tabItem.id + i}
-            >
-              {tabItem.content}
-            </div>
-          ))}
+          <div className="tab-content">
+            {tabData.map((tabItem, i) => (
+              <div
+                className={`tab-pane ${i == 0 ? "show active" : ""}`}
+                id={tabItem.id}
+                key={tabItem.id + i}
+              >
+                {tabItem.content}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

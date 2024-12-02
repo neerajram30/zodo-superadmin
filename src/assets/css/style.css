@@ -111,7 +111,7 @@ a:hover,
 a:active,
 a:focus {
   text-decoration: none;
-  color: #009ce7;
+  color: #05A95C;
   outline: none;
 }
 .form-control {
@@ -1678,7 +1678,7 @@ textarea.form-control {
   color: #ff3667;
 }
 .dash-content p .passive-view {
-  color: #00d3c7;
+  color: #05A95C;
 }
 .dash-table h6{
   font-size: 14px;
@@ -1956,7 +1956,7 @@ ul.chat-user-total li i.old-users {
   z-index: -1;
 }
 .morning-user {
-  padding: 50px 0px 50px 35px;
+  padding: 25px 0px 25px 20px;
 }
 .morning-user h2 {
   font-size: 28px;
@@ -11636,6 +11636,9 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 /*-----------------
 	45. Assets
 -----------------------*/
+.modal-input{
+  width: 100%;
+}
 .small-toggle{
   height: 5px;
   width: 25px;

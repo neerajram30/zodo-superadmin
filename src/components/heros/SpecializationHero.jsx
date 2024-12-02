@@ -20,12 +20,12 @@ function SpecializationHero() {
           </div>
         </div>
         <div className="col-md col-sm-12">
-          <div className="invoices-create-btn d-flex justify-content-md-end">
+          <div className="d-flex justify-content-md-end">
             <Link
               to="#"
               // data-bs-toggle="modal"
               // data-bs-target="#save_invocies_details"
-              className="hospital-draft-btn rounded-pill text-primary ps-4 pe-4 pt-2 pb-2"
+              className="hospital-draft-btn rounded-pill text-primary ps-4 pe-4 pt-2 pb-2 me-2"
             >
               <img src={uploadfiles_icon} alt="upload" />
               <span className="ms-2 me-2"> Upload Files</span>
@@ -34,7 +34,7 @@ function SpecializationHero() {
               to
               // data-bs-toggle="modal"
               // data-bs-target="#save_invocies_details"
-              className="hospital-add-btn rounded-pill ms-1 text-white ps-4 pe-4 pt-2 pb-2"
+              className="hospital-add-btn rounded-pill ms-1 text-white ps-4 pe-4 pt-2 pb-2 me-2"
               onClick={() => setShow(true)}
             >
               <img src={addicon} alt="add" />

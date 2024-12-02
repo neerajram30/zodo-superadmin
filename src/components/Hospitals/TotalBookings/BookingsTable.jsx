@@ -7,7 +7,7 @@ import ExportTable from "../../assests/ExportTable";
 function BookingsTable(props) {
   const { data, columns } = props;
   return (
-    <div className="card-box">
+    <div>
       <div className="row mt-4">
         <div className="col-12 col-md-6 col-xl-3">
           <div className="form-group local-forms cal-icon">
