@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { dashboard, logout_01, menuicon08 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
 
@@ -10,13 +10,13 @@ const Sidebar = (props) => {
   const handleClick = (e, item, item1, item3) => {
     const div = document.querySelector(`#${item}`);
     const ulDiv = document.querySelector(`.${item1}`);
-    e?.target?.className
+    
+    ulDiv.style.display === "block"
       ? (ulDiv.style.display = "none")
       : (ulDiv.style.display = "block");
-    e?.target?.className
+    div.classList.contains("subdrop")
       ? div.classList.remove("subdrop")
       : div.classList.add("subdrop");
-    console.log("Item3 ", item3);
   };
 
   useEffect(() => {
@@ -75,7 +75,9 @@ const Sidebar = (props) => {
                   <Link
                     to="/manage-hospitals"
                     id="menu-item3"
-                    onClick={(e) => handleClick(e, "menu-item3", "menu-items3")}
+                    onClick={(e) =>
+                      handleClick(e, "menu-item3", "menu-items3", "menu-items3")
+                    }
                     className={
                       props?.activeClassName === "manage-hospitals" ||
                       props?.activeClassName === "manage-doctors"

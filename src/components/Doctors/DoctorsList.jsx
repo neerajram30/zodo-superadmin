@@ -223,7 +223,7 @@ function DoctorsList() {
                     <h3>Doctors List</h3>
                   </div>
                 </div>
-                <div className="col-12 col-md-3 ms-md-3">
+                <div className="col-12 col-md-3 ms-md-4">
                   <div className="doctor-list-search">
                     <div className="search-container">
                       <SearchBox />

@@ -45,12 +45,12 @@ function HospitalDetailsCard() {
       <div className="card-box profile-header rounded-bottom-0">
         <div className="row">
           <div className="d-flex justify-content-between">
-            <h5>
-              <span onClick={() => navigate(-1)}>
+            <div className="basic-hero-header">
+              <Link to onClick={() => navigate(-1)}>
                 <img src={arrow_left} alt="" />
-              </span>
-              <span className="ms-2">Hospital Details</span>
-            </h5>
+              </Link>
+              <span className="ms-3">Hospital Details</span>
+            </div>
             <div className="dropdown">
               <Link
                 to="#"
@@ -106,7 +106,9 @@ function HospitalDetailsCard() {
                   <img
                     src={bin_icon_red}
                     alt="delete"
-                    className="dropdown-menu-icon"
+                    className="me-2 ms-1"
+                    width={17}
+                    height={17}
                   />
                   <span className="text-danger">Delete</span>
                 </Link>
@@ -248,7 +250,7 @@ function HospitalDetailsCard() {
             <li key={tabItem.id + i}>
               <Link
                 className={`nav-link ${i == 0 ? "active" : ""}`}
-                to={`/manage-hospitals/${id}/#${tabItem.id}`}
+                to={`/manage-hospitals/${id}#${tabItem.id}`}
                 data-bs-toggle="tab"
               >
                 {tabItem.title}
@@ -262,6 +264,7 @@ function HospitalDetailsCard() {
               className={`tab-pane ${i == 0 ? "show active" : ""}`}
               id={tabItem.id}
               key={tabItem.id + i}
+              aria-current={tabItem.id}
             >
               {tabItem.content}
             </div>

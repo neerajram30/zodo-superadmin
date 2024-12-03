@@ -28,7 +28,7 @@ function Department() {
   return (
     <div>
       <DepartmentHero />
-      <div className="row mt-4">
+      <div className="row mt-3">
         {depatments.map((item) => {
           return (
             <div

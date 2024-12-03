@@ -43,7 +43,7 @@ function Review() {
       },
   ];
   return (
-    <div className="row mt-4">
+    <div className="row mt-3">
       {reviews.map((review) => {
         return (
           <div className="col-md-6 col-sm-6 col-lg-4 col-xl-4" key={review.id}>

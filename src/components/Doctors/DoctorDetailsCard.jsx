@@ -36,12 +36,12 @@ function DoctorDetailsCard() {
       <div className="card-box profile-header mt-3">
         <div className="row">
           <div className="d-flex justify-content-between">
-            <h5>
-              <span onClick={() => navigate(-1)}>
+            <div className="basic-hero-header">
+              <Link to onClick={() => navigate(-1)}>
                 <img src={arrow_left} alt="" />
-              </span>
-              <span className="ms-2">Doctor Details</span>
-            </h5>
+              </Link>
+              <span className="ms-3">Doctor Details</span>
+            </div>
             <div className="dropdown">
               <Link
                 // className="dropdown-toggle"

@@ -634,8 +634,8 @@ table.table td h2 span {
 }
 .dropdown-menu .dropdown-menu-icon{
   /* font-size: 10px; */
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   margin-right: 8px;
 }
 .btn-link,
@@ -8706,8 +8706,8 @@ blockquote p {
   border: 1px solid #009efb;
 }
 .check:checked + .checktoggle-small {
-  background-color: #009efb;
-  border: 1px solid #009efb;
+  background-color: #34C759;
+  border: 1px solid #34C759;
 }
 .payment-details {
   width: 266px;
@@ -10236,7 +10236,7 @@ textarea.form-control {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   /* align-items: center; */
 }
 .department-card h6{
@@ -11690,8 +11690,19 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 }
 
 .details-card{
-  margin-top: -20px;
+  margin-top: -32.5px;
+}
+.overview-card{
+  margin-top: -22px;
 }
 .bookings-card{
-  margin-top: -5px;
+  margin-top: -15px;
+}
+
+.basic-hero-header{
+  height: 25px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
 }

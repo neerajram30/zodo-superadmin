@@ -29,7 +29,9 @@ function ManageSettlement() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
+          <div className="mt-2">
           <Finance/>
+          </div>
           
         </div>
       </div>
