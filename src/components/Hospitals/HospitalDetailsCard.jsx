@@ -18,11 +18,14 @@ import Finance from "./Finance";
 import Reviews from "./Reviews/Reviews";
 import TotalBookings from "./TotalBookings/TotalBookings";
 import Department from "./Departments/Department";
+import ToggleModal from "./ToggleModal";
 
 function HospitalDetailsCard() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [show, setShow] = useState(false);
+  const [disableshow, setdisableShow] = useState(false);
+  const [disable, setdisable] = useState(false);
   const tabData = [
     { id: "overview", title: "Overview", content: <Overview /> },
     { id: "department", title: "Department", content: <Department /> },
@@ -37,7 +40,7 @@ function HospitalDetailsCard() {
 
   const handleTogglebtn = (e) => {
     e.stopPropagation();
-    console.log("btn clicked");
+    setdisableShow(true);
   };
 
   return (
@@ -63,7 +66,7 @@ function HospitalDetailsCard() {
               </Link>
               <div className="dropdown-menu" aria-labelledby="customdropdown">
                 <Link
-                  className="dropdown-item"
+                  className="dropdown-item d-flex"
                   to={`/manage-hospitals/${id}/edit`}
                 >
                   <img
@@ -71,14 +74,13 @@ function HospitalDetailsCard() {
                     alt="edit"
                     className="dropdown-menu-icon"
                   />
-                  <span>Edit</span>
+                  <span className="ps-2">Edit</span>
                 </Link>
                 <div className="dropdown-divider" />
                 <Link
                   className="dropdown-item d-flex"
                   // to="#"
-                  // onClick={() => setShow(true)}
-                  // onClick={handleTogglebtn}
+                  onClick={handleTogglebtn}
                 >
                   {/* <img
                     src={toggle_icon}
@@ -87,19 +89,24 @@ function HospitalDetailsCard() {
                   /> */}
 
                   <div
-                    onClick={handleTogglebtn}
+                    // onClick={handleTogglebtn}
                     className="status-toggle d-flex justify-content-between align-items-center"
                   >
-                    <input type="checkbox" id="status" className="check" />
+                    <input
+                      type="checkbox"
+                      id="status"
+                      className="check"
+                      checked={disable}
+                    />
                     <label htmlFor="status" className="checktoggle-small">
                       checkbox
                     </label>
                   </div>
-                  <span className="ms-1">Disable</span>
+                  <span className="ps-2">{disable ? "Disable" : "Enable"}</span>
                 </Link>
                 <div className="dropdown-divider" />
                 <Link
-                  className="dropdown-item"
+                  className="dropdown-item d-flex"
                   to="#"
                   onClick={() => setShow(true)}
                 >
@@ -107,10 +114,10 @@ function HospitalDetailsCard() {
                     src={bin_icon_red}
                     alt="delete"
                     className="me-2 ms-1"
-                    width={17}
-                    height={17}
+                    width={16}
+                    height={16}
                   />
-                  <span className="text-danger">Delete</span>
+                  <span className="text-danger ps-1">Delete</span>
                 </Link>
               </div>
             </div>
@@ -272,6 +279,12 @@ function HospitalDetailsCard() {
         </div>
       </div>
       <HospitalModal show={show} setShow={setShow} />
+      <ToggleModal
+        show={disableshow}
+        setShow={setdisableShow}
+        setdisable={setdisable}
+        disable={disable}
+      />
     </div>
   );
 }

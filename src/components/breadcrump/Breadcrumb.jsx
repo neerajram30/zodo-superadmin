@@ -13,7 +13,7 @@ function Breadcrumb(props) {
             <ul className="breadcrumb">
               {data?.map((item) => (
                 <>
-                  <li className={`breadcrumb-item ${item.status === "active" ? "active" : ""}`}>
+                  <li className={`breadcrumb-item ${item.status === "active" ? 'active' : ''}`}>
                     <Link to={item.link}>{item.name}</Link>
                   </li>
                   {item.status !== "active" && (
