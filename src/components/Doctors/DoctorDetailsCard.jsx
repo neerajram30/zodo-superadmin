@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import HospitalModal from "../Hospitals/HospitalModal";
 import { Link, useNavigate } from "react-router-dom";
 import {
   arrow_left,
@@ -12,16 +11,19 @@ import {
   pencil_icon,
   phone_icon,
   three_dots_menu,
-  toggle_icon,
 } from "../imagepath";
 import DoctorsOverview from "./DoctorsOverview/DoctorsOverview";
 import DoctorsFinance from "./DoctorsFinance/DoctorsFinance";
 import DoctorsBookings from "./DoctorsBookings/DoctorsBookings";
+import ConfirmDelete from "../modals/ConfirmDelete";
+import ToggleDisable from "../modals/ToggleDisable";
 
 function DoctorDetailsCard() {
   const navigate = useNavigate();
   //   const { id } = useParams();
   const [show, setShow] = useState(false);
+  const [disableshow, setdisableShow] = useState(false);
+  const [disable, setdisable] = useState(false);
   const tabData = [
     { id: "dr_overview", title: "Overview", content: <DoctorsOverview /> },
     { id: "dr_finance", title: "Finance", content: <DoctorsFinance /> },
@@ -31,6 +33,11 @@ function DoctorDetailsCard() {
       content: <DoctorsBookings />,
     },
   ];
+
+  const handleTogglebtn = (e) => {
+    e.stopPropagation();
+    setdisableShow(true);
+  };
   return (
     <div>
       <div className="card-box profile-header mt-3">
@@ -69,14 +76,31 @@ function DoctorDetailsCard() {
                 <Link
                   className="dropdown-item"
                   to="#"
-                  onClick={() => setShow(true)}
+                  onClick={handleTogglebtn}
                 >
-                  <img
+                  {/* <img
                     src={toggle_icon}
                     alt="disable"
                     className="dropdown-menu-icon"
-                  />
-                  <span>Disable</span>
+                  /> 
+                  <span>Disable</span> */}
+                  <div
+                    // onClick={handleTogglebtn}
+                    className="status-toggle d-flex align-items-center"
+                  >
+                    <input
+                      type="checkbox"
+                      id="status"
+                      className="check"
+                      checked={disable}
+                    />
+                    <label htmlFor="status" className="checktoggle-small">
+                      checkbox
+                    </label>
+                    <span className="ps-2">
+                      {disable ? "Disable" : "Enable"}
+                    </span>
+                  </div>
                 </Link>
                 <div className="dropdown-divider" />
                 <Link
@@ -291,7 +315,14 @@ function DoctorDetailsCard() {
           ))}
         </div>
       </div>
-      <HospitalModal show={show} setShow={setShow} />
+      <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
+      <ToggleDisable
+        show={disableshow}
+        setShow={setdisableShow}
+        setdisable={setdisable}
+        disable={disable}
+        title="Doctor"
+      />
     </div>
   );
 }

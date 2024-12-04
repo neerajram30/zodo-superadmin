@@ -177,8 +177,8 @@ function DoctorsList() {
     {
       title: "",
       dataIndex: "FIELD8",
-      render: () => (
-        <>
+      render: (item, record) => (
+        <>  
           <div className="text-end">
             <div className="dropdown dropdown-action">
               <Link
@@ -190,15 +190,13 @@ function DoctorsList() {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to="/editdoctor">
+                <Link className="dropdown-item" to={`/manage-doctors/edit-doctor/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Edit
                 </Link>
                 <Link
                   className="dropdown-item"
                   to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#delete_patient"
                 >
                   <i className="fa fa-trash-alt m-r-5"></i> Delete
                 </Link>

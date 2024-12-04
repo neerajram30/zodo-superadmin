@@ -1,33 +1,51 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import ChooseFile from "../../Hospitals/ChooseFile";
 import UploadFiles from "../../Hospitals/UploadFiles";
 
 function AddDoctors() {
+  const { id } = useParams();
+  const locations = useLocation();
+  const patharray = locations.pathname.split("/");
+
   const breadCrumpData = [
     {
       name: "Doctors",
       status: "inactive",
-      link:"/manage-doctors",
+      link: "/manage-doctors",
     },
     {
       name: "Add Doctors",
       status: "active",
-      link:"/manage-doctors/add-doctors",
+      link: "/manage-doctors/add-doctors",
+    },
+  ];
+
+  const editBreadcrump = [
+    {
+      name: "Doctors",
+      status: "inactive",
+      link: "/manage-doctors",
+    },
+    {
+      name: "Edit",
+      status: "inactive",
+      link: `/manage-doctors/edit-doctor`,
+    },
+    {
+      name: id,
+      status: "inactive",
+      link: `/manage-doctors/edit-doctor/${id}`,
     },
   ];
   const navigate = useNavigate();
   return (
-    <Layout
-      activeClassName="manage-doctors"
-      id="menu-item3"
-      id1="menu-items3"
-    >
+    <Layout activeClassName="manage-doctors" id="menu-item3" id1="menu-items3">
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb data={breadCrumpData} />
+          <Breadcrumb data={patharray.includes("edit-doctor") ? editBreadcrump :  breadCrumpData} />
           <div className="bg-white rounded p-4 mt-3">
             <h4>Doctor Onboarding</h4>
             {/* <div className="row"> */}

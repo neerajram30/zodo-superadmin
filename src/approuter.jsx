@@ -94,6 +94,7 @@ const Approuter = () => {
           <Route path="/manage-doctors" element={<Doctors />} />
           <Route path="/manage-doctors/:id" element={<DoctorDetails />} />
           <Route path="/manage-doctors/add-doctors" element={<AddDoctors />} />
+          <Route path="/manage-doctors/edit-doctor/:id" element={<AddDoctors />} />
           <Route
             path="/manage-doctors/specialization"
             element={<Specialization />}

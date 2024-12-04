@@ -19,7 +19,7 @@ function AddSpecialization(props) {
       <Modal.Body className="border-0">
         <div className="form-group">
           <label className="col-form-label">Specialisation Name</label>
-          <div className="col-md-10">
+          <div className="col-md-12">
             <input
               type="text"
               className="form-control"
@@ -28,7 +28,7 @@ function AddSpecialization(props) {
           </div>
 
           <label className="col-form-label col-md-4">Message</label>
-          <div className="col-md-10">
+          <div className="col-md-12">
             <textarea
               rows={5}
               cols={5}
