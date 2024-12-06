@@ -136,7 +136,7 @@ function HospitalDetailsCard() {
                   </div>
                 </div>
               </div>
-              <div className="col">
+              <div className="col ps-4">
                 {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
                   <h3 className="user-name m-t-0 mb-0">
@@ -182,7 +182,7 @@ function HospitalDetailsCard() {
 
           <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
             <h6>
-              <span>GSTIN</span> GSTIN567890128347
+              <span>GSTIN</span> <span className="fw-semibold text-black">GSTIN567890128347</span>
             </h6>
             <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
               Active
@@ -222,11 +222,11 @@ function HospitalDetailsCard() {
                 <ul className="payment-info w-1">
                   <li>
                     <span className="payment-title">
-                      Account Number: <span>111234567900</span>
+                      Account Number: <span className="fw-semibold text-black">111234567900</span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
-                    <span className="payment-title">Bank Name: Federal</span>
+                    <span className="payment-title">Bank Name: <span className="fw-semibold text-black">Federal</span></span>
                   </li>
                 </ul>
               </div>
@@ -234,11 +234,11 @@ function HospitalDetailsCard() {
                 <ul className="payment-info">
                   <li>
                     <span className="payment-title">
-                      IFSC Code: 111234567900
+                      IFSC Code: <span className="fw-semibold text-black">111234567900</span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
-                    <span className="payment-title">UPI ID: 123@oksbi</span>
+                    <span className="payment-title">UPI ID: <span className="fw-semibold text-black">123@oksbi</span></span>
                   </li>
                 </ul>
               </div>

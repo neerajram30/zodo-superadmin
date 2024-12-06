@@ -124,17 +124,17 @@ function Finance() {
 
       {/* Finance details */}
 
-      <div className="row">
+      <div className="row finance-card-container">
         {financeData.map((item) => (
           <OverViewCard
-            varient="col-md-4 col-sm-6 col-lg-4 col-xl-4 details-card"
+            varient="col-md-4 col-sm-6 col-lg-4 col-xl-4 finance-card"
             data={item}
             key={item.id}
           />
         ))}
       </div>
 
-      <div className="card-box details-card">
+      <div className="card-box finance-card">
         <h5>Transactions</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">
@@ -162,7 +162,7 @@ function Finance() {
         <div>
           <h5>
             {232} results found{" "}
-            <span className="custom-badge status-red ms-1">
+            <span className="delete-badge status-red ms-1">
               <img
                 src={bin_icon_red}
                 alt="delete"
@@ -174,7 +174,6 @@ function Finance() {
             </span>
           </h5>
         </div>
-
         <TransactionTable />
       </div>
     </div>

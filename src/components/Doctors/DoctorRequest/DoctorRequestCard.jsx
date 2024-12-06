@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import ConfirmDelete from "../../modals/ConfirmDelete";
+import ToggleDisable from "../../modals/ToggleDisable";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   arrow_left,
   bin_icon_red,
@@ -11,28 +13,14 @@ import {
   pencil_icon,
   phone_icon,
   three_dots_menu,
-} from "../imagepath";
-import DoctorsOverview from "./DoctorsOverview/DoctorsOverview";
-import DoctorsFinance from "./DoctorsFinance/DoctorsFinance";
-import DoctorsBookings from "./DoctorsBookings/DoctorsBookings";
-import ConfirmDelete from "../modals/ConfirmDelete";
-import ToggleDisable from "../modals/ToggleDisable";
+} from "../../imagepath";
 
-function DoctorDetailsCard() {
+function DoctorRequestCard() {
   const navigate = useNavigate();
-  //   const { id } = useParams();
+    const { id } = useParams();
   const [show, setShow] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
-  const tabData = [
-    { id: "dr_overview", title: "Overview", content: <DoctorsOverview /> },
-    { id: "dr_finance", title: "Finance", content: <DoctorsFinance /> },
-    {
-      id: "dr_bookings",
-      title: "Total Bookings",
-      content: <DoctorsBookings />,
-    },
-  ];
 
   const handleTogglebtn = (e) => {
     e.stopPropagation();
@@ -40,7 +28,7 @@ function DoctorDetailsCard() {
   };
   return (
     <div>
-      <div className="card-box profile-header mt-3">
+      <div className="card-box profile-header mt-3 mb-5">
         <div className="row">
           <div className="d-flex justify-content-between">
             <div className="basic-hero-header">
@@ -63,7 +51,7 @@ function DoctorDetailsCard() {
               <div className="dropdown-menu">
                 <Link
                   className="dropdown-item"
-                  //   to={`/manage-hospitals/${id}/edit`}
+                    to={`/manage-doctors/request/${id}/edit`}
                 >
                   <img
                     src={pencil_icon}
@@ -172,61 +160,44 @@ function DoctorDetailsCard() {
         </div>
 
         <div className="row mt-4">
-          <div className="col-md-12">
-            <ul className="personal-info">
-              <li>
-                <span className="title">Address :</span>
-                <span className="text">
-                  <p className="w-md-75">
-                    Lorem ipsum dolor sit amet consectetur
-                  </p>
+          <div className="col-md-6">
+            <ul className="personal-info address-info">
+              <li className="d-flex align-items-center">
+                <span className="address-header">Address</span>
+                <span className="">:</span>
+                <span className="ms-3 w-100 md-w-75 fw-semibold">
+                  Lorem ipsum dolor sit amet consectetur lorem
                 </span>
               </li>
-              <li>
-                <span className="title">District :</span>
-                <span className="text">
-                  <p className="w-md-75">Hydrabad</p>
-                </span>
+
+              <li className="d-flex align-items-center">
+                <span className="address-header">District</span>
+                <span className="">:</span>
+                <span className="ms-3 w-100 md-w-75 fw-semibold">Hydrabad</span>
               </li>
-              <li>
-                <span className="title">State :</span>
-                <span className="text">
-                  <p className="w-md-75">Telengana</p>
-                </span>
+
+              <li className="d-flex align-items-center">
+                <span className="address-header">State</span>
+                <span className="">:</span>
+                <span className="ms-3 w-100 md-w-75 fw-semibold">Telengana</span>
               </li>
             </ul>
           </div>
-        </div>
-        <div className="row">
+
           <div className="col-md-6">
             <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1">
               <div className="col">
                 <ul className="payment-info w-1">
                   <li>
                     <span className="payment-title">
-                      Education: <span className="fw-semibold text-black">MBBS</span>
+                      Account Number :{" "}
+                      <span className="fw-semibold text-black">111234567900</span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
                     <span className="payment-title">
-                      Specialization: <span className="fw-semibold text-black">ENT</span>
+                      Bank Name : <span className="fw-semibold text-black">Federal</span>
                     </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1">
-              <div className="col">
-                <ul className="payment-info w-1">
-                  <li>
-                    <span className="payment-title">
-                      Account Number: <span className="fw-semibold text-black">111234567900</span>
-                    </span>
-                  </li>
-                  <li className="mt-3 mb-3">
-                    <span className="payment-title">Bank Name: <span className="fw-semibold text-black">Federal</span></span>
                   </li>
                 </ul>
               </div>
@@ -234,85 +205,79 @@ function DoctorDetailsCard() {
                 <ul className="payment-info">
                   <li>
                     <span className="payment-title">
-                      IFSC Code: <span className="fw-semibold text-black">111234567900</span> 
+                      IFSC Code :{" "}
+                      <span className="fw-semibold text-black">111234567900</span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
-                    <span className="payment-title">UPI ID: <span className="fw-semibold text-black">123@oksbi</span></span>
+                    <span className="payment-title">
+                      UPI ID : <span className="fw-semibold text-black">123@oksbi</span>
+                    </span>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1 mt-3 file-upload-card">
-          <div className="row mb-1">
-            <div className="col">
-              <h5>Uploaded Documents</h5>
+        <div className="row">
+          <div className="col border border-secondary-subtle pt-3 pb-1 ms-1 me-1 mt-3 file-upload-card">
+            <h5>Specialisation</h5>
+            <div className="overflow-auto add-specialisation">
+              <div className="border border-secondary-subtle p-2 mt-2">ENT</div>
+              <div className="border border-secondary-subtle p-2 mt-2">ENT</div>
             </div>
-
-            <div className="col">
-              <div className="d-flex justify-content-end">
-                <img src={pencil_icon} alt="" />
-              </div>
+            <div className="pt-2">
+              <Link
+                to
+                className="hospital-draft-btn rounded text-primary ps-2 pe-2 pt-1 pb-1 text-primary"
+              >
+                Add New Row
+              </Link>
             </div>
           </div>
-          <div className="mb-4">
-            {[1, 2, 3].map((item) => {
-              return (
-                <div className="row mt-2" key={`row${item}`}>
-                  <div className="col-12 pt-2 col-md-2">Documents 0{item}</div>
-                  <div className="col-12 col-md-10 md:mt-0 mt-1">
-                    <div className="d-flex justify-content-between align-items-center file-upload-details ps-3 pe-3">
-                      <div className="d-flex align-items-center">
-                        <img src={pdf_icon} alt="pdf_icon" />
-                        <div className="d-flex flex-column justify-content-center file-details ms-2">
-                          <h6>Reg 0{item}</h6>
-                          <p>24MB</p>
+          <div className="col-9 border border-secondary-subtle pt-3 pb-1 ms-1 me-1 mt-3 file-upload-card">
+            <div className="row mb-1">
+              <div className="col">
+                <h5>Uploaded Documents</h5>
+              </div>
+
+              <div className="col">
+                <Link to={`/manage-doctors/request/${id}/edit`} className="d-flex justify-content-end">
+                  <img src={pencil_icon} alt="" />
+                </Link>
+              </div>
+            </div>
+            <div className="mb-4">
+              {[1, 2, 3].map((item) => {
+                return (
+                  <div className="row mt-2" key={`row${item}`}>
+                    <div className="col-12 pt-2 col-md-2">
+                      Documents 0{item}
+                    </div>
+                    <div className="col-12 col-md-10 md:mt-0 mt-1">
+                      <div className="d-flex justify-content-between align-items-center file-upload-details ps-3 pe-3">
+                        <div className="d-flex align-items-center">
+                          <img src={pdf_icon} alt="pdf_icon" />
+                          <div className="d-flex flex-column justify-content-center file-details ms-2">
+                            <h6>Reg 0{item}</h6>
+                            <p>24MB</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="d-flex">
-                        <div className="m-1">
-                          <img src={eye_icon} alt="" />
-                        </div>
-                        <div className="m-1">
-                          <img src={cross_icon} alt="" />
+                        <div className="d-flex">
+                          <div className="m-1">
+                            <img src={eye_icon} alt="" />
+                          </div>
+                          <div className="m-1">
+                            <img src={cross_icon} alt="" />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div className="profile-tabs">
-        <ul className="nav nav-tabs nav-tabs-bottom">
-          {tabData.map((tabItem, i) => (
-            <li key={tabItem.id + i}>
-              <Link
-                className={`nav-link ${i == 0 ? "active" : ""}`}
-                to={`#${tabItem.id}`}
-                data-bs-toggle="tab"
-              >
-                {tabItem.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="tab-content">
-          {tabData.map((tabItem, i) => (
-            <Link
-              className={`tab-pane ${i == 0 ? "show active" : ""}`}
-              id={tabItem.id}
-              key={tabItem.id + i}
-            >
-              {tabItem.content}
-            </Link>
-          ))}
         </div>
       </div>
       <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
@@ -327,4 +292,4 @@ function DoctorDetailsCard() {
   );
 }
 
-export default DoctorDetailsCard;
+export default DoctorRequestCard;

@@ -38,7 +38,7 @@ function DoctorsBookings() {
         ))}
       </div>
 
-      <div className="card-box">
+      <div className="card-box bookings-card">
         <h5 className="text-black">Bookings</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">

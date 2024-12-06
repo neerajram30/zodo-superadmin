@@ -25,9 +25,9 @@ function Cancellation() {
       render: (item) => (
         <div
           className={`${
-            (item === "Overdue" && "custom-badge status-red") ||
-            (item === "Refunded" && "custom-badge status-orange") ||
-            (item === "Paid" && "custom-badge status-green")
+            (item === "Overdue" && "delete-badge status-red") ||
+            (item === "Refunded" && "delete-badge status-orange") ||
+            (item === "Paid" && "delete-badge status-green")
           }`}
         >
           {item}

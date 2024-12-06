@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBox from "../searchbox/SearchBox";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import {
   blogimg10,
   blogimg12,
@@ -15,7 +15,9 @@ import {
   // refreshicon,
 } from "../imagepath";
 import DataTable from "../DataTables/DataTable";
+import ConfirmDelete from "../modals/ConfirmDelete";
 function DoctorRequests() {
+  const [show, setShow] = useState(false);
   const datasource = [
     {
       id: 1,
@@ -162,18 +164,21 @@ function DoctorRequests() {
     {
       title: "Action",
       dataIndex: "FIELD8",
-      render: () => (
+      render: (item, record) => (
         <>
-          <button className="hospital-draft-btn rounded-pill text-primary ps-3 pe-3">
+          <Link
+            to={`/manage-doctors/request/${record.id}`}
+            className="hospital-draft-btn rounded-pill text-primary ps-3 pe-3"
+          >
             view
-          </button>
+          </Link>
         </>
       ),
     },
     {
       title: "",
       dataIndex: "FIELD8",
-      render: () => (
+      render: (item, record) => (
         <>
           <div className="text-end">
             <div className="dropdown dropdown-action">
@@ -186,15 +191,14 @@ function DoctorRequests() {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to="/editdoctor">
+                <Link className="dropdown-item" to={`/manage-doctors/request/${record.id}`}>
                   <i className="far fa-edit me-2" />
                   Edit
                 </Link>
                 <Link
                   className="dropdown-item"
                   to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#delete_patient"
+                  onClick={()=>setShow(true)}
                 >
                   <i className="fa fa-trash-alt m-r-5"></i> Delete
                 </Link>
@@ -247,6 +251,7 @@ function DoctorRequests() {
           </div>
         </div>
       </div>
+      <ConfirmDelete show={show} setShow={setShow} title="Doctor request" />
     </div>
   );
 }

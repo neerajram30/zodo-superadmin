@@ -36,7 +36,7 @@ function DoctorsFinance() {
           />
         ))}
       </div>
-      <div className="card-box">
+      <div className="card-box overview-card">
         <h5 className="text-black">Transactions</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">

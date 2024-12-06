@@ -28,6 +28,8 @@ import SettlementRequests from "./components/pages/Dashboard/SettlementRequests"
 import ManageSettlement from "./components/pages/Dashboard/ManageSettlement";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import ManageRequest from "./components/pages/Hospitals/ManageRequest";
+import DoctorRequest from "./components/pages/Doctors/DoctorRequest";
+import EditDoctor from "./components/pages/Doctors/EditDoctor";
 
 //Accounts
 const Approuter = () => {
@@ -95,6 +97,10 @@ const Approuter = () => {
           <Route path="/manage-doctors/:id" element={<DoctorDetails />} />
           <Route path="/manage-doctors/add-doctors" element={<AddDoctors />} />
           <Route path="/manage-doctors/edit-doctor/:id" element={<AddDoctors />} />
+          <Route path="manage-doctors/request/:id/edit" element={<EditDoctor />} />
+          
+
+          <Route path="/manage-doctors/request/:id" element={<DoctorRequest />} />
           <Route
             path="/manage-doctors/specialization"
             element={<Specialization />}

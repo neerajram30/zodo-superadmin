@@ -33,7 +33,7 @@ function SettlementRequest() {
                 </Link>
               </div>
             </div>
-            <div className="col">
+            <div className="col ps-3">
               <div className="profile-info-left pt-3">
                 <h3 className="user-name m-t-0 mb-0">Apollo Hospital</h3>
               </div>
@@ -59,7 +59,7 @@ function SettlementRequest() {
 
         <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
           <h6>
-            <span>GSTIN : </span> GSTIN567890128347
+            <span>GSTIN : </span><span className="fw-semibold text-black">GSTIN567890128347</span> 
           </h6>
         </div>
       </div>

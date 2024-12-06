@@ -36,7 +36,7 @@ function ConfirmDelete(props) {
           to="#"
           data-bs-toggle="modal"
           data-bs-target="#delete_invoices_details"
-          className="btn hospital-draft-btn text-primary"
+          className="hospital-draft-btn text-primary modal-btn"
           onClick={() => setShow(false)}
         >
           Cancel
@@ -45,7 +45,7 @@ function ConfirmDelete(props) {
           to="#"
           data-bs-toggle="modal"
           data-bs-target="#save_invocies_details"
-          className="btn hospital-add-btn ms-1 text-white"
+          className="hospital-add-btn ms-1 text-white modal-btn border-0"
         >
           Yes, Delete
         </button>

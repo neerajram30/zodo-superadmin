@@ -6,6 +6,8 @@ import UploadFiles from "../../Hospitals/UploadFiles";
 import { useNavigate } from "react-router-dom";
 import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
 import Select from "react-select";
+import Closebtn from "../../assests/Closebtn";
+
 
 function AddHospital() {
   const breadCrumpData = [
@@ -61,7 +63,15 @@ function AddHospital() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <div className="bg-white rounded p-4 mt-3">
-            <h4>Hospital Onboarding</h4>
+            <div className="row">
+              <div className="col">
+                <h4>Hospital Onboarding</h4>
+              </div>
+              <div className="col d-flex justify-content-end">
+                <Closebtn/>
+              </div>
+            </div>
+
             {/* <div className="row"> */}
             <div className="row mt-4">
               <div className="col-md-8 ms-md-3">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   addicon,
   blogimg10,
@@ -16,8 +16,11 @@ import {
 import { Link } from "react-router-dom";
 import SearchBox from "../searchbox/SearchBox";
 import DataTable from "../DataTables/DataTable";
+import ConfirmDelete from "../modals/ConfirmDelete";
 
 function DoctorsList() {
+  const [show, setShow] = useState(false);
+
   const datasource = [
     {
       id: 1,
@@ -178,7 +181,7 @@ function DoctorsList() {
       title: "",
       dataIndex: "FIELD8",
       render: (item, record) => (
-        <>  
+        <>
           <div className="text-end">
             <div className="dropdown dropdown-action">
               <Link
@@ -190,14 +193,14 @@ function DoctorsList() {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to={`/manage-doctors/edit-doctor/${record.id}`}>
+                <Link
+                  className="dropdown-item"
+                  to={`/manage-doctors/edit-doctor/${record.id}`}
+                >
                   <i className="far fa-edit me-2" />
                   Edit
                 </Link>
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                >
+                <Link className="dropdown-item" to="#" onClick={()=> setShow(true)}>
                   <i className="fa fa-trash-alt m-r-5"></i> Delete
                 </Link>
               </div>
@@ -272,6 +275,7 @@ function DoctorsList() {
           </div>
         </div>
       </div>
+      <ConfirmDelete show={show} setShow={setShow} title="Doctor" />
     </div>
   );
 }

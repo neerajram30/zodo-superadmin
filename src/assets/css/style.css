@@ -1730,7 +1730,9 @@ textarea.form-control {
   color: #333;
 }
 .chart-title span {
-  color: #347D73;
+  color: #333448;
+  font-size: 16px;
+  font-weight: 600;
 }
 .card-title > a.btn {
   color: #fff;
@@ -5388,6 +5390,12 @@ a.fc-event:not([href]) {
   margin-bottom: 0;
   padding: 0;
 }
+.address-header{
+  width: 15%;
+}
+.address-info{
+  width: 90%;
+}
 .payment-info {
   list-style: none;
   margin-bottom: 0;
@@ -6640,6 +6648,15 @@ a.btn.add-links:hover {
   display: inline-block;
   font-size: 12px;
   min-width: 115px;
+  padding: 5px 15px;
+  text-align: center;
+  border: 0;
+}
+.delete-badge {
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 12px;
+  min-width: 60px;
   padding: 5px 15px;
   text-align: center;
   border: 0;
@@ -11698,17 +11715,46 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 .details-card{
   margin-top: -32.5px;
 }
+.finance-card{
+  margin-top: -20px;
+}
 .overview-card{
   margin-top: -22px;
 }
 .bookings-card{
   margin-top: -15px;
 }
-
+.finance-card-container{
+  margin-top: -10px;
+}
 .basic-hero-header{
   height: 25px;
   display: flex;
   align-items: center;
   font-size: 14px;
   font-weight: 500;
+}
+.modal-btn{
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 10px;
+}
+.add-specialisation{
+  height: 140px;
+}
+.analytics-count{
+  color: #333448;
+}
+
+.x-btn{
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F3F6FB;
+  color: gray;
+}
+.x-btn:hover{
+  color: gray;
 }

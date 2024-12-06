@@ -5,11 +5,12 @@ import UploadFiles from "../../Hospitals/UploadFiles";
 import FastTag from "../../Hospitals/FastTag";
 import ChooseFile from "../../Hospitals/ChooseFile";
 import { useLocation, useParams } from "react-router-dom";
+import Closebtn from "../../assests/Closebtn";
 function EditHospital() {
   const { id } = useParams();
   const locations = useLocation();
-  const patharray = locations.pathname.split('/');
- 
+  const patharray = locations.pathname.split("/");
+
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -58,9 +59,22 @@ function EditHospital() {
     >
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb data={patharray.includes("manage-request") ? manageBreadcrump :  breadCrumpData} />
+          <Breadcrumb
+            data={
+              patharray.includes("manage-request")
+                ? manageBreadcrump
+                : breadCrumpData
+            }
+          />
           <div className="bg-white rounded p-4 mt-3">
-            <h4>Hospital Onboarding</h4>
+            <div className="row">
+              <div className="col">
+                <h4>Hospital Onboarding</h4>
+              </div>
+              <div className="col d-flex justify-content-end">
+                <Closebtn />
+              </div>
+            </div>
             {/* <div className="row"> */}
             <div className="row mt-4">
               <div className="col-md-8 ms-md-3">

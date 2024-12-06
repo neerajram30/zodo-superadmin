@@ -16,7 +16,7 @@ function Analytics() {
                 <h4>Analytics</h4>
                 <div>
                   
-                  <h6>Total bookings <span>300</span></h6>
+                  <h6>Total bookings <span className="analytics-count">2000</span></h6>
                 </div>
                 <div className="form-group mb-0">
                   <Select

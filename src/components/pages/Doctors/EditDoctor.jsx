@@ -1,28 +1,14 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import ChooseFile from "../../Hospitals/ChooseFile";
 import UploadFiles from "../../Hospitals/UploadFiles";
+import { useNavigate, useParams } from "react-router-dom";
 import Closebtn from "../../assests/Closebtn";
 
-function AddDoctors() {
+function EditDoctor() {
   const { id } = useParams();
-  const locations = useLocation();
-  const patharray = locations.pathname.split("/");
-
-  const breadCrumpData = [
-    {
-      name: "Doctors",
-      status: "inactive",
-      link: "/manage-doctors",
-    },
-    {
-      name: "Add Doctors",
-      status: "active",
-      link: "/manage-doctors/add-doctors",
-    },
-  ];
+  const navigate = useNavigate();
 
   const editBreadcrump = [
     {
@@ -41,28 +27,20 @@ function AddDoctors() {
       link: `/manage-doctors/edit-doctor/${id}`,
     },
   ];
-  const navigate = useNavigate();
   return (
     <Layout activeClassName="manage-doctors" id="menu-item3" id1="menu-items3">
       <div className="page-wrapper">
         <div className="content">
-          <Breadcrumb
-            data={
-              patharray.includes("edit-doctor")
-                ? editBreadcrump
-                : breadCrumpData
-            }
-          />
+          <Breadcrumb data={editBreadcrump} />
           <div className="bg-white rounded p-4 mt-3">
-            <div className="row">
+          <div className="row">
               <div className="col">
-                <h4>Doctor Onboarding</h4>
+                <h4>Edit Doctor</h4>
               </div>
               <div className="col d-flex justify-content-end">
                 <Closebtn />
               </div>
             </div>
-
             {/* <div className="row"> */}
             <div className="row mt-4">
               <div className="col-md-8 ms-md-3">
@@ -299,4 +277,4 @@ function AddDoctors() {
   );
 }
 
-export default AddDoctors;
+export default EditDoctor;
