@@ -38,22 +38,25 @@ function Overview() {
     },
   ];
   return (
-    <div className="row pt-2">
-      {revenueOverview.map((item) => (
-        <OverViewCard
-          varient="col-md-4 col-sm-6 col-lg-4 col-xl-4"
-          data={item}
-          key={item.id}
-        />
-      ))}
-
-      {tagDetails.map((item) => (
-        <OverViewCard
-          varient="col-md-6 col-sm-6 col-lg-6 col-xl-6 overview-card"
-          data={item}
-          key={item.id}
-        />
-      ))}
+    <div>
+      <div className="row">
+        {revenueOverview.map((item) => (
+          <OverViewCard
+            varient="col-md-4 col-sm-6 col-lg-4 col-xl-4"
+            data={item}
+            key={item.id}
+          />
+        ))}
+      </div>
+      <div className="mt-3 row">
+        {tagDetails.map((item) => (
+          <OverViewCard
+            varient="col-md-6 col-sm-6 col-lg-6 col-xl-6 overview-card"
+            data={item}
+            key={item.id}
+          />
+        ))}
+      </div>
     </div>
   );
 }

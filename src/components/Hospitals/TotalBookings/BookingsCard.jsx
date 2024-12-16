@@ -24,7 +24,7 @@ function BookingsCard(props) {
   // ];
   return (
     <div>
-      <div className="dash-widget h-75">
+      <div className="dash-widget h-75 mt-2">
         {/* <div className="w-50">
           <select className="form-select" aria-label="Default select example">
           <option value={selectedOption.value} selected>{selectedOption.label}</option>
@@ -34,7 +34,7 @@ function BookingsCard(props) {
           </select>
           
         </div> */}
-        <div className={`dash-content dash-count flex-grow-1 ${!data.dueStatus && 'pt-2 pb-2 mt-1'}`}>
+        <div className={`dash-content dash-count flex-grow-1 ${!data.dueStatus && 'pt-2 pb-2 mt-2'}`}>
           <h6 className="text-black">{data.bookings}</h6>
           <p>
             <span className="passive-view">{data.dueStatus}</span>

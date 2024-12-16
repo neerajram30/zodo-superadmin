@@ -27,7 +27,7 @@ function DoctorsOverview() {
   ];
   return (
     <div>
-      <div className="row pt-2">
+      <div className="row">
         {revenueOverview.map((item) => (
           <OverViewCard
             varient="col-md-4 col-sm-6 col-lg-4 col-xl-4"
@@ -37,7 +37,7 @@ function DoctorsOverview() {
         ))}
       </div>
 
-      <div className="card-box overview-card">
+      <div className="card-box">
         <h5 className="text-black">Transactions</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">

@@ -27,7 +27,7 @@ function DoctorsBookings() {
   ];
   return (
     <div>
-      <div className="row mt-2">
+      <div className="row ">
         {bookinsDetails.map((item) => (
           <div
             key={item.id + item.operation}
