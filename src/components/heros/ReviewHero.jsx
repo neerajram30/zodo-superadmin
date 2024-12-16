@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import SearchBox from "../searchbox/SearchBox";
 
 function ReviewHero() {
@@ -16,7 +16,7 @@ function ReviewHero() {
             </div>
           </div>
         </div>
-        <div className="col-md col-sm-12">
+        {/* <div className="col-md col-sm-12">
           <div className="invoices-create-btn d-flex justify-content-md-end">
             <Link
               to="#"
@@ -27,7 +27,7 @@ function ReviewHero() {
               Sort By
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

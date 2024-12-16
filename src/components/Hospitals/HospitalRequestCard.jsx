@@ -16,24 +16,24 @@ function HospitalRequestCard(props) {
             <div className="col-auto">
               <img src={right_chevron} alt="#" />
             </div>
-            <div className="row mt-3">
-              <div className="col">
+            <div className="d-flex mt-3 justify-content-between">
+              <div className="">
                 <h5>{hospitalData.name}</h5>
               </div>
-              <div className="col-auto">
-                <h5 className="text-primary">
+              <div className="">
+                <span className="text-primary">
                   {hospitalData.completed} Completed
-                </h5>
+                </span>
               </div>
             </div>
 
-            <div className="row mt-2">
-              <div className="d-flex justify-content-center">
+            <div className="mt-2">
+              <div className="d-flex justify-content-start">
                 <Link
                   to={`/manage-hospitals/manage-request/${hospitalData.id}`}
                   // data-bs-toggle="modal"
                   // data-bs-target="#delete_invoices_details"
-                  className="hospital-draft-btn rounded-pill text-primary ms-1 pt-2 pb-2 ps-4 pe-4 me-2"
+                  className="hospital-draft-btn rounded-pill text-primary review-btn"
                 >
                   Approve
                 </Link>
@@ -41,7 +41,7 @@ function HospitalRequestCard(props) {
                   to={`/manage-hospitals/manage-request/${hospitalData.id}`}
                   // data-bs-toggle="modal"
                   // data-bs-target="#save_invocies_details"
-                  className="text-white hospital-add-btn rounded-pill ms-1 pt-2 pb-2 ps-5 pe-5 ms-2"
+                  className="text-white hospital-add-btn rounded-pill review-btn ms-2"
                 >
                   Review Now
                 </Link>

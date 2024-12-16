@@ -11762,4 +11762,12 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 .paid-btn{
   font-size: 14px;
 }
-
+.review-btn{
+  /* padding: 1%; */
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  font-size: 12px;
+}
