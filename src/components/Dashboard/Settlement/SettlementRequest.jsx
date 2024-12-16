@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { apollo_logo, pencil_icon} from "../../imagepath";
+import { apollo_logo, pencil_icon } from "../../imagepath";
 
 function SettlementRequest() {
-  const { id } = useParams(); 
+  const { id } = useParams();
   return (
     <div className="card-box ms-1 me-1 mt-3">
       <div className="row">
@@ -12,7 +12,7 @@ function SettlementRequest() {
         </div>
         <div className="col-6 d-flex justify-content-end">
           <Link to={`/manage-hospitals/manage-request/${id}/edit`}>
-          <img src={pencil_icon} alt="edit" width={18} height={18} />
+            <img src={pencil_icon} alt="edit" width={18} height={18} />
           </Link>
         </div>
       </div>
@@ -49,9 +49,7 @@ function SettlementRequest() {
                   Plot No 283/A, Incur 9, 3rd Floor, Kavuri Hills, Madhapur,
                   Hyderabad
                 </div>
-                <div className="mt-2">
-                  +91 0000000
-                </div>
+                <div className="mt-2">+91 0000000</div>
               </span>
             </li>
           </ul>
@@ -59,7 +57,8 @@ function SettlementRequest() {
 
         <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
           <h6>
-            <span>GSTIN : </span><span className="fw-semibold text-black">GSTIN567890128347</span> 
+            <span>GSTIN : </span>
+            <span className="fw-semibold text-black">GSTIN567890128347</span>
           </h6>
         </div>
       </div>

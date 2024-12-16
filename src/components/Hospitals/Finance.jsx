@@ -52,7 +52,7 @@ function Finance() {
             <div className="dash-content dash-count flex-grow-1">
               <h6>$ 20,000</h6>
               <p>
-                <span className="custom-badge status-orange">
+                <span className="delete-badge status-orange">
                   REQUESTED AMOUNT
                 </span>
               </p>
@@ -64,7 +64,7 @@ function Finance() {
                   to="#"
                   data-bs-toggle="modal"
                   data-bs-target="#save_invocies_details"
-                  className="hospital-add-btn rounded-pill text-white mt-2 border-0 text ps-3 pe-3 pt-1 pb-1"
+                  className="hospital-add-btn rounded-pill text-white border-0 text ps-3 pe-3 pt-1 pb-1 paid-btn"
                 >
                   Paid Fully
                 </button>
@@ -134,7 +134,7 @@ function Finance() {
         ))}
       </div>
 
-      <div className="card-box finance-card">
+      <div className="card-box">
         <h5>Transactions</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">

@@ -301,7 +301,7 @@ table.table td h2 span {
 .card-box {
   background-color: #fff;
   border-radius: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding: 20px;
   position: relative;
 }
@@ -658,7 +658,7 @@ table.table td h2 span {
   background-color: rgba(0, 0, 0, 0.2);
 }
 .card {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   box-shadow: none;
   border: 0;
   border-radius: 12px;
@@ -1645,7 +1645,7 @@ textarea.form-control {
   background-color: #fff;
   border-radius: 12px;
   backdrop-filter: blur(2px);
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   padding: 20px;
   position: relative;
 }
@@ -1948,7 +1948,7 @@ ul.chat-user-total li i.old-users {
 .good-morning-blk {
   background: #ffffff;
   border-radius: 12px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   position: relative;
   z-index: 9;
 }
@@ -11758,3 +11758,8 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 .x-btn:hover{
   color: gray;
 }
+
+.paid-btn{
+  font-size: 14px;
+}
+

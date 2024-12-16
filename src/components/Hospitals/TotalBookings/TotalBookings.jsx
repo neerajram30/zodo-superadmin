@@ -35,7 +35,7 @@ function TotalBookings() {
           </div>
         ))}
       </div>
-      <div className="card-box bookings-card">
+      <div className="card-box">
         <BookingTabs />
       </div>
     </div>
