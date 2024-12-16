@@ -63,7 +63,7 @@ const Login = () => {
                             className="toggle-password"
                             onClick={togglePasswordVisibility}
                           >
-                            {passwordVisible ? (
+                            {!passwordVisible ? (
                               <EyeOff className="react-feather-custom" />
                             ) : (
                               <Eye className="react-feather-custom" />
