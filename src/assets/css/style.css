@@ -1100,7 +1100,9 @@ textarea.form-control {
   -webkit-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
-  
+}
+.submenu-normal-text{
+  color: #8C8C8C !important;
 }
 .sidebar-menu ul ul a.submenu-active {
   color: #347D73;
@@ -11716,7 +11718,7 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   margin-top: -32.5px;
 }
 .finance-card{
-  margin-top: -20px;
+  margin-top: -10px;
 }
 .overview-card{
   margin-top: -22px;
@@ -11770,4 +11772,57 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   align-items: center;
   height: 35px;
   font-size: 12px;
+}
+
+.search-hero-header h3{
+  font-size: 18px;
+  font-weight: 600;
+}
+.doctor-list-btn-add{
+  /* width: 100%; */
+  /* padding: 8px 10px 8px 10px; */
+  width: 50%;
+  height: 40px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.doctor-list-btn-manage{
+  /* width: 100%; */
+  /* padding: 8px 10px 8px 10px; */
+  width: 65%;
+  height: 40px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.specialization-upload-btn{
+  /* width: 100%; */
+  /* padding: 8px 10px 8px 10px; */
+  width: 40%;
+  height: 40px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.specialization-add-btn{
+  /* width: 100%; */
+  /* padding: 8px 10px 8px 10px; */
+  width: 45%;
+  height: 40px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-search-container{
+  width: 100%;
+}
+.manage-access{
+  font-size: 12px;
+  padding: 3px 5px 6px 5px;
 }

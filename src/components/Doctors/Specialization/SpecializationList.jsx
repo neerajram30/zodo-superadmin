@@ -35,7 +35,7 @@ function SpecializationList() {
     },
   ];
   return (
-    <div>
+    <div className="mt-3">
       <Table
         pagination={{
           total: specialisationList.length,

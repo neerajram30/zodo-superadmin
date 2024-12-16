@@ -12,7 +12,7 @@ function Specialization() {
       link:"/manage-doctors",
     },
     {
-      name: "Specialization",
+      name: "Specialisation",
       status: "active",
       link:"/manage-doctors/specialization",
     },

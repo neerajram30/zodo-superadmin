@@ -54,7 +54,7 @@ const Login = () => {
                             Password <span className="login-danger">*</span>
                           </label>
                           <input
-                            type={passwordVisible ? "password" : ""}
+                            type={!passwordVisible ? "password" : ""}
                             className="form-control pass-input"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}

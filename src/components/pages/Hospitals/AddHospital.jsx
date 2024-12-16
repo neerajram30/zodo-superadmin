@@ -81,7 +81,7 @@ function AddHospital() {
                 <FastTag />
               </div> */}
             </div>
-            <div className="w-100 mt-4 mt-md-0">
+            <div className="w-100 mt-4 mt-md-2">
               <div className="form-group">
                 <label>
                   <h4 className="card-title">Hospital Name</h4>

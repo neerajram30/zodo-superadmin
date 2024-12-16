@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import SearchBox from "../searchbox/SearchBox";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   blogimg10,
   blogimg12,
   blogimg2,
   blogimg4,
   blogimg6,
-  blogimg8,
-  pdficon,
-  pdficon3,
-  pdficon4,
-  // plusicon,
-  // refreshicon,
+  blogimg8
 } from "../imagepath";
 import DataTable from "../DataTables/DataTable";
 import ConfirmDelete from "../modals/ConfirmDelete";
+import DoctorRequestHero from "../heros/DoctorRequestHero";
 function DoctorRequests() {
   const [show, setShow] = useState(false);
   const datasource = [
@@ -137,7 +132,7 @@ function DoctorRequests() {
       sorter: (a, b) => a.Department.length - b.Department.length,
     },
     {
-      title: "Specialization",
+      title: "Specialisation",
       dataIndex: "Specialization",
       sorter: (a, b) => a.Specialization.length - b.Specialization.length,
     },
@@ -191,14 +186,17 @@ function DoctorRequests() {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                <Link className="dropdown-item" to={`/manage-doctors/request/${record.id}`}>
+                <Link
+                  className="dropdown-item"
+                  to={`/manage-doctors/request/${record.id}`}
+                >
                   <i className="far fa-edit me-2" />
                   Edit
                 </Link>
                 <Link
                   className="dropdown-item"
                   to="#"
-                  onClick={()=>setShow(true)}
+                  onClick={() => setShow(true)}
                 >
                   <i className="fa fa-trash-alt m-r-5"></i> Delete
                 </Link>
@@ -214,37 +212,7 @@ function DoctorRequests() {
       <div className="col-sm-12">
         <div className="card card-table show-entire rounded-0">
           <div className="card-body">
-            {/* Table Header */}
-            <div className="page-table-header mb-2">
-              <div className="row align-items-center">
-                <div className="col-12  col-md-1">
-                  <div className="doctor-table-blk">
-                    <h3>Doctors Requests</h3>
-                  </div>
-                </div>
-                <div className="col-12 col-md-3 ms-md-5">
-                  <div className="doctor-list-search ms-md-4">
-                    <div className="search-container">
-                      <SearchBox />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-md-auto text-end float-md-end ms-auto download-grp mt-3 mt-md-0">
-                  <Link to="#" className=" me-2">
-                    <img src={pdficon} alt="#" />
-                  </Link>
-                  <Link to="#" className=" me-2"></Link>
-                  <Link to="#" className=" me-2">
-                    <img src={pdficon3} alt="#" />
-                  </Link>
-                  <Link to="#">
-                    <img src={pdficon4} alt="#" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-            {/* /Table Header */}
+            <DoctorRequestHero />
             <div className="doctor-list">
               <DataTable data={datasource} columns={columns} />
             </div>

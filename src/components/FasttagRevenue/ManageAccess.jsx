@@ -9,7 +9,7 @@ function ManageAccess() {
           to="#"
           // data-bs-toggle="modal"
           // data-bs-target="#delete_invoices_details"
-          className="btn hospital-draft-btn rounded-pill text-primary"
+          className="hospital-draft-btn rounded-pill text-primary manage-access"
         >
           Contact them
         </Link>
@@ -17,7 +17,7 @@ function ManageAccess() {
           to="#"
           // data-bs-toggle="modal"
           // data-bs-target="#save_invocies_details"
-          className="btn hospital-add-btn rounded-pill ms-md-1"
+          className="hospital-add-btn rounded-pill ms-md-1 text-white manage-access"
         >
           Approve
         </Link>

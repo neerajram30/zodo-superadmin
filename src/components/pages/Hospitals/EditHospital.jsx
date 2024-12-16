@@ -4,13 +4,13 @@ import Breadcrumb from "../../breadcrump/Breadcrumb";
 import UploadFiles from "../../Hospitals/UploadFiles";
 import FastTag from "../../Hospitals/FastTag";
 import ChooseFile from "../../Hospitals/ChooseFile";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Closebtn from "../../assests/Closebtn";
 function EditHospital() {
   const { id } = useParams();
   const locations = useLocation();
   const patharray = locations.pathname.split("/");
-
+  const navigate = useNavigate();
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -84,7 +84,7 @@ function EditHospital() {
                 <FastTag />
               </div>
             </div>
-            <div className="w-100 mt-4 mt-md-0">
+            <div className="w-100 mt-4 mt-md-3">
               <div className="form-group">
                 <label>
                   <h4 className="card-title">Hospital Name</h4>
@@ -292,6 +292,37 @@ function EditHospital() {
                 </div>
                 <div className="col-md-4 mt-2">
                   <UploadFiles />
+                </div>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="settings-btns col-md-6 col-sm-12">
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary"
+                  onClick={() => navigate(-1)}
+                >
+                  Back
+                </button>
+                &nbsp;&nbsp;
+              </div>
+
+              <div className="settings-btns col-md-6 col-sm-12 mt-md-0 mt-2">
+                <div className="d-flex justify-content-md-end justify-content-center">
+                  <button
+                    type="submit"
+                    className="btn btn-secondary btn-main-secondary"
+                  >
+                    Cancel
+                  </button>
+                  &nbsp;&nbsp;
+                  <button
+                    type="submit"
+                    className="border-0 btn-primary btn-main-primary text-white"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
             </div>
