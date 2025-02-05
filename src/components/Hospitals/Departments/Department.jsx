@@ -1,8 +1,17 @@
 import React from "react";
 import DepartmentHero from "../../heros/DepartmentHero";
 import DepartmentCard from "./DepartmentCard";
+import { useDepartmentList } from "../../../hooks/departments/useDepartmentList";
+import PropTypes from "prop-types";
 
-function Department() {
+function Department(props) {
+  const { hospitalId } = props;
+  const {
+    data: departmentList,
+    isLoading,
+    isError,
+  } = useDepartmentList(hospitalId);
+
   const depatments = [
     {
       id: 1,
@@ -25,6 +34,10 @@ function Department() {
       peopleCount: 8,
     },
   ];
+
+  console.log("data", departmentList);
+  console.log("is loading", isLoading);
+  console.log("is error ", isError);
   return (
     <div>
       <DepartmentHero />
@@ -43,5 +56,9 @@ function Department() {
     </div>
   );
 }
+
+Department.propTypes = {
+  hospitalId: PropTypes.node,
+};
 
 export default Department;

@@ -19,7 +19,6 @@ function HospitalsList(props) {
     </div>
   );
 }
-
 HospitalsList.propTypes = {
   hospitalDetails: PropTypes.node,
   tabData: PropTypes.node,

@@ -2,13 +2,14 @@ import PropTypes from "prop-types";
 import React from "react";
 
 function FasttagToggle(props) {
-  const { index } = props;
+  const { index, setToggleFasttag } = props;
   return (
     <div className="status-toggle d-flex justify-content-between align-items-center">
       <input
         type="checkbox"
         id={`${index ? "status_" + index : "status_0"}`}
         className="check"
+        onChange={(e)=>setToggleFasttag(e.target.checked)}
       />
       <label
         htmlFor={`${index ? "status_" + index : "status_0"}`}
@@ -22,6 +23,7 @@ function FasttagToggle(props) {
 
 FasttagToggle.propTypes = {
   index: PropTypes.node,
+  setToggleFasttag: PropTypes.node,
 };
 
 export default FasttagToggle;

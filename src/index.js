@@ -17,9 +17,15 @@ import "./assets/css/select2.min.css";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js';
 
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from "./apis/queryClient.js";
 
+// const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <Approuter/>
+    <QueryClientProvider client={queryClient}>
+      <Approuter/>
+    </QueryClientProvider>
+
 );

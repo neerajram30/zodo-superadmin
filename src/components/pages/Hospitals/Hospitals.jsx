@@ -6,8 +6,16 @@ import HospitalsList from "../../Hospitals/HospitalsList";
 import HospitalHero from "../../heros/HospitalHero";
 import AllHospitals from "../../Hospitals/AllHospitals";
 import HospitalRequest from "../../Hospitals/HospitalRequest";
+import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
 
 function Hospitals() {
+  const { data, isLoading, isError } = useGetHospitals();
+  // console.log("Data",hospitalList?.data);
+  console.log("is loading", isLoading);
+  console.log("is error ", isError);
+  const hospitalList = data?.data;
+
+  
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -16,8 +24,12 @@ function Hospitals() {
     },
   ];
   const tabData = [
-    { id: "allhospitals", title: "All Hosptitals", content: <AllHospitals/> },
-    { id: "requested", title: "Requested Hospitals", content: <HospitalRequest/> },
+    { id: "allhospitals", title: "All Hosptitals", content: <AllHospitals hospitalList={hospitalList}/> },
+    {
+      id: "requested",
+      title: "Requested Hospitals",
+      content: <HospitalRequest />,
+    },
   ];
 
   return (

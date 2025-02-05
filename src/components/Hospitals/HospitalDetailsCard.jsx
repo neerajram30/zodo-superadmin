@@ -19,16 +19,19 @@ import Reviews from "./Reviews/Reviews";
 import TotalBookings from "./TotalBookings/TotalBookings";
 import Department from "./Departments/Department";
 import ToggleModal from "./ToggleModal";
+import PropTypes from "prop-types";
 
-function HospitalDetailsCard() {
+function HospitalDetailsCard(props) {
+  const { hospitalDetails } = props;
   const navigate = useNavigate();
   const { id } = useParams();
+
   const [show, setShow] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
   const tabData = [
     { id: "overview", title: "Overview", content: <Overview /> },
-    { id: "department", title: "Department", content: <Department /> },
+    { id: "department", title: "Department", content: <Department hospitalId={id}/> },
     { id: "finance", title: "Finance", content: <Finance /> },
     {
       id: "total-bookings",
@@ -140,7 +143,7 @@ function HospitalDetailsCard() {
                 {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
                   <h3 className="user-name m-t-0 mb-0">
-                    Apollo, Pvt Ltd Company
+                    {hospitalDetails?.name}
                   </h3>
                   <small className="text-muted">
                     multinational healthcare group
@@ -173,7 +176,7 @@ function HospitalDetailsCard() {
                 <span className="text">
                   <Link to>
                     <img src={search_outline_icon} alt="website" />{" "}
-                    <span className="ms-1">www.apollo.com</span>
+                    <span className="ms-1">{hospitalDetails?.website}</span>
                   </Link>
                 </span>
               </li>
@@ -182,7 +185,8 @@ function HospitalDetailsCard() {
 
           <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
             <h6>
-              <span>GSTIN</span> <span className="fw-semibold text-black">GSTIN567890128347</span>
+              <span>GSTIN</span>{" "}
+              <span className="fw-semibold text-black">{hospitalDetails?.gst}</span>
             </h6>
             <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
               Active
@@ -197,20 +201,21 @@ function HospitalDetailsCard() {
                 <span className="title">Address:</span>
                 <span className="text">
                   <p className="w-md-75 ms-3">
-                    Lorem ipsum dolor sit amet consectetur
+                    {hospitalDetails?.address?.lineOne + " " +
+                      hospitalDetails?.address?.lineOne+ " "+ hospitalDetails?.address?.city}
                   </p>
                 </span>
               </li>
               <li>
                 <span className="title">District:</span>
                 <span className="text">
-                  <p className="w-md-75 ms-3">Hydrabad</p>
+                  <p className="w-md-75 ms-3">{hospitalDetails?.address?.district}</p>
                 </span>
               </li>
               <li>
                 <span className="title">State:</span>
                 <span className="text">
-                  <p className="w-md-75 ms-3">Telengana</p>
+                  <p className="w-md-75 ms-3">{hospitalDetails?.address?.state}</p>
                 </span>
               </li>
             </ul>
@@ -222,11 +227,17 @@ function HospitalDetailsCard() {
                 <ul className="payment-info w-1">
                   <li>
                     <span className="payment-title">
-                      Account Number: <span className="fw-semibold text-black">111234567900</span>
+                      Account Number:{" "}
+                      <span className="fw-semibold text-black">
+                        111234567900
+                      </span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
-                    <span className="payment-title">Bank Name: <span className="fw-semibold text-black">Federal</span></span>
+                    <span className="payment-title">
+                      Bank Name:{" "}
+                      <span className="fw-semibold text-black">Federal</span>
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -234,11 +245,17 @@ function HospitalDetailsCard() {
                 <ul className="payment-info">
                   <li>
                     <span className="payment-title">
-                      IFSC Code: <span className="fw-semibold text-black">111234567900</span>
+                      IFSC Code:{" "}
+                      <span className="fw-semibold text-black">
+                        111234567900
+                      </span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
-                    <span className="payment-title">UPI ID: <span className="fw-semibold text-black">123@oksbi</span></span>
+                    <span className="payment-title">
+                      UPI ID:{" "}
+                      <span className="fw-semibold text-black">123@oksbi</span>
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -246,7 +263,7 @@ function HospitalDetailsCard() {
           </div>
 
           <div className="col mt-4 mt-md-0">
-            <FastTag />
+            <FastTag fastTagDetails={hospitalDetails?.fastTag}/>
           </div>
         </div>
       </div>
@@ -288,5 +305,9 @@ function HospitalDetailsCard() {
     </div>
   );
 }
+
+HospitalDetailsCard.propTypes = {
+  hospitalDetails: PropTypes.node,
+};
 
 export default HospitalDetailsCard;

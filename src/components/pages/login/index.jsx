@@ -5,22 +5,29 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { useState } from "react";
 import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
+import { useLogin } from "../../../hooks/auth/useLogin";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const { mutate: login, isLoading } = useLogin();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login({ email, password });
+  };
+  
   return (
     <>
-      {/* Main Wrapper */}
+      {isLoading && <div>Loading</div>}
       <div className="main-wrapper login-body">
         <div className="container-fluid px-0">
           <div className="row">
-            {/* Login logo */}
             <div className="col-lg-6 login-wrap">
               <div className="login-sec">
                 <div className="log-img">
@@ -28,8 +35,6 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            {/* /Login logo */}
-            {/* Login Content */}
             <div className="col-lg-6 login-wrap-bg">
               <div className="login-wrapper">
                 <div className="loginbox">
@@ -47,7 +52,11 @@ const Login = () => {
                           <label>
                             Email <span className="login-danger">*</span>
                           </label>
-                          <input className="form-control" type="text" />
+                          <input
+                            className="form-control"
+                            type="text"
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
                         </div>
                         <div className="form-group">
                           <label>
@@ -85,6 +94,7 @@ const Login = () => {
                           <Link
                             to="/dashboard"
                             className="btn btn-primary btn-block"
+                            onClick={handleLogin}
                           >
                             Login
                           </Link>

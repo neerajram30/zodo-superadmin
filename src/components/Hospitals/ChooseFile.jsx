@@ -33,4 +33,8 @@ function ChooseFile() {
   );
 }
 
+// ChooseFile.propTypes = {
+//   config: PropTypes.node,
+// };
+
 export default ChooseFile;

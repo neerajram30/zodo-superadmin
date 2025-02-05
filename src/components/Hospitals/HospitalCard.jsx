@@ -1,17 +1,18 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { right_chevron } from "../imagepath";
+import { apollo_logo, right_chevron } from "../imagepath";
 import { Link } from "react-router-dom";
 
 function HospitalCard(props) {
-  const { hospitalData } = props;
+  const { hospitalData, hospitalId } = props;
+
   return (
-    <div className="card invoices-grid-card w-100" key={hospitalData.id}>
-      <Link to={`/manage-hospitals/${hospitalData.id}`}>
+    <div className="card invoices-grid-card w-100" key={hospitalId}>
+      <Link to={`/manage-hospitals/${hospitalId}`}>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={hospitalData.logo} alt="#" />
+              <img src={apollo_logo} alt="#" />
             </div>
             <div className="col-auto">
               <img src={right_chevron} alt="#" />
@@ -21,7 +22,7 @@ function HospitalCard(props) {
                 <h5>{hospitalData.name}</h5>
               </div>
               <div className="col-auto">
-                <h5 className="text-primary">{hospitalData.status}</h5>
+                <h5 className="text-primary">{hospitalData?.current}</h5>
               </div>
             </div>
 
@@ -30,7 +31,7 @@ function HospitalCard(props) {
                 <p>TOTAL FAST TAG</p>
               </div>
               <div className="col-auto">
-                <h5>{hospitalData.totalFasttags}</h5>
+                <h5>{hospitalData?.fastTag?.count}</h5>
               </div>
             </div>
 
@@ -39,7 +40,7 @@ function HospitalCard(props) {
                 <p>TODAY BOOKING</p>
               </div>
               <div className="col-auto">
-                <h5>{hospitalData.todayBookings}</h5>
+                <h5>0</h5>
               </div>
             </div>
           </div>
@@ -51,5 +52,6 @@ function HospitalCard(props) {
 
 HospitalCard.propTypes = {
   hospitalData: PropTypes.node,
+  hospitalId: PropTypes.node,
 };
 export default HospitalCard;

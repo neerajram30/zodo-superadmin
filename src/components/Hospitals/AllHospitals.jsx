@@ -1,17 +1,25 @@
-import React from 'react'
-import { hospitalDetails } from '../configs/hospitalDetails'
-import HospitalCard from './HospitalCard'
+import React from "react";
+// import { hospitalDetails } from "../configs/hospitalDetails";
+import HospitalCard from "./HospitalCard";
+import PropTypes from "prop-types";
 
-function AllHospitals() {
+function AllHospitals(props) {
+  const { hospitalList } = props;
+
   return (
     <div className="row mt-2">
-        {hospitalDetails.map((item) => (
+      {hospitalList?.map((item) => (
         <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
-          <HospitalCard hospitalData={item} />
+          {console.log(item?.id)}
+          <HospitalCard hospitalData={item} hospitalId={item?.id} />
         </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default AllHospitals
+AllHospitals.propTypes = {
+  hospitalList: PropTypes.node,
+};
+
+export default AllHospitals;
