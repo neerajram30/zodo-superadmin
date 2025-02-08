@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   logo,
@@ -19,8 +19,10 @@ const Header = () => {
 
   const handlesidebarmobilemenu = () => {
     document.body.classList.toggle("slide-nav");
-    document.getElementsByTagName("html")[0].classList.toggle('menu-opened');
-    document.getElementsByClassName("sidebar-overlay")[0].classList.toggle("opened");
+    document.getElementsByTagName("html")[0].classList.toggle("menu-opened");
+    document
+      .getElementsByClassName("sidebar-overlay")[0]
+      .classList.toggle("opened");
   };
 
   const openDrawer = () => {
@@ -58,26 +60,17 @@ const Header = () => {
             <img src={logo} width={108} height={38} alt="" />{" "}
           </Link>
         </div>
-        <Link id="toggle_btn" to="#" onClick={handlesidebar}>
-          <img src={baricon} alt="" />
-        </Link>
-        <Link id="mobile_btn" className="mobile_btn float-start" to="#" onClick={handlesidebarmobilemenu}>
+
+        <Link
+          id="mobile_btn"
+          className="mobile_btn float-start"
+          to="#"
+          onClick={handlesidebarmobilemenu}
+        >
           <img src={baricon1} alt="" />
         </Link>
-        <div className="top-nav-search mob-view">
-          <form>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search here"
-            />
-            <Link className="btn">
-              <img src={searchnormal} alt="" />
-            </Link>
-          </form>
-        </div>
+
         <ul className="nav user-menu float-end">
-          
           {/* <li className="nav-item dropdown d-none d-sm-block">
             <Link
               onClick={openDrawer}
@@ -232,7 +225,10 @@ const Header = () => {
                       <span className="avatar">C</span>
                     </div>
                     <div className="list-body">
-                      <span className="message-author"> Catherine Manseau </span>
+                      <span className="message-author">
+                        {" "}
+                        Catherine Manseau{" "}
+                      </span>
                       <span className="message-time">12:28 AM</span>
                       <div className="clearfix"></div>
                       <span className="message-content">
