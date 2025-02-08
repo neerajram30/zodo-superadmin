@@ -6,8 +6,12 @@ export const addHospital = async (hospitalData) => {
 };
 
 export const getHospitals = async () => {
-  const response = await apiClient.get("/hospitals");
-  return response.data;
+  try {
+    const response = await apiClient.get("/hospitals");
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getHospital = async (id) => {

@@ -11826,3 +11826,20 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   font-size: 12px;
   padding: 3px 5px 6px 5px;
 }
+
+.overlay-loader {
+  position: fixed; /* Fixed position to cover the entire screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay with 70% opacity */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  z-index: 1050; /* Ensure it's above other content */
+}
+
+.custom-loader{
+  color: #008f64;
+}
