@@ -3,7 +3,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 function TextArea(props) {
-  const { name, label, validation, placeholder } = props;
+  const { name, label, validation, placeholder, disabled } = props;
   const {
     register,
     formState: { errors },
@@ -18,6 +18,7 @@ function TextArea(props) {
         cols={5}
         id={name}
         name={name}
+        disabled={disabled}
         // type={type}
         placeholder={placeholder}
         className={`form-control ${
@@ -39,6 +40,7 @@ TextArea.propTypes = {
   label: PropTypes.node,
   validation: PropTypes.node,
   placeholder: PropTypes.node,
+  disabled: PropTypes.node,
 };
 
 export default TextArea;

@@ -3,7 +3,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 function InputField(props) {
-  const { name, label, type, validation, placeholder } = props;
+  const { name, label, type, validation, placeholder, disabled } = props;
   const {
     register,
     formState: { errors },
@@ -20,6 +20,7 @@ function InputField(props) {
         name={name}
         type={type}
         placeholder={placeholder}
+        disabled={disabled}
         className={`form-control ${
           errors !== undefined && errors[name] ? "is-invalid" : ""
         }`}
@@ -40,6 +41,7 @@ InputField.propTypes = {
   type: PropTypes.node,
   validation: PropTypes.node,
   placeholder: PropTypes.node,
+  disabled: PropTypes.node,
 };
 
 export default InputField;

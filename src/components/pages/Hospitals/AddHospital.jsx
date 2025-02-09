@@ -8,11 +8,12 @@ import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
 import Select from "react-select";
 import Closebtn from "../../assests/Closebtn";
 import { useAddHostpital } from "../../../hooks/hospitals/useAddHostpital";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
 import InputField from "../../InputFields/InputField";
 import TextArea from "../../InputFields/TextArea";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 import ToastMessage from "../../toast/ToastMessage";
+import Checkbox from "../../InputFields/Checkbox";
 
 function AddHospital() {
   const [toggleFasttag, setToggleFasttag] = useState(false);
@@ -23,6 +24,9 @@ function AddHospital() {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastVarient, setToastVariant] = useState("");
+  const control = methods.control;
+  const isSameAsCompanyAddress = useWatch({ control, name: "sameascompany" });
+  console.log("Same as company ", isSameAsCompanyAddress);
 
   const breadCrumpData = [
     {
@@ -89,7 +93,13 @@ function AddHospital() {
   };
 
   console.log("Loading", isLoading);
+  // const handleChcekbox = (checked)=>{
+  //   console.log("is checked ",checked);
+  //   if(checked){
 
+  //   }
+
+  // }
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -364,7 +374,7 @@ function AddHospital() {
                 </div>
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mt-3">Billing Address</h4>
-                  <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
+                  {/* <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
                     {" "}
                     Same as Company Address
                     <input
@@ -374,7 +384,14 @@ function AddHospital() {
                       // checked={checked}
                     />
                     <span className="checkmark" />
-                  </label>
+                  </label> */}
+
+                  <Checkbox
+                    name="sameascompany"
+                    label="Same as Company Address"
+                    validation={null}
+                    // onChangeHandler={handleChcekbox}
+                  />
                 </div>
                 <div className="row">
                   <div className="col-md-4">
@@ -387,6 +404,7 @@ function AddHospital() {
                         }}
                         placeholder="Account Holder Name"
                         type="text"
+                        disabled={isSameAsCompanyAddress}
                       />
                     </div>
                   </div>
@@ -398,6 +416,8 @@ function AddHospital() {
                         validation={{ required: "Street is required" }}
                         placeholder="Area / Street / Sector"
                         type="text"
+                        disabled={isSameAsCompanyAddress}
+
                       />
                     </div>
                   </div>
@@ -409,6 +429,8 @@ function AddHospital() {
                     label=""
                     validation={{ required: "Address is required" }}
                     placeholder="Enter Address"
+                    disabled={isSameAsCompanyAddress}
+
                   />
                 </div>
 
@@ -421,6 +443,8 @@ function AddHospital() {
                         validation={{ required: "Town is required" }}
                         placeholder="Town / City"
                         type="text"
+                        disabled={isSameAsCompanyAddress}
+
                       />
                     </div>
                   </div>
@@ -433,6 +457,8 @@ function AddHospital() {
                         validation={{ required: "District is required" }}
                         placeholder="District"
                         type="text"
+                        disabled={isSameAsCompanyAddress}
+
                       />
                     </div>
                   </div>
@@ -447,6 +473,8 @@ function AddHospital() {
                         validation={{ required: "State is required" }}
                         placeholder="State"
                         type="text"
+                        disabled={isSameAsCompanyAddress}
+
                       />
                     </div>
                   </div>
@@ -458,6 +486,8 @@ function AddHospital() {
                         validation={{ required: "Pincode is required" }}
                         placeholder="Pincode"
                         type="text"
+                        disabled={isSameAsCompanyAddress}
+
                       />
                     </div>
                   </div>
