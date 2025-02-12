@@ -6,15 +6,16 @@ export const addHospital = async (hospitalData) => {
 };
 
 export const getHospitals = async () => {
-  try {
-    const response = await apiClient.get("/hospitals");
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await apiClient.get("/hospitals");
+  return response.data;
 };
 
 export const getHospital = async (id) => {
   const response = await apiClient.get(`/hospitals/${id}`);
+  return response.data;
+};
+
+export const deleteHospital = async (id) => {
+  const response = await apiClient.delete(`/hospitals/${id}`);
   return response.data;
 };

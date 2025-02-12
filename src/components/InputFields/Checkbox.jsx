@@ -22,9 +22,7 @@ function Checkbox(props) {
 
   const handleCheck = (e) => {
     const isChecked = e.target.checked;
-    // console.log(e.target.checked);
     setChecked(isChecked);
-    // onChangeHandler(isChecked);
     if(isChecked){
       setValue('billingAddress',address);
       setValue('billingAccountHoldername',companyName);
@@ -33,7 +31,6 @@ function Checkbox(props) {
       setValue('billingDistrict',district);
       setValue('billingState',state);
       setValue('billingPincode',pincode);
-      // setValue('billingAddress',address);
 
     }
     else{
