@@ -1,12 +1,13 @@
 // Custom hook for creating hospital
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addHospital } from "../../apis/hospitals";
-// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { addSpecialization } from "../../apis/specialisation";
+import useSpecialisations from "../../store/useSpecialisations";
 
-export const useAddHostpital = () => {
+export const useAddSpecialisation = () => {
   const queryClient = useQueryClient();
-  // const navigate = useNavigate();
+  const specialisationData = useSpecialisations((state) => state.specialisations);
+  const addNewSpecialisation = useSpecialisations((state) => state.addNewSpecialisation);
   const [showToast, setShowToast] = useState({
     show: false,
     message: "",
@@ -14,43 +15,40 @@ export const useAddHostpital = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: addHospital, // API function to create
+    mutationFn: addSpecialization, // API function to create
     onMutate: async (id) => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
-      await queryClient.cancelQueries({ queryKey: ["hospitals"] });
+      await queryClient.cancelQueries({ queryKey: ["specialisation"] });
 
       // Get previous hospital list before deleting
-      const previousHospitals = queryClient.getQueryData(["hospitals"]);
+      const previousHospitals = queryClient.getQueryData(["specialisation"]);
 
       // Optimistically update the cache
-      queryClient.setQueryData(["hospitals"], (oldHospitals) =>
+      queryClient.setQueryData(["specialisation"], (oldHospitals) =>
         oldHospitals ? oldHospitals.filter((h) => h.id !== id) : []
       );
 
       return { previousHospitals };
     },
     onSuccess: (data) => {
-      const message = data.message;
+      const message = data.message || "Specialisation added successfully";
+      const specialisation = [...specialisationData, data];
+      console.log("Specialisation data ", specialisation);
+      addNewSpecialisation(data);
       setShowToast({ show: true, message: message, status: "success" });
     },
     onError: (error, id, context) => {
       console.error("Error deleting hospital:", error.message);
       // Rollback if there is an error
       if (context?.previousHospitals) {
-        queryClient.setQueryData(["hospitals"], context.previousHospitals);
+        queryClient.setQueryData(["specialisation"], context.previousHospitals);
       }
       setShowToast({
         show: true,
         message: error.message,
         status: "danger",
       });
-    },
-    // onSettled: () => {
-    //   // Redirect after deletion (even if it fails)
-    //   setTimeout(() => {
-    //     navigate("/manage-hospitals");
-    //   }, 5000);
-    // },
+    }
   });
 
   return {
@@ -58,5 +56,6 @@ export const useAddHostpital = () => {
     showToast,
     setShowToast,
     isLoading: mutation.isPending,
+    isSuccess: mutation.isSuccess,
   };
 };

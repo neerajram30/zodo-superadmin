@@ -3,7 +3,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 function TextArea(props) {
-  const { name, label, validation, placeholder, disabled } = props;
+  const { name, label, validation, placeholder, disabled, defaultValue } = props;
   const {
     register,
     formState: { errors },
@@ -25,6 +25,7 @@ function TextArea(props) {
           errors !== undefined && errors[name] ? "is-invalid" : ""
         }`}
         {...register(name, validation)}
+        defaultValue={defaultValue}
       />
       {errors !== undefined && errors[name] && (
         <div className="invalid-feedback">
@@ -41,6 +42,7 @@ TextArea.propTypes = {
   validation: PropTypes.node,
   placeholder: PropTypes.node,
   disabled: PropTypes.node,
+  defaultValue: PropTypes.node,
 };
 
 export default TextArea;

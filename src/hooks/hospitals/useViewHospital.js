@@ -5,8 +5,10 @@ export const useViewHospital = (id) => {
   if (!id || typeof id !== "string" || id.trim() === "" || id === undefined) {
     return { data: null, isLoading: false, isError: true };
   }
+  console.log("Hospital ID", id);
+  
   return useQuery({
-    queryKey: ["hospital"], // Unique query key
+    queryKey: ["hospital", id], // Unique query key
     queryFn: () => getHospital(id),
     onError: (error) => {
       console.log(error);

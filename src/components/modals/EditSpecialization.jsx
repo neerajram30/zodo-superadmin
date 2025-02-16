@@ -1,25 +1,25 @@
-import PropTypes from "prop-types";
+import { Modal } from "antd";
 import React from "react";
-import { Modal } from "react-bootstrap";
-import { useAddSpecialisation } from "../../hooks/specialisation/useAddSpecialisation";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import TextArea from "../InputFields/TextArea";
 import ToastMessage from "../toast/ToastMessage";
+import { useEditSpecialisation } from "../../hooks/specialisation/useEditSpecialisation";
+import PropTypes from "prop-types";
 
-function AddSpecialization(props) {
+function EditSpecialization(props) {
   const { show, setShow } = props;
-  const { mutate, isLoading, showToast, setShowToast } = useAddSpecialisation();
+  const { mutate, isLoading, showToast, setShowToast } =
+    useEditSpecialisation();
   const methods = useForm();
-  const onCreateSpecialisation = async (data) => {
+  const onEditSpecialisation = async (data) => {
     const specialisation = {
       name: data.specialisationName,
       description: data.message,
     };
     await mutate(specialisation);
-    methods.reset();
+    // methods.reset();
   };
-
   return (
     <div>
       <Modal
@@ -35,7 +35,7 @@ function AddSpecialization(props) {
         </Modal.Header>
         <Modal.Body className="border-0">
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onCreateSpecialisation)}>
+            <form onSubmit={methods.handleSubmit(onEditSpecialisation)}>
               <div className="form-group">
                 <div className="col-md-12">
                   <InputField
@@ -91,9 +91,10 @@ function AddSpecialization(props) {
   );
 }
 
-AddSpecialization.propTypes = {
+
+EditSpecialization.propTypes = {
   show: PropTypes.node,
   setShow: PropTypes.node,
 };
 
-export default AddSpecialization;
+export default EditSpecialization;

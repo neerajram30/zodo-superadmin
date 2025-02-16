@@ -1,10 +1,10 @@
-// Custom hook for creating hospital
+// Custom hook for editing hospital
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addHospital } from "../../apis/hospitals";
+import { editHospital } from "../../apis/hospitals";
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export const useAddHostpital = () => {
+export const useEditHostpital = () => {
   const queryClient = useQueryClient();
   // const navigate = useNavigate();
   const [showToast, setShowToast] = useState({
@@ -14,7 +14,7 @@ export const useAddHostpital = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: addHospital, // API function to create
+    mutationFn: editHospital, // API function to create
     onMutate: async (id) => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
       await queryClient.cancelQueries({ queryKey: ["hospitals"] });
@@ -30,27 +30,22 @@ export const useAddHostpital = () => {
       return { previousHospitals };
     },
     onSuccess: (data) => {
-      const message = data.message;
+
+      // Show toast message and navigate to the list of hospitals  
+      const message = data?.message || "Hospital updated successfully";
       setShowToast({ show: true, message: message, status: "success" });
     },
     onError: (error, id, context) => {
-      console.error("Error deleting hospital:", error.message);
       // Rollback if there is an error
       if (context?.previousHospitals) {
         queryClient.setQueryData(["hospitals"], context.previousHospitals);
       }
       setShowToast({
         show: true,
-        message: error.message,
+        message: error.message || "An error occurred while editing hospital",
         status: "danger",
       });
     },
-    // onSettled: () => {
-    //   // Redirect after deletion (even if it fails)
-    //   setTimeout(() => {
-    //     navigate("/manage-hospitals");
-    //   }, 5000);
-    // },
   });
 
   return {

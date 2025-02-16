@@ -17,17 +17,10 @@ import Checkbox from "../../InputFields/Checkbox";
 
 function AddHospital() {
   const [toggleFasttag, setToggleFasttag] = useState(false);
-  console.log(toggleFasttag);
-
-  const { onSubmit, isLoading, isSuccess } = useAddHostpital();
+  const { mutate, showToast, setShowToast, isLoading } = useAddHostpital();
   const methods = useForm();
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [toastVarient, setToastVariant] = useState("");
   const control = methods.control;
   const isSameAsCompanyAddress = useWatch({ control, name: "sameascompany" });
-  console.log("Same as company ", isSameAsCompanyAddress);
-
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -73,33 +66,10 @@ function AddHospital() {
         price: 0,
       },
     };
-    try {
-      const response = await onSubmit(hospital);
-      console.log("Sucess ", response);
-      console.log("is success ", isSuccess);
 
-      if (response.statusCode === 201) {
-        setToastVariant("Success");
-        setToastMessage(response?.message);
-        setShowToast(true);
-      }
-    } catch (error) {
-      const errorMessage =
-        error?.response?.data?.message || "Something went wrong";
-      setToastVariant("Failure");
-      setToastMessage(errorMessage);
-      setShowToast(true);
-    }
+    await mutate(hospital);
+    methods.reset();
   };
-
-  console.log("Loading", isLoading);
-  // const handleChcekbox = (checked)=>{
-  //   console.log("is checked ",checked);
-  //   if(checked){
-
-  //   }
-
-  // }
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -107,12 +77,6 @@ function AddHospital() {
       id1="menu-items3"
     >
       {isLoading && <FullscreenLoader />}
-      <ToastMessage
-        showToast={showToast}
-        setShowToast={setShowToast}
-        message={toastMessage}
-        state={toastVarient}
-      />
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
@@ -374,18 +338,6 @@ function AddHospital() {
                 </div>
                 <div className="d-flex justify-content-between">
                   <h4 className="card-title mt-3">Billing Address</h4>
-                  {/* <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
-                    {" "}
-                    Same as Company Address
-                    <input
-                      type="checkbox"
-                      name="radio"
-                      // onChange={handleCheck}
-                      // checked={checked}
-                    />
-                    <span className="checkmark" />
-                  </label> */}
-
                   <Checkbox
                     name="sameascompany"
                     label="Same as Company Address"
@@ -417,7 +369,6 @@ function AddHospital() {
                         placeholder="Area / Street / Sector"
                         type="text"
                         disabled={isSameAsCompanyAddress}
-
                       />
                     </div>
                   </div>
@@ -430,7 +381,6 @@ function AddHospital() {
                     validation={{ required: "Address is required" }}
                     placeholder="Enter Address"
                     disabled={isSameAsCompanyAddress}
-
                   />
                 </div>
 
@@ -444,7 +394,6 @@ function AddHospital() {
                         placeholder="Town / City"
                         type="text"
                         disabled={isSameAsCompanyAddress}
-
                       />
                     </div>
                   </div>
@@ -458,7 +407,6 @@ function AddHospital() {
                         placeholder="District"
                         type="text"
                         disabled={isSameAsCompanyAddress}
-
                       />
                     </div>
                   </div>
@@ -474,7 +422,6 @@ function AddHospital() {
                         placeholder="State"
                         type="text"
                         disabled={isSameAsCompanyAddress}
-
                       />
                     </div>
                   </div>
@@ -487,7 +434,6 @@ function AddHospital() {
                         placeholder="Pincode"
                         type="text"
                         disabled={isSameAsCompanyAddress}
-
                       />
                     </div>
                   </div>
@@ -558,6 +504,7 @@ function AddHospital() {
           </div>
         </div>
       </div>
+      <ToastMessage showToast={showToast} setShowToast={setShowToast} />
     </Layout>
   );
 }

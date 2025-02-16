@@ -6,16 +6,30 @@ import Layout from "../../layout/Layout";
 import { useParams } from "react-router-dom";
 import { useViewHospital } from "../../../hooks/hospitals/useViewHospital";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
+import useSelectedHospital from "../../../store/useSelectedHospital";
 
 function HospitalDetails() {
   const { id } = useParams();
-  const { data:hospitalDetails, isLoading, isError, error } = useViewHospital(id);
-  console.log("data",hospitalDetails);
+  const {
+    data: hospitalDetails,
+    isLoading,
+    isError,
+    error,
+  } = useViewHospital(id);
+  console.log("data", hospitalDetails);
   console.log("is loading", isLoading);
   console.log("is error ", isError);
   console.log("error", error);
-  
+  const setSelectedHospital = useSelectedHospital(
+    (state) => state.setSelectedHospital
+  );
 
+  const selectedHospital = useSelectedHospital(
+    (state) => state.selectedHospital
+  );
+  setSelectedHospital(hospitalDetails);
+  console.log("selected hospital", selectedHospital);
+  
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -47,7 +61,7 @@ function HospitalDetails() {
       </Layout>
     );
   }
-  
+
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -57,15 +71,12 @@ function HospitalDetails() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          <HospitalDetailsCard hospitalDetails={hospitalDetails}/>
+          <HospitalDetailsCard hospitalDetails={hospitalDetails} />
           {isLoading && <FullscreenLoader />}
         </div>
       </div>
     </Layout>
   );
 }
-
-
-
 
 export default HospitalDetails;
