@@ -3,7 +3,7 @@ import { getHospitals } from "../../apis/hospitals";
 
 export const useGetHospitals = () => {
   return useQuery({
-    queryKey: ['hospitalList'], // Unique query key
+    queryKey: ["hospitals"], // Unique query key
     queryFn: () => getHospitals(),
   });
 };

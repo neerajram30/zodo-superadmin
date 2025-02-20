@@ -57,8 +57,8 @@ export const getHospital = async (id) => {
  * @returns {Promise<Object>} The updated hospital data.
  */
 
-export const editHospital = async (id, editedHospital) => {
-  const response = await apiClient.patch(`/hospitals/${id}`, editedHospital);
+export const editHospital = async ({id, data}) => {
+  const response = await apiClient.patch(`/hospitals/${id}`, data);
   return response.data;
 };
 

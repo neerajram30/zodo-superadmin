@@ -1,25 +1,42 @@
-import { Modal } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import TextArea from "../InputFields/TextArea";
 import ToastMessage from "../toast/ToastMessage";
 import { useEditSpecialisation } from "../../hooks/specialisation/useEditSpecialisation";
 import PropTypes from "prop-types";
+import { Modal } from "react-bootstrap";
 
 function EditSpecialization(props) {
-  const { show, setShow } = props;
+  const { show, setShow, specialisation } = props;
   const { mutate, isLoading, showToast, setShowToast } =
     useEditSpecialisation();
-  const methods = useForm();
+  const defaultValues = {
+    specialisationName: specialisation?.name,
+    message: specialisation?.description,
+  };
+  const methods = useForm({ defaultValues });
   const onEditSpecialisation = async (data) => {
-    const specialisation = {
+    console.log("Edited ", data);
+
+    const editedSpecialisation = {
       name: data.specialisationName,
       description: data.message,
     };
-    await mutate(specialisation);
+    console.log(mutate);
+    console.log("ID", specialisation?.id);
+    console.log("Edited Specialisation", editedSpecialisation);
+
+    await mutate({ id: specialisation?.id, data: editedSpecialisation });
     // methods.reset();
   };
+
+  useEffect(() => {
+    methods.reset(defaultValues); // Update form values when defaultValues change
+  }, [specialisation]);
+
+  console.log("Specialisation", specialisation);
+
   return (
     <div>
       <Modal
@@ -31,7 +48,7 @@ function EditSpecialization(props) {
         backdropClassName="hospital-modal-backdrop"
       >
         <Modal.Header closeButton className="border-0">
-          <Modal.Title>Specialisation</Modal.Title>
+          <Modal.Title>Edit Specialisations</Modal.Title>
         </Modal.Header>
         <Modal.Body className="border-0">
           <FormProvider {...methods}>
@@ -44,6 +61,7 @@ function EditSpecialization(props) {
                     validation={{ required: "Specialisation Name is required" }}
                     placeholder="Enter Specialisation Name"
                     type="text"
+                    defaultValue={specialisation?.name}
                   />
                 </div>
               </div>
@@ -53,6 +71,7 @@ function EditSpecialization(props) {
                     name="message"
                     label="Message"
                     placeholder="Type message here"
+                    defaultValue={specialisation?.description}
                   />
                 </div>
               </div>
@@ -91,10 +110,10 @@ function EditSpecialization(props) {
   );
 }
 
-
 EditSpecialization.propTypes = {
   show: PropTypes.node,
   setShow: PropTypes.node,
+  specialisation: PropTypes.node,
 };
 
 export default EditSpecialization;

@@ -22,32 +22,32 @@ export const useEditSpecialisation = () => {
     mutationFn: editSpecialization, // API function to create
     onMutate: async (id) => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
-      await queryClient.cancelQueries({ queryKey: ["specialisation"] });
+      await queryClient.cancelQueries({ queryKey: ["specialisations"] });
 
       // Get previous hospital list before deleting
       const previousSpecialisation = queryClient.getQueryData([
-        "specialisation",
+        "specialisations",
       ]);
 
       // Optimistically update the cache
-      queryClient.setQueryData(["specialisation"], (oldSpecialisationa) =>
-        oldSpecialisationa ? oldSpecialisationa.filter((h) => h.id !== id) : []
+      queryClient.setQueryData(["specialisations"], (oldSpecialisation) =>
+        oldSpecialisation ? oldSpecialisation.filter((h) => h.id !== id) : []
       );
 
       return { previousSpecialisation };
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
+      
       const message = data.message || "Specialisation edited successfully";
-      //   const specialisation = [...specialisationData, data];
-      //   console.log("Specialisation data ", specialisation);
-      //   addNewSpecialisation(data);
+      queryClient.setQueryData(["specialisations", variables.id], data);
+      queryClient.invalidateQueries({ queryKey: ["specialisations"] });
       setShowToast({ show: true, message: message, status: "success" });
     },
     onError: (error, id, context) => {
       console.error("Error deleting hospital:", error.message);
       // Rollback if there is an error
-      if (context?.previousHospitals) {
-        queryClient.setQueryData(["specialisation"], context.previousHospitals);
+      if (context?.previousSpecialisation) {
+        queryClient.setQueryData(["specialisations"], context.previousSpecialisation);
       }
       setShowToast({
         show: true,

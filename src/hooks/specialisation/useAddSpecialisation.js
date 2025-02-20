@@ -6,7 +6,7 @@ import useSpecialisations from "../../store/useSpecialisations";
 
 export const useAddSpecialisation = () => {
   const queryClient = useQueryClient();
-  const specialisationData = useSpecialisations((state) => state.specialisations);
+  // const specialisationData = useSpecialisations((state) => state.specialisations);
   const addNewSpecialisation = useSpecialisations((state) => state.addNewSpecialisation);
   const [showToast, setShowToast] = useState({
     show: false,
@@ -18,13 +18,13 @@ export const useAddSpecialisation = () => {
     mutationFn: addSpecialization, // API function to create
     onMutate: async (id) => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
-      await queryClient.cancelQueries({ queryKey: ["specialisation"] });
+      await queryClient.cancelQueries({ queryKey: ["specialisations"] });
 
       // Get previous hospital list before deleting
-      const previousHospitals = queryClient.getQueryData(["specialisation"]);
+      const previousHospitals = queryClient.getQueryData(["specialisations"]);
 
       // Optimistically update the cache
-      queryClient.setQueryData(["specialisation"], (oldHospitals) =>
+      queryClient.setQueryData(["specialisations"], (oldHospitals) =>
         oldHospitals ? oldHospitals.filter((h) => h.id !== id) : []
       );
 
@@ -32,8 +32,7 @@ export const useAddSpecialisation = () => {
     },
     onSuccess: (data) => {
       const message = data.message || "Specialisation added successfully";
-      const specialisation = [...specialisationData, data];
-      console.log("Specialisation data ", specialisation);
+      // const specialisation = [...specialisationData, data];
       addNewSpecialisation(data);
       setShowToast({ show: true, message: message, status: "success" });
     },
@@ -41,7 +40,7 @@ export const useAddSpecialisation = () => {
       console.error("Error deleting hospital:", error.message);
       // Rollback if there is an error
       if (context?.previousHospitals) {
-        queryClient.setQueryData(["specialisation"], context.previousHospitals);
+        queryClient.setQueryData(["specialisations"], context.previousHospitals);
       }
       setShowToast({
         show: true,

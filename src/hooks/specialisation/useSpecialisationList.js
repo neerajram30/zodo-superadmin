@@ -3,7 +3,7 @@ import { getSpecializations } from "../../apis/specialisation";
 
 export const useSpecialisationList = () => {
   return useQuery({
-    queryKey: ['specialisations'], // Unique query key
+    queryKey: ["specialisations"], // Unique query key
     queryFn: () =>getSpecializations(),
   });
 };

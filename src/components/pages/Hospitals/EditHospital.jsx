@@ -23,6 +23,7 @@ function EditHospital() {
   const selectedHospital = useSelectedHospital(
     (state) => state.selectedHospital
   );
+
   // const locations = useLocation();
   // const patharray = locations.pathname.split("/");
 
@@ -65,8 +66,8 @@ function EditHospital() {
     };
     // console.log("hospital !!", hospital);
     // console.log(mutate);
-    await mutate(id, hospital);
-    methods.reset();
+    await mutate({ id: selectedHospital.id, data: hospital });
+    // methods.reset();
   };
 
   const breadCrumpData = [

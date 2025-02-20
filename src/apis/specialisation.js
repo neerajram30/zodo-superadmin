@@ -11,7 +11,14 @@ export const addSpecialization = async (specialisationData) => {
   return response.data;
 };
 
-export const editSpecialization = async (id, editedSpecialisation) => {
-  const response = await apiClient.patch(`/specialisations/${id}`, editedSpecialisation);
+export const editSpecialization = async ({id, data}) => {
+  
+  const response = await apiClient.patch(`/specialisations/${id}`, data);
   return response.data;
 }
+
+
+export const deleteSpecialization = async (id) => {
+  const response = await apiClient.delete(`/specialisations/${id}`);
+  return response.data;
+};

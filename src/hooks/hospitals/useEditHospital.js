@@ -29,10 +29,12 @@ export const useEditHostpital = () => {
 
       return { previousHospitals };
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
 
       // Show toast message and navigate to the list of hospitals  
-      const message = data?.message || "Hospital updated successfully";
+      const message = data?.message || "Hospital updated successful0ly";
+      queryClient.setQueryData(["hospitals", variables.id], data);
+      queryClient.invalidateQueries({ queryKey: ["hospitals"] });
       setShowToast({ show: true, message: message, status: "success" });
     },
     onError: (error, id, context) => {
