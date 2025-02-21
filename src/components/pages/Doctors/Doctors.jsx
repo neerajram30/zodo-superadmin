@@ -20,9 +20,10 @@ function Doctors() {
       title: "Doctor Request (10)",
       content: <DoctorRequests />,
     },
-    // { id: "dr_finance", title: "Finance", content: <DoctorsFinance/> },
-    // { id: "dr_bookings", title: "Total Bookings", content: <DoctorsBookings/> },
   ];
+
+
+  
   return (
     <Layout activeClassName="manage-doctors" id="menu-item3" id1="menu-items3">
       <div className="page-wrapper">
