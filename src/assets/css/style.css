@@ -11842,4 +11842,9 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 
 .custom-loader{
   color: #008f64;
+
+}
+
+.select-item-input{
+  /* padding: 200px; */
 }

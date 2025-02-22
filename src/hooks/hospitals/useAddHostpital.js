@@ -44,13 +44,7 @@ export const useAddHostpital = () => {
         message: error.message,
         status: "danger",
       });
-    },
-    // onSettled: () => {
-    //   // Redirect after deletion (even if it fails)
-    //   setTimeout(() => {
-    //     navigate("/manage-hospitals");
-    //   }, 5000);
-    // },
+    }
   });
 
   return {
