@@ -34,7 +34,6 @@ export const useAddHostpital = () => {
       setShowToast({ show: true, message: message, status: "success" });
     },
     onError: (error, id, context) => {
-      console.error("Error deleting hospital:", error.message);
       // Rollback if there is an error
       if (context?.previousHospitals) {
         queryClient.setQueryData(["hospitals"], context.previousHospitals);
