@@ -21,6 +21,7 @@ import Department from "./Departments/Department";
 import ToggleModal from "./ToggleModal";
 import PropTypes from "prop-types";
 import { useEditHostpital } from "../../hooks/hospitals/useEditHospital";
+import FullscreenLoader from "../loadings/FullscreenLoader";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
@@ -62,7 +63,6 @@ function HospitalDetailsCard(props) {
     const { id, district_id, ...rest } = hospitalDetails;
     console.log(id);
     console.log(district_id);
-    
 
     const updatedHospital = {
       ...rest,
@@ -350,6 +350,7 @@ function HospitalDetailsCard(props) {
           setdisable={setdisable}
           disable={disable}
         />
+        {isLoading && <FullscreenLoader />}
       </div>
     )
   );
