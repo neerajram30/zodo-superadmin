@@ -2,6 +2,7 @@ import React from "react";
 
 function ChooseFile() {
   const handleButtonClick = () => {
+    // e.stoppropagation()
     document.getElementById("fileInput").click();
   };
   return (
@@ -16,7 +17,8 @@ function ChooseFile() {
         <div>
           <small className="w-25 text-muted">size less than 2 MB</small>
         </div>
-        <button
+        <a
+          
           className="choose-file-btn mt-2 bg-white"
           onClick={handleButtonClick}
         >
@@ -27,7 +29,7 @@ function ChooseFile() {
             id="fileInput"
           />
           <span>Choose file</span>
-        </button>
+        </a>
       </div>
     </div>
   );

@@ -43,8 +43,6 @@ export const getHospitals = async () => {
 
 export const getHospital = async (id) => {
   const response = await apiClient.get(`/hospitals/${id}`);
-  console.log("response", response.data);
-
   return response.data;
 };
 

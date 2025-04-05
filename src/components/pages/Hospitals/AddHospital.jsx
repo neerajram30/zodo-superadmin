@@ -12,12 +12,11 @@ import { FormProvider, useForm, useWatch } from "react-hook-form";
 import InputField from "../../InputFields/InputField";
 import TextArea from "../../InputFields/TextArea";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
-import ToastMessage from "../../toast/ToastMessage";
 import Checkbox from "../../InputFields/Checkbox";
 
 function AddHospital() {
   const [toggleFasttag, setToggleFasttag] = useState(false);
-  const { mutate, showToast, setShowToast, isLoading } = useAddHostpital();
+  const { mutate, isLoading } = useAddHostpital();
   const methods = useForm();
   const control = methods.control;
   const isSameAsCompanyAddress = useWatch({ control, name: "sameascompany" });
@@ -68,7 +67,7 @@ function AddHospital() {
     };
 
     await mutate(hospital);
-    methods.reset();
+    // methods.reset();
   };
   return (
     <Layout
@@ -504,7 +503,6 @@ function AddHospital() {
           </div>
         </div>
       </div>
-      <ToastMessage showToast={showToast} setShowToast={setShowToast} />
     </Layout>
   );
 }

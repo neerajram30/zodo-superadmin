@@ -14,6 +14,8 @@ function Hospitals() {
   const { data, isLoading, isError } = useGetHospitals();
   // console.log("Data",hospitalList?.data);
   console.log("is error ", isError);
+  console.log("Data", data);
+
   const hospitalList = data?.data;
   const setHospitalList = useHospitalList((state) => state.setHospitalList);
   setHospitalList(hospitalList);
@@ -49,7 +51,6 @@ function Hospitals() {
           <Breadcrumb data={breadCrumpData} />
           <HospitalHero tabData={tabData} />
           <HospitalsList tabData={tabData} />
-          {/* <LoadMore/> */}
           {isLoading && <FullscreenLoader />}
         </div>
       </div>

@@ -12,13 +12,12 @@ import Select from "react-select";
 import TextArea from "../../InputFields/TextArea";
 import useSelectedHospital from "../../../store/useSelectedHospital";
 import { useEditHostpital } from "../../../hooks/hospitals/useEditHospital";
-import ToastMessage from "../../toast/ToastMessage";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 function EditHospital() {
   const { id } = useParams();
   const [toggleFasttag, setToggleFasttag] = useState(false);
   console.log(toggleFasttag);
-  const { mutate, showToast, setShowToast, isLoading } = useEditHostpital();
+  const { mutate, isLoading } = useEditHostpital();
 
   const selectedHospital = useSelectedHospital(
     (state) => state.selectedHospital
@@ -135,7 +134,7 @@ function EditHospital() {
                       <InputField
                         name="adminName"
                         label="Admin Name"
-                        validation={{ required: "Admin Name is required" }}
+                        // validation={{ required: "Admin Name is required" }}
                         placeholder=""
                         type="text"
                       />
@@ -543,7 +542,6 @@ function EditHospital() {
           </div>
         </div>
       </div>
-      <ToastMessage showToast={showToast} setShowToast={setShowToast} />
     </Layout>
   );
 }

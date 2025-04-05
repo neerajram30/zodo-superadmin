@@ -1,58 +1,61 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteHospital } from "../../apis/hospitals";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { toast} from "react-toastify";
 
 const useDeleteHospital = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [showToast, setShowToast] = useState({
-    show: false,
-    message: "",
-    status: "",
-  });
   const mutation = useMutation({
     mutationFn: deleteHospital, // API function to delete hospital
     onMutate: async (id) => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
       await queryClient.cancelQueries({ queryKey: ["hospitals"] });
-
-      // Get previous hospital list before deleting
-      const previousHospitals = queryClient.getQueryData(["hospitals"]);
-
       // Optimistically update the cache
-      queryClient.setQueryData(["hospitals"], (oldHospitals) =>
-        oldHospitals ? oldHospitals.filter((h) => h.id !== id) : []
-      );
-
-      return { previousHospitals };
+      queryClient.setQueryData(["hospitals"], (oldHospitals) => ({
+        // const oldHospitalList = oldHospitals?.data || [];
+        // oldHospitalList.length > 1
+        //   ? oldHospitalList.filter((h) => h.id === id)
+        //   : []
+        ...oldHospitals,
+        data: oldHospitals.data.filter((hospital) => hospital.id !== id),
+      }));
     },
     onSuccess: (data) => {
       const message = data.message;
-      console.log("Hospital deleted successfully", data);
-      setShowToast({ show: true, message: message, status: "success" });
+      toast.success(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate("/manage-hospitals");
     },
     onError: (error, id, context) => {
-      console.error("Error deleting hospital:", error.message);
+      const errotMessage = error?.response?.data?.message || "Failed to delete hospital";
       // Rollback if there is an error
       if (context?.previousHospitals) {
         queryClient.setQueryData(["hospitals"], context.previousHospitals);
       }
-      setShowToast({
-        show: true,
-        message: "Failed to delete hospital",
-        status: "danger",
+      toast.error(errotMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
-    },
-    onSettled: () => {
-      // Redirect after deletion (even if it fails)
-      setTimeout(() => {
-        navigate("/manage-hospitals");
-      }, 5000);
     },
   });
 
-  return { mutate: mutation.mutate, showToast, setShowToast, isLoading: mutation.isPending };
+  return {
+    mutate: mutation.mutate,
+    isLoading: mutation.isPending,
+  };
 };
 
 export default useDeleteHospital;

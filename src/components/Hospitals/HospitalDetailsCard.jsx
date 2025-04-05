@@ -20,15 +20,19 @@ import TotalBookings from "./TotalBookings/TotalBookings";
 import Department from "./Departments/Department";
 import ToggleModal from "./ToggleModal";
 import PropTypes from "prop-types";
+import { useEditHostpital } from "../../hooks/hospitals/useEditHospital";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
+  console.log("HospitalDetailsCard", hospitalDetails);
+
   const navigate = useNavigate();
   const { id } = useParams();
-  const [showToast, setShowToast] = useState(() => () => {});
+  // const [showToast, setShowToast] = useState(() => () => {});
   const [show, setShow] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
+  const { mutate, isLoading } = useEditHostpital();
   const tabData = [
     { id: "overview", title: "Overview", content: <Overview /> },
     {
@@ -45,12 +49,30 @@ function HospitalDetailsCard(props) {
     { id: "reviews", title: "Reviews", content: <Reviews /> },
   ];
 
-  const handleTogglebtn = (e) => {
+  const hospitalStatus = hospitalDetails?.isDisabled;
+  console.log("Hospital Status", hospitalStatus);
+  console.log("isLoadeing", isLoading);
+  console.log("hospitalDetails", hospitalDetails);
+  console.log("mutate", mutate);
+  console.log("id", id);
+
+  const handleTogglebtn = async (e) => {
     e.stopPropagation();
     setdisableShow(true);
-  };
+    const { id, district_id, ...rest } = hospitalDetails;
+    console.log(id);
+    console.log(district_id);
+    
 
-  console.log("Show", showToast);
+    const updatedHospital = {
+      ...rest,
+      isDisabled: !hospitalStatus,
+    };
+    console.log("Upadted !!", updatedHospital);
+
+    await mutate({ id: id, data: updatedHospital });
+    setdisableShow(false);
+  };
 
   return (
     id && (
@@ -106,14 +128,14 @@ function HospitalDetailsCard(props) {
                         type="checkbox"
                         id="status"
                         className="check"
-                        checked={disable}
+                        checked={hospitalStatus}
                       />
                       <label htmlFor="status" className="checktoggle-small">
                         checkbox
                       </label>
                     </div>
                     <span className="ps-2">
-                      {disable ? "Disable" : "Enable"}
+                      {hospitalStatus ? "Disable" : "Enable"}
                     </span>
                   </Link>
                   <div className="dropdown-divider" />
@@ -319,8 +341,8 @@ function HospitalDetailsCard(props) {
           show={show}
           setShow={setShow}
           hospitalId={hospitalDetails?.id}
-          setShowToast={setShowToast}
-          showToast={setShowToast}
+          // setShowToast={setShowToast}
+          // showToast={setShowToast}
         />
         <ToggleModal
           show={disableshow}
