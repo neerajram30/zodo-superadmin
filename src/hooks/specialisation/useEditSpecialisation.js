@@ -1,7 +1,7 @@
 // Custom hook for creating hospital
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { editSpecialization } from "../../apis/specialisation";
+import { toast } from "react-toastify";
 // import useSpecialisations from "../../store/useSpecialisations";
 
 export const useEditSpecialisation = () => {
@@ -12,36 +12,32 @@ export const useEditSpecialisation = () => {
 //   const addNewSpecialisation = useSpecialisations(
 //     (state) => state.addNewSpecialisation
 //   );
-  const [showToast, setShowToast] = useState({
-    show: false,
-    message: "",
-    status: "",
-  });
+  // const [showToast, setShowToast] = useState({
+  //   show: false,
+  //   message: "",
+  //   status: "",
+  // });
 
   const mutation = useMutation({
     mutationFn: editSpecialization, // API function to create
-    onMutate: async (id) => {
+    onMutate: async () => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
       await queryClient.cancelQueries({ queryKey: ["specialisations"] });
-
       // Get previous hospital list before deleting
-      const previousSpecialisation = queryClient.getQueryData([
-        "specialisations",
-      ]);
-
-      // Optimistically update the cache
-      queryClient.setQueryData(["specialisations"], (oldSpecialisation) =>
-        oldSpecialisation ? oldSpecialisation.filter((h) => h.id !== id) : []
-      );
-
-      return { previousSpecialisation };
     },
     onSuccess: (data, variables) => {
-      
       const message = data.message || "Specialisation edited successfully";
       queryClient.setQueryData(["specialisations", variables.id], data);
       queryClient.invalidateQueries({ queryKey: ["specialisations"] });
-      setShowToast({ show: true, message: message, status: "success" });
+      toast.success(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     },
     onError: (error, id, context) => {
       console.error("Error deleting hospital:", error.message);
@@ -49,18 +45,22 @@ export const useEditSpecialisation = () => {
       if (context?.previousSpecialisation) {
         queryClient.setQueryData(["specialisations"], context.previousSpecialisation);
       }
-      setShowToast({
-        show: true,
-        message: error.message,
-        status: "danger",
+      const errorMessage =
+        error?.response?.data?.message || "Failed to edit specialisation";
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     },
   });
 
   return {
     mutate: mutation.mutate,
-    showToast,
-    setShowToast,
     isLoading: mutation.isPending,
     isSuccess: mutation.isSuccess,
   };

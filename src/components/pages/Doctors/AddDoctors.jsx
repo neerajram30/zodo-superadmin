@@ -11,15 +11,14 @@ import { useSpecialisationList } from "../../../hooks/specialisation/useSpeciali
 import InputField from "../../InputFields/InputField";
 import TextArea from "../../InputFields/TextArea";
 import { useCreateDoctors } from "../../../hooks/doctors/useCreateDoctors";
-import ToastMessage from "../../toast/ToastMessage";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 function AddDoctors() {
   const { id } = useParams();
   const { data, isLoading } = useSpecialisationList();
   const {
     mutate,
-    showToast,
-    setShowToast,
+    // showToast,
+    // setShowToast,
     isLoading: doctorLoading,
   } = useCreateDoctors();
   const methods = useForm();
@@ -76,7 +75,6 @@ function AddDoctors() {
       specifications_id: specifications,
       phone_number: "7012896637",
     };
-
     mutate(doctorData);
   };
   return (
@@ -347,7 +345,7 @@ function AddDoctors() {
           </div>
         </div>
       </div>
-      <ToastMessage showToast={showToast} setShowToast={setShowToast} />
+      {/* <ToastMessage showToast={showToast} setShowToast={setShowToast} /> */}
     </Layout>
   );
 }

@@ -1,14 +1,22 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { apollo_logo, right_chevron } from "../imagepath";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 function HospitalCard(props) {
   const { hospitalData, hospitalId } = props;
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const handelClick = () => {
+    queryClient.invalidateQueries(["departments", hospitalId]);
+    navigate(`/manage-hospitals/${hospitalId}`);
+  }
+
 
   return (
     <div className="card invoices-grid-card w-100" key={hospitalId}>
-      <Link to={`/manage-hospitals/${hospitalId}`}>
+      <a to onClick={handelClick}>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
@@ -45,7 +53,7 @@ function HospitalCard(props) {
             </div>
           </div>
         </div>
-      </Link>
+      </a>
     </div>
   );
 }

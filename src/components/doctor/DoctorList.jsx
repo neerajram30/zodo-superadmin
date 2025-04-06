@@ -160,17 +160,17 @@ const DoctorList = () => {
     {
       title: "Department",
       dataIndex: "Department",
-      sorter: (a, b) => a.Department.length - b.Department.length,
+      // sorter: (a, b) => a.Department.length - b.Department.length,
     },
     {
       title: "Specialization",
       dataIndex: "Specialization",
-      sorter: (a, b) => a.Specialization.length - b.Specialization.length,
+      // sorter: (a, b) => a.Specialization.length - b.Specialization.length,
     },
     {
       title: "Degree",
       dataIndex: "Degree",
-      sorter: (a, b) => a.Degree.length - b.Degree.length,
+      // sorter: (a, b) => a.Degree.length - b.Degree.length,
     },
     {
       title: "Mobile",
@@ -185,12 +185,12 @@ const DoctorList = () => {
     {
       title: "Email",
       dataIndex: "Email",
-      sorter: (a, b) => a.Email.length - b.Email.length,
+      // sorter: (a, b) => a.Email.length - b.Email.length,
     },
     {
       title: "JoiningDate",
       dataIndex: "JoiningDate",
-      sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length,
+      // sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length,
     },
     {
       title: "",

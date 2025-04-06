@@ -1,23 +1,25 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Modal } from "react-bootstrap";
-import { useAddSpecialisation } from "../../hooks/specialisation/useAddSpecialisation";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import TextArea from "../InputFields/TextArea";
+import { useAddDepartment } from "../../hooks/departments/useAddDepartment";
+import { useParams } from "react-router-dom";
 
-function AddSpecialization(props) {
+function AddDepartment(props) {
   const { show, setShow } = props;
-  const { mutate, isLoading } = useAddSpecialisation();
+  const { id } = useParams();
+  const { mutate, isLoading } = useAddDepartment();
   const methods = useForm();
-  const onCreateSpecialisation = async (data) => {
-    const specialisation = {
-      name: data.specialisationName,
+  const onCreateDepartment = async (data) => {
+    const department = {
+      name: data.departmentName,
       description: data.message,
+      hospital_id: id,
     };
-    await mutate(specialisation);
+    await mutate(department);
     methods.reset();
-    setShow(false);
   };
 
   return (
@@ -35,14 +37,14 @@ function AddSpecialization(props) {
         </Modal.Header>
         <Modal.Body className="border-0">
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onCreateSpecialisation)}>
+            <form onSubmit={methods.handleSubmit(onCreateDepartment)}>
               <div className="form-group">
                 <div className="col-md-12">
                   <InputField
-                    name="specialisationName"
-                    label="Specialisation Name"
-                    validation={{ required: "Specialisation Name is required" }}
-                    placeholder="Enter Specialisation Name"
+                    name="departmentName"
+                    label="Department Name"
+                    validation={{ required: "Department Name is required" }}
+                    placeholder="Enter Department Name"
                     type="text"
                   />
                 </div>
@@ -86,14 +88,13 @@ function AddSpecialization(props) {
           </FormProvider>
         </Modal.Body>
       </Modal>
-      {/* <ToastMessage showToast={showToast} setShowToast={setShowToast} /> */}
     </div>
   );
 }
 
-AddSpecialization.propTypes = {
+AddDepartment.propTypes = {
   show: PropTypes.node,
   setShow: PropTypes.node,
 };
 
-export default AddSpecialization;
+export default AddDepartment;

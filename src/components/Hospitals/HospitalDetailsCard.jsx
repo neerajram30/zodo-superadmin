@@ -7,8 +7,6 @@ import {
   pencil_icon,
   phone_icon,
   search_outline_icon,
-  // toggle_icon,
-  // toggle_icon,
 } from "../imagepath";
 import { apollo_logo, three_dots_menu } from "../imagepath";
 import Overview from "./Overview";
@@ -25,8 +23,6 @@ import FullscreenLoader from "../loadings/FullscreenLoader";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
-  console.log("HospitalDetailsCard", hospitalDetails);
-
   const navigate = useNavigate();
   const { id } = useParams();
   // const [showToast, setShowToast] = useState(() => () => {});
@@ -51,12 +47,7 @@ function HospitalDetailsCard(props) {
   ];
 
   const hospitalStatus = hospitalDetails?.isDisabled;
-  console.log("Hospital Status", hospitalStatus);
-  console.log("isLoadeing", isLoading);
-  console.log("hospitalDetails", hospitalDetails);
-  console.log("mutate", mutate);
-  console.log("id", id);
-
+  
   const handleTogglebtn = async (e) => {
     e.stopPropagation();
     setdisableShow(true);

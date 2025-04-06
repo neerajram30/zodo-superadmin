@@ -10,7 +10,6 @@ function AllHospitals(props) {
     <div className="row mt-2">
       {hospitalList?.map((item) => (
         <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
-          {console.log(item?.id)}
           <HospitalCard hospitalData={item} hospitalId={item?.id} />
         </div>
       ))}

@@ -2,15 +2,13 @@ import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import TextArea from "../InputFields/TextArea";
-import ToastMessage from "../toast/ToastMessage";
 import { useEditSpecialisation } from "../../hooks/specialisation/useEditSpecialisation";
 import PropTypes from "prop-types";
 import { Modal } from "react-bootstrap";
 
 function EditSpecialization(props) {
   const { show, setShow, specialisation } = props;
-  const { mutate, isLoading, showToast, setShowToast } =
-    useEditSpecialisation();
+  const { mutate, isLoading } = useEditSpecialisation();
   const defaultValues = {
     specialisationName: specialisation?.name,
     message: specialisation?.description,
@@ -23,12 +21,9 @@ function EditSpecialization(props) {
       name: data.specialisationName,
       description: data.message,
     };
-    console.log(mutate);
-    console.log("ID", specialisation?.id);
-    console.log("Edited Specialisation", editedSpecialisation);
-
     await mutate({ id: specialisation?.id, data: editedSpecialisation });
-    // methods.reset();
+    methods.reset();
+    setShow(false);
   };
 
   useEffect(() => {
@@ -105,7 +100,6 @@ function EditSpecialization(props) {
           </FormProvider>
         </Modal.Body>
       </Modal>
-      <ToastMessage showToast={showToast} setShowToast={setShowToast} />
     </div>
   );
 }

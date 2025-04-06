@@ -143,17 +143,17 @@ function DoctorsList() {
     {
       title: "Department",
       dataIndex: "Department",
-      sorter: (a, b) => a.Department.length - b.Department.length,
+      // sorter: (a, b) => a.Department.length - b.Department.length,
     },
     {
       title: "Specialisation",
       dataIndex: "Specialization",
-      sorter: (a, b) => a.Specialization.length - b.Specialization.length,
+      // sorter: (a, b) => a.Specialization.length - b.Specialization.length,
     },
     {
       title: "Degree",
       dataIndex: "Degree",
-      sorter: (a, b) => a.Degree.length - b.Degree.length,
+      // sorter: (a, b) => a.Degree.length - b.Degree.length,
     },
     {
       title: "Mobile",
@@ -173,7 +173,7 @@ function DoctorsList() {
     {
       title: "JoiningDate",
       dataIndex: "JoiningDate",
-      sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length,
+      // sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length,
     },
     {
       title: "",
@@ -194,17 +194,18 @@ function DoctorsList() {
                 <Link
                   className="dropdown-item"
                   to={`/manage-doctors/edit-doctor/${record.id}`}
+                  aria-disabled="true"
                 >
                   <i className="far fa-edit me-2" />
                   Edit
                 </Link>
-                <Link
+                {/* <Link
                   className="dropdown-item"
                   to="#"
                   onClick={() => setShow(true)}
                 >
                   <i className="fa fa-trash-alt m-r-5"></i> Delete
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

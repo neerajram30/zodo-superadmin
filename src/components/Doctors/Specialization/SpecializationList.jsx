@@ -8,24 +8,18 @@ import { deleteicon, pencil_notebook } from "../../imagepath";
 import EditSpecialization from "../../modals/EditSpecialization";
 import ConfirmDelete from "../../modals/ConfirmDelete";
 import useDeleteSpecialisation from "../../../hooks/specialisation/useDeleteSpecialisation";
-import ToastMessage from "../../toast/ToastMessage";
 function SpecializationList() {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [specialisationId, setSpecialisationId] = useState(null);
-  const { data, isLoading, isError } = useSpecialisationList();
-  console.log(isError);
+  const { data, isLoading } = useSpecialisationList();
 
   const {
     mutate,
-    showToast,
-    setShowToast,
     isLoading: deleteLoading,
   } = useDeleteSpecialisation();
-  console.log("Show toast ", showToast);
-  console.log(deleteLoading);
-  console.log(setShowToast);
+  console.log("Delete loading", deleteLoading);
 
   const setSpecialisations = useSpecialisations(
     (state) => state.setSpecialisations
@@ -35,7 +29,6 @@ function SpecializationList() {
     (state) => state.specialisations
   );
   const [specialisation, setSpecialisation] = useState("");
-  console.log("Specialisation data ", specialisationData);
 
   const specialisationList = specialisationData?.map((item) => {
     return {
@@ -120,6 +113,7 @@ function SpecializationList() {
   const onDelete = () => {
     if (specialisationId) {
       mutate(specialisationId);
+      setShowDelete(false);
     }
   };
   return (
@@ -152,7 +146,6 @@ function SpecializationList() {
         deleteItem={onDelete}
         id={specialisationId}
       />
-      <ToastMessage showToast={showToast} setShowToast={setShowToast} />
     </div>
   );
 }

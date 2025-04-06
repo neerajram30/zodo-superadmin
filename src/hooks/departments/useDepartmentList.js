@@ -3,7 +3,7 @@ import { getDepartmentList } from "../../apis/departments";
 
 export const useDepartmentList = (id) => {
   return useQuery({
-    queryKey: ["departments"], // Unique query key
+    queryKey: ["departments",id], // Unique query key
     queryFn: () => getDepartmentList(id),
   });
 };

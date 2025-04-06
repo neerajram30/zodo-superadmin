@@ -5,6 +5,7 @@ export const useViewHospital = (id) => {
   if (!id || typeof id !== "string" || id.trim() === "" || id === undefined) {
     return { data: null, isLoading: false, isError: true };
   }
+  // const queryClient = useQueryClient();
   
   return useQuery({
     queryKey: ["hospital", id], // Unique query key

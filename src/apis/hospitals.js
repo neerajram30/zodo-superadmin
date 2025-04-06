@@ -72,3 +72,5 @@ export const deleteHospital = async (id) => {
   const response = await apiClient.delete(`/hospitals/${id}`);
   return response.data;
 };
+
+

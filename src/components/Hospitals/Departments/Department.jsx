@@ -12,41 +12,41 @@ function Department(props) {
     isError,
   } = useDepartmentList(hospitalId);
 
-  const depatments = [
-    {
-      id: 1,
-      department: "Surgical Department",
-      peopleCount: 8,
-    },
-    {
-      id: 2,
-      department: "Radiology Department",
-      peopleCount: 8,
-    },
-    {
-      id: 3,
-      department: "Maternal & Child Health Services",
-      peopleCount: 8,
-    },
-    {
-      id: 4,
-      department: "Cardiology",
-      peopleCount: 8,
-    },
-  ];
+  // const depatments = [
+  //   {
+  //     id: 1,
+  //     department: "Surgical Department",
+  //     peopleCount: 8,
+  //   },
+  //   {
+  //     id: 2,
+  //     department: "Radiology Department",
+  //     peopleCount: 8,
+  //   },
+  //   {
+  //     id: 3,
+  //     department: "Maternal & Child Health Services",
+  //     peopleCount: 8,
+  //   },
+  //   {
+  //     id: 4,
+  //     department: "Cardiology",
+  //     peopleCount: 8,
+  //   },
+  // ];
 
-  console.log("data", departmentList);
+  console.log("depatment list", departmentList);
   console.log("is loading", isLoading);
   console.log("is error ", isError);
   return (
     <div>
       <DepartmentHero />
       <div className="row mt-3">
-        {depatments.map((item) => {
+        {departmentList?.map((item) => {
           return (
             <div
               className="col-md-3 col-sm-6 col-lg-3 col-xl-3"
-              key={item.id + item.department}
+              key={item.id}
             >
               <DepartmentCard data={item} />
             </div>
