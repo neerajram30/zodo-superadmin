@@ -15,7 +15,6 @@ function DoctorsList() {
   console.log(isLoading);
   console.log(isError);
   const datasource = data?.data
-  console.log("DATA SOURCE ",datasource);
   
   // const datasource = [
   //   {

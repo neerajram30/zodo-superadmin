@@ -6,20 +6,9 @@ const useDeleteDepartment = (hospitalId) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: deleteDepartment, // API function to delete hospital
-    onMutate: async (id) => {
-      console.log(id);
-
+    onMutate: async () => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
       await queryClient.cancelQueries({ queryKey: ["departments",hospitalId] });
-    //   queryClient.setQueryData(
-    //     ["departments", hospitalId],
-    //     (oldDepartments) => ({
-    //       ...oldDepartments,
-    //       data: oldDepartments?.data?.filter(
-    //         (department) => department.id !== id
-    //       ),
-    //     })
-    //   );
     },
     onSuccess: (data) => {
       const message = data.message;

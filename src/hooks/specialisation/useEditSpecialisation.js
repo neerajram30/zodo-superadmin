@@ -6,17 +6,6 @@ import { toast } from "react-toastify";
 
 export const useEditSpecialisation = () => {
   const queryClient = useQueryClient();
-//   const specialisationData = useSpecialisations(
-//     (state) => state.specialisations
-//   );
-//   const addNewSpecialisation = useSpecialisations(
-//     (state) => state.addNewSpecialisation
-//   );
-  // const [showToast, setShowToast] = useState({
-  //   show: false,
-  //   message: "",
-  //   status: "",
-  // });
 
   const mutation = useMutation({
     mutationFn: editSpecialization, // API function to create
@@ -26,7 +15,7 @@ export const useEditSpecialisation = () => {
       // Get previous hospital list before deleting
     },
     onSuccess: (data, variables) => {
-      const message = data.message || "Specialisation edited successfully";
+      const message = data.message || "Specialisation updated successfully";
       queryClient.setQueryData(["specialisations", variables.id], data);
       queryClient.invalidateQueries({ queryKey: ["specialisations"] });
       toast.success(message, {
@@ -43,7 +32,10 @@ export const useEditSpecialisation = () => {
       console.error("Error deleting hospital:", error.message);
       // Rollback if there is an error
       if (context?.previousSpecialisation) {
-        queryClient.setQueryData(["specialisations"], context.previousSpecialisation);
+        queryClient.setQueryData(
+          ["specialisations"],
+          context.previousSpecialisation
+        );
       }
       const errorMessage =
         error?.response?.data?.message || "Failed to edit specialisation";

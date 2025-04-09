@@ -13,7 +13,7 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   // const [email, setEmail] = useState("");
   // const { mutate: login, isLoading } = useLogin();
-  const { login, user, validationError, isLoading } = useAuth();
+  const { login, validationError, isLoading } = useAuth();
   const navigate = useNavigate();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -21,7 +21,6 @@ const Login = () => {
 
   const handleLogin = (data) => {
     // e.preventDefault();
-    console.log("Login !", data);
     login(data, {
       onSuccess: () => {
         navigate("/dashboard");
@@ -29,7 +28,6 @@ const Login = () => {
     });
     // login({ email, password });
   };
-  console.log("Auth user", user);
 
   const {
     register,

@@ -24,7 +24,6 @@ export const useCreateDoctors = () => {
     },
     onSuccess: (data) => {
       const message = data?.message || "Doctor added successfully";
-      console.log("Success message", message);
       queryClient.invalidateQueries(["doctors"]);
       navigate("/manage-doctors");
       toast.success(message, {

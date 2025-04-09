@@ -9,7 +9,7 @@ function FasttagToggle(props) {
         type="checkbox"
         id={`${index ? "status_" + index : "status_0"}`}
         className="check"
-        onChange={(e)=>setToggleFasttag(e.target.checked)}
+        onChange={(e)=>setToggleFasttag && setToggleFasttag(e.target.checked)}
       />
       <label
         htmlFor={`${index ? "status_" + index : "status_0"}`}

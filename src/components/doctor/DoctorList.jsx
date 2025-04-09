@@ -27,7 +27,6 @@ const DoctorList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 

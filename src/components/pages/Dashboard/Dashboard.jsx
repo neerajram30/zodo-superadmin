@@ -7,14 +7,20 @@ import RevenueInfo from "../../Dashboard/RevenueInfo";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Analytics from "../../Dashboard/Analytics";
 import DashboardTables from "../../Dashboard/DashboardTables";
+import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
+import { useDoctorsList } from "../../../hooks/doctors/useDoctorsList";
 
 function Dashboard() {
+  const { data } = useGetHospitals();
+  const { data:doctorList } = useDoctorsList();
+  const hospitalCount = data?.data?.length;
+  const doctorCount = doctorList?.data?.length;
   const basicInformation = [
     {
       id: 1,
       title: "Total hospitals",
       icon: profile_hospitals,
-      count: 140,
+      count: hospitalCount,
       percentageUp: 20,
       link: "/manage-hospitals",
     },
@@ -22,7 +28,7 @@ function Dashboard() {
       id: 2,
       title: "Total Doctors ( online )",
       icon: doctors,
-      count: 250,
+      count: doctorCount,
       percentageUp: 40,
       link: "/manage-doctors",
     },
@@ -39,7 +45,7 @@ function Dashboard() {
     {
       name: "Dashboard",
       status: "active",
-      link:"/dashboard",
+      link: "/dashboard",
     },
   ];
 

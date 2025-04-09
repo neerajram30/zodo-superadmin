@@ -10,7 +10,6 @@ const DataTable = () => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const onSelectChange = (newSelectedRowKeys) => {
-      console.log("selectedRowKeys changed: ", selectedRowKeys);
       setSelectedRowKeys(newSelectedRowKeys);
     };
     const rowSelection = {
