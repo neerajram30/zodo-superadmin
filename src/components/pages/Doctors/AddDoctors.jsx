@@ -56,16 +56,17 @@ function AddDoctors() {
     },
   ];
   const navigate = useNavigate();
-  console.log("specialisation", data);
-  const specialisationOptions = data?.map((item) => ({
-    value: item.id,
-    label: item.name,
-  }));
+  const specialisationOptions =
+    Array.isArray(data) &&
+    data?.map((item) => ({
+      value: item.id,
+      label: item.name,
+    }));
 
   const onCreateDoctor = (data) => {
     const specifications = data["specialisation"].map((item) => item.value);
     console.log(specifications);
-    
+
     const doctorData = {
       name: data["doctorName"],
       email: data["doctorEmail"],
@@ -88,7 +89,7 @@ function AddDoctors() {
                 : breadCrumpData
             }
           />
-          {doctorLoading && <FullscreenLoader/>}
+          {doctorLoading && <FullscreenLoader />}
           <div className="bg-white rounded p-4 mt-3">
             <div className="row">
               <div className="col">
