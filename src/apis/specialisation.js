@@ -2,8 +2,10 @@
 import apiClient from "./apiClient";
 
 export const getSpecializations = async () => {
-  const response = await apiClient.get("/specialisations");
-  return response.data;
+  const response = await apiClient.get(`/specialisations`);
+  console.log("Response ",response);
+  
+  return response?.data?.data;
 };
 
 export const addSpecialization = async (specialisationData) => {

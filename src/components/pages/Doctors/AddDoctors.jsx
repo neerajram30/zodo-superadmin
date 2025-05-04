@@ -15,6 +15,8 @@ import FullscreenLoader from "../../loadings/FullscreenLoader";
 function AddDoctors() {
   const { id } = useParams();
   const { data, isLoading } = useSpecialisationList();
+  console.log("Specialisation",data);
+  
   const {
     mutate,
     // showToast,
