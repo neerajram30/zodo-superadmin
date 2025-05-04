@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login02, loginlogo } from "../../imagepath";
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -34,6 +34,16 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+    useEffect(() => {
+      const token = localStorage.getItem("token"); 
+      if(token) {
+        navigate("/dashboard"); // Redirect to dashboard if token exists
+      }
+      console.log("Token", token);
+      
+    }, [])
+  
 
   return (
     <>

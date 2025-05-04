@@ -65,8 +65,6 @@ function AddDoctors() {
 
   const onCreateDoctor = (data) => {
     const specifications = data["specialisation"].map((item) => item.value);
-    console.log(specifications);
-
     const doctorData = {
       name: data["doctorName"],
       email: data["doctorEmail"],
@@ -137,7 +135,7 @@ function AddDoctors() {
                   <div className="col-md-6">
                     <div className="form-group">
                       <SelectInput
-                        options={specialisationOptions}
+                        options={specialisationOptions || []}
                         label="Specialisation"
                         isLoading={isLoading}
                         name="specialisation"

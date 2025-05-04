@@ -6,14 +6,16 @@ import PropTypes from "prop-types";
 
 function HospitalHero(props) {
   const {tabData} = props;
-
+  const handleSearch = (term)=>{
+    console.log(term);
+  }
   return (
     <div className="page-header invoices-page-header mt-3">
       <div className="row align-items-center">
         <div className="col-12 col-md-3 ms-md-3">
           <div className="doctor-list-search">
             <div className="search-container">
-              <SearchBox />
+              <SearchBox onChangeHandler={handleSearch}/>
             </div>
           </div>
         </div>

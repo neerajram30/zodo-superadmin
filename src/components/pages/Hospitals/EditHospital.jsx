@@ -8,7 +8,6 @@ import Closebtn from "../../assests/Closebtn";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../../InputFields/InputField";
 import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
-import Select from "react-select";
 import TextArea from "../../InputFields/TextArea";
 import useSelectedHospital from "../../../store/useSelectedHospital";
 import { useEditHostpital } from "../../../hooks/hospitals/useEditHospital";
@@ -198,7 +197,7 @@ function EditHospital() {
                   </div>
                 </div>
 
-                <div className="row mt-4">
+                {/* <div className="row mt-4">
                   <div className="col-md-6">
                     <div className="form-group">
                       <label>Choose Percentage of Profit</label>
@@ -219,7 +218,7 @@ function EditHospital() {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <h4 className="card-title mt-3">Company Location</h4>
                 <div className="row">

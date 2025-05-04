@@ -19,7 +19,6 @@ export const useAddDepartment = (hospitalId) => {
       const message = data.message;
       // Invalidate and refetch the hospitals query after a successful mutation
       queryClient.invalidateQueries(["departments",hospitalId]);
-      //   navigate("/manage-hospitals");
       toast.success(message, {
         position: "top-right",
         autoClose: 5000,
