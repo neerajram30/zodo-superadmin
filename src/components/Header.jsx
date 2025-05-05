@@ -14,9 +14,9 @@ import {
 import { useAuth } from "../hooks/auth/useAuth";
 
 const Header = () => {
-  const {user} = useAuth();
+  const { user, setUser } = useAuth();
   const userName = user?.first_name + user?.last_name || "User";
-  const userRole = user?.user_type || "Role"
+  const userRole = user?.user_type || "Role";
   const handlesidebar = () => {
     document.body.classList.toggle("mini-sidebar");
   };
@@ -57,11 +57,12 @@ const Header = () => {
     };
   }, []);
 
-
-  const handleLogout = ()=>{
-    navigate('/');
-    localStorage.clear()
-  }
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove the token from local storage
+    // const token = localStorage.getItem("token"); // Check if the token is removed
+    setUser(null); // Clear the user state
+    navigate("/login"); // Redirect to the login page
+  };
 
   return (
     <div className="main-wrapper">

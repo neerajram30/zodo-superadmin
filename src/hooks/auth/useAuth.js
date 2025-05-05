@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { login } from "../../apis/auth";
 import PropTypes from "prop-types";
+import { useGetUser } from "./useGetUser";
 // import { login, logout, getUser } from "./authService";
 
 // Create Context for Authentication
@@ -12,15 +13,21 @@ export const AuthProvider = ({ children }) => {
   const queryClient = useQueryClient();
   const [user, setUser] = useState(null);
   const [validationError, setValidationError] = useState(null);
-
-  // Fetch authenticated user
-  //   const { data, isLoading } = useQuery({
-  //     queryKey: ["user"],
-  //     queryFn: getUser,
-  //     retry: false, // Prevent retries if user is not authenticated
-  //     onSuccess: (userData) => setUser(userData),
-  //     onError: () => setUser(null),
-  //   });
+  const { mutate: getUser } = useGetUser();
+  // Fetch user data when the component mounts
+  const fetchUserData = async () => {
+    const token = localStorage.getItem("token"); // Get the token from local storage
+    if (token) {
+      const user = await getUser(); // Fetch user data if token exists
+      // console.log("User data from local storage", user);
+      setUser(user?.data?.data);
+    } else {
+      setUser(null); // Set user to null if no token is found
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   // Login mutation
   const loginMutation = useMutation({
@@ -30,29 +37,19 @@ export const AuthProvider = ({ children }) => {
       setUser(data.data);
       queryClient.invalidateQueries(["user"]); // Refresh user data
     },
-    onError: (error)=>{
-      const errorMessage = error?.response?.data?.message; 
-      setValidationError(errorMessage || "Something went wrong")
-    }
+    onError: (error) => {
+      const errorMessage = error?.response?.data?.message;
+      setValidationError(errorMessage || "Something went wrong");
+    },
   });
-
-  // Logout mutation
-    // const logoutMutation = useMutation({
-    //   mutationFn: logout,
-    //   onSuccess: () => {
-    //     localStorage.removeItem("token");
-    //     setUser(null);
-    //     queryClient.setQueryData(["user"], null);
-    //   },
-    // });
-
   return (
     <AuthContext.Provider
       value={{
         user,
         isLoading: loginMutation.isPending,
         login: loginMutation.mutate,
-        validationError
+        validationError,
+        setUser
         // logout: logoutMutation.mutate,
       }}
     >
@@ -69,5 +66,3 @@ AuthProvider.propTypes = {
 export const useAuth = () => {
   return useContext(AuthContext);
 };
-
-
