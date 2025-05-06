@@ -48,19 +48,16 @@ function HospitalDetailsCard(props) {
 
   const hospitalStatus = hospitalDetails?.isDisabled;
 
-  const handleTogglebtn = async (e) => {
+  const handleTogglebtn = (e) => {
     e.stopPropagation();
     setdisableShow(true);
-    const { id, district_id, ...rest } = hospitalDetails;
-    console.log(id);
-    console.log(district_id);
+  };
 
+  const handleDisable = async () => {
+    const { id } = hospitalDetails;
     const updatedHospital = {
-      ...rest,
       isDisabled: !hospitalStatus,
     };
-    console.log("Upadted !!", updatedHospital);
-
     await mutate({ id: id, data: updatedHospital });
     setdisableShow(false);
   };
@@ -354,6 +351,8 @@ function HospitalDetailsCard(props) {
           setShow={setdisableShow}
           setdisable={setdisable}
           disable={disable}
+          handleDisable={handleDisable}
+          isLoading={isLoading}
         />
         {isLoading && <FullscreenLoader />}
       </div>

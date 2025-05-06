@@ -3,12 +3,11 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 
 function ToggleModal(props) {
-  const { show, setShow, setdisable, disable } = props;
-  const handleDisable = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setShow(false);
+  const { show, setShow, setdisable, disable, handleDisable, isLoading } = props;
+  const handleDisableClick = () => {
+    // setShow(false);
     setdisable(!disable);
+    handleDisable();
   };
   return (
     <Modal
@@ -21,8 +20,8 @@ function ToggleModal(props) {
     >
       <Modal.Header closeButton className="border-0">
         <Modal.Title>
-          Are you sure you want to {!disable ? "Enable" : "Disable"} the Hospital
-          ?
+          Are you sure you want to {!disable ? "Enable" : "Disable"} the
+          Hospital ?
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="border-0">
@@ -41,24 +40,34 @@ function ToggleModal(props) {
           </div>
         </div>
       </Modal.Body>
-      <Modal.Footer className="border-0">
+      {/* <Modal.Footer className="border-0"> */}
+      <div className="form-group d-flex justify-content-end pt-3 pe-2">
         <button
           to="#"
-          data-bs-toggle="modal"
-          data-bs-target="#delete_invoices_details"
-          className="btn hospital-draft-btn text-primary"
+          //   data-bs-toggle="modal"
+          //   data-bs-target="#delete_invoices_details"
+          className="hospital-draft-btn text-primary pt-1 pb-1 ps-3 pe-3 rounded"
           onClick={() => setShow(false)}
         >
           Cancel
         </button>
         <button
           to="#"
-          onClick={handleDisable}
-          className="btn hospital-add-btn ms-1 text-white"
+          //   data-bs-toggle="modal"
+          //   data-bs-target="#save_invocies_details"
+          className="hospital-add-btn ms-1 text-white border-0 pt-1 pb-1 ps-3 pe-3 rounded"
+          onClick={() => handleDisableClick()}
         >
-          Yes, {!disable ? "Enable" : "Disable"}
+          {isLoading && (
+            <span
+              className="spinner-border spinner-border-sm"
+              aria-hidden="true"
+            ></span>
+          )}
+          <span className="ps-2">Yes,{!disable ? " Enable" : " Disable"}</span>
         </button>
-      </Modal.Footer>
+      </div>
+      {/* </Modal.Footer> */}
     </Modal>
   );
 }
@@ -68,6 +77,8 @@ ToggleModal.propTypes = {
   setShow: PropTypes.node,
   setdisable: PropTypes.node,
   disable: PropTypes.node,
+  handleDisable: PropTypes.func,
+  isLoading: PropTypes.bool
 };
 
 export default ToggleModal;

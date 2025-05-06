@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import UploadFiles from "../../Hospitals/UploadFiles";
@@ -9,19 +9,26 @@ import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../../InputFields/InputField";
 import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
 import TextArea from "../../InputFields/TextArea";
-import useSelectedHospital from "../../../store/useSelectedHospital";
+// import useSelectedHospital from "../../../store/useSelectedHospital";
 import { useEditHostpital } from "../../../hooks/hospitals/useEditHospital";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
+import { useGetDistrict } from "../../../hooks/useGetDistrict";
+import SelectField from "../../InputFields/SelectField";
+import { useViewHospital } from "../../../hooks/hospitals/useViewHospital";
 function EditHospital() {
   const { id } = useParams();
   const [toggleFasttag, setToggleFasttag] = useState(false);
   console.log(toggleFasttag);
   const { mutate, isLoading } = useEditHostpital();
-
-  const selectedHospital = useSelectedHospital(
-    (state) => state.selectedHospital
-  );
-
+  const { data: hospitalDetails } = useViewHospital(id);
+  // const selectedHospital = useSelectedHospital(
+  //   (state) => state.selectedHospital
+  // );
+  const { data: districts, isLoading: districtLoading } = useGetDistrict();
+  const districtOptions = districts?.map((item) => ({
+    label: item.name,
+    value: item.name,
+  }));
   // const locations = useLocation();
   // const patharray = locations.pathname.split("/");
 
@@ -30,41 +37,99 @@ function EditHospital() {
   const navigate = useNavigate();
   console.log("isloading", isLoading);
 
-  const onCreateHospital = async (data) => {
+  useEffect(() => {
+    if (hospitalDetails) {
+      const fastTag = hospitalDetails?.fastTag?.enabled;
+      setToggleFasttag(fastTag);
+      const district = hospitalDetails?.address?.district;
+      const billingDistrict = hospitalDetails?.billing_address?.district;
+      const districtOption = { label: district, value: district };
+      const billingDistrictOption = {
+        label: billingDistrict,
+        value: billingDistrict,
+      };
+      methods.reset({
+        hospitalName: hospitalDetails?.name,
+        email: hospitalDetails?.contact_details?.email,
+        phone: hospitalDetails?.contact_details?.mobile,
+        fastTagcount: hospitalDetails?.fastTag?.count,
+        // set default values for other fields as needed
+        // adminName: "",
+        // adminEmail: "",
+        // adminPassword: "",
+        website: hospitalDetails?.contact_details?.website,
+        gstnumber: hospitalDetails?.gst,
+        companyName: hospitalDetails?.address?.lineOne,
+        street: hospitalDetails?.address?.city,
+        address: hospitalDetails?.address?.lineTwo,
+        town: hospitalDetails?.address?.city,
+        district: districtOption,
+        state: hospitalDetails?.address?.state,
+        pincode: hospitalDetails?.address?.pincode,
+        accountNumber: hospitalDetails?.bank_details?.account_number,
+        verifyAccountnumber: hospitalDetails?.bank_details?.account_number,
+        accountHoldername: hospitalDetails?.bank_details?.account_holder,
+        bankname: hospitalDetails?.bank_details?.bank_name,
+        ifsc: hospitalDetails?.bank_details?.ifsc,
+        upiid: hospitalDetails?.bank_details?.upi_id,
+        billingAccountHoldername: hospitalDetails?.billing_address?.lineOne,
+
+        billingStreet: hospitalDetails?.billing_address?.city,
+        billingAddress: hospitalDetails?.billing_address?.lineTwo,
+        billingTown: hospitalDetails?.billing_address?.city,
+        billingDistrict: billingDistrictOption,
+        billingState: hospitalDetails?.billing_address?.state,
+        billingPincode: hospitalDetails?.billing_address?.pincode,
+        // companyWebsite: hospitalDetails?.billing_address?.website,
+      });
+    }
+  }, [hospitalDetails, methods]);
+
+  const onEditHospital = async (data) => {
     const hospital = {
       name: data?.hospitalName,
-      logo: "hihihi",
+      logo: "hospital logo",
       location: data?.town,
       address: {
         lineOne: data?.companyName,
-        lineTwo: data?.address + " " + data?.street,
+        lineTwo: data?.address,
         city: data?.town,
-        district: data?.district,
+        district: data?.district.value,
         state: data?.state,
         pincode: data?.pincode,
+        street: data?.street,
       },
       billing_address: {
         lineOne: data?.billingAccountHoldername,
-        lineTwo: data?.billingAddress + " " + data?.billingStreet,
+        lineTwo: data?.billingAddress,
         city: data?.billingTown,
-        district: data?.billingDistrict,
+        district: data?.billingDistrict?.value,
         state: data?.billingState,
         pincode: data?.billingPincode,
-      },
-      admin: {
-        name: data?.adminName,
-        email: data?.adminEmail,
-        password: data?.adminPassword,
+        street: data?.billingStreet,
       },
       fastTag: {
         enabled: toggleFasttag,
-        count: 0,
+        count: parseInt(data?.fastTagcount),
         price: 0,
       },
+      bank_details: {
+        account_number: data?.accountNumber,
+        account_holder: data?.accountHoldername,
+        ifsc: data?.ifsc,
+        bank_name: data?.bankname,
+        upi_id: data?.upiid,
+      },
+      contact_details: {
+        email: data?.email,
+        mobile: data?.phone,
+        website: data?.website,
+      },
+      gst: data?.gstnumber,
     };
     // console.log("hospital !!", hospital);
     // console.log(mutate);
-    await mutate({ id: selectedHospital.id, data: hospital });
+    await mutate({ id: id, data: hospital });
     // methods.reset();
   };
 
@@ -100,7 +165,7 @@ function EditHospital() {
           <div className="bg-white rounded p-4 mt-3">
             <div className="row">
               <div className="col">
-                <h4>Hospital Onboarding</h4>
+                <h4>Edit Hospital</h4>
               </div>
               <div className="col d-flex justify-content-end">
                 <Closebtn />
@@ -108,22 +173,36 @@ function EditHospital() {
             </div>
 
             <FormProvider {...methods}>
-              <form onSubmit={methods.handleSubmit(onCreateHospital)}>
+              <form onSubmit={methods.handleSubmit(onEditHospital)}>
                 <div className="row mt-4">
                   <div className="col-md-8 ms-md-3">
                     <ChooseFile />
                   </div>
                 </div>
                 <div className="w-100 mt-4 mt-md-2">
-                  <div className="form-group">
-                    <InputField
-                      name="hospitalName"
-                      label="Hospital Name"
-                      validation={{ required: "Hospital Name is required" }}
-                      placeholder=""
-                      type="text"
-                      defaultValue={selectedHospital?.name} // {selectedHospital?.name}
-                    />
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <InputField
+                          name="hospitalName"
+                          label="Hospital Name"
+                          validation={{ required: "Hospital Name is required" }}
+                          placeholder=""
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <InputField
+                          name="email"
+                          label="Contact email"
+                          validation={{ required: "Contact email is required" }}
+                          placeholder=""
+                          type="email"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -131,9 +210,34 @@ function EditHospital() {
                   <div className="col-md-4">
                     <div className="form-group">
                       <InputField
+                        name="phone"
+                        label="Contact number"
+                        validation={{ required: "Contact number is required" }}
+                        placeholder=""
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <InputField
+                        name="website"
+                        label="Hospital Website"
+                        // validation={{ required: "Hospital Website is required" }}
+                        placeholder="Enter hospital website"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div className="row">
+                  <div className="col-md-4">
+                    <div className="form-group">
+                      <InputField
                         name="adminName"
                         label="Admin Name"
-                        // validation={{ required: "Admin Name is required" }}
+                        validation={{ required: "Admin Name is required" }}
                         placeholder=""
                         type="text"
                       />
@@ -161,22 +265,7 @@ function EditHospital() {
                       />
                     </div>
                   </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <InputField
-                        name="website"
-                        label="Website"
-                        validation={{ required: "Website is required" }}
-                        placeholder="Website"
-                        type="text"
-                        defaultValue={selectedHospital?.website}
-                      />
-                    </div>
-                  </div>
-                </div>
+                </div> */}
                 <h4 className="card-title">GSTIN</h4>
                 <div className="w-50">
                   <InputField
@@ -185,30 +274,46 @@ function EditHospital() {
                     validation={{ required: "GST Number is required" }}
                     placeholder="GST Number"
                     type="text"
-                    defaultValue={selectedHospital?.gst}
                   />
                 </div>
 
                 <h4 className="card-title mt-4">Fast Tag</h4>
-                <div className="d-flex">
-                  <label className="">Enable Fast Tag</label>
-                  <div className="ms-2">
-                    <FasttagToggle setToggleFasttag={setToggleFasttag} />
+                <div className="row">
+                  <div className="col-md-3">
+                    <div className="d-flex pt-2">
+                      <label className="">Enable Fast Tag</label>
+                      <div className="ms-2">
+                        <FasttagToggle
+                          setToggleFasttag={setToggleFasttag}
+                          toggleFasttag={toggleFasttag}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <InputField
+                      name="fastTagcount"
+                      label=""
+                      // validation={{ required: "Fasttag issues per day is required" }}
+                      placeholder="Fasttag issues per day"
+                      type="number"
+                      disabled={!toggleFasttag}
+                    />
                   </div>
                 </div>
 
-                {/* <div className="row mt-4">
-                  <div className="col-md-6">
+                <div className="row mt-4">
+                  {/* <div className="col-md-6">
                     <div className="form-group">
                       <label>Choose Percentage of Profit</label>
                       <Select
-                      // defaultValue={selectedOption}
-                      // onChange={setSelectedOption}
-                      // options={option}
+                        defaultValue={selectedOption}
+                        onChange={setSelectedOption}
+                        options={option}
                       />
                     </div>
-                  </div>
-                  <div className="col-md-6">
+                  </div> */}
+                  {/* <div className="col-md-6">
                     <div className="form-group">
                       <label>Fast tag Issue Per Day</label>
                       <Select
@@ -217,19 +322,18 @@ function EditHospital() {
                       // options={option}
                       />
                     </div>
-                  </div>
-                </div> */}
+                  </div> */}
+                </div>
 
-                <h4 className="card-title mt-3">Company Location</h4>
+                <h4 className="card-title mt-1">Hospital Location</h4>
                 <div className="row">
                   <div className="col-md-4">
                     <InputField
                       name="companyName"
                       label=""
-                      validation={{ required: "Company Location is required" }}
+                      validation={{ required: "Company name is required" }}
                       placeholder="Company Name"
                       type="text"
-                      defaultValue={selectedHospital?.address.lineOne}
                     />
                   </div>
 
@@ -240,7 +344,6 @@ function EditHospital() {
                       validation={{ required: "Street is required" }}
                       placeholder="Area / Street / Sector"
                       type="text"
-                      defaultValue={selectedHospital?.address.city}
                     />
                   </div>
                 </div>
@@ -251,7 +354,6 @@ function EditHospital() {
                     label=""
                     validation={{ required: "Address is required" }}
                     placeholder="Enter Address"
-                    defaultValue={selectedHospital?.address.lineTwo}
                   />
                 </div>
 
@@ -264,20 +366,28 @@ function EditHospital() {
                         validation={{ required: "Town is required" }}
                         placeholder="Town"
                         type="text"
-                        defaultValue={selectedHospital?.address.city}
                       />
                     </div>
                   </div>
 
                   <div className="col-md-5">
                     <div className="form-group">
-                      <InputField
+                      {/* <InputField
                         name="district"
                         label=""
                         validation={{ required: "District is required" }}
                         placeholder="District"
                         type="text"
-                        defaultValue={selectedHospital?.address.district}
+                      /> */}
+
+                      <SelectField
+                        options={districtOptions || []}
+                        label=""
+                        isLoading={districtLoading}
+                        name="district"
+                        isMultiSelect={false}
+                        placeholder="Select District"
+                        validationMessage="District is required"
                       />
                     </div>
                   </div>
@@ -292,7 +402,6 @@ function EditHospital() {
                         validation={{ required: "State is required" }}
                         placeholder="State"
                         type="text"
-                        defaultValue={selectedHospital?.address.state}
                       />
                     </div>
                   </div>
@@ -305,7 +414,6 @@ function EditHospital() {
                         validation={{ required: "Pincode is required" }}
                         placeholder="Pincode"
                         type="text"
-                        defaultValue={selectedHospital?.address.pincode}
                       />
                     </div>
                   </div>
@@ -338,7 +446,7 @@ function EditHospital() {
                 </div>
 
                 <div className="row">
-                  <div className="col-md-8">
+                  <div className="col-md-6">
                     <div className="form-group">
                       <InputField
                         name="accountHoldername"
@@ -351,6 +459,19 @@ function EditHospital() {
                       />
                     </div>
                   </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <InputField
+                        name="bankname"
+                        label=""
+                        validation={{ required: "Bank name is required" }}
+                        placeholder="Bank name"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
                   <div className="col-md-4">
                     <div className="form-group">
                       <InputField
@@ -362,15 +483,17 @@ function EditHospital() {
                       />
                     </div>
                   </div>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <h4 className="card-title mt-3">Billing Address</h4>
-                  {/* <Checkbox
-                    name="sameascompany"
-                    label="Same as Company Address"
-                    validation={null}
-                    // onChangeHandler={handleChcekbox}
-                  /> */}
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <InputField
+                        name="upiid"
+                        label=""
+                        // validation={{ required: "IFSC Code is required" }}
+                        placeholder="Upi id (optional)"
+                        type="text"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-md-4">
@@ -384,7 +507,6 @@ function EditHospital() {
                         placeholder="Account Holder Name"
                         type="text"
                         // disabled={isSameAsCompanyAddress}
-                        defaultValue={selectedHospital?.billing_address.lineOne}
                       />
                     </div>
                   </div>
@@ -397,7 +519,6 @@ function EditHospital() {
                         placeholder="Area / Street / Sector"
                         type="text"
                         // disabled={isSameAsCompanyAddress}
-                        defaultValue={selectedHospital?.billing_address.city}
                       />
                     </div>
                   </div>
@@ -410,7 +531,6 @@ function EditHospital() {
                     validation={{ required: "Address is required" }}
                     placeholder="Enter Address"
                     // disabled={isSameAsCompanyAddress}
-                    defaultValue={selectedHospital?.billing_address.lineTwo}
                   />
                 </div>
 
@@ -424,23 +544,20 @@ function EditHospital() {
                         placeholder="Town / City"
                         type="text"
                         // disabled={isSameAsCompanyAddress}
-                        defaultValue={selectedHospital?.billing_address.city}
                       />
                     </div>
                   </div>
 
                   <div className="col-md-6">
                     <div className="form-group">
-                      <InputField
-                        name="billingDistrict"
+                      <SelectField
+                        options={districtOptions || []}
                         label=""
-                        validation={{ required: "District is required" }}
-                        placeholder="District"
-                        type="text"
-                        defaultValue={
-                          selectedHospital?.billing_address.district
-                        }
-                        // disabled={isSameAsCompanyAddress}
+                        isLoading={districtLoading}
+                        name="billingDistrict"
+                        isMultiSelect={false}
+                        placeholder="Select District"
+                        validationMessage="Billing District is required"
                       />
                     </div>
                   </div>
@@ -455,8 +572,6 @@ function EditHospital() {
                         validation={{ required: "State is required" }}
                         placeholder="State"
                         type="text"
-                        defaultValue={selectedHospital?.billing_address.state}
-                        // disabled={isSameAsCompanyAddress}
                       />
                     </div>
                   </div>
@@ -468,23 +583,8 @@ function EditHospital() {
                         validation={{ required: "Pincode is required" }}
                         placeholder="Pincode"
                         type="text"
-                        defaultValue={selectedHospital?.billing_address.pincode}
-                        // disabled={isSameAsCompanyAddress}
                       />
                     </div>
-                  </div>
-                </div>
-
-                <div className="w-100 mt-3">
-                  <div className="form-group">
-                    <InputField
-                      name="companyWebsite"
-                      label="Company Website"
-                      validation={{ required: "Company Website is required" }}
-                      placeholder="Enter Company Website"
-                      type="text"
-                      defaultValue={selectedHospital?.website}
-                    />
                   </div>
                 </div>
 
