@@ -7,18 +7,20 @@ import HospitalHero from "../../heros/HospitalHero";
 import AllHospitals from "../../Hospitals/AllHospitals";
 import HospitalRequest from "../../Hospitals/HospitalRequest";
 import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
-import FullscreenLoader from "../../loadings/FullscreenLoader";
 import useHospitalList from "../../../store/useHospitalList";
-
+import { useRequestedHospitals } from "../../../hooks/hospitals/useRequestedHospital";
+import FullscreenLoader from "../../loadings/FullscreenLoader";
 function Hospitals() {
-  const { data, isLoading, isError } = useGetHospitals();
+  const { data: hospitalList, isLoading } = useGetHospitals();
   // console.log("Data",hospitalList?.data);
-  console.log("is error ", isError);
-  console.log("Data", data);
 
-  const hospitalList = data?.data;
   const setHospitalList = useHospitalList((state) => state.setHospitalList);
   setHospitalList(hospitalList);
+  console.log();
+
+  const { data: requestedHospitals, isLoading: requestedLoading } =
+    useRequestedHospitals("pending");
+  console.log(requestedHospitals, requestedLoading);
 
   const breadCrumpData = [
     {
@@ -31,12 +33,12 @@ function Hospitals() {
     {
       id: "allhospitals",
       title: "All Hosptitals",
-      content: <AllHospitals hospitalList={hospitalList} />,
+      content: <AllHospitals hospitalList={hospitalList ?? []} />,
     },
     {
       id: "requested",
       title: "Requested Hospitals",
-      content: <HospitalRequest />,
+      content: <HospitalRequest hospitalList={requestedHospitals ?? []} />,
     },
   ];
 
@@ -51,7 +53,7 @@ function Hospitals() {
           <Breadcrumb data={breadCrumpData} />
           <HospitalHero tabData={tabData} />
           <HospitalsList tabData={tabData} />
-          {isLoading && <FullscreenLoader />}
+          {isLoading || (requestedLoading && <FullscreenLoader />)}
         </div>
       </div>
     </Layout>

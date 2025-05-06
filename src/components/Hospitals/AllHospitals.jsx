@@ -2,9 +2,14 @@ import React from "react";
 // import { hospitalDetails } from "../configs/hospitalDetails";
 import HospitalCard from "./HospitalCard";
 import PropTypes from "prop-types";
+import FullscreenLoader from "../loadings/FullscreenLoader";
 
 function AllHospitals(props) {
-  const { hospitalList } = props;
+  const { hospitalList, loading } = props;
+
+  if(loading){
+    return <FullscreenLoader/>
+  }
 
   return (
     <div className="row mt-2">
@@ -19,6 +24,7 @@ function AllHospitals(props) {
 
 AllHospitals.propTypes = {
   hospitalList: PropTypes.node,
+  loading: PropTypes.node,
 };
 
 export default AllHospitals;

@@ -30,7 +30,7 @@ export const addHospital = async (hospitalData) => {
 
 export const getHospitals = async () => {
   const response = await apiClient.get("/hospitals");
-  return response.data;
+  return response?.data?.data;
 };
 
 /**
@@ -73,4 +73,8 @@ export const deleteHospital = async (id) => {
   return response.data;
 };
 
+export const getRequestedHospitalList = async (status) => {
+  const response = await apiClient.get(`/hospitals?status=${status}`);
+  return response.data?.data;
+};
 
