@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import HospitalsList from "../../Hospitals/HospitalsList";
@@ -11,12 +11,13 @@ import useHospitalList from "../../../store/useHospitalList";
 import { useRequestedHospitals } from "../../../hooks/hospitals/useRequestedHospital";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 function Hospitals() {
-  const { data: hospitalList, isLoading } = useGetHospitals();
+  const [searchTerm, setSearchterm] = useState("");
+  const { data: hospitalList, isLoading } = useGetHospitals(searchTerm);
   // console.log("Data",hospitalList?.data);
-
+  console.log(searchTerm);
+  
   const setHospitalList = useHospitalList((state) => state.setHospitalList);
   setHospitalList(hospitalList);
-  console.log();
 
   const { data: requestedHospitals, isLoading: requestedLoading } =
     useRequestedHospitals("pending");
@@ -42,6 +43,10 @@ function Hospitals() {
     },
   ];
 
+  const handleSearch = (searchTerm) => {
+    setSearchterm(searchTerm);
+  };
+
   return (
     <Layout
       activeClassName="manage-hospitals"
@@ -51,7 +56,7 @@ function Hospitals() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          <HospitalHero tabData={tabData} />
+          <HospitalHero tabData={tabData} handleSearch={handleSearch} />
           <HospitalsList tabData={tabData} />
           {isLoading || (requestedLoading && <FullscreenLoader />)}
         </div>

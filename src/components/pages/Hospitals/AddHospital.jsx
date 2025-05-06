@@ -5,7 +5,6 @@ import ChooseFile from "../../Hospitals/ChooseFile";
 import UploadFiles from "../../Hospitals/UploadFiles";
 import { useNavigate } from "react-router-dom";
 import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
-import Select from "react-select";
 import Closebtn from "../../assests/Closebtn";
 import { useAddHostpital } from "../../../hooks/hospitals/useAddHostpital";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
@@ -13,6 +12,9 @@ import InputField from "../../InputFields/InputField";
 import TextArea from "../../InputFields/TextArea";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 import Checkbox from "../../InputFields/Checkbox";
+import { toast } from "react-toastify";
+import { useGetDistrict } from "../../../hooks/useGetDistrict";
+import SelectField from "../../InputFields/SelectField";
 
 function AddHospital() {
   const [toggleFasttag, setToggleFasttag] = useState(false);
@@ -33,41 +35,73 @@ function AddHospital() {
     },
   ];
   const navigate = useNavigate();
+  const { data: districts, isLoading: districtLoading } = useGetDistrict();
+  const districtOptions = districts?.map((item) => ({
+    label: item.name,
+    value: item.name,
+  }));
   const onCreateHospital = async (data) => {
-    const hospital = {
-      name: data?.hospitalName,
-      logo: "hihihi",
-      location: data?.town,
-      address: {
-        lineOne: data?.companyName,
-        lineTwo: data?.address + " " + data?.street,
-        city: data?.town,
-        district: data?.district,
-        state: data?.state,
-        pincode: data?.pincode,
-      },
-      billing_address: {
-        lineOne: data?.billingAccountHoldername,
-        lineTwo: data?.billingAddress + " " + data?.billingStreet,
-        city: data?.billingTown,
-        district: data?.billingDistrict,
-        state: data?.billingState,
-        pincode: data?.billingPincode,
-      },
-      admin: {
-        name: data?.adminName,
-        email: data?.adminEmail,
-        password: data?.adminPassword,
-      },
-      fastTag: {
-        enabled: toggleFasttag,
-        count: 0,
-        price: 0,
-      },
-    };
-
-    await mutate(hospital);
-    // methods.reset();
+    if (data.accountNumber === data.verifyAccountnumber) {
+      const hospital = {
+        name: data?.hospitalName,
+        logo: "hospital logo",
+        location: data?.town,
+        address: {
+          lineOne: data?.companyName,
+          lineTwo: data?.address + " " + data?.street,
+          city: data?.town,
+          district: data?.district.value,
+          state: data?.state,
+          pincode: data?.pincode,
+          street: data?.street,
+        },
+        billing_address: {
+          lineOne: data?.billingAccountHoldername,
+          lineTwo: data?.billingAddress,
+          city: data?.billingTown,
+          district: data?.billingDistrict?.value,
+          state: data?.billingState,
+          pincode: data?.billingPincode,
+          street: data?.billingStreet,
+        },
+        admin: {
+          name: data?.adminName,
+          email: data?.adminEmail,
+          password: data?.adminPassword,
+        },
+        fastTag: {
+          enabled: toggleFasttag,
+          count: parseInt(data?.fastTagcount),
+          price: 0,
+        },
+        bank_details: {
+          account_number: data?.accountNumber,
+          account_holder: data?.accountHoldername,
+          ifsc: data?.ifsc,
+          bank_name: data?.bankname,
+          upi_id: data?.upiid,
+        },
+        contact_details:{
+          email: data?.email,
+          mobile: data?.phone,
+          website:data?.website
+        },
+        gst: data?.gstnumber,
+      };
+      await mutate(hospital);
+      // methods.reset();
+    } else {
+      const errorMessage = "Account number mismatch";
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   return (
     <Layout
@@ -97,14 +131,54 @@ function AddHospital() {
                   </div>
                 </div>
                 <div className="w-100 mt-4 mt-md-2">
-                  <div className="form-group">
-                    <InputField
-                      name="hospitalName"
-                      label="Hospital Name"
-                      validation={{ required: "Hospital Name is required" }}
-                      placeholder=""
-                      type="text"
-                    />
+                  <div className="row">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <InputField
+                          name="hospitalName"
+                          label="Hospital Name"
+                          validation={{ required: "Hospital Name is required" }}
+                          placeholder=""
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <InputField
+                          name="email"
+                          label="Contact email"
+                          validation={{ required: "Contact email is required" }}
+                          placeholder=""
+                          type="email"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-md-4">
+                    <div className="form-group">
+                      <InputField
+                        name="phone"
+                        label="Contact number"
+                        validation={{ required: "Contact number is required" }}
+                        placeholder=""
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <InputField
+                        name="website"
+                        label="Hospital Website"
+                        // validation={{ required: "Hospital Website is required" }}
+                        placeholder="Enter hospital website"
+                        type="text"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -143,20 +217,6 @@ function AddHospital() {
                     </div>
                   </div>
                 </div>
-
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group">
-                      <InputField
-                        name="website"
-                        label="Website"
-                        validation={{ required: "Website is required" }}
-                        placeholder="Website"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                </div>
                 <h4 className="card-title">GSTIN</h4>
                 <div className="w-50">
                   <InputField
@@ -169,25 +229,39 @@ function AddHospital() {
                 </div>
 
                 <h4 className="card-title mt-4">Fast Tag</h4>
-                <div className="d-flex">
-                  <label className="">Enable Fast Tag</label>
-                  <div className="ms-2">
-                    <FasttagToggle setToggleFasttag={setToggleFasttag} />
+                <div className="row">
+                  <div className="col-md-3">
+                    <div className="d-flex pt-2">
+                      <label className="">Enable Fast Tag</label>
+                      <div className="ms-2">
+                        <FasttagToggle setToggleFasttag={setToggleFasttag} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <InputField
+                      name="fastTagcount"
+                      label=""
+                      // validation={{ required: "Fasttag issues per day is required" }}
+                      placeholder="Fasttag issues per day"
+                      type="number"
+                      disabled={!toggleFasttag}
+                    />
                   </div>
                 </div>
 
                 <div className="row mt-4">
-                  <div className="col-md-6">
+                  {/* <div className="col-md-6">
                     <div className="form-group">
                       <label>Choose Percentage of Profit</label>
                       <Select
-                      // defaultValue={selectedOption}
-                      // onChange={setSelectedOption}
-                      // options={option}
+                        defaultValue={selectedOption}
+                        onChange={setSelectedOption}
+                        options={option}
                       />
                     </div>
-                  </div>
-                  <div className="col-md-6">
+                  </div> */}
+                  {/* <div className="col-md-6">
                     <div className="form-group">
                       <label>Fast tag Issue Per Day</label>
                       <Select
@@ -196,16 +270,16 @@ function AddHospital() {
                       // options={option}
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
-                <h4 className="card-title mt-3">Company Location</h4>
+                <h4 className="card-title mt-1">Hospital Location</h4>
                 <div className="row">
                   <div className="col-md-4">
                     <InputField
                       name="companyName"
                       label=""
-                      validation={{ required: "Company Location is required" }}
+                      validation={{ required: "Company name is required" }}
                       placeholder="Company Name"
                       type="text"
                     />
@@ -246,12 +320,22 @@ function AddHospital() {
 
                   <div className="col-md-5">
                     <div className="form-group">
-                      <InputField
+                      {/* <InputField
                         name="district"
                         label=""
                         validation={{ required: "District is required" }}
                         placeholder="District"
                         type="text"
+                      /> */}
+
+                      <SelectField
+                        options={districtOptions || []}
+                        label=""
+                        isLoading={districtLoading}
+                        name="district"
+                        isMultiSelect={false}
+                        placeholder="Select District"
+                        validationMessage="District is required"
                       />
                     </div>
                   </div>
@@ -310,7 +394,7 @@ function AddHospital() {
                 </div>
 
                 <div className="row">
-                  <div className="col-md-8">
+                  <div className="col-md-6">
                     <div className="form-group">
                       <InputField
                         name="accountHoldername"
@@ -323,6 +407,19 @@ function AddHospital() {
                       />
                     </div>
                   </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <InputField
+                        name="bankname"
+                        label=""
+                        validation={{ required: "Bank name is required" }}
+                        placeholder="Bank name"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
                   <div className="col-md-4">
                     <div className="form-group">
                       <InputField
@@ -330,6 +427,17 @@ function AddHospital() {
                         label=""
                         validation={{ required: "IFSC Code is required" }}
                         placeholder="IFSC"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <InputField
+                        name="upiid"
+                        label=""
+                        // validation={{ required: "IFSC Code is required" }}
+                        placeholder="Upi id (optional)"
                         type="text"
                       />
                     </div>
@@ -399,12 +507,22 @@ function AddHospital() {
 
                   <div className="col-md-6">
                     <div className="form-group">
-                      <InputField
+                      {/* <InputField
                         name="billingDistrict"
                         label=""
                         validation={{ required: "District is required" }}
                         placeholder="District"
                         type="text"
+                        disabled={isSameAsCompanyAddress}
+                      /> */}
+                      <SelectField
+                        options={districtOptions || []}
+                        label=""
+                        isLoading={districtLoading}
+                        name="billingDistrict"
+                        isMultiSelect={false}
+                        placeholder="Select District"
+                        validationMessage="Billing District is required"
                         disabled={isSameAsCompanyAddress}
                       />
                     </div>
@@ -435,18 +553,6 @@ function AddHospital() {
                         disabled={isSameAsCompanyAddress}
                       />
                     </div>
-                  </div>
-                </div>
-
-                <div className="w-100 mt-3">
-                  <div className="form-group">
-                    <InputField
-                      name="companyWebsite"
-                      label="Company Website"
-                      validation={{ required: "Company Website is required" }}
-                      placeholder="Enter Company Website"
-                      type="text"
-                    />
                   </div>
                 </div>
 

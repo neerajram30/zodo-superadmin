@@ -47,7 +47,7 @@ function HospitalDetailsCard(props) {
   ];
 
   const hospitalStatus = hospitalDetails?.isDisabled;
-  
+
   const handleTogglebtn = async (e) => {
     e.stopPropagation();
     setdisableShow(true);
@@ -119,14 +119,14 @@ function HospitalDetailsCard(props) {
                         type="checkbox"
                         id="status"
                         className="check"
-                        checked={hospitalStatus}
+                        checked={!hospitalDetails?.isDisabled}
                       />
                       <label htmlFor="status" className="checktoggle-small">
                         checkbox
                       </label>
                     </div>
                     <span className="ps-2">
-                      {hospitalStatus ? "Disable" : "Enable"}
+                      {!hospitalDetails?.isDisabled ? "Disable" : "Enable"}
                     </span>
                   </Link>
                   <div className="dropdown-divider" />
@@ -167,9 +167,9 @@ function HospitalDetailsCard(props) {
                     <h3 className="user-name m-t-0 mb-0">
                       {hospitalDetails?.name}
                     </h3>
-                    <small className="text-muted">
+                    {/* <small className="text-muted">
                       multinational healthcare group
-                    </small>
+                    </small> */}
                   </div>
                   {/* </div> */}
                 </div>
@@ -182,7 +182,10 @@ function HospitalDetailsCard(props) {
                   <span className="text">
                     <Link to className="text-dark">
                       <img src={phone_icon} alt="phone" />{" "}
-                      <span className="ms-1">770-889-6484</span>
+                      <span className="ms-1">
+                        {hospitalDetails?.contact_details?.mobile ??
+                          "No phone number"}
+                      </span>
                     </Link>
                   </span>
                 </li>
@@ -190,7 +193,9 @@ function HospitalDetailsCard(props) {
                   <span className="text">
                     <Link to className="text-dark">
                       <img src={email_icon} alt="email" />{" "}
-                      <span className="ms-1">apollo@example.com</span>
+                      <span className="ms-1">
+                        {hospitalDetails?.contact_details?.email ?? "No email"}
+                      </span>
                     </Link>
                   </span>
                 </li>
@@ -198,7 +203,11 @@ function HospitalDetailsCard(props) {
                   <span className="text">
                     <Link to>
                       <img src={search_outline_icon} alt="website" />{" "}
-                      <span className="ms-1">{hospitalDetails?.website}</span>
+                      <span className="ms-1">
+                        {hospitalDetails?.contact_details?.website ?? (
+                          <span className="text-dark">No website</span>
+                        )}
+                      </span>
                     </Link>
                   </span>
                 </li>
@@ -213,7 +222,7 @@ function HospitalDetailsCard(props) {
                 </span>
               </h6>
               <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
-                Active
+                {!hospitalDetails?.isDisabled ? "Active" : "Inactive"}
               </button>
             </div>
           </div>
@@ -260,14 +269,16 @@ function HospitalDetailsCard(props) {
                       <span className="payment-title">
                         Account Number:{" "}
                         <span className="fw-semibold text-black">
-                          111234567900
+                          {hospitalDetails?.bank_details?.account_number}
                         </span>
                       </span>
                     </li>
                     <li className="mt-3 mb-3">
                       <span className="payment-title">
-                        Bank Name:{" "}
-                        <span className="fw-semibold text-black">Federal</span>
+                        Account Holder Name:{" "}
+                        <span className="fw-semibold text-black">
+                          {hospitalDetails?.bank_details?.account_holder}
+                        </span>
                       </span>
                     </li>
                   </ul>
@@ -278,7 +289,7 @@ function HospitalDetailsCard(props) {
                       <span className="payment-title">
                         IFSC Code:{" "}
                         <span className="fw-semibold text-black">
-                          111234567900
+                          {hospitalDetails?.bank_details?.ifsc}
                         </span>
                       </span>
                     </li>
@@ -286,7 +297,7 @@ function HospitalDetailsCard(props) {
                       <span className="payment-title">
                         UPI ID:{" "}
                         <span className="fw-semibold text-black">
-                          123@oksbi
+                          {hospitalDetails?.bank_details?.upi_id}
                         </span>
                       </span>
                     </li>
@@ -296,7 +307,10 @@ function HospitalDetailsCard(props) {
             </div>
 
             <div className="col mt-4 mt-md-0">
-              <FastTag fastTagDetails={hospitalDetails?.fastTag} />
+              <FastTag
+                fastTagDetails={hospitalDetails?.fastTag}
+                toggleFasttag={true}
+              />
             </div>
           </div>
         </div>

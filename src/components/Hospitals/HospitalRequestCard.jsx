@@ -1,39 +1,52 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { right_chevron } from "../imagepath";
+import React, { useState } from "react";
+import { apollo_logo } from "../imagepath";
 import { Link } from "react-router-dom";
+import ApproveRequestModal from "../modals/ApproveRequestModal";
+import { useChangeHospitalStatus } from "../../hooks/hospitals/useChangeHospitalStatus";
 
 function HospitalRequestCard(props) {
   const { hospitalData } = props;
+  const [showApprove, setshowApprove] = useState(false);
+  const { mutate, isLoading } = useChangeHospitalStatus();
+  console.log(isLoading);
+
+  const handelHospitalRequest = async () => {
+    console.log("Logic here");
+    const statusUpdate = { status: "active" };
+    await mutate({ id: hospitalData.id, data: statusUpdate });
+  };
+
   return (
     <div className="card invoices-grid-card w-100" key={hospitalData.id}>
       <Link to>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={hospitalData.logo} alt="#" />
+              <img src={apollo_logo} alt="#" />
             </div>
-            <div className="col-auto">
+            {/* <div className="col-auto">
               <img src={right_chevron} alt="#" />
-            </div>
+            </div> */}
             <div className="d-flex mt-3 justify-content-between">
               <div className="">
                 <h5>{hospitalData.name}</h5>
               </div>
-              <div className="">
+              {/* <div className="">
                 <span className="text-primary">
                   {hospitalData.completed} Completed
                 </span>
-              </div>
+              </div> */}
             </div>
 
             <div className="mt-2">
               <div className="d-flex justify-content-start">
                 <Link
-                  to={`/manage-hospitals/manage-request/${hospitalData.id}`}
+                  to
                   // data-bs-toggle="modal"
                   // data-bs-target="#delete_invoices_details"
                   className="hospital-draft-btn rounded-pill text-primary review-btn"
+                  onClick={() => setshowApprove(true)}
                 >
                   Approve
                 </Link>
@@ -47,27 +60,15 @@ function HospitalRequestCard(props) {
                 </Link>
               </div>
             </div>
-
-            {/* <div className="row mt-2">
-              <div className="col text-secondary align-middle">
-                <p>TOTAL FAST TAG</p>
-              </div>
-              <div className="col-auto">
-                <h5>{hospitalData.totalFasttags}</h5>
-              </div>
-            </div> */}
-
-            {/* <div className="row">
-              <div className="col text-secondary">
-                <p>TODAY BOOKING</p>
-              </div>
-              <div className="col-auto">
-                <h5>{hospitalData.todayBookings}</h5>
-              </div>
-            </div> */}
           </div>
         </div>
       </Link>
+      <ApproveRequestModal
+        show={showApprove}
+        setShow={setshowApprove}
+        title="hospital request"
+        handleRequest={handelHospitalRequest}
+      />
     </div>
   );
 }

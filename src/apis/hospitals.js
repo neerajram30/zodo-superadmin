@@ -33,6 +33,11 @@ export const getHospitals = async () => {
   return response?.data?.data;
 };
 
+export const getHospitalsBySearch = async (query) => {
+  const response = await apiClient.get(`/hospitals?name=${query}`);
+  return response?.data?.data;
+};
+
 /**
  * Retrieves a specific hospital by ID.
  * @async
@@ -77,4 +82,11 @@ export const getRequestedHospitalList = async (status) => {
   const response = await apiClient.get(`/hospitals?status=${status}`);
   return response.data?.data;
 };
+
+export const changeHospitalStatus = async ({id, data}) => {
+  const response = await apiClient.patch(`/hospitals/${id}/change-status`, data);
+  return response.data;
+};
+
+
 

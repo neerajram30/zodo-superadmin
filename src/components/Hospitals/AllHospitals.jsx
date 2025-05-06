@@ -6,7 +6,6 @@ import FullscreenLoader from "../loadings/FullscreenLoader";
 
 function AllHospitals(props) {
   const { hospitalList, loading } = props;
-
   if(loading){
     return <FullscreenLoader/>
   }
