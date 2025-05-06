@@ -1,51 +1,19 @@
 import React from "react";
 import BookingsTable from "./BookingsTable";
 import { fastTagList } from "../../configs/fastTagList";
+import { useParams } from "react-router-dom";
+import { useValidateId } from "../../../hooks/useValidateId";
+import { useHospitalAppointmentsByquery } from "../../../hooks/appointments/useHospitalAppointmentsByquery";
 function FastTags() {
-  const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "TRANSACTION NAME",
-      dataIndex: "transactionName",
-      sorter: (a, b) => a.transactionName.length - b.transactionName.length,
-    },
-    {
-      title: "DUE ISSUE",
-      dataIndex: "dueIssue",
-      sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
-    },
-    {
-      title: "STATUS",
-      dataIndex: "status",
-      render: (item) => (
-        <div
-          className={`${
-            (item === "Overdue" && "delete-badge status-red") ||
-            (item === "Refunded" && "delete-badge status-orange") ||
-            (item === "Paid" && "delete-badge status-green")
-          }`}
-        >
-          {item}
-        </div>
-      ),
-    },
-    {
-      title: "AMOUNT",
-      dataIndex: "amount",
-      sorter: (a, b) => a.amount.length - b.amount.length,
-    },
-    {
-      title: "ACTIONS",
-      dataIndex: "actions",
-    },
-  ];
+  const { id } = useParams();
+  const { validId } = useValidateId(id);
+  const query = `is_fast_tag=true`
+  const { data: appointments } = useHospitalAppointmentsByquery(validId, query);
+  console.log("fasttag!!",appointments);
+  
   return (
     <div>
-      <BookingsTable columns={columns} data={fastTagList} />
+      <BookingsTable data={fastTagList} />
     </div>
   );
 }

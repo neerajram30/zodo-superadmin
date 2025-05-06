@@ -1,8 +1,10 @@
 import { Table } from "antd";
 import React, { useState } from "react";
-import { hospitalTransactions } from "../../configs/hospitalTransactions";
+// import { hospitalTransactions } from "../../configs/hospitalTransactions";
 import { itemRender, onShowSizeChange } from "../../Pagination";
-function TransactionTable() {
+import PropTypes from "prop-types";
+function TransactionTable(props) {
+  const { settlements } = props;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
@@ -69,7 +71,7 @@ function TransactionTable() {
     <div className="table-responsive">
       <Table
         pagination={{
-          total: hospitalTransactions.length,
+          total: settlements.length,
           showSizeChanger: true,
           // showTotal: (total, range) =>
           //   `Showing ${range[0]} to ${range[1]} of ${total} entries`,
@@ -77,12 +79,16 @@ function TransactionTable() {
           itemRender: itemRender,
         }}
         columns={columns}
-        dataSource={hospitalTransactions}
+        dataSource={settlements ?? []}
         rowSelection={rowSelection}
         rowKey={(record) => record.id}
       />
     </div>
   );
 }
+
+TransactionTable.propTypes = {
+  settlements: PropTypes.node,
+};
 
 export default TransactionTable;

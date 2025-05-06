@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { right_chevron } from "../../imagepath";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import DeleteDepartment from "./DeleteDepartment";
@@ -10,7 +9,7 @@ function DepartmentCard(props) {
   const [showDelete, setShowDelete] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   return (
-    <div className="dash-widget h-75">
+    <div className="dash-widget">
       <div className="dash-content dash-count flex-grow-1 department-card">
         <div className="d-flex justify-content-between">
           <h6>{data.name}</h6>
@@ -46,9 +45,9 @@ function DepartmentCard(props) {
         </div>
         <div className="row">
           <p className="text-dark col">{2} Person</p>
-          <div className="col-auto">
+          {/* <div className="col-auto">
             <img src={right_chevron} alt="#" />
-          </div>
+          </div> */}
         </div>
       </div>
       <DeleteDepartment show={showDelete} setShow={setShowDelete} departmentId={data.id}/>

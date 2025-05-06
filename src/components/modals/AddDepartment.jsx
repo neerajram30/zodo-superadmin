@@ -20,6 +20,7 @@ function AddDepartment(props) {
     };
     await mutate(department);
     methods.reset();
+    setShow(false);
   };
 
   return (
@@ -33,7 +34,7 @@ function AddDepartment(props) {
         backdropClassName="hospital-modal-backdrop"
       >
         <Modal.Header closeButton className="border-0">
-          <Modal.Title>Specialisation</Modal.Title>
+          <Modal.Title>Department</Modal.Title>
         </Modal.Header>
         <Modal.Body className="border-0">
           <FormProvider {...methods}>

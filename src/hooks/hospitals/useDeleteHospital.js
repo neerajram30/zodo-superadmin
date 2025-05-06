@@ -18,10 +18,10 @@ const useDeleteHospital = () => {
         //   ? oldHospitalList.filter((h) => h.id === id)
         //   : []
         ...oldHospitals,
-        data: oldHospitals.data.filter((hospital) => hospital.id !== id),
+        data: oldHospitals?.data?.filter((hospital) => hospital.id !== id),
       }));
     },
-    onSuccess: (data) => {
+    onSuccess: (data) => {      
       const message = data.message;
       toast.success(message, {
         position: "top-right",
@@ -34,7 +34,7 @@ const useDeleteHospital = () => {
       });
       navigate("/manage-hospitals");
     },
-    onError: (error, id, context) => {
+    onError: (error, id, context) => {      
       const errotMessage = error?.response?.data?.message || "Failed to delete hospital";
       // Rollback if there is an error
       if (context?.previousHospitals) {

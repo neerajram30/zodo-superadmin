@@ -53,10 +53,6 @@ function EditHospital() {
         email: hospitalDetails?.contact_details?.email,
         phone: hospitalDetails?.contact_details?.mobile,
         fastTagcount: hospitalDetails?.fastTag?.count,
-        // set default values for other fields as needed
-        // adminName: "",
-        // adminEmail: "",
-        // adminPassword: "",
         website: hospitalDetails?.contact_details?.website,
         gstnumber: hospitalDetails?.gst,
         companyName: hospitalDetails?.address?.lineOne,
@@ -80,7 +76,6 @@ function EditHospital() {
         billingDistrict: billingDistrictOption,
         billingState: hospitalDetails?.billing_address?.state,
         billingPincode: hospitalDetails?.billing_address?.pincode,
-        // companyWebsite: hospitalDetails?.billing_address?.website,
       });
     }
   }, [hospitalDetails, methods]);

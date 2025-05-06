@@ -4,8 +4,17 @@ import TransactionTable from "./Transactions/TransactionTable";
 import { DatePicker } from "antd";
 import OverViewCard from "./OverViewCard";
 import ExportTable from "../assests/ExportTable";
+import { useParams } from "react-router-dom";
+import { useValidateId } from "../../hooks/useValidateId";
+import { useHospitalSettlements } from "../../hooks/auth/Settlements/useHospitalSettlements";
 
 function Finance() {
+  const { id } = useParams();
+  const { validId } = useValidateId(id);
+  console.log("Valid id ", validId);
+  const { data: settlements} = useHospitalSettlements(validId);
+  console.log(settlements);
+  
   const financeData = [
     {
       id: 1,
@@ -161,7 +170,7 @@ function Finance() {
         </div>
         <div>
           <h5>
-            {232} results found{" "}
+            {settlements?.length} results found{" "}
             <span className="delete-badge status-red ms-1">
               <img
                 src={bin_icon_red}
@@ -174,7 +183,7 @@ function Finance() {
             </span>
           </h5>
         </div>
-        <TransactionTable />
+        <TransactionTable settlements={settlements ?? []}/>
       </div>
     </div>
   );

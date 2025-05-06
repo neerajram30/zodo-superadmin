@@ -5,7 +5,57 @@ import PropTypes from "prop-types";
 import ExportTable from "../../assests/ExportTable";
 
 function BookingsTable(props) {
-  const { data, columns } = props;
+  const { data } = props;
+  const columns = [
+    {
+      title: "Booking Id",
+      dataIndex: "booking_id",
+      sorter: (a, b) => a.id - b.id,
+    },
+    {
+      title: "TRANSACTION NAME",
+      dataIndex: "transactionName",
+      sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+      render:(item, record)=>(
+        <div>{record.type}</div>
+      )
+    },
+    {
+      title: "DUE ISSUE",
+      dataIndex: "createdAt",
+      sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
+    },
+    {
+      title: "STATUS",
+      dataIndex: "status",
+      render: (item) => (
+        <div
+          className={`${
+            (item === "cancelled" && "delete-badge status-red") ||
+            (item === "started" && "delete-badge status-orange") ||
+            (item === "completed" && "delete-badge status-green")
+          }`}
+        >
+          {item}
+        </div>
+      ),
+    },
+    {
+      title: "AMOUNT",
+      dataIndex: "amount",
+      sorter: (a, b) => a.amount.length - b.amount.length,
+      render:(item,record)=>(
+        <div>{record?.doctor?.pricing}</div>
+      )
+    },
+    {
+      title: "ACTIONS",
+      dataIndex: "actions",
+      render:()=>(
+        <div>view</div>
+      )
+    },
+  ];
   return (
     <div>
       <div className="row mt-4">
@@ -24,7 +74,7 @@ function BookingsTable(props) {
           </div>
         </div>
         <div className="col-12 col-md-6 col-xl-3">
-          <ExportTable/>
+          <ExportTable />
         </div>
       </div>
       <div>{/* <h5>{232} results found</h5> */}</div>
@@ -37,7 +87,6 @@ function BookingsTable(props) {
 }
 
 BookingsTable.propTypes = {
-  columns: PropTypes.node,
   data: PropTypes.node,
 };
 

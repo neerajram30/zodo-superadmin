@@ -233,7 +233,7 @@ function HospitalDetailsCard(props) {
                     <p className="w-md-75 ms-3">
                       {hospitalDetails?.address?.lineOne +
                         " " +
-                        hospitalDetails?.address?.lineOne +
+                        hospitalDetails?.address?.lineTwo +
                         " " +
                         hospitalDetails?.address?.city}
                     </p>

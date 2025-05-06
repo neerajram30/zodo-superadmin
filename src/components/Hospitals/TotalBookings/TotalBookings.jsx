@@ -3,23 +3,25 @@ import BookingsCard from "./BookingsCard";
 import BookingTabs from "./BookingTabs";
 
 function TotalBookings() {
+  
+  
   const bookinsDetails = [
     {
       id: 1,
       bookings: "12,000",
-      dueStatus:"",
+      dueStatus: "",
       operation: "Total Bookings",
     },
     {
       id: 2,
       bookings: "5000",
-      dueStatus:"",
+      dueStatus: "",
       operation: "Total Fast Tag Booking",
     },
     {
       id: 3,
       bookings: "12",
-      dueStatus:"No Dues",
+      dueStatus: "No Dues",
       operation: "Cancellation",
     },
   ];
