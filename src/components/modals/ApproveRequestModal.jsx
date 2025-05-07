@@ -3,7 +3,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 
 function ApproveRequestModal(props) {
-  const { show, setShow, title, handleRequest } = props;
+  const { show, setShow, title, handleRequest, isLoading } = props;
 
   return (
     <div>
@@ -16,9 +16,7 @@ function ApproveRequestModal(props) {
         backdropClassName="hospital-modal-backdrop"
       >
         <Modal.Header closeButton className="border-0">
-          <Modal.Title>
-            Are you sure you want to approve the {title} ?
-          </Modal.Title>
+          <Modal.Title>Are you sure you want to {title} ?</Modal.Title>
         </Modal.Header>
         <Modal.Body className="border-0">
           <div className="form-group">
@@ -49,9 +47,15 @@ function ApproveRequestModal(props) {
             // data-bs-toggle="modal"
             // data-bs-target="#save_invocies_details"
             className="hospital-add-btn ms-1 text-white modal-btn border-0"
-            onClick={()=>handleRequest()}
+            onClick={() => handleRequest()}
           >
-            Yes, Approve
+            {isLoading && (
+              <span
+                className="spinner-border spinner-border-sm"
+                aria-hidden="true"
+              ></span>
+            )}
+            <span className="ps-2 pe-2">Yes</span>
           </button>
         </Modal.Footer>
       </Modal>
@@ -64,6 +68,7 @@ ApproveRequestModal.propTypes = {
   setShow: PropTypes.func,
   title: PropTypes.string,
   handleRequest: PropTypes.func,
+  isLoading: PropTypes.bool
 };
 
 export default ApproveRequestModal;

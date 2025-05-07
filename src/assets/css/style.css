@@ -506,16 +506,16 @@ table.table td h2 span {
   color: #347D73;
 }
 .btn-outline-primary:hover {
-  background-color: #347D73;
+  background-color: #cadad8;
   border-color: #347D73;
-  color: #fff;
+  /* color: #000; */
 }
 .btn-outline-primary.active:not(:disabled):not(.disabled),
 .btn-outline-primary:active:not(:disabled):not(.disabled),
 .show > .btn-outline-primary.dropdown-toggle {
-  background-color: #347D73;
+  /* background-color: #347D73; */
   border-color: #347D73;
-  color: #fff;
+  /* color: #fff; */
 }
 .btn-success {
   background-color: #55ce63;

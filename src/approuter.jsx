@@ -27,12 +27,13 @@ import FasttagRevenue from "./components/pages/Dashboard/FasttagRevenue";
 import SettlementRequests from "./components/pages/Dashboard/SettlementRequests";
 import ManageSettlement from "./components/pages/Dashboard/ManageSettlement";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
-import ManageRequest from "./components/pages/Hospitals/ManageRequest";
 import DoctorRequest from "./components/pages/Doctors/DoctorRequest";
 import EditDoctor from "./components/pages/Doctors/EditDoctor";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./ProtectedRoute";
 import { useAuth } from "./hooks/auth/useAuth";
+import ReviewHospital from "./components/pages/Hospitals/ReviewHospital";
+import ReviewEdit from "./components/pages/Hospitals/ReviewEdit";
 
 //Accounts
 const Approuter = () => {
@@ -101,17 +102,27 @@ const Approuter = () => {
               element={<AddHospital />}
             />
             <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />
-            <Route
+            {/* <Route
               path="/manage-hospitals/manage-request/:id"
               element={<ManageRequest />}
-            />
+            /> */}
+
             <Route
+              path="/manage-hospitals/manage-request/:id"
+              element={<ReviewHospital />}
+            />
+            {/* <Route
               path="/manage-hospitals/manage-request/:id/edit"
               element={<EditHospital />}
-            />
+            /> */}
             <Route
               path="/manage-hospitals/:id/edit"
               element={<EditHospital />}
+            />
+
+            <Route
+              path="/manage-hospitals/manage-request/:id/edit"
+              element={<ReviewEdit />}
             />
             {/* Manage Doctors */}
             <Route path="/manage-doctors" element={<Doctors />} />

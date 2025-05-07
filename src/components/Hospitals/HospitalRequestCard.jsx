@@ -12,7 +12,6 @@ function HospitalRequestCard(props) {
   console.log(isLoading);
 
   const handelHospitalRequest = async () => {
-    console.log("Logic here");
     const statusUpdate = { status: "active" };
     await mutate({ id: hospitalData.id, data: statusUpdate });
   };
@@ -66,7 +65,7 @@ function HospitalRequestCard(props) {
       <ApproveRequestModal
         show={showApprove}
         setShow={setshowApprove}
-        title="hospital request"
+        title="review hospital request"
         handleRequest={handelHospitalRequest}
       />
     </div>

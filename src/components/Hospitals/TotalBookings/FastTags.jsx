@@ -6,13 +6,12 @@ import { useHospitalAppointmentsByquery } from "../../../hooks/appointments/useH
 function FastTags() {
   const { id } = useParams();
   const { validId } = useValidateId(id);
-  const query = `is_fast_tag=true`
-  const { data: appointments } = useHospitalAppointmentsByquery(validId, query);
-  console.log("fasttag!!",appointments);
+  const query = `is_fast_tag=1`
+  const { data: fastTagAppointments } = useHospitalAppointmentsByquery(validId, query);
   
   return (
     <div>
-      <BookingsTable data={[]} />
+      <BookingsTable data={fastTagAppointments} />
     </div>
   );
 }

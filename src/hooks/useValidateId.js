@@ -10,7 +10,7 @@ export const useValidateId = (id) => {
     const isValid = regex.test(id);
     if (!isValid) {
       setValidId(null);
-      navigate("/hospital/services");
+      navigate(-1);
     } else {
       setValidId(id);
     }

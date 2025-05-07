@@ -15,14 +15,17 @@ function Hospitals() {
   const { data: hospitalList, isLoading } = useGetHospitals(searchTerm);
   // console.log("Data",hospitalList?.data);
   console.log(searchTerm);
-  
+
   const setHospitalList = useHospitalList((state) => state.setHospitalList);
   setHospitalList(hospitalList);
 
   const { data: requestedHospitals, isLoading: requestedLoading } =
     useRequestedHospitals("pending");
+  const { data: rejectedHospitals, isLoading: rejectedLoading } =
+    useRequestedHospitals("rejected");
   console.log(requestedHospitals, requestedLoading);
   const requestHospitalCount = requestedHospitals?.length ?? 0;
+  const rejectedHospitalCount = rejectedHospitals?.length ?? 0;
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -41,6 +44,11 @@ function Hospitals() {
       title: `Requested Hospitals (${requestHospitalCount})`,
       content: <HospitalRequest hospitalList={requestedHospitals ?? []} />,
     },
+    {
+      id: "rejected",
+      title: `Rejected Hospitals (${rejectedHospitalCount})`,
+      content: <HospitalRequest hospitalList={rejectedHospitals ?? []} />,
+    },
   ];
 
   const handleSearch = (searchTerm) => {
@@ -58,7 +66,9 @@ function Hospitals() {
           <Breadcrumb data={breadCrumpData} />
           <HospitalHero tabData={tabData} handleSearch={handleSearch} />
           <HospitalsList tabData={tabData} />
-          {isLoading || (requestedLoading && <FullscreenLoader />)}
+          {isLoading ||
+            rejectedLoading ||
+            (requestedLoading && <FullscreenLoader />)}
         </div>
       </div>
     </Layout>

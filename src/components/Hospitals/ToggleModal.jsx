@@ -20,14 +20,14 @@ function ToggleModal(props) {
     >
       <Modal.Header closeButton className="border-0">
         <Modal.Title>
-          Are you sure you want to {!disable ? "Enable" : "Disable"} the
+          Are you sure you want to {disable ? "Enable" : "Disable"} the
           Hospital ?
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="border-0">
         <div className="form-group">
           <label className="col-form-label col-md-4">
-            Reason For {!disable ? "Enabl" : "Disabl"}ing
+            Reason For {disable ? "Enabl" : "Disabl"}ing
           </label>
           <div className="">
             <textarea
@@ -64,7 +64,7 @@ function ToggleModal(props) {
               aria-hidden="true"
             ></span>
           )}
-          <span className="ps-2">Yes,{!disable ? " Enable" : " Disable"}</span>
+          <span className="ps-2">Yes,{disable ? " Enable" : " Disable"}</span>
         </button>
       </div>
       {/* </Modal.Footer> */}
