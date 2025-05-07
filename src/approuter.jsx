@@ -34,6 +34,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import { useAuth } from "./hooks/auth/useAuth";
 import ReviewHospital from "./components/pages/Hospitals/ReviewHospital";
 import ReviewEdit from "./components/pages/Hospitals/ReviewEdit";
+import EditDoctotRequest from "./components/pages/Doctors/EditDoctotRequest";
 
 //Accounts
 const Approuter = () => {
@@ -132,17 +133,21 @@ const Approuter = () => {
               element={<AddDoctors />}
             />
             <Route
-              path="/manage-doctors/edit-doctor/:id"
-              element={<AddDoctors />}
-            />
-            <Route
-              path="manage-doctors/request/:id/edit"
+              path="/manage-doctors/:id/edit"
               element={<EditDoctor />}
             />
+            {/* <Route
+              path="manage-doctors/request/:id/edit"
+              element={<EditDoctor />}
+            /> */}
 
             <Route
               path="/manage-doctors/request/:id"
               element={<DoctorRequest />}
+            />
+            <Route
+              path="/manage-doctors/request/:id/edit"
+              element={<EditDoctotRequest />}
             />
             <Route
               path="/manage-doctors/specialization"

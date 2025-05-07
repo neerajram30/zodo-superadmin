@@ -1,19 +1,19 @@
 import { Table } from "antd";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React from "react";
 import { itemRender } from "../Pagination";
 
 function DataTable(props) {
   const { columns, data, isLoading } = props;
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const onSelectChange = (newSelectedRowKeys) => {
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
+  // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  // const onSelectChange = (newSelectedRowKeys) => {
+  //   setSelectedRowKeys(newSelectedRowKeys);
+  // };
+  // const rowSelection = {
+  //   selectedRowKeys,
+  //   onChange: onSelectChange,
+  // };
   return (
     <div className="table-responsive">
       <Table
@@ -28,8 +28,8 @@ function DataTable(props) {
         }}
         columns={columns}
         dataSource={data}
-        rowSelection={rowSelection}
-        rowKey={(record) => record.id}
+        // rowSelection={rowSelection}
+        // rowKey={(record) => record.id}
         loading={isLoading}
       />
     </div>

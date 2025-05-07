@@ -1,10 +1,10 @@
 import React from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
-import { useParams } from "react-router-dom";
 import EditDoctorForm from "../../Doctors/EditDoctorForm";
+import { useParams } from "react-router-dom";
 
-function EditDoctor() {
+function EditDoctotRequest() {
   const { id } = useParams();
   const editBreadcrump = [
     {
@@ -15,12 +15,12 @@ function EditDoctor() {
     {
       name: id,
       status: "inactive",
-      link: `/manage-doctors/${id}`,
+      link: `/manage-doctors/request/${id}`,
     },
     {
       name: "Edit",
-      status: "inactive",
-      link: `/manage-doctors/${id}/edit`,
+      status: "active",
+      link: `/manage-doctors/request/${id}/edit`,
     },
   ];
   return (
@@ -28,11 +28,11 @@ function EditDoctor() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={editBreadcrump} />
-          <EditDoctorForm/>  
+          <EditDoctorForm />
         </div>
       </div>
     </Layout>
   );
 }
 
-export default EditDoctor;
+export default EditDoctotRequest;

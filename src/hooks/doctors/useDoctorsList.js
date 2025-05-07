@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getDoctors } from "../../apis/doctors";
+import { getDoctors, getDoctorsByQuery } from "../../apis/doctors";
 
-export const useDoctorsList = () => {
+export const useDoctorsList = (query) => {
     return useQuery({
-      queryKey: ["doctors"], // Unique query key
-      queryFn: () => getDoctors(),
+      queryKey: ["doctors",], // Unique query key
+      queryFn: () => query ? getDoctorsByQuery(query) : getDoctors(),
     });
   };
   

@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBox from "../searchbox/SearchBox";
 import { Link } from "react-router-dom";
-import { addicon, pdficon, pdficon3, pdficon4 } from "../imagepath";
+import { addicon } from "../imagepath";
 
 function DoctorListHero() {
   return (
@@ -32,7 +32,7 @@ function DoctorListHero() {
               <span className="ms-2 me-2">Add Doctor</span>
             </Link>
           </div>
-          <div className="w-25 d-flex justify-content-between ps-3 pe-3">
+          {/* <div className="w-25 d-flex justify-content-between ps-3 pe-3">
             <Link to="#" className="">
               <img src={pdficon} alt="#" />
             </Link>
@@ -42,7 +42,7 @@ function DoctorListHero() {
             <Link to="#">
               <img src={pdficon4} alt="#" />
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

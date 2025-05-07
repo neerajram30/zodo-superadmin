@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   arrow_left,
   bin_icon_red,
@@ -16,11 +16,18 @@ import DoctorsOverview from "./DoctorsOverview/DoctorsOverview";
 import DoctorsFinance from "./DoctorsFinance/DoctorsFinance";
 import DoctorsBookings from "./DoctorsBookings/DoctorsBookings";
 import ConfirmDelete from "../modals/ConfirmDelete";
-import ToggleDisable from "../modals/ToggleDisable";
+import { useDoctorById } from "../../hooks/doctors/useDoctorById";
+import FullscreenLoader from "../loadings/FullscreenLoader";
+import { reduceArraytoString } from "../configs/reduceArraytoString";
+import { useChangeDoctorStatus } from "../../hooks/doctors/useChangeDoctorStatus";
+import ToggleModal from "../Hospitals/ToggleModal";
 
 function DoctorDetailsCard() {
   const navigate = useNavigate();
-  //   const { id } = useParams();
+  const { id } = useParams();
+  const { data, isLoading } = useDoctorById(id);
+  console.log("Doctor data ", data);
+  const { mutate, isLoading: statusChangeLoading } = useChangeDoctorStatus();
   const [show, setShow] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
@@ -37,6 +44,23 @@ function DoctorDetailsCard() {
   const handleTogglebtn = (e) => {
     e.stopPropagation();
     setdisableShow(true);
+  };
+  const doctorStatus = data?.status;
+
+  const handleDisable = async () => {
+    console.log("Trigger");
+    
+    const updatedStatus = {
+      status: doctorStatus === "active" ? "disabled" : "active",
+    };
+    await mutate(
+      { id: id, data: updatedStatus },
+      {
+        onSuccess: () => {
+          setdisableShow(false);
+        },
+      }
+    );
   };
   return (
     <div>
@@ -61,9 +85,9 @@ function DoctorDetailsCard() {
                 <img src={three_dots_menu} alt="" />
               </Link>
               <div className="dropdown-menu">
-                <Link
+                {/* <Link
                   className="dropdown-item"
-                  //   to={`/manage-hospitals/${id}/edit`}
+                    to={`/manage-hospitals/${id}/edit`}
                 >
                   <img
                     src={pencil_icon}
@@ -71,8 +95,8 @@ function DoctorDetailsCard() {
                     className="dropdown-menu-icon"
                   />
                   <span>Edit</span>
-                </Link>
-                <div className="dropdown-divider" />
+                </Link> */}
+                {/* <div className="dropdown-divider" /> */}
                 <Link
                   className="dropdown-item"
                   to="#"
@@ -92,13 +116,13 @@ function DoctorDetailsCard() {
                       type="checkbox"
                       id="status"
                       className="check"
-                      checked={disable}
+                      checked={doctorStatus === "active" ? true : false}
                     />
                     <label htmlFor="status" className="checktoggle-small">
                       checkbox
                     </label>
                     <span className="ps-2">
-                      {disable ? "Disable" : "Enable"}
+                      {doctorStatus === "active" ? "Disable" : "Enable"}
                     </span>
                   </div>
                 </Link>
@@ -127,7 +151,7 @@ function DoctorDetailsCard() {
                 <div className="doctor-img-wrap">
                   <div className="profile-img">
                     {/* <Link to="#"> */}
-                    <img className="" src={dr_profile} alt="#" />
+                    <img className="" src={dr_profile} alt="#" /> /
                     {/* </Link> */}
                   </div>
                 </div>
@@ -135,8 +159,10 @@ function DoctorDetailsCard() {
               <div className="col">
                 {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
-                  <h3 className="user-name m-t-0 mb-0">Dr. Sunny kuriakose</h3>
-                  <small className="text-muted">MBBS</small>
+                  <h3 className="user-name m-t-0 mb-0">Dr. {data?.name}</h3>
+                  <small className="text-muted">
+                    {data?.registration_details?.qualification}
+                  </small>
                 </div>
                 {/* </div> */}
               </div>
@@ -149,7 +175,7 @@ function DoctorDetailsCard() {
                 <span className="text">
                   <div className="text-dark">
                     <img src={phone_icon} alt="phone" />{" "}
-                    <span className="ms-1">770-889-6484</span>
+                    <span className="ms-1">{data?.phone_number}</span>
                   </div>
                 </span>
               </li>
@@ -157,7 +183,7 @@ function DoctorDetailsCard() {
                 <span className="text">
                   <div className="text-dark">
                     <img src={email_icon} alt="email" />{" "}
-                    <span className="ms-1">apollo@example.com</span>
+                    <span className="ms-1">{data?.email}</span>
                   </div>
                 </span>
               </li>
@@ -166,19 +192,19 @@ function DoctorDetailsCard() {
 
           <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
             <button className="btn hospital-draft-btn text-primary w-75 mt-1">
-              Active
+              {data?.status ?? "Inactive"}
             </button>
           </div>
         </div>
 
-        <div className="row mt-4">
+        {/* <div className="row mt-4">
           <div className="col-md-12">
             <ul className="personal-info">
               <li>
                 <span className="title">Address :</span>
                 <span className="text">
                   <p className="w-md-75">
-                    Lorem ipsum dolor sit amet consectetur
+                    Lorem ipsum dolor sit amet consectetu
                   </p>
                 </span>
               </li>
@@ -196,7 +222,7 @@ function DoctorDetailsCard() {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
         <div className="row">
           <div className="col-md-6">
             <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1">
@@ -204,12 +230,18 @@ function DoctorDetailsCard() {
                 <ul className="payment-info w-1">
                   <li>
                     <span className="payment-title">
-                      Education: <span className="fw-semibold text-black">MBBS</span>
+                      Education:{" "}
+                      <span className="fw-semibold text-black">
+                        {data?.registration_details?.qualification}
+                      </span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
                     <span className="payment-title">
-                      Specialization: <span className="fw-semibold text-black">ENT</span>
+                      Specialization:{" "}
+                      <span className="fw-semibold text-black">
+                        {reduceArraytoString(data?.specialisations)}
+                      </span>
                     </span>
                   </li>
                 </ul>
@@ -222,11 +254,19 @@ function DoctorDetailsCard() {
                 <ul className="payment-info w-1">
                   <li>
                     <span className="payment-title">
-                      Account Number: <span className="fw-semibold text-black">111234567900</span>
+                      Account Number:{" "}
+                      <span className="fw-semibold text-black">
+                        {data?.bank_details?.account_number}
+                      </span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
-                    <span className="payment-title">Bank Name: <span className="fw-semibold text-black">Federal</span></span>
+                    <span className="payment-title">
+                      Bank Name:{" "}
+                      <span className="fw-semibold text-black">
+                        {data?.bank_details?.bank_name}
+                      </span>
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -234,11 +274,19 @@ function DoctorDetailsCard() {
                 <ul className="payment-info">
                   <li>
                     <span className="payment-title">
-                      IFSC Code: <span className="fw-semibold text-black">111234567900</span> 
+                      IFSC Code:{" "}
+                      <span className="fw-semibold text-black">
+                        {data?.bank_details?.ifsc}
+                      </span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
-                    <span className="payment-title">UPI ID: <span className="fw-semibold text-black">123@oksbi</span></span>
+                    <span className="payment-title">
+                      UPI ID:{" "}
+                      <span className="fw-semibold text-black">
+                        {data?.bank_details?.upi_id}
+                      </span>
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -315,13 +363,16 @@ function DoctorDetailsCard() {
           ))}
         </div>
       </div>
+      {isLoading && <FullscreenLoader />}
       <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
-      <ToggleDisable
+      <ToggleModal
         show={disableshow}
         setShow={setdisableShow}
         setdisable={setdisable}
         disable={disable}
         title="Doctor"
+        handleDisable={handleDisable}
+        isLoading={statusChangeLoading}
       />
     </div>
   );

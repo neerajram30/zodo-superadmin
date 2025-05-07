@@ -7,151 +7,59 @@ import DataTable from "../DataTables/DataTable";
 import ConfirmDelete from "../modals/ConfirmDelete";
 import DoctorListHero from "../heros/DoctorListHero";
 import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
+import { reduceArraytoString } from "../configs/reduceArraytoString";
 
 function DoctorsList() {
   const [show, setShow] = useState(false);
-  const { data, isLoading, isError } = useDoctorsList();
-  // console.log("Doctors list", data);
+  const { data: doctorList, isLoading } = useDoctorsList();
+  console.log("Doctors list", doctorList);
   console.log(isLoading);
-  console.log(isError);
-  const datasource = data?.data
-  
-  // const datasource = [
-  //   {
-  //     id: 1,
-  //     Img: blogimg2,
-  //     Name: "Andrea Lalema",
-  //     Department: "Otolaryngology",
-  //     Specialization: "Infertility",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  //   {
-  //     id: 2,
-  //     Img: blogimg4,
-  //     Name: "Dr.Smith Bruklin",
-  //     Department: "Urology",
-  //     Specialization: "Prostate",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  //   {
-  //     id: 3,
-  //     Img: blogimg6,
-  //     Name: "Dr.William Stephin",
-  //     Department: "Radiology",
-  //     Specialization: "Cancer",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  //   {
-  //     id: 4,
-  //     Img: blogimg12,
-  //     Name: "Bernardo James",
-  //     Department: "Dentist",
-  //     Specialization: "Prostate",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  //   {
-  //     id: 5,
-  //     Img: blogimg10,
-  //     Name: "Cristina Groves",
-  //     Department: "Gynocolgy",
-  //     Specialization: "Prostate",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  //   {
-  //     id: 6,
-  //     Img: blogimg8,
-  //     Name: "Mark Hay Smith",
-  //     Department: "Gynocolgy",
-  //     Specialization: "Prostate",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  //   {
-  //     id: 7,
-  //     Img: blogimg2,
-  //     Name: "Andrea Lalema",
-  //     Department: "Otolaryngology",
-  //     Specialization: "Infertility",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  //   {
-  //     id: 8,
-  //     Img: blogimg4,
-  //     Name: "Dr.Smith Bruklin",
-  //     Department: "Urology",
-  //     Specialization: "Prostate",
-  //     Degree: "MBBS, MS",
-  //     Mobile: "+1 23 456890",
-  //     Email: "example@email.com",
-  //     JoiningDate: "01.10.2022",
-  //     FIELD9: "",
-  //   },
-  // ];
-
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
-      key:"name",
-      render: (text, record) => (
+      key: "name",
+      render: (text) => (
         <>
           <h2 className="profile-image">
             {/* <Link
               to={`/manage-doctors/${record.id}`}
               className="avatar avatar-sm me-2"
-            > */}
-              {/* <img
+            >
+              <img
                 className="avatar-img rounded-circle"
-                src={record.Img}
+                src={blogimg12}
                 alt="User Image"
-              /> */}
-            {/* </Link> */}
-            <Link to={`/manage-doctors/${record.id}`}>{text}</Link>
+              />
+            {text}
+            </Link> */}
+            <Link to>{text}</Link>
           </h2>
         </>
       ),
       sorter: (a, b) => a.name.length - b.name.length,
     },
-    {
-      title: "Department",
-      dataIndex: "Department",
-      // sorter: (a, b) => a.Department.length - b.Department.length,
-    },
+    // {
+    //   title: "Department",
+    //   dataIndex: "Department",
+    //   // sorter: (a, b) => a.Department.length - b.Department.length,
+    // },
     {
       title: "Specialisation",
       dataIndex: "Specialization",
       // sorter: (a, b) => a.Specialization.length - b.Specialization.length,
+      render: (item, record) => {
+        const specialisations = reduceArraytoString(
+          record?.specialisations ?? []
+        );
+        return <div>{specialisations}</div>;
+      },
     },
     {
-      title: "Degree",
-      dataIndex: "Degree",
+      title: "Type",
+      dataIndex: "hospital_id",
+      render: (item) => (item ? "ofline" : "online"),
+
       // sorter: (a, b) => a.Degree.length - b.Degree.length,
     },
     {
@@ -171,7 +79,12 @@ function DoctorsList() {
     },
     {
       title: "JoiningDate",
-      dataIndex: "JoiningDate",
+      dataIndex: "work_start_date",
+      render: (item) => (
+        <div className="d-flex justify-content-center">
+          {item ? item : "N/A"}
+        </div>
+      ),
       // sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length,
     },
     {
@@ -192,7 +105,14 @@ function DoctorsList() {
               <div className="dropdown-menu dropdown-menu-end">
                 <Link
                   className="dropdown-item"
-                  to={`/manage-doctors/edit-doctor/${record.id}`}
+                  to={`/manage-doctors/${record.id}`}
+                >
+                  <i className="far fa-eye me-2" />
+                  View
+                </Link>
+                <Link
+                  className="dropdown-item"
+                  to={`/manage-doctors/${record.id}/edit`}
                   aria-disabled="true"
                 >
                   <i className="far fa-edit me-2" />
@@ -221,7 +141,7 @@ function DoctorsList() {
             {/* Table Header */}
             <DoctorListHero />
             <div className="doctor-list">
-              <DataTable data={datasource} columns={columns} />
+              <DataTable data={doctorList ?? []} columns={columns} />
             </div>
           </div>
         </div>

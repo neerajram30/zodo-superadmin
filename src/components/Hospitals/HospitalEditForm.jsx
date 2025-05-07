@@ -12,11 +12,11 @@ import FasttagToggle from "../FasttagRevenue/FasttagToggle";
 import TextArea from "../InputFields/TextArea";
 import UploadFiles from "./UploadFiles";
 import SelectField from "../InputFields/SelectField";
+import { toast } from "react-toastify";
 
 function HospitalEditForm() {
   const { id } = useParams();
   const [toggleFasttag, setToggleFasttag] = useState(false);
-  console.log(toggleFasttag);
   const { mutate, isLoading } = useEditHostpital();
   const { data: hospitalDetails } = useViewHospital(id);
   // const selectedHospital = useSelectedHospital(
@@ -79,51 +79,64 @@ function HospitalEditForm() {
   }, [hospitalDetails, methods]);
 
   const onEditHospital = async (data) => {
-    const hospital = {
-      name: data?.hospitalName,
-      logo: "hospital logo",
-      location: data?.town,
-      address: {
-        lineOne: data?.companyName,
-        lineTwo: data?.address,
-        city: data?.town,
-        district: data?.district.value,
-        state: data?.state,
-        pincode: data?.pincode,
-        street: data?.street,
-      },
-      billing_address: {
-        lineOne: data?.billingAccountHoldername,
-        lineTwo: data?.billingAddress,
-        city: data?.billingTown,
-        district: data?.billingDistrict?.value,
-        state: data?.billingState,
-        pincode: data?.billingPincode,
-        street: data?.billingStreet,
-      },
-      fastTag: {
-        enabled: toggleFasttag,
-        count: parseInt(data?.fastTagcount),
-        price: 0,
-      },
-      bank_details: {
-        account_number: data?.accountNumber,
-        account_holder: data?.accountHoldername,
-        ifsc: data?.ifsc,
-        bank_name: data?.bankname,
-        upi_id: data?.upiid,
-      },
-      contact_details: {
-        email: data?.email,
-        mobile: data?.phone,
-        website: data?.website,
-      },
-      gst: data?.gstnumber,
-    };
-    // console.log("hospital !!", hospital);
-    // console.log(mutate);
-    await mutate({ id: id, data: hospital });
-    // methods.reset();
+    if (data.accountNumber === data.verifyAccountnumber) {
+      const hospital = {
+        name: data?.hospitalName,
+        logo: "hospital logo",
+        location: data?.town,
+        address: {
+          lineOne: data?.companyName,
+          lineTwo: data?.address,
+          city: data?.town,
+          district: data?.district.value,
+          state: data?.state,
+          pincode: data?.pincode,
+          street: data?.street,
+        },
+        billing_address: {
+          lineOne: data?.billingAccountHoldername,
+          lineTwo: data?.billingAddress,
+          city: data?.billingTown,
+          district: data?.billingDistrict?.value,
+          state: data?.billingState,
+          pincode: data?.billingPincode,
+          street: data?.billingStreet,
+        },
+        fastTag: {
+          enabled: toggleFasttag,
+          count: parseInt(data?.fastTagcount),
+          price: 0,
+        },
+        bank_details: {
+          account_number: data?.accountNumber,
+          account_holder: data?.accountHoldername,
+          ifsc: data?.ifsc,
+          bank_name: data?.bankname,
+          upi_id: data?.upiid,
+        },
+        contact_details: {
+          email: data?.email,
+          mobile: data?.phone,
+          website: data?.website,
+        },
+        gst: data?.gstnumber,
+      };
+      // console.log("hospital !!", hospital);
+      // console.log(mutate);
+      await mutate({ id: id, data: hospital });
+      // methods.reset();
+    } else {
+      const errorMessage = "Account number mismatch";
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   return (
     <div className="bg-white rounded p-4 mt-3">

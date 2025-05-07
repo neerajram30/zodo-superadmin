@@ -4,7 +4,6 @@ import ToggleDisable from "../../modals/ToggleDisable";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   arrow_left,
-  bin_icon_red,
   cross_icon,
   dr_profile,
   email_icon,
@@ -14,18 +13,17 @@ import {
   phone_icon,
   three_dots_menu,
 } from "../../imagepath";
+import PropTypes from "prop-types";
+import FullscreenLoader from "../../loadings/FullscreenLoader";
 
-function DoctorRequestCard() {
+function DoctorRequestCard(props) {
   const navigate = useNavigate();
-    const { id } = useParams();
+  const { id } = useParams();
+  const { doctorDetails, isLoading } = props;
   const [show, setShow] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
 
-  const handleTogglebtn = (e) => {
-    e.stopPropagation();
-    setdisableShow(true);
-  };
   return (
     <div>
       <div className="card-box profile-header mt-3 mb-5">
@@ -45,13 +43,12 @@ function DoctorRequestCard() {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {/* <span className="bi bi-chevron-up"></span> */}
                 <img src={three_dots_menu} alt="" />
               </Link>
               <div className="dropdown-menu">
                 <Link
                   className="dropdown-item"
-                    to={`/manage-doctors/request/${id}/edit`}
+                  to={`/manage-doctors/request/${id}/edit`}
                 >
                   <img
                     src={pencil_icon}
@@ -61,48 +58,6 @@ function DoctorRequestCard() {
                   <span>Edit</span>
                 </Link>
                 <div className="dropdown-divider" />
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                  onClick={handleTogglebtn}
-                >
-                  {/* <img
-                    src={toggle_icon}
-                    alt="disable"
-                    className="dropdown-menu-icon"
-                  /> 
-                  <span>Disable</span> */}
-                  <div
-                    // onClick={handleTogglebtn}
-                    className="status-toggle d-flex align-items-center"
-                  >
-                    <input
-                      type="checkbox"
-                      id="status"
-                      className="check"
-                      checked={disable}
-                    />
-                    <label htmlFor="status" className="checktoggle-small">
-                      checkbox
-                    </label>
-                    <span className="ps-2">
-                      {disable ? "Disable" : "Enable"}
-                    </span>
-                  </div>
-                </Link>
-                <div className="dropdown-divider" />
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                  onClick={() => setShow(true)}
-                >
-                  <img
-                    src={bin_icon_red}
-                    alt="delete"
-                    className="dropdown-menu-icon"
-                  />
-                  <span className="text-danger">Delete</span>
-                </Link>
               </div>
             </div>
           </div>
@@ -123,8 +78,8 @@ function DoctorRequestCard() {
               <div className="col">
                 {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
-                  <h3 className="user-name m-t-0 mb-0">Dr. Sunny kuriakose</h3>
-                  <small className="text-muted">MBBS</small>
+                  <h3 className="user-name m-t-0 mb-0">Dr {doctorDetails?.name}</h3>
+                  <small className="text-muted">{doctorDetails?.registration_details?.qualification}</small>
                 </div>
                 {/* </div> */}
               </div>
@@ -137,7 +92,7 @@ function DoctorRequestCard() {
                 <span className="text">
                   <div className="text-dark">
                     <img src={phone_icon} alt="phone" />{" "}
-                    <span className="ms-1">770-889-6484</span>
+                    <span className="ms-1">{doctorDetails?.phone_number}</span>
                   </div>
                 </span>
               </li>
@@ -145,7 +100,7 @@ function DoctorRequestCard() {
                 <span className="text">
                   <div className="text-dark">
                     <img src={email_icon} alt="email" />{" "}
-                    <span className="ms-1">apollo@example.com</span>
+                    <span className="ms-1">{doctorDetails?.email}</span>
                   </div>
                 </span>
               </li>
@@ -154,13 +109,13 @@ function DoctorRequestCard() {
 
           <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
             <button className="btn hospital-draft-btn text-primary w-75 mt-1">
-              Active
+              {doctorDetails?.status ? doctorDetails?.status : "inactive"}
             </button>
           </div>
         </div>
 
         <div className="row mt-4">
-          <div className="col-md-6">
+          {/* <div className="col-md-6">
             <ul className="personal-info address-info">
               <li className="d-flex align-items-center">
                 <span className="address-header">Address</span>
@@ -179,10 +134,12 @@ function DoctorRequestCard() {
               <li className="d-flex align-items-center">
                 <span className="address-header">State</span>
                 <span className="">:</span>
-                <span className="ms-3 w-100 md-w-75 fw-semibold">Telengana</span>
+                <span className="ms-3 w-100 md-w-75 fw-semibold">
+                  Telengana
+                </span>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="col-md-6">
             <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1">
@@ -191,12 +148,15 @@ function DoctorRequestCard() {
                   <li>
                     <span className="payment-title">
                       Account Number :{" "}
-                      <span className="fw-semibold text-black">111234567900</span>
+                      <span className="fw-semibold text-black">
+                        {doctorDetails?.bank_details?.account_number}
+                      </span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
                     <span className="payment-title">
-                      Bank Name : <span className="fw-semibold text-black">Federal</span>
+                      Bank Name :{" "}
+                      <span className="fw-semibold text-black">{doctorDetails?.bank_details?.bank_name}</span>
                     </span>
                   </li>
                 </ul>
@@ -206,12 +166,15 @@ function DoctorRequestCard() {
                   <li>
                     <span className="payment-title">
                       IFSC Code :{" "}
-                      <span className="fw-semibold text-black">111234567900</span>
+                      <span className="fw-semibold text-black">
+                        {doctorDetails?.bank_details?.ifsc}
+                      </span>
                     </span>
                   </li>
                   <li className="mt-3 mb-3">
                     <span className="payment-title">
-                      UPI ID : <span className="fw-semibold text-black">123@oksbi</span>
+                      UPI ID :{" "}
+                      <span className="fw-semibold text-black">{doctorDetails?.bank_details?.upi_id}</span>
                     </span>
                   </li>
                 </ul>
@@ -223,17 +186,20 @@ function DoctorRequestCard() {
           <div className="col border border-secondary-subtle pt-3 pb-1 ms-1 me-1 mt-3 file-upload-card">
             <h5>Specialisation</h5>
             <div className="overflow-auto add-specialisation">
-              <div className="border border-secondary-subtle p-2 mt-2">ENT</div>
-              <div className="border border-secondary-subtle p-2 mt-2">ENT</div>
+              {
+                doctorDetails?.specialisations?.map((item)=>(
+                  <div className="border border-secondary-subtle p-2 mt-2" key={item.id}>{item.name}</div>
+                ))
+              }
             </div>
-            <div className="pt-2">
+            {/* <div className="pt-2">
               <Link
                 to
                 className="hospital-draft-btn rounded text-primary ps-2 pe-2 pt-1 pb-1 text-primary"
               >
                 Add New Row
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="col-9 border border-secondary-subtle pt-3 pb-1 ms-1 me-1 mt-3 file-upload-card">
             <div className="row mb-1">
@@ -242,7 +208,10 @@ function DoctorRequestCard() {
               </div>
 
               <div className="col">
-                <Link to={`/manage-doctors/request/${id}/edit`} className="d-flex justify-content-end">
+                <Link
+                  to={`/manage-doctors/request/${id}/edit`}
+                  className="d-flex justify-content-end"
+                >
                   <img src={pencil_icon} alt="" />
                 </Link>
               </div>
@@ -280,6 +249,7 @@ function DoctorRequestCard() {
           </div>
         </div>
       </div>
+      {isLoading && <FullscreenLoader/>}
       <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
       <ToggleDisable
         show={disableshow}
@@ -291,5 +261,10 @@ function DoctorRequestCard() {
     </div>
   );
 }
+
+DoctorRequestCard.propTypes = {
+  doctorDetails: PropTypes.func,
+  isLoading: PropTypes.bool,
+};
 
 export default DoctorRequestCard;

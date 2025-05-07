@@ -17,7 +17,7 @@ function Doctors() {
     { id: "dr_list", title: "All Doctors", content: <DoctorsList /> },
     {
       id: "dr_request",
-      title: "Doctor Request (10)",
+      title: "Doctor Requests",
       content: <DoctorRequests />,
     },
   ];

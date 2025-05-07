@@ -61,7 +61,7 @@ function Review(props) {
                         <img src={user_profile_1} alt="profile_picture" />
                       </div>
                       <div className="col-9 mt-2">
-                        <p>{review.name}</p>
+                        <p>{review?.user?.first_name +" "+review?.user?.last_name}</p>
                         <div>
                           <i className="fa fa-star active"></i>
                           <i className="fa fa-star active"></i>
@@ -75,7 +75,7 @@ function Review(props) {
                       </div>
                     </div>
                     <div className="review-description pt-3 pb-3">
-                      <p>{review.description}</p>
+                      <p>{review.review_note}</p>
                     </div>
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 
 function ToggleModal(props) {
-  const { show, setShow, setdisable, disable, handleDisable, isLoading } = props;
+  const { show, setShow, setdisable, disable, handleDisable, isLoading, title } = props;
   const handleDisableClick = () => {
     // setShow(false);
     setdisable(!disable);
@@ -20,8 +20,8 @@ function ToggleModal(props) {
     >
       <Modal.Header closeButton className="border-0">
         <Modal.Title>
-          Are you sure you want to {disable ? "Enable" : "Disable"} the
-          Hospital ?
+          Are you sure you want to {disable ? "Enable" : "Disable"} the{" "}
+          {title} ?
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="border-0">
@@ -78,7 +78,8 @@ ToggleModal.propTypes = {
   setdisable: PropTypes.node,
   disable: PropTypes.node,
   handleDisable: PropTypes.func,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  title: PropTypes.string
 };
 
 export default ToggleModal;

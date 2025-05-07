@@ -1,8 +1,5 @@
 import React from "react";
 import OverViewCard from "../../Hospitals/OverViewCard";
-import { DatePicker } from "antd";
-import TransactionTable from "../../Hospitals/Transactions/TransactionTable";
-import ExportTable from "../../assests/ExportTable";
 
 function DoctorsOverview() {
   const revenueOverview = [
@@ -37,7 +34,7 @@ function DoctorsOverview() {
         ))}
       </div>
 
-      <div className="card-box">
+      {/* <div className="card-box">
         <h5 className="text-black">Transactions</h5>
         <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">
@@ -70,7 +67,7 @@ function DoctorsOverview() {
         <div className="table-responsive">
           <TransactionTable />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

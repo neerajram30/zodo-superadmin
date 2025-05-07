@@ -360,6 +360,7 @@ function HospitalDetailsCard(props) {
           disable={disable}
           handleDisable={handleDisable}
           isLoading={isLoading}
+          title="Hospital"
         />
         {isLoading && <FullscreenLoader />}
       </div>

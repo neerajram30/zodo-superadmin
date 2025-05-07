@@ -1,209 +1,93 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  blogimg10,
-  blogimg12,
-  blogimg2,
-  blogimg4,
-  blogimg6,
-  blogimg8
-} from "../imagepath";
 import DataTable from "../DataTables/DataTable";
 import ConfirmDelete from "../modals/ConfirmDelete";
 import DoctorRequestHero from "../heros/DoctorRequestHero";
+import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
+import { reduceArraytoString } from "../configs/reduceArraytoString";
 function DoctorRequests() {
   const [show, setShow] = useState(false);
-  const datasource = [
-    {
-      id: 1,
-      Img: blogimg2,
-      Name: "Andrea Lalema",
-      Department: "Otolaryngology",
-      Specialization: "Infertility",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-    {
-      id: 2,
-      Img: blogimg4,
-      Name: "Dr.Smith Bruklin",
-      Department: "Urology",
-      Specialization: "Prostate",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-    {
-      id: 3,
-      Img: blogimg6,
-      Name: "Dr.William Stephin",
-      Department: "Radiology",
-      Specialization: "Cancer",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-    {
-      id: 4,
-      Img: blogimg12,
-      Name: "Bernardo James",
-      Department: "Dentist",
-      Specialization: "Prostate",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-    {
-      id: 5,
-      Img: blogimg10,
-      Name: "Cristina Groves",
-      Department: "Gynocolgy",
-      Specialization: "Prostate",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-    {
-      id: 6,
-      Img: blogimg8,
-      Name: "Mark Hay Smith",
-      Department: "Gynocolgy",
-      Specialization: "Prostate",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-    {
-      id: 7,
-      Img: blogimg2,
-      Name: "Andrea Lalema",
-      Department: "Otolaryngology",
-      Specialization: "Infertility",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-    {
-      id: 8,
-      Img: blogimg4,
-      Name: "Dr.Smith Bruklin",
-      Department: "Urology",
-      Specialization: "Prostate",
-      Degree: "MBBS, MS",
-      Mobile: "+1 23 456890",
-      Email: "example@email.com",
-      FIELD9: "",
-    },
-  ];
+  const query = "status=pending";
+  const { data: doctorList, isLoading } = useDoctorsList(query);
+  console.log(doctorList);
+  console.log(isLoading);
+
   const columns = [
     {
       title: "Name",
-      dataIndex: "Name",
-      render: (text, record) => (
+      dataIndex: "name",
+      key: "name",
+      render: (text) => (
         <>
           <h2 className="profile-image">
-            <Link
-              to={`/manage-doctors/${record.id}`}
-              className="avatar avatar-sm me-2"
-            >
-              <img
-                className="avatar-img rounded-circle"
-                src={record.Img}
-                alt="User Image"
-              />
-            </Link>
-            <Link to={`/manage-doctors/${record.id}`}>{record.Name}</Link>
+            {/* <Link
+                  to={`/manage-doctors/${record.id}`}
+                  className="avatar avatar-sm me-2"
+                >
+                  <img
+                    className="avatar-img rounded-circle"
+                    src={blogimg12}
+                    alt="User Image"
+                  />
+                {text}
+                </Link> */}
+            <Link to>{text}</Link>
           </h2>
         </>
       ),
-      sorter: (a, b) => a.Name.length - b.Name.length,
+      sorter: (a, b) => a.name.length - b.name.length,
     },
-    {
-      title: "Department",
-      dataIndex: "Department",
-      sorter: (a, b) => a.Department.length - b.Department.length,
-    },
+    // {
+    //   title: "Department",
+    //   dataIndex: "Department",
+    //   // sorter: (a, b) => a.Department.length - b.Department.length,
+    // },
     {
       title: "Specialisation",
       dataIndex: "Specialization",
-      sorter: (a, b) => a.Specialization.length - b.Specialization.length,
+      // sorter: (a, b) => a.Specialization.length - b.Specialization.length,
+      render: (item, record) => {
+        const specialisations = reduceArraytoString(
+          record?.specialisations ?? []
+        );
+        return <div>{specialisations}</div>;
+      },
     },
     {
-      title: "Degree",
-      dataIndex: "Degree",
-      sorter: (a, b) => a.Degree.length - b.Degree.length,
+      title: "Type",
+      dataIndex: "type",
+      render:(item, record) =>(
+        <div>{record.hospital_id ? "ofline" : "online"}</div>
+      )
+      // sorter: (a, b) => a.Degree.length - b.Degree.length,
     },
     {
       title: "Mobile",
-      dataIndex: "Mobile",
-      sorter: (a, b) => a.Mobile.length - b.Mobile.length,
-      render: (text, record) => (
+      dataIndex: "phone_number",
+      sorter: (a, b) => a.phone_number.length - b.phone_number.length,
+      render: (text) => (
         <>
-          <Link to="#">{record.Mobile}</Link>
+          <Link to="#">{text}</Link>
         </>
       ),
     },
     {
       title: "Email",
-      dataIndex: "Email",
-      sorter: (a, b) => a.Email.length - b.Email.length,
+      dataIndex: "email",
+      sorter: (a, b) => a.email.length - b.email.length,
     },
     {
       title: "Action",
       dataIndex: "FIELD8",
       render: (item, record) => (
-        <>
+        <div className="d-flex justify-content-center">
           <Link
-            to={`/manage-doctors/request/${record.id}`}
+            to={record?.hospital_id ? `/manage-doctors/${record.id}` :`/manage-doctors/request/${record.id}`}
             className="hospital-draft-btn rounded-pill text-primary ps-3 pe-3"
           >
-            view
+            {record.hospital_id ? "View" : "Review"}
           </Link>
-        </>
-      ),
-    },
-    {
-      title: "",
-      dataIndex: "FIELD8",
-      render: (item, record) => (
-        <>
-          <div className="text-end">
-            <div className="dropdown dropdown-action">
-              <Link
-                to="#"
-                className="action-icon dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="fas fa-ellipsis-v" />
-              </Link>
-              <div className="dropdown-menu dropdown-menu-end">
-                <Link
-                  className="dropdown-item"
-                  to={`/manage-doctors/request/${record.id}`}
-                >
-                  <i className="far fa-edit me-2" />
-                  Edit
-                </Link>
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                  onClick={() => setShow(true)}
-                >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
-                </Link>
-              </div>
-            </div>
-          </div>
-        </>
+        </div>
       ),
     },
   ];
@@ -214,7 +98,7 @@ function DoctorRequests() {
           <div className="card-body">
             <DoctorRequestHero />
             <div className="doctor-list">
-              <DataTable data={datasource} columns={columns} />
+              <DataTable data={doctorList ?? []} columns={columns} />
             </div>
           </div>
         </div>
