@@ -22,7 +22,7 @@ function Hospitals() {
   const { data: requestedHospitals, isLoading: requestedLoading } =
     useRequestedHospitals("pending");
   console.log(requestedHospitals, requestedLoading);
-
+  const requestHospitalCount = requestedHospitals?.length ?? 0;
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -38,7 +38,7 @@ function Hospitals() {
     },
     {
       id: "requested",
-      title: "Requested Hospitals",
+      title: `Requested Hospitals (${requestHospitalCount})`,
       content: <HospitalRequest hospitalList={requestedHospitals ?? []} />,
     },
   ];

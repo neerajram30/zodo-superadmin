@@ -71,7 +71,7 @@ function TransactionTable(props) {
     <div className="table-responsive">
       <Table
         pagination={{
-          total: settlements.length,
+          total: settlements?.length,
           showSizeChanger: true,
           // showTotal: (total, range) =>
           //   `Showing ${range[0]} to ${range[1]} of ${total} entries`,

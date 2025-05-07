@@ -8,10 +8,10 @@ import { useHospitalAppointments } from "../../../hooks/appointments/useHospital
 function BookingsList() {
   const { id } = useParams();
   const { validId } = useValidateId(id);
-  const {data: appointments} = useHospitalAppointments(validId);
+  const {data: appointments, isLoading} = useHospitalAppointments(validId);
   return (
     <div>
-      <BookingsTable data={appointments ?? []} />
+      <BookingsTable data={appointments ?? []} isLoading={isLoading}/>
     </div>
   );
 }

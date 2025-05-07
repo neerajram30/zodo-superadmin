@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { itemRender } from "../Pagination";
 
 function DataTable(props) {
-  const { columns, data } = props;
+  const { columns, data, isLoading } = props;
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const onSelectChange = (newSelectedRowKeys) => {
@@ -30,14 +30,16 @@ function DataTable(props) {
         dataSource={data}
         rowSelection={rowSelection}
         rowKey={(record) => record.id}
+        loading={isLoading}
       />
     </div>
   );
 }
 
 DataTable.propTypes = {
-  columns: PropTypes.node,
-  data: PropTypes.node,
+  columns: PropTypes.array,
+  data: PropTypes.array,
+  isLoading: PropTypes.bool
 };
 
 export default DataTable;

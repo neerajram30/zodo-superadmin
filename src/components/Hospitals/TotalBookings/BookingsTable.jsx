@@ -3,9 +3,10 @@ import React from "react";
 import DataTable from "../../DataTables/DataTable";
 import PropTypes from "prop-types";
 import ExportTable from "../../assests/ExportTable";
+import { getDateFromIso } from "../../configs/getDateFromISO";
 
 function BookingsTable(props) {
-  const { data } = props;
+  const { data, isLoading } = props;
   const columns = [
     {
       title: "Booking Id",
@@ -24,6 +25,9 @@ function BookingsTable(props) {
       title: "DUE ISSUE",
       dataIndex: "createdAt",
       sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
+      render:(item)=>(
+        <div>{getDateFromIso(item)}</div>
+      )
     },
     {
       title: "STATUS",
@@ -80,14 +84,15 @@ function BookingsTable(props) {
       <div>{/* <h5>{232} results found</h5> */}</div>
 
       <div className="table-responsive">
-        <DataTable data={data} columns={columns} />
+        <DataTable data={data} columns={columns} isLoading={isLoading}/>
       </div>
     </div>
   );
 }
 
 BookingsTable.propTypes = {
-  data: PropTypes.node,
+  data: PropTypes.array,
+  isLoading: PropTypes.bool
 };
 
 export default BookingsTable;

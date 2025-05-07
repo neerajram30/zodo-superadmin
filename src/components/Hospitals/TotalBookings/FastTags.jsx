@@ -1,6 +1,5 @@
 import React from "react";
 import BookingsTable from "./BookingsTable";
-import { fastTagList } from "../../configs/fastTagList";
 import { useParams } from "react-router-dom";
 import { useValidateId } from "../../../hooks/useValidateId";
 import { useHospitalAppointmentsByquery } from "../../../hooks/appointments/useHospitalAppointmentsByquery";
@@ -13,7 +12,7 @@ function FastTags() {
   
   return (
     <div>
-      <BookingsTable data={fastTagList} />
+      <BookingsTable data={[]} />
     </div>
   );
 }
