@@ -6,7 +6,7 @@ import OverViewCard from "./OverViewCard";
 import ExportTable from "../assests/ExportTable";
 import { useParams } from "react-router-dom";
 import { useValidateId } from "../../hooks/useValidateId";
-import { useHospitalSettlements } from "../../hooks/auth/Settlements/useHospitalSettlements";
+import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettlements";
 
 function Finance() {
   const { id } = useParams();

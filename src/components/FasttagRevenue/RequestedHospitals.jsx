@@ -1,43 +1,23 @@
 import React from "react";
-import FasttagTable from "./FasttagTable";
-import { kims_logo } from "../imagepath";
-import ManageAccess from "./ManageAccess";
-
-function RequestedHospitals() {
+import { Table } from "antd";
+import PropTypes from "prop-types";
+import ManageAccess from './ManageAccess'
+function RequestedHospitals(props) {
+  const { data } = props;
   const columns = [
-    { label: "Hospital Name", key: "hospitalName" },
-    { label: "Requested Fast Tags/day", key: "requestedTagsPerday" },
-    { label: "Requested On", key: "requestedOn" },
-    { label: "Access", key: "access" },
+    { title: "Hospital Name", dataIndex: "name" },
+    { title: "Requested Fast Tags/day", dataIndex: "requestedTagsPerday", render:(item,record)=> <div>{record?.fastTag?.count}</div> },
+    { title: "Requested On", dataIndex: "requestedOn" },
+    { title: "Access", dataIndex: "access", render:(item, record)=> <ManageAccess record={record}/> },
   ];
-  const rows = [
-    {
-      id: 1,
-      hospitalName: "KIMS",
-      image: `${kims_logo}`,
-      requestedTagsPerday: 30,
-      requestedOn: 300,
-      access: <ManageAccess/>,
-    },
-    {
-      id: 2,
-      hospitalName: "KIMS",
-      image: `${kims_logo}`,
-      requestedTagsPerday: 30,
-      requestedOn: 300,
-      access: <ManageAccess/>,
-    },
-    {
-      id: 3,
-      hospitalName: "KIMS",
-      image: `${kims_logo}`,
-      requestedTagsPerday: 30,
-      requestedOn: 300,
-      access: <ManageAccess/>,
-    },
-  ];
+  
 
-  return <FasttagTable columns={columns} rows={rows} />;
+  return <Table columns={columns} dataSource={data} />;
 }
+
+RequestedHospitals.propTypes = {
+  data: PropTypes.array,
+  isLoading: PropTypes.bool,
+};
 
 export default RequestedHospitals;

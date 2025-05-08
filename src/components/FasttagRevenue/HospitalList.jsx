@@ -1,51 +1,39 @@
 import React from "react";
-import FasttagTable from "./FasttagTable";
-import { kims_logo} from "../imagepath";
-import EditFasttag from "./EditFasttag";
 import FasttagToggle from "./FasttagToggle";
+import { Table } from "antd";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-function HospitalList() {
+function HospitalList(props) {
+  const { data, isLoading } = props;
   const columns = [
-    { label: "Hospital Name", key: "hospitalName" },
-    { label: "No. Fast Tags/day", key: "fastTagsPerday" },
-    { label: "Monthly Sales", key: "monthlySales" },
-    { label: "Revenue/Month", key: "revenuePerMonth" },
-    { label: "Fast Tag", key: "fastTag" },
-    { label: "Action", key: "action" },
-  ];
-  const rows = [
+    { title: "Hospital Name", dataIndex: "name" },
     {
-      id: 1,
-      hospitalName:"KIMS",
-      image:`${kims_logo}`,
-      fastTagsPerday:30,
-      monthlySales:300,
-      revenuePerMonth:"$ 20,000",
-      fastTag:<FasttagToggle index={1}/>,
-      action:<EditFasttag/>,
+      title: "No. Fast Tags/day",
+      dataIndex: "fastTagsPerday",
+      render: (item, record) => <div>{record?.fastTag?.count}</div>,
+    },
+    { title: "Monthly Sales", dataIndex: "monthlySales" },
+    { title: "Revenue/Month", dataIndex: "revenuePerMonth" },
+    {
+      title: "Fast Tag",
+      dataIndex: "fastTag",
+      render: (item, record) => (
+        <FasttagToggle toggleFasttag={record.fastTag?.enabled} />
+      ),
     },
     {
-      id: 2,
-      hospitalName:"KIMS",
-      image:`${kims_logo}`,
-      fastTagsPerday:30,
-      monthlySales:300,
-      revenuePerMonth:"$ 20,000",
-      fastTag:<FasttagToggle index={2}/>,
-      action:<EditFasttag/>,
+      title: "Action",
+      dataIndex: "action",
+      render: (item, record) => (
+        <Link to={`/manage-hospitals/${record.id}`}>view</Link>
+      ),
     },
-    {
-      id: 3,
-      hospitalName:"KIMS",
-      image:`${kims_logo}`,
-      fastTagsPerday:30,
-      monthlySales:300,
-      revenuePerMonth:"$ 20,000",
-      fastTag:<FasttagToggle index={3}/>,
-      action:<EditFasttag/>,
-    }
   ];
-  return <FasttagTable columns={columns} rows={rows}/>;
+  return <Table columns={columns} dataSource={data} loading={isLoading} />;
 }
-
+HospitalList.propTypes = {
+  data: PropTypes.array,
+  isLoading: PropTypes.bool,
+};
 export default HospitalList;

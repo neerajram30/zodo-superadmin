@@ -6,15 +6,14 @@ import HospitalsList from "../../Hospitals/HospitalsList";
 import HospitalHero from "../../heros/HospitalHero";
 import AllHospitals from "../../Hospitals/AllHospitals";
 import HospitalRequest from "../../Hospitals/HospitalRequest";
-import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
 import useHospitalList from "../../../store/useHospitalList";
 import { useRequestedHospitals } from "../../../hooks/hospitals/useRequestedHospital";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
+import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
 function Hospitals() {
   const [searchTerm, setSearchterm] = useState("");
   const { data: hospitalList, isLoading } = useGetHospitals(searchTerm);
   // console.log("Data",hospitalList?.data);
-  console.log(searchTerm);
 
   const setHospitalList = useHospitalList((state) => state.setHospitalList);
   setHospitalList(hospitalList);

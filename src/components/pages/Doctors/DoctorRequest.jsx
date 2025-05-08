@@ -11,7 +11,6 @@ import ApproveRequestModal from "../../modals/ApproveRequestModal";
 function DoctorRequest() {
   const { id } = useParams();
   const { data: doctorDetails, isLoading } = useDoctorById(id);
-
   const [showApprovemodal, setShowApprovemodal] = useState(false);
   const [showDeclineModal, setShowDeclineMoadl] = useState(false);
   const { mutate, isLoading: approveLoading } = useChangeDoctorStatus();

@@ -20,7 +20,6 @@ function HospitalsList(props) {
   );
 }
 HospitalsList.propTypes = {
-  hospitalDetails: PropTypes.node,
   tabData: PropTypes.node,
 };
 

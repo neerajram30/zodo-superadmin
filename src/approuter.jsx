@@ -24,7 +24,6 @@ import AddDoctors from "./components/pages/Doctors/AddDoctors";
 import Specialization from "./components/pages/Doctors/Specialization";
 import FasttagIssued from "./components/pages/Dashboard/FasttagIssued";
 import FasttagRevenue from "./components/pages/Dashboard/FasttagRevenue";
-import SettlementRequests from "./components/pages/Dashboard/SettlementRequests";
 import ManageSettlement from "./components/pages/Dashboard/ManageSettlement";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import DoctorRequest from "./components/pages/Doctors/DoctorRequest";
@@ -35,6 +34,7 @@ import { useAuth } from "./hooks/auth/useAuth";
 import ReviewHospital from "./components/pages/Hospitals/ReviewHospital";
 import ReviewEdit from "./components/pages/Hospitals/ReviewEdit";
 import EditDoctotRequest from "./components/pages/Doctors/EditDoctotRequest";
+import SettlementPage from "./components/pages/Settlement/SettlementPage";
 
 //Accounts
 const Approuter = () => {
@@ -82,9 +82,13 @@ const Approuter = () => {
               path="dashboard/fasttag-issued"
               element={<FasttagIssued />}
             />
-            <Route
+            {/* <Route
               path="/dashboard/settlement-requests"
               element={<SettlementRequests />}
+            /> */}
+            <Route
+              path="/dashboard/settlement-requests"
+              element={<SettlementPage />}
             />
             <Route
               path="/dashboard/settlement-requests/:id"
