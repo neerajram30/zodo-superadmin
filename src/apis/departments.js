@@ -5,6 +5,13 @@ export const getDepartmentList = async (id) => {
   return response.data;
 };
 
+export const getDepartmentListByQuery = async (id,query) => {
+  const response = await apiClient.get(
+    `/departments/?hospital_id=${id}&${query}`
+  );
+  return response.data || [];
+};
+
 export const addDepartment = async (departmentData) => {
   const response = await apiClient.post("/departments", departmentData);
   return response.data || [];

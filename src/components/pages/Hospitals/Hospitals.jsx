@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
-import HospitalsList from "../../Hospitals/HospitalsList";
 // import LoadMore from "../../Hospitals/LoadMore";
 import HospitalHero from "../../heros/HospitalHero";
 import AllHospitals from "../../Hospitals/AllHospitals";
@@ -37,16 +36,19 @@ function Hospitals() {
       id: "allhospitals",
       title: "All Hosptitals",
       content: <AllHospitals hospitalList={hospitalList ?? []} />,
+      link:'all'
     },
     {
       id: "requested",
       title: `Requested Hospitals (${requestHospitalCount})`,
       content: <HospitalRequest hospitalList={requestedHospitals ?? []} />,
+      link:'requested'
     },
     {
       id: "rejected",
       title: `Rejected Hospitals (${rejectedHospitalCount})`,
       content: <HospitalRequest hospitalList={rejectedHospitals ?? []} />,
+      link:'rejected'
     },
   ];
 
@@ -64,7 +66,6 @@ function Hospitals() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <HospitalHero tabData={tabData} handleSearch={handleSearch} />
-          <HospitalsList tabData={tabData} />
           {isLoading ||
             rejectedLoading ||
             (requestedLoading && <FullscreenLoader />)}

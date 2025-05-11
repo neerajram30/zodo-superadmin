@@ -35,6 +35,8 @@ import ReviewHospital from "./components/pages/Hospitals/ReviewHospital";
 import ReviewEdit from "./components/pages/Hospitals/ReviewEdit";
 import EditDoctotRequest from "./components/pages/Doctors/EditDoctotRequest";
 import SettlementPage from "./components/pages/Settlement/SettlementPage";
+import PublicRoute from "./PublicRoute";
+import FinancePage from "./components/pages/FinancePage";
 
 //Accounts
 const Approuter = () => {
@@ -46,17 +48,18 @@ const Approuter = () => {
       <ToastContainer />
       <BrowserRouter basename="/">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/lockscreen" element={<LockScreen />} />
-          <Route path="/changepassword" element={<ChangePassword />} />
-          <Route path="/error" element={<Error />} />
-          <Route path="/server-error" element={<ServerError />} />
-          <Route path="/blankpage" element={<BlankPage />} />
-
+          <Route element={<PublicRoute />}>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/lockscreen" element={<LockScreen />} />
+            <Route path="/changepassword" element={<ChangePassword />} />
+            {/* <Route path="/error" element={<Error />} /> */}
+            {/* <Route path="/server-error" element={<ServerError />} /> */}
+            <Route path="/blankpage" element={<BlankPage />} />
+          </Route>
           <Route
             element={
               <ProtectedRoute
@@ -136,10 +139,7 @@ const Approuter = () => {
               path="/manage-doctors/add-doctors"
               element={<AddDoctors />}
             />
-            <Route
-              path="/manage-doctors/:id/edit"
-              element={<EditDoctor />}
-            />
+            <Route path="/manage-doctors/:id/edit" element={<EditDoctor />} />
             {/* <Route
               path="manage-doctors/request/:id/edit"
               element={<EditDoctor />}
@@ -157,7 +157,14 @@ const Approuter = () => {
               path="/manage-doctors/specialization"
               element={<Specialization />}
             />
+            <Route
+              path="/finance"
+              element={<FinancePage/>}
+            />
           </Route>
+          {/* Unauthorised routes       */}
+          <Route path="/unauthorized" element={<ServerError />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
       <div className="sidebar-overlay"></div>

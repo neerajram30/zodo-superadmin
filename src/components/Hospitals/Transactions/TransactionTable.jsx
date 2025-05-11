@@ -3,44 +3,47 @@ import React, { useState } from "react";
 // import { hospitalTransactions } from "../../configs/hospitalTransactions";
 import { itemRender, onShowSizeChange } from "../../Pagination";
 import PropTypes from "prop-types";
+import { formatDate } from "../../configs/formatDate";
 function TransactionTable(props) {
-  const { settlements } = props;
+  const { settlements, handleSelection } = props;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    handleSelection(newSelectedRowKeys)
     setSelectedRowKeys(newSelectedRowKeys);
   };
+
   const columns = [
     {
       title: "DATE ISSUED",
-      dataIndex: "date",
-      sorter: (a, b) => a.date.length - b.date.length,
+      dataIndex: "created_at",
+      render: (item) => <div>{formatDate(item)}</div>,
+      // sorter: (a, b) => a.date.length - b.date.length,
     },
     {
       title: "INVOICE#",
       dataIndex: "invoiceNumber",
-      sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
     },
     {
       title: "TRANSACTION NAME",
       dataIndex: "transactionName",
-      sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
     },
     {
       title: "DUE DATE",
       dataIndex: "dueDate",
-      sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+      // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
     },
     {
       title: "STATUS",
       dataIndex: "status",
-      sorter: (a, b) => a.status.length - b.status.length,
+      // sorter: (a, b) => a.status.length - b.status.length,
       render: (item) => (
         <div
           className={`${
-            (item === "Overdue" && "delete-badge status-red") ||
-            (item === "Refunded" && "delete-badge status-orange") ||
-            (item === "Paid" && "delete-badge status-green")
+            (item === "failed" && "delete-badge status-red") ||
+            (item === "requested" && "delete-badge status-orange") ||
+            (item === "completed" && "delete-badge status-green")
           }`}
         >
           {item}
@@ -49,13 +52,14 @@ function TransactionTable(props) {
     },
     {
       title: "TOTAL",
-      dataIndex: "total",
-      sorter: (a, b) => a.total.length - b.total.length,
+      dataIndex: "amount",
+      render:(item)=><div>₹ {item}</div>
+      // sorter: (a, b) => a.total.length - b.total.length,
     },
     {
       title: "BALANCE",
       dataIndex: "balance",
-      sorter: (a, b) => a.balance.length - b.balance.length,
+      // sorter: (a, b) => a.balance.length - b.balance.length,
     },
     {
       title: "ACTIONS",
@@ -88,7 +92,8 @@ function TransactionTable(props) {
 }
 
 TransactionTable.propTypes = {
-  settlements: PropTypes.node,
+  settlements: PropTypes.array,
+  handleSelection:PropTypes.func
 };
 
 export default TransactionTable;

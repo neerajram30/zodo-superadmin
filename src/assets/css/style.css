@@ -679,7 +679,12 @@ table.table td h2 span {
 .btn.btn-rounded {
   border-radius: 50px;
 }
-.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:focus{
+  background:none;
+  border-color: transparent;
+
+}
+
 .nav-tabs .nav-link:hover {
   background-color: #eee;
   border-color: transparent;
@@ -11696,7 +11701,7 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 }
 .has-search .form-control {
   padding-left: 2.375rem;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .search-container{
   width: 100%;
@@ -11847,4 +11852,21 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 
 .select-item-input{
   /* padding: 200px; */
+}
+
+.nav-link .nav-active{
+  background-color: #007bff !important;
+  color: #028ee1;
+}
+
+.range-picker .ant-picker {
+  border-color: black !important;
+}
+.range-picker .ant-picker-cell-selected .ant-picker-cell-inner {
+  background-color: black !important;
+  color: white !important;
+}
+
+.tab-list{
+  min-height: 30vh;
 }

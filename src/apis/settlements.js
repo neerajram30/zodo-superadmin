@@ -7,6 +7,23 @@ export const getHospitalSettlement = async (id) => {
   return response?.data?.data ?? [];
 };
 
+export const getHospitalSettlementByquery = async (id,query) => {
+  const response = await apiClient.get(
+    `settlements?hospital_id=${id}&${query}`
+  );
+  return response?.data?.data ?? [];
+};
+
+
+
+
+export const getDoctorSettlements = async (id) => {
+  const response = await apiClient.get(
+    `settlements?doctor_id=${id}`
+  );
+  return response?.data?.data ?? [];
+};
+
 export const getAllSettlements = async () => {
   const response = await apiClient.get(
     `settlements/admin`
@@ -16,7 +33,7 @@ export const getAllSettlements = async () => {
 
 export const getAllSettlementsByQuery = async (query) => {
   const response = await apiClient.get(
-    `settlements/admin?name=${query}`
+    `settlements/admin?${query}`
   );
   return response?.data?.data ?? [];
 };

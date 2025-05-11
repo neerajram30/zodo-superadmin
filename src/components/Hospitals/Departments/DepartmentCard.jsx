@@ -44,7 +44,7 @@ function DepartmentCard(props) {
           </div>
         </div>
         <div className="row">
-          <p className="text-dark col">{2} Person</p>
+          <p className="text-dark col">{data.status}</p>
           {/* <div className="col-auto">
             <img src={right_chevron} alt="#" />
           </div> */}

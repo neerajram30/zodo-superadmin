@@ -16,10 +16,6 @@ function HospitalDetails() {
     // isError,
     error,
   } = useViewHospital(id);
-  // console.log("data", hospitalDetails);
-  // console.log("is loading", isLoading);
-  // console.log("is error ", isError);
-  // console.log("error", error);
   const setSelectedHospital = useSelectedHospital(
     (state) => state.setSelectedHospital
   );

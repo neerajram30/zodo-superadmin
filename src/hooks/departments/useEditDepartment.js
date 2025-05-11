@@ -9,13 +9,14 @@ export const useEditDepartment = () => {
     mutationFn: editDepartment, // API function to create
     onMutate: async () => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
-      await queryClient.cancelQueries({ queryKey: ["hospitals"] });
+      await queryClient.cancelQueries({ queryKey: ["departments"] });
     },
     onSuccess: (data, variables) => {
       const message = data?.message || "Department updated successfully";
-      queryClient.setQueryData(["departments", variables.id], data);
-    //   queryClient.invalidateQueries({ queryKey: ["hospitals"] });
-      queryClient.invalidateQueries({ queryKey: ["departments", variables.id] });
+      queryClient.invalidateQueries({ queryKey: ["departments"] });
+      queryClient.invalidateQueries({
+        queryKey: ["departments", variables.id],
+      });
       toast.success(message, {
         position: "top-right",
         autoClose: 5000,

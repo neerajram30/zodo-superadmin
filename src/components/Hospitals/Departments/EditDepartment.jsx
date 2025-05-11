@@ -14,14 +14,20 @@ function EditDepartment(props) {
 
   const onEditDepartment = async (data) => {
     const departmentId = departmentData?.id;
-    
+
     const department = {
       name: data.departmentName,
       description: data.message,
       hospital_id: data.hospital_id,
     };
-    await mutate({ id: departmentId, data: department });
-    methods.reset();
+    await mutate(
+      { id: departmentId, data: department },
+      {
+        onSuccess: () => {
+          setShow(false);
+        },
+      }
+    );
   };
   return (
     <Modal
@@ -33,7 +39,7 @@ function EditDepartment(props) {
       backdropClassName="hospital-modal-backdrop"
     >
       <Modal.Header closeButton className="border-0">
-        <Modal.Title>Specialisation</Modal.Title>
+        <Modal.Title>Edit Department</Modal.Title>
       </Modal.Header>
       <Modal.Body className="border-0">
         <FormProvider {...methods}>

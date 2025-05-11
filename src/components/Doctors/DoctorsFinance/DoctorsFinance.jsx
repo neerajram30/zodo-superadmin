@@ -58,7 +58,7 @@ function DoctorsFinance() {
             </div>
           </div>
           <div className="col-12 col-md-6 col-xl-3">
-            <ExportTable/>
+            <ExportTable />
           </div>
         </div>
         <div>
@@ -66,7 +66,7 @@ function DoctorsFinance() {
         </div>
 
         <div className="table-responsive">
-          <TransactionTable />
+          <TransactionTable settlements={[]} />
         </div>
       </div>
     </div>

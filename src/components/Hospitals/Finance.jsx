@@ -1,20 +1,36 @@
-import React from "react";
 import { bin_icon_red, right_chevron } from "../imagepath";
 import TransactionTable from "./Transactions/TransactionTable";
-import { DatePicker } from "antd";
 import OverViewCard from "./OverViewCard";
-import ExportTable from "../assests/ExportTable";
 import { useParams } from "react-router-dom";
-import { useValidateId } from "../../hooks/useValidateId";
 import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettlements";
+import { useState } from "react";
+import DateSearchHero from "../heros/DateSearchHero";
 
 function Finance() {
   const { id } = useParams();
-  const { validId } = useValidateId(id);
-  console.log("Valid id ", validId);
-  const { data: settlements} = useHospitalSettlements(validId);
-  console.log(settlements);
-  
+  const [selectedItems, setSelectedItems] = useState(null);
+  console.log(selectedItems);
+  const [searchTerm, setsearchTerm] = useState("");
+  const [date, setdate] = useState(null);
+  const query =
+    (searchTerm &&
+      date &&
+      `name=${searchTerm}&from_date=${date.startDate}&to_date=${date.endDate}`) ||
+    (searchTerm && `name=${searchTerm}`) ||
+    (date && `from_date=${date.startDate}&to_date=${date.endDate}`) ||
+    "";
+  const handleDate = (date) => {
+    setdate(date);
+  };
+  const handleSearch = (term) => {
+    setsearchTerm(term);
+  };
+
+  const { data: settlements } = useHospitalSettlements(id, query);
+  const handleSelection = (items) => {
+    setSelectedItems(items);
+  };
+
   const financeData = [
     {
       id: 1,
@@ -145,7 +161,9 @@ function Finance() {
 
       <div className="card-box">
         <h5>Transactions</h5>
-        <div className="row mt-4">
+
+        <DateSearchHero handleDate={handleDate} handleSearch={handleSearch} />
+        {/* <div className="row mt-4">
           <div className="col-12 col-md-6 col-xl-3">
             <div className="form-group local-forms cal-icon">
               <DatePicker
@@ -167,23 +185,28 @@ function Finance() {
           <div className="col-12 col-md-6 col-xl-3">
             <ExportTable />
           </div>
-        </div>
+        </div> */}
         <div>
-          <h5>
-            {settlements?.length} results found{" "}
-            <span className="delete-badge status-red ms-1">
-              <img
-                src={bin_icon_red}
-                alt="delete"
-                className="dropdown-menu-icon"
-                width={15}
-                height={15}
-              />
-              <span className="mt-5 ps-2">CLEAR</span>
-            </span>
-          </h5>
+          {settlements?.length && (
+            <h5>
+              {settlements?.length + "results found"}
+              <span className="delete-badge status-red ms-1">
+                <img
+                  src={bin_icon_red}
+                  alt="delete"
+                  className="dropdown-menu-icon"
+                  width={15}
+                  height={15}
+                />
+                <span className="mt-5 ps-2">CLEAR</span>
+              </span>
+            </h5>
+          )}
         </div>
-        <TransactionTable settlements={settlements ?? []}/>
+        <TransactionTable
+          settlements={settlements ?? []}
+          handleSelection={handleSelection}
+        />
       </div>
     </div>
   );

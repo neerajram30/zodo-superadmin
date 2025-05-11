@@ -1,26 +1,67 @@
-import React from "react";
-import DepartmentHero from "../../heros/DepartmentHero";
+import { useState } from "react";
 import DepartmentCard from "./DepartmentCard";
 import { useDepartmentList } from "../../../hooks/departments/useDepartmentList";
 import PropTypes from "prop-types";
-import FullscreenLoader from "../../loadings/FullscreenLoader";
+import ButtonSerchHero from "../../heros/ButtonSerchHero";
+import CenteredModal from "../../modals/CenteredModal";
+import AddDepartmentForm from "./AddDepartmentForm";
+import ComponentLoader from "../../loadings/ComponentLoader";
 
 function Department(props) {
   const { hospitalId } = props;
-  const { data: departmentList, isLoading } = useDepartmentList(hospitalId);
+  const [searchTerm, setSearchterm] = useState("");
+  const [show, setShow] = useState(false);
+  const query = searchTerm ? `name=${searchTerm}` : "";
+  const { data: departmentList, isLoading } = useDepartmentList(
+    hospitalId,
+    query
+  );
+
+  const handleShow = () => {
+    setShow(true);
+  };
+  const handelSearchTerm = (search) => {
+    setSearchterm(search);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
   return (
     <div>
-      <DepartmentHero />
-      <div className="row mt-3 mb-5">
-        {departmentList?.map((item) => {
-          return (
-            <div className="col-md-3 col-sm-6 col-lg-3 col-xl-3" key={item.id}>
-              <DepartmentCard data={item} />
-            </div>
-          );
-        })}
+      <ButtonSerchHero
+        title="All Departments"
+        handleSearchterm={handelSearchTerm}
+        handleShow={handleShow}
+        buttonTitle="Add Department"
+      />
+      <div className="tab-list">
+        {!isLoading ? (
+          <div className="row mt-3 mb-5">
+            {departmentList?.map((item) => {
+              return (
+                <div
+                  className="col-md-3 col-sm-6 col-lg-3 col-xl-3"
+                  key={item.id}
+                >
+                  <DepartmentCard data={item} />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <ComponentLoader />
+        )}
       </div>
-      {isLoading && <FullscreenLoader/>}
+
+      <CenteredModal
+        show={show}
+        handleClose={handleClose}
+        title="Add Department"
+      >
+        <AddDepartmentForm handleClose={handleClose} />
+      </CenteredModal>
     </div>
   );
 }
