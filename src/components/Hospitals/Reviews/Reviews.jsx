@@ -13,7 +13,7 @@ function Reviews() {
     setSearchterm(term)
   }
   return (
-    <div>
+    <div className="mt-3">
       <BasicSearchHero 
       
       title="Reviews" 

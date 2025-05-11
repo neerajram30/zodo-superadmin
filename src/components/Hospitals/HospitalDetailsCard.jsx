@@ -20,6 +20,7 @@ import ToggleModal from "./ToggleModal";
 import PropTypes from "prop-types";
 import FullscreenLoader from "../loadings/FullscreenLoader";
 import { useChangeHospitalStatus } from "../../hooks/hospitals/useChangeHospitalStatus";
+import TransparentTabs from "../tabs/TransparentTabs";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
@@ -32,19 +33,26 @@ function HospitalDetailsCard(props) {
   // const { mutate, isLoading } = useEditHostpital();
   const { mutate, isLoading } = useChangeHospitalStatus();
   const tabData = [
-    { id: "overview", title: "Overview", content: <Overview /> },
+    {
+      id: "overview",
+      title: "Overview",
+      content: <Overview />,
+      link: "overview",
+    },
     {
       id: "department",
       title: "Department",
       content: <Department hospitalId={id} />,
+      link: "department",
     },
-    { id: "finance", title: "Finance", content: <Finance /> },
+    { id: "finance", title: "Finance", content: <Finance />, link: "finance" },
     {
       id: "total-bookings",
       title: "Total Bookings",
       content: <TotalBookings />,
+      link: "bookings",
     },
-    { id: "reviews", title: "Reviews", content: <Reviews /> },
+    { id: "reviews", title: "Reviews", content: <Reviews />, link: "review" },
   ];
 
   const hospitalStatus = hospitalDetails?.status;
@@ -123,14 +131,18 @@ function HospitalDetailsCard(props) {
                         type="checkbox"
                         id="status"
                         className="check"
-                        checked={hospitalDetails?.status === "active" ? true : false}
+                        checked={
+                          hospitalDetails?.status === "active" ? true : false
+                        }
                       />
                       <label htmlFor="status" className="checktoggle-small">
                         checkbox
                       </label>
                     </div>
                     <span className="ps-2">
-                      {hospitalDetails?.status === "active" ? "Disable" : "Enable"}
+                      {hospitalDetails?.status === "active"
+                        ? "Disable"
+                        : "Enable"}
                     </span>
                   </Link>
                   <div className="dropdown-divider" />
@@ -203,18 +215,18 @@ function HospitalDetailsCard(props) {
                     </Link>
                   </span>
                 </li>
-                <li>
-                  <span className="text">
-                    <Link to>
-                      <img src={search_outline_icon} alt="website" />{" "}
-                      <span className="ms-1">
-                        {hospitalDetails?.contact_details?.website ?? (
-                          <span className="text-dark">No website</span>
-                        )}
-                      </span>
-                    </Link>
-                  </span>
-                </li>
+                {hospitalDetails?.contact_details?.website && (
+                  <li>
+                    <span className="text">
+                      <Link to>
+                        <img src={search_outline_icon} alt="website" />{" "}
+                        <span className="ms-1">
+                          {hospitalDetails?.contact_details?.website}
+                        </span>
+                      </Link>
+                    </span>
+                  </li>
+                )}
               </ul>
             </div>
 
@@ -239,9 +251,9 @@ function HospitalDetailsCard(props) {
                   <span className="text">
                     <p className="w-md-75 ms-3">
                       {hospitalDetails?.address?.lineOne +
-                        " " +
+                        ", " +
                         hospitalDetails?.address?.lineTwo +
-                        " " +
+                        ", " +
                         hospitalDetails?.address?.city}
                     </p>
                   </span>
@@ -318,8 +330,8 @@ function HospitalDetailsCard(props) {
             </div>
           </div>
         </div>
-
-        <div className="profile-tabs">
+        <TransparentTabs tabData={tabData} />
+        {/* <div className="profile-tabs">
           <ul className="nav nav-tabs nav-tabs-bottom">
             {tabData.map((tabItem, i) => (
               <li key={tabItem.id + i}>
@@ -345,7 +357,7 @@ function HospitalDetailsCard(props) {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         <HospitalModal
           show={show}
           setShow={setShow}

@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 import { useAllSettlements } from "../../../hooks/settlements/useAllSettlements";
 import { useSetSettlementStatusList } from "../../../hooks/settlements/useGetSettlementStatusList";
 import TabSearchHero from "../../heros/TabSearchHero";
-import Settlements from "../../settlements/Settlements";
 import SettlementList from "../../settlements/SettlementList";
 import SettlementRequest from "../../settlements/SettlementRequest";
 
 function SettlementPage() {
   const [searchTerm, setSearchterm] = useState("");
-  const { data: settlementList, isLoading } = useAllSettlements(searchTerm);
+  const query = searchTerm ? `name=${searchTerm}` : ""
+  const { data: settlementList, isLoading } = useAllSettlements(query);
   // console.log("Data",settlementList?.data);
   const { data: requestedSettlements, isLoading: requestedLoading } =
-    useSetSettlementStatusList("pending");
+    useSetSettlementStatusList("requested");
   const { data: rejectedSettlements, isLoading: rejectedLoading } =
     useSetSettlementStatusList("rejected");
   const requestSettlementCount = requestedSettlements?.length ?? 0;
@@ -37,16 +37,19 @@ function SettlementPage() {
       id: "allhospitals",
       title: "All Settlements",
       content: <SettlementList data={settlementList ?? []} />,
+      link:"all"
     },
     {
       id: "requested",
       title: `Requested Settlements (${requestSettlementCount})`,
       content: <SettlementRequest data={requestedSettlements ?? []} />,
+      link:"requested"
     },
     {
       id: "rejected",
       title: `Rejected Settlements (${rejectedSettlementCount})`,
       content: <SettlementRequest hospitalList={rejectedSettlements ?? []} />,
+      link:"rejected"
     },
   ];
 
@@ -61,7 +64,7 @@ function SettlementPage() {
           {/* <BasicHero title="Settlement Requests" /> */}
           {/* <SettlementList /> */}
           <TabSearchHero tabData={tabData} handleSearch={handleSearch} />
-          <Settlements tabData={tabData} />
+          {/* <Settlements tabData={tabData} /> */}
           {isLoading ||
             rejectedLoading ||
             (requestedLoading && <FullscreenLoader />)}

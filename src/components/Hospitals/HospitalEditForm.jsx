@@ -123,7 +123,11 @@ function HospitalEditForm() {
       };
       // console.log("hospital !!", hospital);
       // console.log(mutate);
-      await mutate({ id: id, data: hospital });
+      await mutate({ id: id, data: hospital }, { onSuccess: () => {
+        navigate(`/manage-hospitals/${id}`)
+
+
+      } });
       // methods.reset();
     } else {
       const errorMessage = "Account number mismatch";

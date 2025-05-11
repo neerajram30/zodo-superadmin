@@ -1,5 +1,3 @@
-import React from "react";
-import SearchBox from "../searchbox/SearchBox";
 import { Link } from "react-router-dom";
 import { addicon } from "../imagepath";
 
@@ -12,7 +10,17 @@ function DoctorListHero() {
             <h3>Doctors List</h3>
           </div>
           <div className="ms-3 w-50">
-            <SearchBox />
+            <div>
+              <div className="form-group has-search">
+                <span className="fa fa-search form-control-feedback"></span>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search"
+                  // onChange={(e) => handleSearchInput(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
         </div>
 

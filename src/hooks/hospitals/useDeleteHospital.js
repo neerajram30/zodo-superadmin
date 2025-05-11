@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteHospital } from "../../apis/hospitals";
 import { useNavigate } from "react-router-dom";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 const useDeleteHospital = () => {
   const queryClient = useQueryClient();
@@ -21,7 +21,8 @@ const useDeleteHospital = () => {
         data: oldHospitals?.data?.filter((hospital) => hospital.id !== id),
       }));
     },
-    onSuccess: (data) => {      
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["hospitals"] });
       const message = data.message;
       toast.success(message, {
         position: "top-right",
@@ -34,8 +35,9 @@ const useDeleteHospital = () => {
       });
       navigate("/manage-hospitals");
     },
-    onError: (error, id, context) => {      
-      const errotMessage = error?.response?.data?.message || "Failed to delete hospital";
+    onError: (error, id, context) => {
+      const errotMessage =
+        error?.response?.data?.message || "Failed to delete hospital";
       // Rollback if there is an error
       if (context?.previousHospitals) {
         queryClient.setQueryData(["hospitals"], context.previousHospitals);

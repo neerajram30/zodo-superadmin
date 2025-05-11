@@ -1,40 +1,54 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { apollo_logo } from "../imagepath";
+import { formatDate } from "fullcalendar/index.js";
 
 function SettlementCard(props) {
   const { data } = props;
+  const getDuestatus = (inputdate)=>{
+    const date = new Date(inputdate);
+    const now = new Date();
+    if(date < now){
+      return "OVER DUE AMOUNT";
+    }
+    else if(date > now){
+      return "REQUEST AMOUNT";
+    }
+  }
   return (
     <div className="card invoices-grid-card w-100">
       <Link to={`/dashboard/settlement-requests/${data.id}`}>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={data.icon} alt="#" />
+              <img src={apollo_logo} alt="#" />
             </div>
             <div className="col-auto">
-              <span className="text-success">●</span>
+              <span className={data.status === "rejected" && `text-danger` || data.status === "requested" && `text-warning` || `text-success`}>●</span>
+            
+              {/* <h5 className="custom-badgestatus-orange">{data.status}</h5> */}
             </div>
             <div className="row mt-3">
               <div className="col">
-                <h5>{data.name}</h5>
+                <h5>Hospital name</h5>
               </div>
-              <div className="col-auto">
+              {/* <div className="col-auto">
                 <h5 className="text-primary">{data.status}</h5>
-              </div>
+              </div> */}
             </div>
 
             <div className="row mt-2">
               <div className="col text-secondary align-middle">
-                <p className={`${data.dueStatus === "OVER DUE" ? "custom-badge status-red" :"custom-badge status-orange"}`}>{data.dueStatus}</p>
+                <p className={`${getDuestatus(data?.request_date) === "OVER DUE AMOUNT" ? "custom-badge status-red" :"custom-badge status-orange"}`}>{getDuestatus(data?.request_date)}</p>
               </div>
               <div className="col-auto">
-                <h5>{data.requestedAmount}</h5>
+                <h5>₹ {data.amount}</h5>
               </div>
             </div>
 
             <div className="row">
-              <p>Requested On {data.requestedDate}</p>
+              <p>Requested On {formatDate(data?.request_date)}</p>
             </div>
           </div>
         </div>

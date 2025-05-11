@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { useState } from "react";
 import { apollo_logo } from "../imagepath";
 import { Link } from "react-router-dom";
 import ApproveRequestModal from "../modals/ApproveRequestModal";
@@ -9,16 +9,13 @@ function HospitalRequestCard(props) {
   const { hospitalData } = props;
   const [showApprove, setshowApprove] = useState(false);
   const { mutate, isLoading } = useChangeHospitalStatus();
-  console.log(isLoading);
-
   const handelHospitalRequest = async () => {
     const statusUpdate = { status: "active" };
     await mutate({ id: hospitalData.id, data: statusUpdate });
   };
-
   return (
     <div className="card invoices-grid-card w-100" key={hospitalData.id}>
-      <Link to>
+      {/* <Link to> */}
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
@@ -40,15 +37,15 @@ function HospitalRequestCard(props) {
 
             <div className="mt-2">
               <div className="d-flex justify-content-start">
-                <Link
-                  to
+                <button
+                  // to
                   // data-bs-toggle="modal"
                   // data-bs-target="#delete_invoices_details"
                   className="hospital-draft-btn rounded-pill text-primary review-btn"
                   onClick={() => setshowApprove(true)}
                 >
                   Approve
-                </Link>
+                </button>
                 <Link
                   to={`/manage-hospitals/manage-request/${hospitalData.id}`}
                   // data-bs-toggle="modal"
@@ -61,12 +58,13 @@ function HospitalRequestCard(props) {
             </div>
           </div>
         </div>
-      </Link>
+      {/* </Link> */}
       <ApproveRequestModal
         show={showApprove}
         setShow={setshowApprove}
         title="review hospital request"
         handleRequest={handelHospitalRequest}
+        isLoading={isLoading}
       />
     </div>
   );

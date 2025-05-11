@@ -29,7 +29,7 @@ function Department(props) {
   };
 
   return (
-    <div>
+    <div className="mt-3">
       <ButtonSerchHero
         title="All Departments"
         handleSearchterm={handelSearchTerm}
@@ -53,7 +53,7 @@ function Department(props) {
             </div>
           ) : (
             <div className="d-flex justify-content-center align-items-center pt-5 pb-5 text-secondary">
-              <small>No reviews found</small>
+              <small>No departments found</small>
             </div>
           )
         ) : (

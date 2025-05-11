@@ -32,7 +32,7 @@ function DoctorDetailsCard() {
   const [disable, setdisable] = useState(false);
   const tabData = [
     { id: "dr_overview", title: "Overview", content: <DoctorsOverview />,link:"overview" },
-    { id: "dr_finance", title: "Finance", content: <DoctorsFinance />,link:"finane" },
+    { id: "dr_finance", title: "Finance", content: <DoctorsFinance />,link:"finance" },
     {
       id: "dr_bookings",
       title: "Total Bookings",

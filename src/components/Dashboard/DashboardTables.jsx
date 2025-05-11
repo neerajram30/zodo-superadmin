@@ -15,13 +15,29 @@ function DashboardTable() {
   const doctors = doctorList?.slice(0, 3);
   const hospitalColumns = [
     { title: "Hospital Info Name", dataIndex: "name" },
-    { title: "Contact Info", dataIndex: "", render:(item, record)=><div>{record?.contact_details?.mobile}</div> },
-    { title: "Action", dataIndex: "", render:(item, record)=> <Link to={`/manage-hospitals/${record.id}`}>View</Link> },
+    {
+      title: "Contact Info",
+      dataIndex: "",
+      render: (item, record) => <div>{record?.contact_details?.mobile}</div>,
+    },
+    {
+      title: "Action",
+      dataIndex: "",
+      render: (item, record) => (
+        <Link to={`/manage-hospitals/manage-request/${record.id}`}>View</Link>
+      ),
+    },
   ];
   const doctorColumns = [
     { title: "Hospital Info Name", dataIndex: "name" },
     { title: "Date of Request", dataIndex: "phone_number" },
-    { title: "Action", dataIndex: "", render:(item, record)=> <Link to={`/manage-doctors/${record.id}`}>View</Link> },
+    {
+      title: "Action",
+      dataIndex: "",
+      render: (item, record) => (
+        <Link to={`/manage-doctors/request/${record.id}`}>View</Link>
+      ),
+    },
   ];
   // const hospitalData = {
   //   title: "Recent Hospital Request",
@@ -75,22 +91,33 @@ function DashboardTable() {
     <>
       <div className="row">
         <div className="col-md-6">
-          <p>Recent Hospital Request</p>
-          <Table
-            columns={hospitalColumns}
-            dataSource={hospitals}
-            pagination={false}
-            loading={requestedLoading}
-          />
+          <div className="dash-widget dashboard-table-card">
+            <div className="d-flex justify-content-between">
+              <h4>Recent Hospital Request</h4>
+              <Link to="/manage-hospitals?tab=requested"><small>See all</small></Link>
+            </div>
+            <Table
+              columns={hospitalColumns}
+              dataSource={hospitals}
+              pagination={false}
+              loading={requestedLoading}
+            />
+          </div>
         </div>
+        <br />
         <div className="col-md-6">
-          <p>Recent Doctor Request</p>
-          <Table
-            columns={doctorColumns}
-            dataSource={doctors}
-            loading={doctorLoading}
-            pagination={false}
-          />
+          <div className="dash-widget dashboard-table-card">
+            <div className="d-flex justify-content-between">
+              <h4>Recent Doctor Request</h4>
+              <Link to="/manage-doctors?tab=requested"><small>See all</small></Link>
+            </div>
+            <Table
+              columns={doctorColumns}
+              dataSource={doctors}
+              loading={doctorLoading}
+              pagination={false}
+            />
+          </div>
         </div>
       </div>
     </>
