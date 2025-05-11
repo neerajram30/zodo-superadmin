@@ -24,6 +24,13 @@ export const getDoctorSettlements = async (id) => {
   return response?.data?.data ?? [];
 };
 
+export const getDoctorSettlementsByQuery = async (id,query) => {
+  const response = await apiClient.get(
+    `settlements?doctor_id=${id}&${query}`
+  );
+  return response?.data?.data ?? [];
+};
+
 export const getAllSettlements = async () => {
   const response = await apiClient.get(
     `settlements/admin`

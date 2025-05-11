@@ -22,6 +22,13 @@ export const getHospitalAppointmentsByQuery = async (id, query) => {
   return response?.data?.data;
 };
 
+export const getDoctorAppointmentsByQuery = async (id, query) => {
+  const response = await apiClient.get(
+    `/bookings/doctor/${id}/bookings?${query}`
+  );
+  return response?.data?.data;
+};
+
 // export const getDoctorAppointments = async (id) => {
 //   const response = await apiClient.get(`/bookings/doctor/${id}/bookings`);
 //   return response?.data?.data;

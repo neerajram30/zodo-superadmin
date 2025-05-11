@@ -1,10 +1,16 @@
-import React from "react";
+import { useState } from "react";
 import OverViewCard from "../../Hospitals/OverViewCard";
-import { DatePicker } from "antd";
-import TransactionTable from "../../Hospitals/Transactions/TransactionTable";
-import ExportTable from "../../assests/ExportTable";
-
+import SearchDateTable from "../../Tables/SearchDateTable";
+import { useParams } from "react-router-dom";
+import { formatDate } from "../../configs/formatDate";
+import { useDoctorSettlements } from "../../../hooks/settlements/useDoctorSettlement";
 function DoctorsFinance() {
+  const { id } = useParams();
+  const [query, setQuery] = useState("");
+  const { data: settlements, isLoading } = useDoctorSettlements(id, query);
+  const handelQuery = (queryResult) => {
+    setQuery(queryResult);
+  };
   const financeData = [
     {
       id: 1,
@@ -25,6 +31,61 @@ function DoctorsFinance() {
       operation: "Total Balance",
     },
   ];
+
+  const columns = [
+    {
+      title: "DATE ISSUED",
+      dataIndex: "created_at",
+      render: (item) => <div>{formatDate(item)}</div>,
+      // sorter: (a, b) => a.date.length - b.date.length,
+    },
+    {
+      title: "INVOICE#",
+      dataIndex: "invoiceNumber",
+      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+    },
+    {
+      title: "TRANSACTION NAME",
+      dataIndex: "transactionName",
+      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+    },
+    {
+      title: "DUE DATE",
+      dataIndex: "dueDate",
+      // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+    },
+    {
+      title: "STATUS",
+      dataIndex: "status",
+      // sorter: (a, b) => a.status.length - b.status.length,
+      render: (item) => (
+        <div
+          className={`${
+            (item === "failed" && "delete-badge status-red") ||
+            (item === "requested" && "delete-badge status-orange") ||
+            (item === "completed" && "delete-badge status-green")
+          }`}
+        >
+          {item}
+        </div>
+      ),
+    },
+    {
+      title: "TOTAL",
+      dataIndex: "amount",
+      render: (item) => <div>₹ {item}</div>,
+      // sorter: (a, b) => a.total.length - b.total.length,
+    },
+    {
+      title: "BALANCE",
+      dataIndex: "balance",
+      // sorter: (a, b) => a.balance.length - b.balance.length,
+    },
+    {
+      title: "ACTIONS",
+      dataIndex: "actions",
+    },
+  ];
   return (
     <div>
       <div className="row">
@@ -36,39 +97,13 @@ function DoctorsFinance() {
           />
         ))}
       </div>
-      <div className="card-box">
-        <h5 className="text-black">Transactions</h5>
-        <div className="row mt-4">
-          <div className="col-12 col-md-6 col-xl-3">
-            <div className="form-group local-forms cal-icon">
-              <DatePicker
-                className="form-control datetimepicker"
-                // onChange={onChange}
-                suffixIcon={null}
-              />
-            </div>
-          </div>
-          <div className="col-12 col-md-6 col-xl-3">
-            <div className="form-group local-forms">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search"
-              />
-            </div>
-          </div>
-          <div className="col-12 col-md-6 col-xl-3">
-            <ExportTable />
-          </div>
-        </div>
-        <div>
-          <h5 className="text-black">{232} results found</h5>
-        </div>
-
-        <div className="table-responsive">
-          <TransactionTable settlements={[]} />
-        </div>
-      </div>
+      <SearchDateTable
+        data={settlements}
+        isLoading={isLoading}
+        handelQuery={handelQuery}
+        columns={columns}
+        title="Transactions"
+      />
     </div>
   );
 }

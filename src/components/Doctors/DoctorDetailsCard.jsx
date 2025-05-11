@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  arrow_left,
-  bin_icon_red,
-  cross_icon,
+  arrow_left, cross_icon,
   dr_profile,
   email_icon,
   eye_icon,
   pdf_icon,
   pencil_icon,
   phone_icon,
-  three_dots_menu,
+  three_dots_menu
 } from "../imagepath";
 import DoctorsOverview from "./DoctorsOverview/DoctorsOverview";
 import DoctorsFinance from "./DoctorsFinance/DoctorsFinance";
@@ -21,6 +19,7 @@ import FullscreenLoader from "../loadings/FullscreenLoader";
 import { reduceArraytoString } from "../configs/reduceArraytoString";
 import { useChangeDoctorStatus } from "../../hooks/doctors/useChangeDoctorStatus";
 import ToggleModal from "../Hospitals/ToggleModal";
+import TransparentTabs from "../tabs/TransparentTabs";
 
 function DoctorDetailsCard() {
   const navigate = useNavigate();
@@ -32,12 +31,13 @@ function DoctorDetailsCard() {
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
   const tabData = [
-    { id: "dr_overview", title: "Overview", content: <DoctorsOverview /> },
-    { id: "dr_finance", title: "Finance", content: <DoctorsFinance /> },
+    { id: "dr_overview", title: "Overview", content: <DoctorsOverview />,link:"overview" },
+    { id: "dr_finance", title: "Finance", content: <DoctorsFinance />,link:"finane" },
     {
       id: "dr_bookings",
       title: "Total Bookings",
       content: <DoctorsBookings />,
+      link:"total-bookings"
     },
   ];
 
@@ -85,7 +85,7 @@ function DoctorDetailsCard() {
                 <img src={three_dots_menu} alt="" />
               </Link>
               <div className="dropdown-menu">
-                {/* <Link
+                <Link
                   className="dropdown-item"
                     to={`/manage-hospitals/${id}/edit`}
                 >
@@ -95,7 +95,7 @@ function DoctorDetailsCard() {
                     className="dropdown-menu-icon"
                   />
                   <span>Edit</span>
-                </Link> */}
+                </Link>
                 {/* <div className="dropdown-divider" /> */}
                 <Link
                   className="dropdown-item"
@@ -126,7 +126,7 @@ function DoctorDetailsCard() {
                     </span>
                   </div>
                 </Link>
-                <div className="dropdown-divider" />
+                {/* <div className="dropdown-divider" />
                 <Link
                   className="dropdown-item"
                   to="#"
@@ -138,7 +138,7 @@ function DoctorDetailsCard() {
                     className="dropdown-menu-icon"
                   />
                   <span className="text-danger">Delete</span>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -299,12 +299,6 @@ function DoctorDetailsCard() {
             <div className="col">
               <h5>Uploaded Documents</h5>
             </div>
-
-            <div className="col">
-              <div className="d-flex justify-content-end">
-                <img src={pencil_icon} alt="" />
-              </div>
-            </div>
           </div>
           <div className="mb-4">
             {[1, 2, 3].map((item) => {
@@ -336,33 +330,7 @@ function DoctorDetailsCard() {
           </div>
         </div>
       </div>
-
-      <div className="profile-tabs">
-        <ul className="nav nav-tabs nav-tabs-bottom">
-          {tabData.map((tabItem, i) => (
-            <li key={tabItem.id + i}>
-              <Link
-                className={`nav-link ${i == 0 ? "active" : ""}`}
-                to={`#${tabItem.id}`}
-                data-bs-toggle="tab"
-              >
-                {tabItem.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="tab-content">
-          {tabData.map((tabItem, i) => (
-            <Link
-              className={`tab-pane ${i == 0 ? "show active" : ""}`}
-              id={tabItem.id}
-              key={tabItem.id + i}
-            >
-              {tabItem.content}
-            </Link>
-          ))}
-        </div>
-      </div>
+      <TransparentTabs tabData={tabData}/>      
       {isLoading && <FullscreenLoader />}
       <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
       <ToggleModal

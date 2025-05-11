@@ -1,36 +1,18 @@
-import { bin_icon_red, right_chevron } from "../imagepath";
-import TransactionTable from "./Transactions/TransactionTable";
+import { right_chevron } from "../imagepath";
 import OverViewCard from "./OverViewCard";
 import { useParams } from "react-router-dom";
 import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettlements";
 import { useState } from "react";
-import DateSearchHero from "../heros/DateSearchHero";
-
+import SearchDateTable from "../Tables/SearchDateTable";
+import { formatDate } from "../configs/formatDate";
 function Finance() {
   const { id } = useParams();
-  const [selectedItems, setSelectedItems] = useState(null);
-  console.log(selectedItems);
-  const [searchTerm, setsearchTerm] = useState("");
-  const [date, setdate] = useState(null);
-  const query =
-    (searchTerm &&
-      date &&
-      `name=${searchTerm}&from_date=${date.startDate}&to_date=${date.endDate}`) ||
-    (searchTerm && `name=${searchTerm}`) ||
-    (date && `from_date=${date.startDate}&to_date=${date.endDate}`) ||
-    "";
-  const handleDate = (date) => {
-    setdate(date);
-  };
-  const handleSearch = (term) => {
-    setsearchTerm(term);
-  };
+  const [query, setQuery] = useState("");
 
-  const { data: settlements } = useHospitalSettlements(id, query);
-  const handleSelection = (items) => {
-    setSelectedItems(items);
+  const handelQuery = (queryResult) => {
+    setQuery(queryResult);
   };
-
+  const { data: settlements, isLoading } = useHospitalSettlements(id, query);
   const financeData = [
     {
       id: 1,
@@ -67,6 +49,61 @@ function Finance() {
       amount: "$ 20,000",
       status: "No Dues",
       operation: "Fast Tag Revenue",
+    },
+  ];
+
+  const columns = [
+    {
+      title: "DATE ISSUED",
+      dataIndex: "created_at",
+      render: (item) => <div>{formatDate(item)}</div>,
+      // sorter: (a, b) => a.date.length - b.date.length,
+    },
+    {
+      title: "INVOICE#",
+      dataIndex: "invoiceNumber",
+      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+    },
+    {
+      title: "TRANSACTION NAME",
+      dataIndex: "transactionName",
+      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+    },
+    {
+      title: "DUE DATE",
+      dataIndex: "dueDate",
+      // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+    },
+    {
+      title: "STATUS",
+      dataIndex: "status",
+      // sorter: (a, b) => a.status.length - b.status.length,
+      render: (item) => (
+        <div
+          className={`${
+            (item === "failed" && "delete-badge status-red") ||
+            (item === "requested" && "delete-badge status-orange") ||
+            (item === "completed" && "delete-badge status-green")
+          }`}
+        >
+          {item}
+        </div>
+      ),
+    },
+    {
+      title: "TOTAL",
+      dataIndex: "amount",
+      render: (item) => <div>₹ {item}</div>,
+      // sorter: (a, b) => a.total.length - b.total.length,
+    },
+    {
+      title: "BALANCE",
+      dataIndex: "balance",
+      // sorter: (a, b) => a.balance.length - b.balance.length,
+    },
+    {
+      title: "ACTIONS",
+      dataIndex: "actions",
     },
   ];
   return (
@@ -158,56 +195,13 @@ function Finance() {
           />
         ))}
       </div>
-
-      <div className="card-box">
-        <h5>Transactions</h5>
-
-        <DateSearchHero handleDate={handleDate} handleSearch={handleSearch} />
-        {/* <div className="row mt-4">
-          <div className="col-12 col-md-6 col-xl-3">
-            <div className="form-group local-forms cal-icon">
-              <DatePicker
-                className="form-control datetimepicker"
-                // onChange={onChange}
-                suffixIcon={null}
-              />
-            </div>
-          </div>
-          <div className="col-12 col-md-6 col-xl-3">
-            <div className="form-group local-forms">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search"
-              />
-            </div>
-          </div>
-          <div className="col-12 col-md-6 col-xl-3">
-            <ExportTable />
-          </div>
-        </div> */}
-        <div>
-          {settlements?.length && (
-            <h5>
-              {settlements?.length + "results found"}
-              <span className="delete-badge status-red ms-1">
-                <img
-                  src={bin_icon_red}
-                  alt="delete"
-                  className="dropdown-menu-icon"
-                  width={15}
-                  height={15}
-                />
-                <span className="mt-5 ps-2">CLEAR</span>
-              </span>
-            </h5>
-          )}
-        </div>
-        <TransactionTable
-          settlements={settlements ?? []}
-          handleSelection={handleSelection}
-        />
-      </div>
+      <SearchDateTable
+        data={settlements}
+        isLoading={isLoading}
+        handelQuery={handelQuery}
+        columns={columns}
+        title="Transactions"
+      />
     </div>
   );
 }
