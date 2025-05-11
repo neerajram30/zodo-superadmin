@@ -3,8 +3,6 @@ import BookingsCard from "./BookingsCard";
 import BookingTabs from "./BookingTabs";
 
 function TotalBookings() {
-  
-  
   const bookinsDetails = [
     {
       id: 1,

@@ -38,18 +38,24 @@ function Department(props) {
       />
       <div className="tab-list">
         {!isLoading ? (
-          <div className="row mt-3 mb-5">
-            {departmentList?.map((item) => {
-              return (
-                <div
-                  className="col-md-3 col-sm-6 col-lg-3 col-xl-3"
-                  key={item.id}
-                >
-                  <DepartmentCard data={item} />
-                </div>
-              );
-            })}
-          </div>
+          departmentList.length > 0 ? (
+            <div className="row mt-3 mb-5">
+              {departmentList?.map((item) => {
+                return (
+                  <div
+                    className="col-md-3 col-sm-6 col-lg-3 col-xl-3"
+                    key={item.id}
+                  >
+                    <DepartmentCard data={item} />
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="d-flex justify-content-center align-items-center pt-5 pb-5 text-secondary">
+              <small>No reviews found</small>
+            </div>
+          )
         ) : (
           <ComponentLoader />
         )}

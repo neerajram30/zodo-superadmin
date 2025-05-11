@@ -1,18 +1,25 @@
-import React from "react";
+import { useState } from "react";
 import Review from "./Review";
-import ReviewHero from "../../heros/ReviewHero";
-import { useValidateId } from "../../../hooks/useValidateId";
 import { useParams } from "react-router-dom";
-import { useHospitalReview } from "../../../hooks/useHospitalReview";
+import { useHospitalReview } from "../../../hooks/review/useHospitalReview";
+import BasicSearchHero from "../../heros/BasicSearchHero";
 
 function Reviews() {
   const { id } = useParams();
-  const { validId } = useValidateId(id);
-  const { data: reviews, isLoading } = useHospitalReview(validId);
+  const [searchTerm,setSearchterm] = useState("");
+  const query = `name=${searchTerm}`
+  const { data: reviews, isLoading } = useHospitalReview(id,query);
+  const handleSearchterm = (term)=>{
+    setSearchterm(term)
+  }
   return (
     <div>
-      <ReviewHero />
-      <Review reviews={reviews ?? []} isLoading={isLoading}/>
+      <BasicSearchHero 
+      
+      title="Reviews" 
+      handleSearchterm={handleSearchterm}
+      />
+      <Review reviews={reviews ?? []} isLoading={isLoading} />
     </div>
   );
 }
