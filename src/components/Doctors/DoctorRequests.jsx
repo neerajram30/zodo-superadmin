@@ -7,7 +7,16 @@ import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
 import { reduceArraytoString } from "../configs/reduceArraytoString";
 function DoctorRequests() {
   const [show, setShow] = useState(false);
-  const query = "status=pending";
+  const [searchTerm, setSearchterm] = useState("");
+  const query = searchTerm
+    ? `status=pending&name=${searchTerm}`
+    : "status=pending";
+  // const { data: doctorRequestList, isLoading } = useDoctorsList(query);
+
+  const handelSearchTerm = (term) => {
+    setSearchterm(term);
+  };
+  // const query = "status=pending";
   const { data: doctorList, isLoading } = useDoctorsList(query);
   console.log(doctorList);
   console.log(isLoading);
@@ -56,9 +65,9 @@ function DoctorRequests() {
     {
       title: "Type",
       dataIndex: "type",
-      render:(item, record) =>(
+      render: (item, record) => (
         <div>{record.hospital_id ? "ofline" : "online"}</div>
-      )
+      ),
       // sorter: (a, b) => a.Degree.length - b.Degree.length,
     },
     {
@@ -82,10 +91,14 @@ function DoctorRequests() {
       render: (item, record) => (
         <div className="d-flex justify-content-center">
           <Link
-            to={record?.hospital_id ? `/manage-doctors/${record.id}` :`/manage-doctors/request/${record.id}`}
+            to={
+              record.status === "pending"
+                ? `/manage-doctors/request/${record.id}`
+                : `/manage-doctors/${record.id}`
+            }
             className="hospital-draft-btn rounded-pill text-primary ps-3 pe-3"
           >
-            {record.hospital_id ? "View" : "Review"}
+            {record.status === "pending" ? "Review" : "View"}
           </Link>
         </div>
       ),
@@ -96,7 +109,7 @@ function DoctorRequests() {
       <div className="col-sm-12">
         <div className="card card-table show-entire rounded-0">
           <div className="card-body">
-            <DoctorRequestHero />
+            <DoctorRequestHero handelSearchTerm={handelSearchTerm} />
             <div className="doctor-list">
               <DataTable data={doctorList ?? []} columns={columns} />
             </div>

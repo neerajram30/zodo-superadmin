@@ -1,7 +1,14 @@
-import React from "react";
-import SearchBox from "../searchbox/SearchBox";
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useDebounce } from "../../hooks/useDebounce";
 
-function DoctorRequestHero() {
+function DoctorRequestHero(props) {
+  const { handelSearchTerm } = props;
+  const [searchTerm, setSearchterm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm);
+  useEffect(() => {
+    handelSearchTerm(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
   return (
     <div className="page-header invoices-page-header mb-2">
       <div className="d-flex flex-column flex-md-row">
@@ -10,26 +17,25 @@ function DoctorRequestHero() {
             <h3>Doctors Requests</h3>
           </div>
           <div className="ms-3 w-50">
-            <SearchBox />
+            <div>
+              <div className="form-group has-search">
+                <span className="fa fa-search form-control-feedback"></span>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search"
+                  onChange={(e) => setSearchterm(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* <div className="w-50 d-flex align-items-center justify-content-end flex-column flex-md-row">
-          <div className="w-25 d-flex justify-content-between ps-3 pe-3">
-            <Link to="#" className="">
-              <img src={pdficon} alt="#" />
-            </Link>
-            <Link to="#" className="">
-              <img src={pdficon3} alt="#" />
-            </Link>
-            <Link to="#">
-              <img src={pdficon4} alt="#" />
-            </Link>
-          </div>
-        </div> */}
       </div>
     </div>
   );
 }
 
+DoctorRequestHero.propTypes = {
+  handelSearchTerm: PropTypes.func,
+};
 export default DoctorRequestHero;

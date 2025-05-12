@@ -1,9 +1,8 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 
-import Finance from "../../Hospitals/Finance";
+import SettlementDetails from "../../settlements/SettlementDetails";
 function ManageSettlement() {
   const { id } = useParams();
   const breadCrumpData = [
@@ -30,9 +29,8 @@ function ManageSettlement() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <div className="mt-2">
-          <Finance/>
+          <SettlementDetails/>
           </div>
-          
         </div>
       </div>
     </Layout>

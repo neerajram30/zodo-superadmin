@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSpecializations } from "../../apis/specialisation";
+import {
+  getSpecializations,
+  getSpecializationsByQuery,
+} from "../../apis/specialisation";
 
-export const useSpecialisationList = () => {
+export const useSpecialisationList = (query) => {
   return useQuery({
-    queryKey: ["specialisations"], // Unique query key
-    queryFn: () =>getSpecializations(),
+    queryKey: ["specialisations",query], // Unique query key
+    queryFn: () =>
+      query ? getSpecializationsByQuery(query) : getSpecializations(),
   });
 };

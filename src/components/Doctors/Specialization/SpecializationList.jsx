@@ -1,17 +1,16 @@
 import { Table } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { itemRender, onShowSizeChange } from "../../Pagination";
-import { formatDate } from "../../configs/formatDate";
-import useSpecialisations from "../../../store/useSpecialisations";
-import { useSpecialisationList } from "../../../hooks/specialisation/useSpecialisationList";
 import { deleteicon, pencil_notebook } from "../../imagepath";
 import EditSpecialization from "../../modals/EditSpecialization";
 import ConfirmDelete from "../../modals/ConfirmDelete";
+import PropTypes from "prop-types";
 import useDeleteSpecialisation from "../../../hooks/specialisation/useDeleteSpecialisation";
+import { formatDate } from "../../configs/formatDate";
 
-function SpecializationList() {
+function SpecializationList(props) {
+  const { specialisationList, isLoading } = props;
   // State for selected table rows
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // State to control visibility of edit modal
   const [showEdit, setShowEdit] = useState(false);
   // State to control visibility of delete confirmation modal
@@ -19,65 +18,64 @@ function SpecializationList() {
   // State to store the ID of the specialisation being edited or deleted
   const [specialisationId, setSpecialisationId] = useState(null);
   // Fetch specialisation list data and loading state from custom hook
-  const { data, isLoading } = useSpecialisationList();
+  // const { data, isLoading } = useSpecialisationList();
 
-  // Fetch delete mutation function and loading state from custom hook
-  const {
-    mutate,
-    isLoading: deleteLoading,
-  } = useDeleteSpecialisation();
+  // // Fetch delete mutation function and loading state from custom hook
+  const { mutate, isLoading: deleteLoading } = useDeleteSpecialisation();
   console.log("Delete loading", deleteLoading);
 
-  // Get the setter for specialisations from the global store
-  const setSpecialisations = useSpecialisations(
-    (state) => state.setSpecialisations
-  );
-  // Update the global store with the fetched data
-  setSpecialisations(data);
-  // Get the specialisations array from the global store
-  const specialisationData = useSpecialisations(
-    (state) => state.specialisations
-  );
-  // State to store the currently selected specialisation for editing
+  // // Get the setter for specialisations from the global store
+  // const setSpecialisations = useSpecialisations(
+  //   (state) => state.setSpecialisations
+  // );
+  // // Update the global store with the fetched data
+  // setSpecialisations(data);
+  // // Get the specialisations array from the global store
+  // const specialisationData = useSpecialisations(
+  //   (state) => state.specialisations
+  // );
+  // // State to store the currently selected specialisation for editing
   const [specialisation, setSpecialisation] = useState("");
 
-  // Transform the specialisation data for the table
-  const specialisationList = Array.isArray(specialisationData) && specialisationData.map((item) => {
-    return {
-      id: item.id, // Unique identifier for each row
-      specialisationName: item.name, // Name of the specialisation
-      createdDate: formatDate(item.createdAt), // Formatted creation date
-      lastUpdated: formatDate(item.updatedAt), // Formatted last updated date
-    };
-  });
+  // // Transform the specialisation data for the table
+  // const specialisationList = Array.isArray(specialisationData) && specialisationData.map((item) => {
+  //   return {
+  //     id: item.id, // Unique identifier for each row
+  //     specialisationName: item.name, // Name of the specialisation
+  //     createdDate: formatDate(item.createdAt), // Formatted creation date
+  //     lastUpdated: formatDate(item.updatedAt), // Formatted last updated date
+  //   };
+  // });
 
   // Handler for row selection changes in the table
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
+  // const onSelectChange = (newSelectedRowKeys) => {
+  //   console.log("selectedRowKeys changed: ", selectedRowKeys);
+  //   setSelectedRowKeys(newSelectedRowKeys);
+  // };
   // Row selection configuration for the table
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
+  // const rowSelection = {
+  //   selectedRowKeys,
+  //   onChange: onSelectChange,
+  // };
   // Table columns configuration
   const columns = [
     {
       title: "SPECIALISATION NAME",
-      dataIndex: "specialisationName",
-      sorter: (a, b) =>
-        a.specialisationName.length - b.specialisationName.length,
+      dataIndex: "name",
+      // sorter: (a, b) => a.specialisationName.length - b.specialisationName.length,
     },
     {
       title: "CREATED DATE",
-      dataIndex: "createdDate",
-      sorter: (a, b) => a.createdDate.length - b.createdDate.length,
+      dataIndex: "createdAt",
+      render: (item) => <div>{formatDate(item)}</div>,
+      // sorter: (a, b) => a.createdDate.length - b.createdDate.length,
     },
     {
       title: "LAST UPDATED",
-      dataIndex: "lastUpdated",
-      sorter: (a, b) => a.lastUpdated.length - b.lastUpdated.length,
+      dataIndex: "updatedAt",
+      render: (item) => <div>{formatDate(item)}</div>,
+
+      // sorter: (a, b) => a.lastUpdated.length - b.lastUpdated.length,
     },
     {
       title: "ACTIONS",
@@ -110,7 +108,7 @@ function SpecializationList() {
     console.log(specialisationId);
 
     // Find the selected specialisation by ID
-    const selectedSpecialisation = specialisationData?.find(
+    const selectedSpecialisation = specialisationList?.find(
       (item) => item.id === specialisationId
     );
 
@@ -151,8 +149,8 @@ function SpecializationList() {
         }}
         columns={columns}
         dataSource={specialisationList}
-        rowSelection={rowSelection}
-        rowKey={(record) => record.id}
+        // rowSelection={rowSelection}
+        // rowKey={(record) => record.id}
         loading={isLoading}
       />
       {/* Edit Specialization Modal */}
@@ -167,12 +165,16 @@ function SpecializationList() {
         show={showDelete}
         setShow={setShowDelete}
         title="Delete Specialisation"
-        deleteItem={onDelete}
+        // deleteItem={onDelete}
         id={specialisationId}
+        handleDelete={onDelete}
       />
     </div>
   );
 }
-
+SpecializationList.propTypes = {
+  specialisationList: PropTypes.array,
+  isLoading: PropTypes.bool,
+};
 // Export the SpecializationList component as default
 export default SpecializationList;

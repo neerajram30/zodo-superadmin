@@ -1,9 +1,8 @@
-import React from "react";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Layout from "../../layout/Layout";
 import DoctorsList from "../../Doctors/DoctorsList";
-import { Link } from "react-router-dom";
 import DoctorRequests from "../../Doctors/DoctorRequests";
+import TransparentTabs from "../../tabs/TransparentTabs";
 
 function Doctors() {
   const breadCrumpData = [
@@ -14,11 +13,12 @@ function Doctors() {
     },
   ];
   const tabData = [
-    { id: "dr_list", title: "All Doctors", content: <DoctorsList /> },
+    { id: "dr_list", title: "All Doctors", content: <DoctorsList />,link:'all' },
     {
       id: "dr_request",
       title: "Doctor Requests",
       content: <DoctorRequests />,
+      link:'requests'
     },
   ];
 
@@ -30,7 +30,7 @@ function Doctors() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <div className="card-box mt-3">
-            <div className="profile-tabs">
+            {/* <div className="profile-tabs">
               <ul className="nav nav-tabs nav-tabs-bottom">
                 {tabData.map((tabItem, i) => (
                   <li key={tabItem.id + i}>
@@ -55,7 +55,8 @@ function Doctors() {
                   </Link>
                 ))}
               </div>
-            </div>
+            </div> */}
+            <TransparentTabs tabData={tabData}/>
           </div>
         </div>
       </div>

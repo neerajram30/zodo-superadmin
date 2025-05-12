@@ -31,7 +31,7 @@ function SettlementCard(props) {
             </div>
             <div className="row mt-3">
               <div className="col">
-                <h5>Hospital name</h5>
+                <h5>{data?.hospital?.name}</h5>
               </div>
               {/* <div className="col-auto">
                 <h5 className="text-primary">{data.status}</h5>

@@ -6,7 +6,8 @@ import { bin_icon_red } from "../imagepath";
 import { itemRender, onShowSizeChange } from "../Pagination";
 
 function SearchDateTable(props) {
-  const { data, isLoading, handelQuery, columns, title } = props;
+  const { data, isLoading, handelQuery, columns, title, setSelecteditemsList } =
+    props;
   const [selectedItems, setSelectedItems] = useState(null);
   console.log(selectedItems);
   const [searchTerm, setsearchTerm] = useState("");
@@ -15,6 +16,7 @@ function SearchDateTable(props) {
   const onSelectChange = (newSelectedRowKeys) => {
     handleSelection(newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
+    setSelecteditemsList(newSelectedRowKeys);
   };
   const query =
     (searchTerm &&
@@ -36,8 +38,7 @@ function SearchDateTable(props) {
 
   useEffect(() => {
     handelQuery(query);
-  }, [query])
-  
+  }, [query]);
 
   const rowSelection = {
     selectedRowKeys,
@@ -49,21 +50,23 @@ function SearchDateTable(props) {
       <h5>{title}</h5>
       <DateSearchHero handleDate={handleDate} handleSearch={handleSearch} />
       <div>
-        {data?.length && (
+        {data?.length ? (
           <h5>
-            {data?.length + "results found"}
-            <span className="delete-badge status-red ms-1">
-              <img
-                src={bin_icon_red}
-                alt="delete"
-                className="dropdown-menu-icon"
-                width={15}
-                height={15}
-              />
-              <span className="mt-5 ps-2">CLEAR</span>
-            </span>
+            {data?.length + " results found"}
+            {selectedRowKeys.length > 0 && (
+              <span className="delete-badge status-red ms-1">
+                <img
+                  src={bin_icon_red}
+                  alt="delete"
+                  className="dropdown-menu-icon"
+                  width={15}
+                  height={15}
+                />
+                <span className="mt-5 ps-2">CLEAR</span>
+              </span>
+            )}
           </h5>
-        )}
+        ) : null}
       </div>
       <div className="table-responsive">
         <Table
@@ -89,7 +92,8 @@ SearchDateTable.propTypes = {
   columns: PropTypes.array,
   isLoading: PropTypes.bool,
   handelQuery: PropTypes.func,
-  title: PropTypes.string
+  title: PropTypes.string,
+  setSelecteditemsList: PropTypes.func,
 };
 
 export default SearchDateTable;

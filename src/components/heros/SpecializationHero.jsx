@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchBox from "../searchbox/SearchBox";
 import AddSpecialization from "../modals/AddSpecialization";
 import { addicon, uploadfiles_icon } from "../imagepath";
+import PropTypes from "prop-types";
+import { useDebounce } from "../../hooks/useDebounce";
 
-function SpecializationHero() {
+function SpecializationHero(props) {
+  const { handelSearchTerm } = props;
   const [show, setShow] = useState(false);
+  const [searchTerm, setSearchterm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm);
+  useEffect(() => {
+    handelSearchTerm(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
   return (
     <div className="page-header invoices-page-header mb-2 mt-3">
       <div className="d-flex flex-column flex-md-row">
@@ -14,7 +21,17 @@ function SpecializationHero() {
             <h3>Specialisation</h3>
           </div>
           <div className="ms-3 w-50">
-            <SearchBox />
+            <div>
+              <div className="form-group has-search">
+                <span className="fa fa-search form-control-feedback"></span>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search"
+                  onChange={(e) => setSearchterm(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -46,5 +63,8 @@ function SpecializationHero() {
     </div>
   );
 }
+SpecializationHero.propTypes = {
+  handelSearchTerm: PropTypes.func,
+};
 
 export default SpecializationHero;

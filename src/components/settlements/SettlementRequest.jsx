@@ -5,11 +5,12 @@ import FullscreenLoader from "../loadings/FullscreenLoader";
 
 function SettlementRequest(props) {
   const { data, loading } = props;
+  
   return (
     <div className="row mt-2">
       {data?.map((item) => (
         <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
-          <SettlementRequestCard hospitalData={item} />
+          <SettlementRequestCard data={item} />
         </div>
       ))}
       {loading && <FullscreenLoader/>}

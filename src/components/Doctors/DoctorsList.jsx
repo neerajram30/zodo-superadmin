@@ -11,9 +11,13 @@ import { reduceArraytoString } from "../configs/reduceArraytoString";
 
 function DoctorsList() {
   const [show, setShow] = useState(false);
-  const { data: doctorList, isLoading } = useDoctorsList();
-  console.log("Doctors list", doctorList);
-  console.log(isLoading);
+  const [searchTerm, setSearchterm] = useState("");
+  const query = searchTerm ?  `name=${searchTerm}` : "";
+  const { data: doctorList, isLoading } = useDoctorsList(query);
+  
+  const handelSearchTerm = (term)=>{
+    setSearchterm(term);
+  }
   const columns = [
     {
       title: "Name",
@@ -139,9 +143,9 @@ function DoctorsList() {
         <div className="card card-table show-entire">
           <div className="card-body">
             {/* Table Header */}
-            <DoctorListHero />
+            <DoctorListHero handelSearchTerm={handelSearchTerm}/>
             <div className="doctor-list">
-              <DataTable data={doctorList ?? []} columns={columns} />
+              <DataTable data={doctorList ?? []} columns={columns} isLoading={isLoading}/>
             </div>
           </div>
         </div>

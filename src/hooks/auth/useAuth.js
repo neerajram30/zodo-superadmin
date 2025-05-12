@@ -21,6 +21,11 @@ export const AuthProvider = ({ children }) => {
       const user = await getUser(); // Fetch user data if token exists
       // console.log("User data from local storage", user);
       setUser(user?.data?.data);
+      const type = user?.data?.data?.user_type;
+      if(type !== "superAdmin"){
+        localStorage.removeItem("token");
+      }
+      
     } else {
       setUser(null); // Set user to null if no token is found
     }

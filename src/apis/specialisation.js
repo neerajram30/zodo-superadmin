@@ -6,6 +6,11 @@ export const getSpecializations = async () => {
   return response?.data?.data;
 };
 
+export const getSpecializationsByQuery = async (query) => {
+  const response = await apiClient.get(`/specialisations?${query}`);  
+  return response?.data?.data;
+};
+
 export const addSpecialization = async (specialisationData) => {
   const response = await apiClient.post("/specialisations", specialisationData);
   return response.data;

@@ -8,12 +8,12 @@ function BookingsTable(props) {
     {
       title: "Booking Id",
       dataIndex: "booking_id",
-      sorter: (a, b) => a.id - b.id,
+      // sorter: (a, b) => a.id - b.id,
     },
     {
       title: "TRANSACTION NAME",
       dataIndex: "transactionName",
-      sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
       render:(item, record)=>(
         <div>{record.type}</div>
       )
@@ -21,7 +21,7 @@ function BookingsTable(props) {
     {
       title: "DUE ISSUE",
       dataIndex: "createdAt",
-      sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
+      // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
       render:(item)=>(
         <div>{getDateFromIso(item)}</div>
       )
@@ -42,18 +42,18 @@ function BookingsTable(props) {
       ),
     },
     {
-      title: "AMOUNT",
+      title: <div className="d-flex justify-content-center">AMOUNT</div>,
       dataIndex: "amount",
-      sorter: (a, b) => a.amount.length - b.amount.length,
+      // sorter: (a, b) => a.amount.length - b.amount.length,
       render:(item,record)=>(
-        <div>{record?.doctor?.pricing}</div>
+        <div className="d-flex justify-content-center">${record?.doctor?.pricing ?? 0}</div>
       )
     },
     {
-      title: "ACTIONS",
+      title:<div className="d-flex justify-content-center">ACTIONS</div>,
       dataIndex: "actions",
       render:()=>(
-        <div>view</div>
+        <div className="d-flex justify-content-center">view</div>
       )
     },
   ];

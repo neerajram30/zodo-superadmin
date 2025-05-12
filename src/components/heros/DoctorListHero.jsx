@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import { addicon } from "../imagepath";
+import PropTypes from "prop-types";
+import { useDebounce } from "../../hooks/useDebounce";
+import { useEffect, useState } from "react";
 
-function DoctorListHero() {
+function DoctorListHero(props) {
+  const { handelSearchTerm } = props;
+  const [searchTerm, setSearchterm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm);
+  useEffect(() => {
+    handelSearchTerm(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
   return (
     <div className="page-header invoices-page-header mb-2">
       <div className="d-flex flex-column flex-md-row">
@@ -17,7 +26,7 @@ function DoctorListHero() {
                   type="text"
                   className="form-control"
                   placeholder="Search"
-                  // onChange={(e) => handleSearchInput(e.target.value)}
+                  onChange={(e) => setSearchterm(e.target.value)}
                 />
               </div>
             </div>
@@ -56,5 +65,9 @@ function DoctorListHero() {
     </div>
   );
 }
+
+DoctorListHero.propTypes = {
+  handelSearchTerm: PropTypes.func,
+};
 
 export default DoctorListHero;

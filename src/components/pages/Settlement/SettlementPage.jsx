@@ -31,7 +31,8 @@ function SettlementPage() {
       link: "/dashboard/settlement-requests",
     },
   ];
-
+  console.log("REQUESTED ",requestedSettlements);
+  
   const tabData = [
     {
       id: "allhospitals",
@@ -48,7 +49,7 @@ function SettlementPage() {
     {
       id: "rejected",
       title: `Rejected Settlements (${rejectedSettlementCount})`,
-      content: <SettlementRequest hospitalList={rejectedSettlements ?? []} />,
+      content: <SettlementRequest data={rejectedSettlements ?? []} />,
       link:"rejected"
     },
   ];

@@ -15,6 +15,8 @@ function SettlementRequestCard(props) {
     const statusUpdate = { status: "active" };
     await mutate({ id: data?.id, data: statusUpdate });
   };
+  console.log("DATA >> ",data);
+  
   return (
     <div className="card invoices-grid-card w-100" key={data?.id}>
       <Link to>
@@ -28,7 +30,7 @@ function SettlementRequestCard(props) {
                 </div> */}
             <div className="d-flex mt-3 justify-content-between">
               <div className="">
-                <h5>{data?.name} Hospital Name</h5>
+                <h5>{data?.hospital?.name}</h5>
               </div>
               {/* <div className="">
                     <span className="text-primary">
@@ -49,7 +51,7 @@ function SettlementRequestCard(props) {
                   Approve
                 </Link>
                 <Link
-                  to={`/manage-hospitals/manage-request/${data?.id}`}
+                  to={`/dashboard/settlement-requests/${data?.id}`}
                   // data-bs-toggle="modal"
                   // data-bs-target="#save_invocies_details"
                   className="text-white hospital-add-btn rounded-pill review-btn ms-2"

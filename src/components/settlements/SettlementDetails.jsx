@@ -1,19 +1,24 @@
-import { right_chevron } from "../imagepath";
-import OverViewCard from "./OverViewCard";
-import { useParams } from "react-router-dom";
-import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettlements";
-import { useState } from "react";
+import React, { useState } from "react";
 import SearchDateTable from "../Tables/SearchDateTable";
-import { formatDate } from "../configs/formatDate";
-function Finance() {
+import OverViewCard from "../Hospitals/OverViewCard";
+import { useViewSettlements } from "../../hooks/settlements/useViewSettlements";
+import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettlements";
+import { useParams } from "react-router-dom";
+import { formatDate } from "fullcalendar/index.js";
+import { right_chevron } from "../imagepath";
+
+function SettlementDetails() {
   const { id } = useParams();
   const [query, setQuery] = useState("");
   const [selectedItemsList, setSelecteditemsList] = useState([]);
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };
-  console.log("Selected items -->",selectedItemsList);
-  
+  console.log("Selected items -->", selectedItemsList);
+  const { data: settlement, isLoading: settlementLoading } =
+    useViewSettlements(id);
+  console.log(settlement, settlementLoading);
+
   const { data: settlements, isLoading } = useHospitalSettlements(id, query);
   const financeData = [
     {
@@ -106,7 +111,7 @@ function Finance() {
     {
       title: <div className="text-center">ACTIONS</div>,
       dataIndex: "actions",
-      render:()=><div className="text-center">view</div>
+      render: () => <div className="text-center">view</div>,
     },
   ];
   return (
@@ -115,14 +120,14 @@ function Finance() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 20,000</h6>
+              <h6>$ {settlement?.amount}</h6>
               <p>
                 <span className="delete-badge status-orange">
                   REQUESTED AMOUNT
                 </span>
               </p>
               <div className="row">
-                <p className="col">Requested On 24-11-2024</p>
+                <p className="col">Requested On {formatDate(settlement?.request_date)}</p>
               </div>
               <div>
                 <button
@@ -189,7 +194,7 @@ function Finance() {
 
       {/* Finance details */}
 
-      <div className="row finance-card-container">
+      <div className="row finance-card-container mt-2">
         {financeData.map((item) => (
           <OverViewCard
             varient="col-md-4 col-sm-6 col-lg-4 col-xl-4 finance-card"
@@ -210,4 +215,4 @@ function Finance() {
   );
 }
 
-export default Finance;
+export default SettlementDetails;
