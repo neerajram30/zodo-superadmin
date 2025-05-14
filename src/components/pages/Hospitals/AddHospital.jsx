@@ -18,10 +18,25 @@ import SelectField from "../../InputFields/SelectField";
 
 function AddHospital() {
   const [toggleFasttag, setToggleFasttag] = useState(false);
+
+  const [profilePic, setProfilePic] = useState("");
   const { mutate, isLoading } = useAddHostpital();
   const methods = useForm();
   const control = methods.control;
   const isSameAsCompanyAddress = useWatch({ control, name: "sameascompany" });
+  const [document1, setDocument1] = useState("");
+  const [document2, setDocument2] = useState("");
+  const [document3, setDocument3] = useState("");
+
+  const handleFileKeyDoc1 = (filekey) => {
+    setDocument1(filekey);
+  };
+  const handleFileKeyDoc2 = (filekey) => {
+    setDocument2(filekey);
+  };
+  const handleFileKeyDoc3 = (filekey) => {
+    setDocument3(filekey);
+  };
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -40,11 +55,14 @@ function AddHospital() {
     label: item.name,
     value: item.name,
   }));
+  const handleFileURL = (fileURL) => {
+    setProfilePic(fileURL);
+  };
   const onCreateHospital = async (data) => {
     if (data.accountNumber === data.verifyAccountnumber) {
       const hospital = {
         name: data?.hospitalName,
-        logo: "hospital logo",
+        logo: profilePic,
         location: data?.town,
         address: {
           lineOne: data?.companyName,
@@ -81,12 +99,13 @@ function AddHospital() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        contact_details:{
+        contact_details: {
           email: data?.email,
           mobile: data?.phone,
-          website:data?.website
+          website: data?.website,
         },
         gst: data?.gstnumber,
+        documents: [{name:"doc1", file :document1},{name:"doc2", file :document2},{name:"doc3", file :document3}],
       };
       await mutate(hospital);
       // methods.reset();
@@ -127,7 +146,7 @@ function AddHospital() {
               <form onSubmit={methods.handleSubmit(onCreateHospital)}>
                 <div className="row mt-4">
                   <div className="col-md-8 ms-md-3">
-                    <ChooseFile />
+                    <ChooseFile handleFileURL={handleFileURL} />
                   </div>
                 </div>
                 <div className="w-100 mt-4 mt-md-2">
@@ -563,13 +582,13 @@ function AddHospital() {
                   </div>
                   <div className="row mt-4 pb-5">
                     <div className="col-md-4 mt-2">
-                      <UploadFiles />
+                      <UploadFiles handleFileKey={handleFileKeyDoc1} />
                     </div>
                     <div className="col-md-4 mt-2">
-                      <UploadFiles />
+                      <UploadFiles handleFileKey={handleFileKeyDoc2} />
                     </div>
                     <div className="col-md-4 mt-2">
-                      <UploadFiles />
+                      <UploadFiles handleFileKey={handleFileKeyDoc3} />
                     </div>
                   </div>
                 </div>

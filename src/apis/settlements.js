@@ -60,3 +60,8 @@ export const changeSettlementStatus = async ({id, data}) => {
   const response = await apiClient.patch(`settlements/${id}/status`, data);
   return response.data;
 };
+
+export const removeSettlement = async (id) => {
+  const response = await apiClient.delete(`/settlements/${id}`);
+  return response?.data || {};
+};

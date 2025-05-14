@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { apollo_logo, right_chevron } from "../imagepath";
+import { right_chevron } from "../imagepath";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -20,7 +19,7 @@ function HospitalCard(props) {
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={apollo_logo} alt="#" />
+              <img src={hospitalData?.logo} alt="#" width={75} height={75}/>
             </div>
             <div className="col-auto">
               <img src={right_chevron} alt="#" />

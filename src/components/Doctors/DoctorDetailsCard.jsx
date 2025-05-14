@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  arrow_left, cross_icon,
-  dr_profile,
-  email_icon,
+  arrow_left,
+  cross_icon, email_icon,
   eye_icon,
   pdf_icon,
   pencil_icon,
@@ -31,13 +30,23 @@ function DoctorDetailsCard() {
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
   const tabData = [
-    { id: "dr_overview", title: "Overview", content: <DoctorsOverview />,link:"overview" },
-    { id: "dr_finance", title: "Finance", content: <DoctorsFinance />,link:"finance" },
+    {
+      id: "dr_overview",
+      title: "Overview",
+      content: <DoctorsOverview />,
+      link: "overview",
+    },
+    {
+      id: "dr_finance",
+      title: "Finance",
+      content: <DoctorsFinance />,
+      link: "finance",
+    },
     {
       id: "dr_bookings",
       title: "Total Bookings",
       content: <DoctorsBookings />,
-      link:"total-bookings"
+      link: "total-bookings",
     },
   ];
 
@@ -49,7 +58,7 @@ function DoctorDetailsCard() {
 
   const handleDisable = async () => {
     console.log("Trigger");
-    
+
     const updatedStatus = {
       status: doctorStatus === "active" ? "disabled" : "active",
     };
@@ -87,7 +96,7 @@ function DoctorDetailsCard() {
               <div className="dropdown-menu">
                 <Link
                   className="dropdown-item"
-                    to={`/manage-hospitals/${id}/edit`}
+                  to={`/manage-hospitals/${id}/edit`}
                 >
                   <img
                     src={pencil_icon}
@@ -102,12 +111,6 @@ function DoctorDetailsCard() {
                   to="#"
                   onClick={handleTogglebtn}
                 >
-                  {/* <img
-                    src={toggle_icon}
-                    alt="disable"
-                    className="dropdown-menu-icon"
-                  /> 
-                  <span>Disable</span> */}
                   <div
                     // onClick={handleTogglebtn}
                     className="status-toggle d-flex align-items-center"
@@ -126,19 +129,6 @@ function DoctorDetailsCard() {
                     </span>
                   </div>
                 </Link>
-                {/* <div className="dropdown-divider" />
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                  onClick={() => setShow(true)}
-                >
-                  <img
-                    src={bin_icon_red}
-                    alt="delete"
-                    className="dropdown-menu-icon"
-                  />
-                  <span className="text-danger">Delete</span>
-                </Link> */}
               </div>
             </div>
           </div>
@@ -150,21 +140,17 @@ function DoctorDetailsCard() {
               <div className="col-md-3">
                 <div className="doctor-img-wrap">
                   <div className="profile-img">
-                    {/* <Link to="#"> */}
-                    <img className="" src={dr_profile} alt="#" /> /
-                    {/* </Link> */}
+                    <img className="" src={data?.profile_pic} alt="#" />
                   </div>
                 </div>
               </div>
               <div className="col">
-                {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
                   <h3 className="user-name m-t-0 mb-0">Dr. {data?.name}</h3>
                   <small className="text-muted">
                     {data?.registration_details?.qualification}
                   </small>
                 </div>
-                {/* </div> */}
               </div>
             </div>
           </div>
@@ -196,33 +182,6 @@ function DoctorDetailsCard() {
             </button>
           </div>
         </div>
-
-        {/* <div className="row mt-4">
-          <div className="col-md-12">
-            <ul className="personal-info">
-              <li>
-                <span className="title">Address :</span>
-                <span className="text">
-                  <p className="w-md-75">
-                    Lorem ipsum dolor sit amet consectetu
-                  </p>
-                </span>
-              </li>
-              <li>
-                <span className="title">District :</span>
-                <span className="text">
-                  <p className="w-md-75">Hydrabad</p>
-                </span>
-              </li>
-              <li>
-                <span className="title">State :</span>
-                <span className="text">
-                  <p className="w-md-75">Telengana</p>
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div> */}
         <div className="row">
           <div className="col-md-6">
             <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1">
@@ -330,7 +289,7 @@ function DoctorDetailsCard() {
           </div>
         </div>
       </div>
-      <TransparentTabs tabData={tabData}/>      
+      <TransparentTabs tabData={tabData} />
       {isLoading && <FullscreenLoader />}
       <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
       <ToggleModal

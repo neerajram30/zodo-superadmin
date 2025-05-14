@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   arrow_left,
@@ -8,7 +8,7 @@ import {
   phone_icon,
   search_outline_icon,
 } from "../imagepath";
-import { apollo_logo, three_dots_menu } from "../imagepath";
+import { three_dots_menu } from "../imagepath";
 import Overview from "./Overview";
 import HospitalModal from "./HospitalModal";
 import FastTag from "./FastTag";
@@ -172,7 +172,7 @@ function HospitalDetailsCard(props) {
                   <div className="hospital-img-wrap">
                     <div className="profile-img">
                       <Link to="#">
-                        <img className="" src={apollo_logo} alt="#" />
+                        <img className="" src={hospitalDetails?.logo} alt="#" />
                       </Link>
                     </div>
                   </div>

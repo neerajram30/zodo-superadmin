@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Closebtn from "../assests/Closebtn";
 import ChooseFile from "../Hospitals/ChooseFile";
 import FullscreenLoader from "../loadings/FullscreenLoader";
@@ -14,6 +14,19 @@ import { toast } from "react-toastify";
 function EditDoctorForm() {
   const { data, isLoading } = useSpecialisationList();
   const { id } = useParams();
+  const [fileURL, setFileURL] = useState("");
+  const handleFileURL = (url) => {
+    setFileURL(url);
+  };
+  const [document1, setDocument1] = useState("");
+  const [document2, setDocument2] = useState("");
+
+  const handleFileKeyDoc1 = (filekey) => {
+    setDocument1(filekey);
+  };
+  const handleFileKeyDoc2 = (filekey) => {
+    setDocument2(filekey);
+  };
   const { data: doctorDetails, isLoading: doctorLoading } = useDoctorById(id);
   console.log("Doctor", doctorDetails);
   const { mutate, isLoading: editingLoader } = useEditDoctor();
@@ -28,6 +41,7 @@ function EditDoctorForm() {
 
   useEffect(() => {
     if (doctorDetails) {
+      setFileURL(doctorDetails?.profile_pic);
       const specialisation = doctorDetails?.specialisations;
       const specialisations = specialisation.map((item) => ({
         label: item.name,
@@ -59,7 +73,7 @@ function EditDoctorForm() {
       const doctorData = {
         name: data["doctorName"],
         email: data["doctorEmail"],
-        profile_pic: "www.link.com",
+        profile_pic: fileURL,
         city: data["city"],
         pricing: parseInt(data?.pricing),
         specifications_id: specifications,
@@ -69,6 +83,8 @@ function EditDoctorForm() {
           registration_number: data?.registrationNumber,
           council_name: data?.councilName,
           qualification: data?.qualification,
+          // registration_proof: document1,
+          // degree_proof: document2
         },
         bank_details: {
           account_number: data?.accountNumber,
@@ -77,6 +93,8 @@ function EditDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
+        documents: [{name:"registration_proof", file :document1},{name:"degree_proof", file :document2}]
+
       };
       console.log(doctorData);
       await mutate({ id: id, data: doctorData });
@@ -108,7 +126,7 @@ function EditDoctorForm() {
       {/* <div className="row"> */}
       <div className="row mt-4">
         <div className="col-md-8 ms-md-3">
-          <ChooseFile />
+          <ChooseFile handleFileURL={handleFileURL} fileURL={fileURL} />
         </div>
       </div>
       {doctorLoading || (editingLoader && <FullscreenLoader />)}
@@ -361,14 +379,13 @@ function EditDoctorForm() {
               <p>upload related documents to complete the process</p>
             </div>
             <div className="row mt-4 pb-5">
-              <div className="col-md-4 mt-2">
-                <UploadFiles />
+              <div className="col-md-6">
+                <label className="pb-2">Registration Proof</label>
+                <UploadFiles handleFileKey={handleFileKeyDoc1} />
               </div>
-              <div className="col-md-4 mt-2">
-                <UploadFiles />
-              </div>
-              <div className="col-md-4 mt-2">
-                <UploadFiles />
+              <div className="col-md-6">
+                <label className="pb-2">Degree Proof</label>
+                <UploadFiles handleFileKey={handleFileKeyDoc2} />
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSpecialisationList } from "../../hooks/specialisation/useSpecialisationList";
 import { useCreateDoctors } from "../../hooks/doctors/useCreateDoctors";
@@ -12,6 +12,19 @@ import SelectField from "../InputFields/SelectField";
 import { toast } from "react-toastify";
 function AddDoctorForm() {
   const { data, isLoading } = useSpecialisationList();
+  const [fileURL, setFileURL] = useState("");
+  const [document1, setDocument1] = useState("");
+  const [document2, setDocument2] = useState("");
+
+  const handleFileKeyDoc1 = (filekey) => {
+    setDocument1(filekey);
+  };
+  const handleFileKeyDoc2 = (filekey) => {
+    setDocument2(filekey);
+  };
+  const handleFileURL = (url) => {
+    setFileURL(url);
+  };
   console.log("Specialisation", data);
   // const { data: districts, isLoading: districtLoading } = useGetDistrict();
   // const districtOptions = districts?.map((item) => ({
@@ -39,7 +52,7 @@ function AddDoctorForm() {
       const doctorData = {
         name: data["doctorName"],
         email: data["doctorEmail"],
-        profile_pic: "www.link.com",
+        profile_pic: fileURL,
         city: data["city"],
         pricing: parseInt(data?.pricing),
         specifications_id: specifications,
@@ -49,6 +62,8 @@ function AddDoctorForm() {
           registration_number: data?.registrationNumber,
           council_name: data?.councilName,
           qualification: data?.qualification,
+          // registration_proof: document1,
+          // degree_proof: document2
         },
         bank_details: {
           account_number: data?.accountNumber,
@@ -57,6 +72,7 @@ function AddDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
+        documents: [{name:"registration_proof", file :document1},{name:"degree_proof", file :document2}]
       };
       await mutate(doctorData, { onSuccess: () => methods.reset() });
     } else {
@@ -86,7 +102,7 @@ function AddDoctorForm() {
       {/* <div className="row"> */}
       <div className="row mt-4">
         <div className="col-md-8 ms-md-3">
-          <ChooseFile />
+          <ChooseFile handleFileURL={handleFileURL} fileURL={fileURL} />
         </div>
       </div>
       {doctorLoading && <FullscreenLoader />}
@@ -339,14 +355,13 @@ function AddDoctorForm() {
               <p>upload related documents to complete the process</p>
             </div>
             <div className="row mt-4 pb-5">
-              <div className="col-md-4 mt-2">
-                <UploadFiles />
+              <div className="col-md-6">
+                <label className="pb-2">Registration Proof</label>
+                <UploadFiles handleFileKey={handleFileKeyDoc1} />
               </div>
-              <div className="col-md-4 mt-2">
-                <UploadFiles />
-              </div>
-              <div className="col-md-4 mt-2">
-                <UploadFiles />
+              <div className="col-md-6">
+                <label className="pb-2">Degree Proof</label>
+                <UploadFiles handleFileKey={handleFileKeyDoc2} />
               </div>
             </div>
           </div>

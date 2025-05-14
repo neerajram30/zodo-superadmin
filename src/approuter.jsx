@@ -1,4 +1,3 @@
-import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/login";
@@ -24,7 +23,6 @@ import AddDoctors from "./components/pages/Doctors/AddDoctors";
 import Specialization from "./components/pages/Doctors/Specialization";
 import FasttagIssued from "./components/pages/Dashboard/FasttagIssued";
 import FasttagRevenue from "./components/pages/Dashboard/FasttagRevenue";
-import ManageSettlement from "./components/pages/Dashboard/ManageSettlement";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
 import DoctorRequest from "./components/pages/Doctors/DoctorRequest";
 import EditDoctor from "./components/pages/Doctors/EditDoctor";
@@ -37,6 +35,8 @@ import EditDoctotRequest from "./components/pages/Doctors/EditDoctotRequest";
 import SettlementPage from "./components/pages/Settlement/SettlementPage";
 import PublicRoute from "./PublicRoute";
 import FinancePage from "./components/pages/FinancePage";
+import SettlementDetails from "./components/pages/Settlement/SettlementDetails";
+import AppManage from "./components/pages/AppManage";
 
 //Accounts
 const Approuter = () => {
@@ -95,8 +95,12 @@ const Approuter = () => {
             />
             <Route
               path="/dashboard/settlement-requests/:id"
-              element={<ManageSettlement />}
+              element={<SettlementDetails />}
             />
+            {/* <Route
+              path="/dashboard/settlement-requests/manage-request/:id"
+              element={<SettlementDetails />}
+            /> */}
             {/* <Route
             path="/dashboard/fasttag-issued/:id"
             element={<FasttagDetails />}
@@ -160,6 +164,10 @@ const Approuter = () => {
             <Route
               path="/finance"
               element={<FinancePage/>}
+            />
+            <Route
+              path="/app-manage"
+              element={<AppManage/>}
             />
           </Route>
           {/* Unauthorised routes       */}

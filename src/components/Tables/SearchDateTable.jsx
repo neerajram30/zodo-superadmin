@@ -2,22 +2,21 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Table } from "antd";
 import DateSearchHero from "../heros/DateSearchHero";
-import { bin_icon_red } from "../imagepath";
 import { itemRender, onShowSizeChange } from "../Pagination";
 
 function SearchDateTable(props) {
-  const { data, isLoading, handelQuery, columns, title, setSelecteditemsList } =
+  const { data, isLoading, handelQuery, columns, title } =
     props;
-  const [selectedItems, setSelectedItems] = useState(null);
-  console.log(selectedItems);
+  // const [selectedItems, setSelectedItems] = useState(null);
+  // console.log(selectedItems);
   const [searchTerm, setsearchTerm] = useState("");
   const [date, setdate] = useState(null);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const onSelectChange = (newSelectedRowKeys) => {
-    handleSelection(newSelectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-    setSelecteditemsList(newSelectedRowKeys);
-  };
+  // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  // const onSelectChange = (newSelectedRowKeys) => {
+  //   handleSelection(newSelectedRowKeys);
+  //   setSelectedRowKeys(newSelectedRowKeys);
+  //   setSelecteditemsList(newSelectedRowKeys);
+  // };
   const query =
     (searchTerm &&
       date &&
@@ -32,28 +31,28 @@ function SearchDateTable(props) {
   const handleSearch = (term) => {
     setsearchTerm(term);
   };
-  const handleSelection = (items) => {
-    setSelectedItems(items);
-  };
+  // const handleSelection = (items) => {
+  //   setSelectedItems(items);
+  // };
 
   useEffect(() => {
     handelQuery(query);
   }, [query]);
 
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
+  // const rowSelection = {
+  //   selectedRowKeys,
+  //   onChange: onSelectChange,
+  // };
 
   return (
     <div className="card-box">
       <h5>{title}</h5>
-      <DateSearchHero handleDate={handleDate} handleSearch={handleSearch} />
+      <DateSearchHero handleDate={handleDate} handleSearch={handleSearch} hideSearchbox={true}/>
       <div>
         {data?.length ? (
           <h5>
             {data?.length + " results found"}
-            {selectedRowKeys.length > 0 && (
+            {/* {selectedRowKeys.length > 0 && (
               <span className="delete-badge status-red ms-1">
                 <img
                   src={bin_icon_red}
@@ -64,7 +63,7 @@ function SearchDateTable(props) {
                 />
                 <span className="mt-5 ps-2">CLEAR</span>
               </span>
-            )}
+            )} */}
           </h5>
         ) : null}
       </div>
@@ -78,8 +77,8 @@ function SearchDateTable(props) {
           }}
           columns={columns}
           dataSource={data ?? []}
-          rowSelection={rowSelection}
-          rowKey={(record) => record.id}
+          // rowSelection={rowSelection}
+          // rowKey={(record) => record.id}
           loading={isLoading}
         />
       </div>

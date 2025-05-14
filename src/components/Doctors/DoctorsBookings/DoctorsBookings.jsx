@@ -59,7 +59,7 @@ function DoctorsBookings() {
           className={`${
             (item === "cancelled" && "delete-badge status-red") ||
             (item === "started" && "delete-badge status-orange") ||
-            (item === "completed" && "delete-badge status-green")
+            (item === "completed" || item === "accepted" && "delete-badge status-green")
           }`}
         >
           {item}
@@ -70,7 +70,7 @@ function DoctorsBookings() {
       title: "AMOUNT",
       dataIndex: "amount",
       sorter: (a, b) => a.amount.length - b.amount.length,
-      render: (item, record) => <div>{record?.doctor?.pricing}</div>,
+      render: (item, record) => <div>₹ {record?.amount}</div>,
     },
     {
       title: "ACTIONS",

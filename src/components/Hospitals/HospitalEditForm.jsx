@@ -17,8 +17,21 @@ import { toast } from "react-toastify";
 function HospitalEditForm() {
   const { id } = useParams();
   const [toggleFasttag, setToggleFasttag] = useState(false);
+  const [fileURL, setFileUrl] = useState("");
   const { mutate, isLoading } = useEditHostpital();
   const { data: hospitalDetails } = useViewHospital(id);
+  const [document1, setDocument1] = useState("");
+  const [document2, setDocument2] = useState("");
+  const [document3, setDocument3] = useState("");
+  const handleFileKeyDoc1 = (filekey) => {
+    setDocument1(filekey);
+  };
+  const handleFileKeyDoc2 = (filekey) => {
+    setDocument2(filekey);
+  };
+  const handleFileKeyDoc3 = (filekey) => {
+    setDocument3(filekey);
+  };
   // const selectedHospital = useSelectedHospital(
   //   (state) => state.selectedHospital
   // );
@@ -37,6 +50,7 @@ function HospitalEditForm() {
 
   useEffect(() => {
     if (hospitalDetails) {
+      setFileUrl(hospitalDetails?.logo);
       const fastTag = hospitalDetails?.fastTag?.enabled;
       setToggleFasttag(fastTag);
       const district = hospitalDetails?.address?.district;
@@ -78,11 +92,17 @@ function HospitalEditForm() {
     }
   }, [hospitalDetails, methods]);
 
+  console.log("File url ", fileURL);
+
+  const handleFileURL = (fileURLResponse) => {
+    setFileUrl(fileURLResponse);
+  };
+
   const onEditHospital = async (data) => {
     if (data.accountNumber === data.verifyAccountnumber) {
       const hospital = {
         name: data?.hospitalName,
-        logo: "hospital logo",
+        logo: fileURL,
         location: data?.town,
         address: {
           lineOne: data?.companyName,
@@ -120,14 +140,22 @@ function HospitalEditForm() {
           website: data?.website,
         },
         gst: data?.gstnumber,
+        documents: [
+          { name: "doc1", file: document1 },
+          { name: "doc2", file: document2 },
+          { name: "doc3", file: document3 },
+        ],
       };
       // console.log("hospital !!", hospital);
       // console.log(mutate);
-      await mutate({ id: id, data: hospital }, { onSuccess: () => {
-        navigate(`/manage-hospitals/${id}`)
-
-
-      } });
+      await mutate(
+        { id: id, data: hospital },
+        {
+          onSuccess: () => {
+            navigate(`/manage-hospitals/${id}`);
+          },
+        }
+      );
       // methods.reset();
     } else {
       const errorMessage = "Account number mismatch";
@@ -158,7 +186,7 @@ function HospitalEditForm() {
         <form onSubmit={methods.handleSubmit(onEditHospital)}>
           <div className="row mt-4">
             <div className="col-md-8 ms-md-3">
-              <ChooseFile />
+              <ChooseFile handleFileURL={handleFileURL} fileURL={fileURL} />
             </div>
           </div>
           <div className="w-100 mt-4 mt-md-2">
@@ -541,13 +569,13 @@ function HospitalEditForm() {
             </div>
             <div className="row mt-4 pb-5">
               <div className="col-md-4 mt-2">
-                <UploadFiles />
+                <UploadFiles handleFileKey={handleFileKeyDoc1} />
               </div>
               <div className="col-md-4 mt-2">
-                <UploadFiles />
+                <UploadFiles handleFileKey={handleFileKeyDoc2} />
               </div>
               <div className="col-md-4 mt-2">
-                <UploadFiles />
+                <UploadFiles handleFileKey={handleFileKeyDoc3} />
               </div>
             </div>
           </div>

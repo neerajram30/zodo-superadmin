@@ -30,6 +30,7 @@
     "apexcharts": "^3.44.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.2",
+    "dayjs": "^1.11.13",
     "feather-icons-react": "^0.6.2",
     "fs": "^0.0.1-security",
     "fullcalendar": "^6.1.9",

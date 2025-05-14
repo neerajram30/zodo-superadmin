@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function SettlementOperations(props) {
   const { approveRequest, isLoading, status, declineRequest } = props;
   const navigate = useNavigate();
+  
   return (
     <div className="row pb-4">
       <div className="settings-btns col-md-6 col-sm-12">
@@ -28,15 +29,17 @@ function SettlementOperations(props) {
             Contact Them
           </button>
           &nbsp;&nbsp;
-          {status !== "rejected" &&<button
-            type="submit"
-            className="btn-outline-primary rounded pt-2 pb-2 ps-5 pe-5"
-            onClick={()=>declineRequest()}
-          >
-            Decline
-          </button>}
+          {status !== "rejected" && (
+            <button
+              type="submit"
+              className="btn-outline-primary rounded pt-2 pb-2 ps-5 pe-5"
+              onClick={() => declineRequest()}
+            >
+              Decline
+            </button>
+          )}
           &nbsp;&nbsp;
-          {status !== "active" && (
+          { status !== "approved" && (
             <button
               type="submit"
               className="border-0 btn-primary btn-main-primary text-white ps-5 pe-5"

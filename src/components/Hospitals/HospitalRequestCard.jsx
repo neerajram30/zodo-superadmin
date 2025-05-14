@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { apollo_logo } from "../imagepath";
 import { Link } from "react-router-dom";
 import ApproveRequestModal from "../modals/ApproveRequestModal";
 import { useChangeHospitalStatus } from "../../hooks/hospitals/useChangeHospitalStatus";
@@ -19,7 +18,7 @@ function HospitalRequestCard(props) {
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={apollo_logo} alt="#" />
+              <img src={hospitalData?.logo} alt="#" width={75} height={75}/>
             </div>
             {/* <div className="col-auto">
               <img src={right_chevron} alt="#" />

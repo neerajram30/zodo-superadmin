@@ -11877,3 +11877,10 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 .settlement-card{
   height: 20vh;
 }
+.upload-document-name{
+  width: 65%;
+  height: 50px;
+  word-wrap: break-word;
+  padding-top: 4%;
+  padding-right: 2%;
+}

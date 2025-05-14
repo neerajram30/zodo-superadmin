@@ -25,7 +25,7 @@ function HospitalDetails() {
   );
   setSelectedHospital(hospitalDetails);
   console.log("selected hospital", selectedHospital);
-  
+
   const breadCrumpData = [
     {
       name: "Hospitals",

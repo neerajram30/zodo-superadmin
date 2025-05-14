@@ -10,15 +10,19 @@ import SettlementRequest from "../../settlements/SettlementRequest";
 
 function SettlementPage() {
   const [searchTerm, setSearchterm] = useState("");
-  const query = searchTerm ? `name=${searchTerm}` : ""
+  const query = searchTerm ? `name=${searchTerm}` : "";
   const { data: settlementList, isLoading } = useAllSettlements(query);
   // console.log("Data",settlementList?.data);
   const { data: requestedSettlements, isLoading: requestedLoading } =
     useSetSettlementStatusList("requested");
   const { data: rejectedSettlements, isLoading: rejectedLoading } =
     useSetSettlementStatusList("rejected");
+
+  const { data: approvedSettlements, isLoading: approvedLoading } =
+    useSetSettlementStatusList("approved");
   const requestSettlementCount = requestedSettlements?.length ?? 0;
   const rejectedSettlementCount = rejectedSettlements?.length ?? 0;
+  const approvedSettlementCount = approvedSettlements?.length ?? 0;
   const breadCrumpData = [
     {
       name: "Dashboard",
@@ -31,26 +35,32 @@ function SettlementPage() {
       link: "/dashboard/settlement-requests",
     },
   ];
-  console.log("REQUESTED ",requestedSettlements);
-  
+  console.log("REQUESTED ", requestedSettlements);
+
   const tabData = [
     {
       id: "allhospitals",
       title: "All Settlements",
       content: <SettlementList data={settlementList ?? []} />,
-      link:"all"
+      link: "all",
+    },
+    {
+      id: "approved",
+      title: `Approved Settlements (${approvedSettlementCount})`,
+      content: <SettlementRequest data={approvedSettlements ?? []}/>,
+      link: "approved",
     },
     {
       id: "requested",
       title: `Requested Settlements (${requestSettlementCount})`,
-      content: <SettlementRequest data={requestedSettlements ?? []} />,
-      link:"requested"
+      content: <SettlementRequest data={requestedSettlements ?? []}/>,
+      link: "requested",
     },
     {
       id: "rejected",
       title: `Rejected Settlements (${rejectedSettlementCount})`,
-      content: <SettlementRequest data={rejectedSettlements ?? []} />,
-      link:"rejected"
+      content: <SettlementRequest data={rejectedSettlements ?? []}/>,
+      link: "rejected",
     },
   ];
 
@@ -68,6 +78,7 @@ function SettlementPage() {
           {/* <Settlements tabData={tabData} /> */}
           {isLoading ||
             rejectedLoading ||
+            approvedLoading ||
             (requestedLoading && <FullscreenLoader />)}
         </div>
       </div>

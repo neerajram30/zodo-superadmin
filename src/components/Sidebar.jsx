@@ -69,51 +69,6 @@ const Sidebar = (props) => {
                 </Link>
               </li>
 
-              {/* <li className="submenu">
-                <Link
-                  className={
-                    props?.activeClassName === "appointment" ? "active" : ""
-                  }
-                  id="menu-item2"
-                  to="/appointment"
-                >
-                  <span className="menu-side">
-                    <img src={menuicon08} alt="" />
-                  </span>{" "}
-                  <span> Appointment </span>
-                </Link>
-              </li> */}
-
-              {/* <li className="submenu">
-                <Link
-                  className={
-                    props?.activeClassName === "doctor-manage" ? "active" : ""
-                  }
-                  id="menu-item4"
-                  to="/doctor-manage"
-                >
-                  <span className="menu-side">
-                    <img src={menuicon08} alt="" />
-                  </span>{" "}
-                  <span> Doctor Manage </span>
-                </Link>
-              </li> */}
-
-              {/* <li className="submenu">
-                <Link
-                  className={
-                    props?.activeClassName === "staff-manage" ? "active" : ""
-                  }
-                  id="menu-item5"
-                  to="/staff-manage"
-                >
-                  <span className="menu-side">
-                    <img src={menuicon08} alt="" />
-                  </span>{" "}
-                  <span> Staff Manage </span>
-                </Link>
-              </li> */}
-
               <li className="submenu">
                 <Link
                   to
@@ -174,6 +129,21 @@ const Sidebar = (props) => {
                     <img src={menuicon08} alt="" />
                   </span>{" "}
                   <span> Finance </span>
+                </Link>
+              </li>
+                  {console.log("App manage >",props?.activeClassName)}
+              <li className="submenu">
+                <Link
+                  className={
+                    props?.activeClassName === "appmanage" ? "active" : ""
+                  }
+                  id="menu-item2"
+                  to="/app-manage"
+                >
+                  <span className="menu-side">
+                    <img src={menuicon08} alt="" />
+                  </span>{" "}
+                  <span> App Manage </span>
                 </Link>
               </li>
             </ul>
