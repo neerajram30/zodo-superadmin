@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { useAppDetails } from "../../hooks/appmanage/useAppDetails";
 import { useCreateAppDetails } from "../../hooks/appmanage/useCreateAppDetails";
-import { useUpdateAppDetails } from "../../hooks/appmanage/useUpdateAppDetails";
+// import { useUpdateAppDetails } from "../../hooks/appmanage/useUpdateAppDetails";
 import ComponentLoader from "../loadings/ComponentLoader";
 
 function PlatfromVersions() {
@@ -13,11 +13,11 @@ function PlatfromVersions() {
   const [androidDate, setAndroidDate] = useState(null);
   const { mutate: createAppdetails, isLoading } = useCreateAppDetails();
   const { data: appDetails, isLoading: appLoading } = useAppDetails();
-  const { mutate: updateAppdetails, isLoading: appDetailsLoading } =
-    useUpdateAppDetails();
+  // const { mutate: updateAppdetails, isLoading: appDetailsLoading } =
+  //   useUpdateAppDetails();
 
-  console.log("App details <><><",appDetails);
-    
+  console.log("App details <><><", appDetails);
+
   const [iosDate, setIosDate] = useState(null);
   const onPlatformVersion = (data) => {
     const formattedAndroidDate = dayjs(androidDate).format("DD/MM/YYYY");
@@ -25,34 +25,33 @@ function PlatfromVersions() {
 
     if (appDetails) {
       const details = {
-        platform_fee: data.platformFee,
+        platform_fee: parseInt(data.platformFee),
         version_details_ios: {
           min_version: data.iosMinimumversion,
           latest_version: data.iosCurrentVersion,
-          last_update_date: formattedIosDate,
+          last_update_date: new Date(formattedIosDate),
         },
         version_details_android: {
           min_version: data.androidMinimumversion,
           latest_version: data.androidCurrentVersion,
-          last_update_date: formattedAndroidDate,
+          last_update_date: new Date(formattedAndroidDate),
         },
       };
-      console.log(data);
-      updateAppdetails(details);
+      createAppdetails(details);
     } else {
       const appdetails = {
         app_store_link: "",
         play_store_link: "",
-        platform_fee: data.platformFee,
+        platform_fee: parseInt(data.platformFee),
         version_details_ios: {
           min_version: data.iosMinimumversion,
           latest_version: data.iosCurrentVersion,
-          last_update_date: formattedIosDate,
+          last_update_date: new Date(formattedIosDate),
         },
         version_details_android: {
           min_version: data.androidMinimumversion,
           latest_version: data.androidCurrentVersion,
-          last_update_date: formattedAndroidDate,
+          last_update_date: new Date(formattedAndroidDate),
         },
         connect_link: "",
         terms_and_conditions_link: "",
@@ -64,8 +63,10 @@ function PlatfromVersions() {
 
   useEffect(() => {
     if (appDetails) {
-      setAndroidDate(dayjs(appDetails?.version_details_android?.last_update_date))
-      setIosDate(dayjs(appDetails?.version_details_ios?.last_update_date))
+      setAndroidDate(
+        dayjs(appDetails?.version_details_android?.last_update_date)
+      );
+      setIosDate(dayjs(appDetails?.version_details_ios?.last_update_date));
       methods.reset({
         androidMinimumversion: appDetails?.version_details_android?.min_version,
         androidCurrentVersion:
@@ -137,7 +138,6 @@ function PlatfromVersions() {
                             suffixIcon={null}
                             value={androidDate}
                           />
-                          
                         </div>
                       </div>
                     </div>
@@ -211,13 +211,13 @@ function PlatfromVersions() {
 
                 <div className="w-50 ms-2 mt-2">
                   <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
-                    {appDetailsLoading ||
-                      (isLoading && (
-                        <span
-                          className="spinner-border spinner-border-sm"
-                          aria-hidden="true"
-                        ></span>
-                      ))}
+                    {/* {appDetailsLoading || */}
+                    {isLoading && (
+                      <span
+                        className="spinner-border spinner-border-sm"
+                        aria-hidden="true"
+                      ></span>
+                    )}
                     Save
                   </button>
                 </div>

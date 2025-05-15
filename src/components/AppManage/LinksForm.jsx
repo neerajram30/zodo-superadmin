@@ -4,14 +4,13 @@ import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { useAppDetails } from "../../hooks/appmanage/useAppDetails";
 import ComponentLoader from "../loadings/ComponentLoader";
 import { useEffect } from "react";
-import { useUpdateAppDetails } from "../../hooks/appmanage/useUpdateAppDetails";
 import { useCreateAppDetails } from "../../hooks/appmanage/useCreateAppDetails";
 
 function LinksForm() {
   const methods = useForm();
   const { data: appDetails, isLoading: appLoading } = useAppDetails();
-  const { mutate: updateAppdetails, isLoading: appDetailsLoading } =
-    useUpdateAppDetails();
+  // const { mutate: updateAppdetails, isLoading: appDetailsLoading } =
+  //   useUpdateAppDetails();
   const { mutate: createAppdetails, isLoading } = useCreateAppDetails();
   console.log(appDetails);
   useEffect(() => {
@@ -32,7 +31,7 @@ function LinksForm() {
         privacy_policy_link: data?.privacyPolicy,
       };
       console.log(data);
-      updateAppdetails(links);
+      createAppdetails(links);
     } else {
       const appdetails = {
         app_store_link: "",
@@ -73,7 +72,7 @@ function LinksForm() {
                   </button>
                   <div className="w-100">
                     <InputField
-                      name="privactPolicy"
+                      name="privacyPolicy"
                       label=""
                       validation={{
                         required: "Privacy policy link is required",
@@ -121,13 +120,15 @@ function LinksForm() {
                 </div>
                 <div className="w-50 ms-2 mt-2">
                   <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
-                    {appDetailsLoading ||
-                      (isLoading && (
+                    {
+                      // appDetailsLoading ||
+                      isLoading && (
                         <span
                           className="spinner-border spinner-border-sm"
                           aria-hidden="true"
                         ></span>
-                      ))}
+                      )
+                    }
                     Save
                   </button>
                 </div>

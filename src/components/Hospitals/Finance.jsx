@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettlements";
 import { useState } from "react";
 import SearchDateTable from "../Tables/SearchDateTable";
-import { formatDate } from "../configs/formatDate";
+import { formatDate } from "fullcalendar/index.js";
 function Finance() {
   const { id } = useParams();
   const [query, setQuery] = useState("");
@@ -12,8 +12,8 @@ function Finance() {
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };
-  console.log("Selected items -->",selectedItemsList);
-  
+  console.log("Selected items -->", selectedItemsList);
+
   const { data: settlements, isLoading } = useHospitalSettlements(id, query);
   const financeData = [
     {
@@ -56,25 +56,36 @@ function Finance() {
 
   const columns = [
     {
+      title: "TRANSATION ID",
+      dataIndex: "transaction_id",
+      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+    },
+    {
       title: "DATE ISSUED",
       dataIndex: "created_at",
       render: (item) => <div>{formatDate(item)}</div>,
       // sorter: (a, b) => a.date.length - b.date.length,
     },
+    // {
+    //   title: "INVOICE#",
+    //   dataIndex: "invoiceNumber",
+    //   // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+    // },
     {
-      title: "INVOICE#",
-      dataIndex: "invoiceNumber",
-      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
-    },
-    {
-      title: "TRANSACTION NAME",
-      dataIndex: "transactionName",
+      title: "PAYMENT METHOD",
+      dataIndex: "payment_method",
       // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
     },
+    // {
+    //   title: "DUE DATE",
+    //   dataIndex: "dueDate",
+    //   // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+    // },
     {
-      title: "DUE DATE",
-      dataIndex: "dueDate",
-      // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+      title: "APPROVED DATE",
+      dataIndex: "approve_date",
+      render: (item) => <div>{item ? formatDate(item) : "N/A"}</div>,
+      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
     },
     {
       title: "STATUS",
@@ -83,9 +94,11 @@ function Finance() {
       render: (item) => (
         <div
           className={`${
-            (item === "failed" && "delete-badge status-red") ||
+            item === "failed" ||
+            (item === "rejected" && "delete-badge status-red") ||
             (item === "requested" && "delete-badge status-orange") ||
-            (item === "completed" && "delete-badge status-green")
+            item === "completed" ||
+            (item === "approved" && "delete-badge status-green")
           }`}
         >
           {item}
@@ -98,16 +111,16 @@ function Finance() {
       render: (item) => <div>₹ {item}</div>,
       // sorter: (a, b) => a.total.length - b.total.length,
     },
-    {
-      title: "BALANCE",
-      dataIndex: "balance",
-      // sorter: (a, b) => a.balance.length - b.balance.length,
-    },
-    {
-      title: <div className="text-center">ACTIONS</div>,
-      dataIndex: "actions",
-      render:()=><div className="text-center">view</div>
-    },
+    // {
+    //   title: "BALANCE",
+    //   dataIndex: "balance",
+    //   // sorter: (a, b) => a.balance.length - b.balance.length,
+    // },
+    // {
+    //   title: <div className="text-center">ACTIONS</div>,
+    //   dataIndex: "actions",
+    //   render:()=><div className="text-center">view</div>
+    // },
   ];
   return (
     <div className="pb-3 mt-2">

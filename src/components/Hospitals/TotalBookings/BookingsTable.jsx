@@ -19,8 +19,16 @@ function BookingsTable(props) {
       )
     },
     {
-      title: "DUE ISSUE",
+      title: "BOOKED DATE",
       dataIndex: "createdAt",
+      // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
+      render:(item)=>(
+        <div>{getDateFromIso(item)}</div>
+      )
+    },
+    {
+      title: "APPOINTMENT DATE",
+      dataIndex: "appointmentDate",
       // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
       render:(item)=>(
         <div>{getDateFromIso(item)}</div>
@@ -45,17 +53,19 @@ function BookingsTable(props) {
       title: <div className="d-flex justify-content-center">AMOUNT</div>,
       dataIndex: "amount",
       // sorter: (a, b) => a.amount.length - b.amount.length,
-      render:(item,record)=>(
-        <div className="d-flex justify-content-center">${record?.doctor?.pricing ?? 0}</div>
+      render:(item)=>(
+        <div className="d-flex justify-content-center">${item ?? 0}</div>
       )
     },
-    {
-      title:<div className="d-flex justify-content-center">ACTIONS</div>,
-      dataIndex: "actions",
-      render:()=>(
-        <div className="d-flex justify-content-center">view</div>
-      )
-    },
+    // {
+    //   title:<div className="d-flex justify-content-center">ACTIONS</div>,
+    //   dataIndex: "prescriptionUrl",
+    //   render:(item)=>(
+    //     <div>
+    //       {item && <a className="d-flex justify-content-center" href={item} target="_blank" rel="noopener noreferrer">view</a>}
+    //     </div>
+    //   )
+    // },
   ];
   return (
     <div>

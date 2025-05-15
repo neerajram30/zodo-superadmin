@@ -12,7 +12,7 @@ export const useCreateAppDetails = () => {
       await queryClient.cancelQueries({ queryKey: ["app-details"] });
     },
     onSuccess: (data) => {
-      const message = data?.message || "Appdetails added successfully";
+      const message = data?.message || "Appdetails updated successfully";
       queryClient.invalidateQueries(["app-details"]);
       //   navigate("/manage-doctors");
       toast.success(message);
@@ -26,7 +26,7 @@ export const useCreateAppDetails = () => {
       const errorMessage =
         error?.response?.data?.validationErrors ||
         error?.response?.data?.message ||
-        "Failed to create app details";
+        "Failed to update app details";
       toast.error(errorMessage, {
         position: "top-right",
         autoClose: 5000,

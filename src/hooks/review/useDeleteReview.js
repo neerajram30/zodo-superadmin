@@ -30,7 +30,7 @@ export const useDeleteReview = () => {
     },
     onError: (error, id, context) => {
       const errotMessage =
-        error?.response?.data?.message || "Failed to delete hospital";
+        error?.response?.data?.message || "Failed to delete review";
       // Rollback if there is an error
       if (context?.previousreviews) {
         queryClient.setQueryData(["reviews"], context.previousreviews);

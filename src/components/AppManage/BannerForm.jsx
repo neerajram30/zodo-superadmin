@@ -8,7 +8,10 @@ import { toast } from "react-toastify";
 import ComponentLoader from "../loadings/ComponentLoader";
 import { useAddBanner } from "../../hooks/appmanage/useAddBanner";
 import FullscreenLoader from "../loadings/FullscreenLoader";
-function BannerForm() {
+import TextArea from "../InputFields/TextArea";
+import PropTypes from "prop-types";
+function BannerForm(props) {
+  const {handleClose} = props;
   // const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -29,6 +32,7 @@ function BannerForm() {
     mutate(bannderData, {
       onSuccess: () => {
         methods.reset();
+        handleClose();
       },
     });
     console.log(data);
@@ -68,111 +72,109 @@ function BannerForm() {
     setFilekey("");
   };
   return (
-    <div className="row">
-      <div className="col-md-12">
-        <div className="card">
-          <div className="card-header">
-            <h5 className="card-title">Add Banners</h5>
-          </div>
-          <div className="card-body pt-0">
-            <FormProvider {...methods}>
-              <form onSubmit={methods.handleSubmit(onCreateBanner)}>
-                <div className="settings-form">
-                  <div className="form-group">
-                    <InputField
-                      name="title"
-                      label="Banner Title"
-                      validation={{ required: "Banner title is required" }}
-                      placeholder="Enter banner title"
-                      type="text"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <InputField
+    <div>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onCreateBanner)}>
+          <div className="settings-form">
+            <div className="form-group">
+              <InputField
+                name="title"
+                label="Banner Title"
+                validation={{ required: "Banner title is required" }}
+                placeholder="Enter banner title"
+                type="text"
+              />
+            </div>
+            <div className="form-group">
+              <TextArea
+                name="description"
+                label="Description"
+                placeholder="Write here.."
+              />
+
+              {/* <InputField
                       name="link"
                       label="Banner Link"
                       validation={{ required: "Banner link is required" }}
                       placeholder="Enter banner link"
                       type="text"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <p className="settings-label">
-                      Upload Banner <span className="star-red">*</span>
-                    </p>
-                    <div className="settings-btn">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        name="image"
-                        id="file"
-                        onChange={handleFile}
-                        className="hide-input"
-                      />
-                      <label htmlFor="file" className="upload">
-                        <i className="feather-upload">
-                          <FeatherIcon icon="upload" />
-                        </i>
-                      </label>
-                    </div>
-                    <h6 className="settings-size">
-                      Recommended image size is <span>150px x 150px</span>
-                    </h6>
+                    /> */}
+            </div>
+            <div className="form-group">
+              <p className="settings-label">
+                Upload Banner <span className="star-red">*</span>
+              </p>
+              <div className="settings-btn">
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="image"
+                  id="file"
+                  onChange={handleFile}
+                  className="hide-input"
+                />
+                <label htmlFor="file" className="upload">
+                  <i className="feather-upload">
+                    <FeatherIcon icon="upload" />
+                  </i>
+                </label>
+              </div>
+              <h6 className="settings-size">
+                Recommended image size is <span>150px x 150px</span>
+              </h6>
 
-                    <>
-                      {file ? (
-                        <div
-                          className="upload-images upload-banner"
-                          // style={{ display: show ? "none" : "" }}
-                        >
-                          {!loading ? (
-                            <div>
-                              {console.log("file url", fileurl)}
-                              <img src={fileurl} alt="Image" />
-                              <Link to="#" className="btn-icon logo-hide-btn">
-                                <i
-                                  className="feather-x-circle crossmark"
-                                  onClick={handleCloseFile}
-                                >
-                                  <FeatherIcon icon="x-circle" />
-                                </i>
-                              </Link>
-                            </div>
-                          ) : (
-                            <ComponentLoader />
-                          )}
-                        </div>
-                      ) : (
-                        <div>No file</div>
-                      )}
-                    </>
+              <>
+                {file ? (
+                  <div
+                    className="upload-images upload-banner"
+                    // style={{ display: show ? "none" : "" }}
+                  >
+                    {!loading ? (
+                      <div>
+                        {console.log("file url", fileurl)}
+                        <img src={fileurl} alt="Image" />
+                        <Link to="#" className="btn-icon logo-hide-btn">
+                          <i
+                            className="feather-x-circle crossmark"
+                            onClick={handleCloseFile}
+                          >
+                            <FeatherIcon icon="x-circle" />
+                          </i>
+                        </Link>
+                      </div>
+                    ) : (
+                      <ComponentLoader />
+                    )}
                   </div>
-                  <div className="form-group mb-0 d-flex justify-content-end">
-                    <div className="settings-btns">
-                      <button
-                        type="submit"
-                        className="btn btn-secondary btn-rounded"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type="submit"
-                        className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2 ms-2"
-                        disabled={loading}
-                      >
-                        Update
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </FormProvider>
+                ) : (
+                  <div>No file</div>
+                )}
+              </>
+            </div>
+            <div className="form-group mb-0 d-flex justify-content-end">
+              <div className="settings-btns">
+                <button type="submit" className="btn btn-secondary btn-rounded">
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2 ms-2"
+                  disabled={loading}
+                >
+                  Update
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      {isLoading && <FullscreenLoader/>}
+        </form>
+      </FormProvider>
+      {isLoading && <FullscreenLoader />}
     </div>
   );
 }
+
+BannerForm.propTypes = {
+  handleClose: PropTypes.func
+};
 
 export default BannerForm;
