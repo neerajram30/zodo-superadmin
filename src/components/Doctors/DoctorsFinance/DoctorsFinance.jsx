@@ -3,11 +3,14 @@ import OverViewCard from "../../Hospitals/OverViewCard";
 import SearchDateTable from "../../Tables/SearchDateTable";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../../configs/formatDate";
-import { useDoctorSettlements } from "../../../hooks/settlements/useDoctorSettlement";
+import { useAllSettlements } from "../../../hooks/settlements/useAllSettlements";
 function DoctorsFinance() {
   const { id } = useParams();
   const [query, setQuery] = useState("");
-  const { data: settlements, isLoading } = useDoctorSettlements(id, query);
+  const inputQuery = query ? `doctor_id=${id}&${query}` : `doctor_id=${id}`;
+  console.log("INPUT QUERY",inputQuery);
+    
+  const { data: settlements, isLoading } = useAllSettlements(inputQuery);
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };

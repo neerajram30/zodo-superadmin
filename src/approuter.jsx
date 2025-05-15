@@ -36,7 +36,10 @@ import SettlementPage from "./components/pages/Settlement/SettlementPage";
 import PublicRoute from "./PublicRoute";
 import FinancePage from "./components/pages/FinancePage";
 import SettlementDetails from "./components/pages/Settlement/SettlementDetails";
-import AppManage from "./components/pages/AppManage";
+import ManageBanner from "./components/pages/AppManage/ManageBanner";
+import AppLink from "./components/pages/AppManage/AppLink";
+import Platform from "./components/pages/AppManage/Platform";
+import Notifications from "./components/pages/AppManage/Notifications";
 
 //Accounts
 const Approuter = () => {
@@ -167,7 +170,19 @@ const Approuter = () => {
             />
             <Route
               path="/app-manage"
-              element={<AppManage/>}
+              element={<ManageBanner/>}
+            />
+            <Route
+              path="/app-link"
+              element={<AppLink/>}
+            />
+            <Route
+              path="/platform"
+              element={<Platform/>}
+            />
+            <Route
+              path="/notifications"
+              element={<Notifications/>}
             />
           </Route>
           {/* Unauthorised routes       */}

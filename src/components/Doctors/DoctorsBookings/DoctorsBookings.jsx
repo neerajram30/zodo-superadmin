@@ -12,7 +12,11 @@ function DoctorsBookings() {
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };
-  const { data: appointments, isLoading } = useDoctorAppointments(id, query);
+  console.log("Query ",query);
+  
+  const { data: appointments, isLoading } = useDoctorAppointments(id);
+  console.log("Data >",appointments);
+  
   const bookinsDetails = [
     {
       id: 1,
@@ -35,20 +39,20 @@ function DoctorsBookings() {
   ];
   const columns = [
     {
-      title: "Booking Id",
+      title: "Booking ID",
       dataIndex: "booking_id",
-      sorter: (a, b) => a.id - b.id,
+      // sorter: (a, b) => a.id - b.id,
     },
     {
       title: "TRANSACTION NAME",
       dataIndex: "transactionName",
-      sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
       render: (item, record) => <div>{record.type}</div>,
     },
     {
       title: "DUE ISSUE",
       dataIndex: "createdAt",
-      sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
+      // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
       render: (item) => <div>{formatDate(item)}</div>,
     },
     {
@@ -59,7 +63,8 @@ function DoctorsBookings() {
           className={`${
             (item === "cancelled" && "delete-badge status-red") ||
             (item === "started" && "delete-badge status-orange") ||
-            (item === "completed" || item === "accepted" && "delete-badge status-green")
+            item === "completed" ||
+            (item === "accepted" && "delete-badge status-green")
           }`}
         >
           {item}
@@ -69,7 +74,7 @@ function DoctorsBookings() {
     {
       title: "AMOUNT",
       dataIndex: "amount",
-      sorter: (a, b) => a.amount.length - b.amount.length,
+      // sorter: (a, b) => a.amount.length - b.amount.length,
       render: (item, record) => <div>₹ {record?.amount}</div>,
     },
     {
