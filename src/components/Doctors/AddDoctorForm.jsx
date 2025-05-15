@@ -10,6 +10,7 @@ import UploadFiles from "../Hospitals/UploadFiles";
 import FullscreenLoader from "../loadings/FullscreenLoader";
 import SelectField from "../InputFields/SelectField";
 import { toast } from "react-toastify";
+import TextArea from "../InputFields/TextArea";
 function AddDoctorForm() {
   const { data, isLoading } = useSpecialisationList();
   const [fileURL, setFileURL] = useState("");
@@ -25,18 +26,7 @@ function AddDoctorForm() {
   const handleFileURL = (url) => {
     setFileURL(url);
   };
-  console.log("Specialisation", data);
-  // const { data: districts, isLoading: districtLoading } = useGetDistrict();
-  // const districtOptions = districts?.map((item) => ({
-  //   label: item.name,
-  //   value: item.name,
-  // }));
-  const {
-    mutate,
-    // showToast,
-    // setShowToast,
-    isLoading: doctorLoading,
-  } = useCreateDoctors();
+  const { mutate, isLoading: doctorLoading } = useCreateDoctors();
   const methods = useForm();
   const navigate = useNavigate();
   const specialisationOptions =
@@ -72,7 +62,11 @@ function AddDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [{name:"registration_proof", file :document1},{name:"degree_proof", file :document2}]
+        documents: [
+          { name: "registration_proof", file: document1 },
+          { name: "degree_proof", file: document2 },
+        ],
+        about:data?.about
       };
       await mutate(doctorData, { onSuccess: () => methods.reset() });
     } else {
@@ -184,8 +178,20 @@ function AddDoctorForm() {
               </div>
             </div>
           </div>
-          <h4 className="card-title">Registration Details</h4>
 
+          <div className="row">
+            <div className="form-group col-12">
+              <TextArea
+                name="about"
+                label="About"
+                // validation={{ required: "Description is required" }}
+                placeholder="Write here.."
+                // disabled={isSameAsCompanyAddress}
+              />
+            </div>
+          </div>
+
+          <h4 className="card-title">Registration Details</h4>
           <div className="row mt-4">
             <div className="col-md-6">
               <div className="form-group">

@@ -1,24 +1,22 @@
-import { useEffect, useState } from "react";
 import { DatePicker } from "antd";
 import ExportTable from "../assests/ExportTable";
-import { useDebounce } from "../../hooks/useDebounce";
 import PropTypes from "prop-types";
 const { RangePicker } = DatePicker;
 
 function DateSearchHero(props) {
-  const { handleSearch, handleDate } = props;
+  const { handleDate } = props;
   //   const [show, setShow] = useState(false);
-  const [searchTerm, setSearchterm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm);
-  useEffect(() => {
-    if (handleSearch) {
-      handleSearch(debouncedSearchTerm);
-    }
-  }, [debouncedSearchTerm]);
+  // const [searchTerm, setSearchterm] = useState("");
+  // const debouncedSearchTerm = useDebounce(searchTerm);
+  // useEffect(() => {
+  //   if (handleSearch) {
+  //     handleSearch(debouncedSearchTerm);
+  //   }
+  // }, [debouncedSearchTerm]);
 
-  const handleSearchInput = (searchTerm) => {
-    setSearchterm(searchTerm);
-  };
+  // const handleSearchInput = (searchTerm) => {
+  //   setSearchterm(searchTerm);
+  // };
   const handleDatePicker = (dates) => {
     if (dates && dates.length === 2) {
       const startDate = dates[0].format("YYYY-MM-DD");
@@ -29,7 +27,7 @@ function DateSearchHero(props) {
   };
   return (
     <div className="row mt-4">
-      <div className="col-12 col-md-6 col-xl-3">
+      {/* <div className="col-12 col-md-6 col-xl-3">
         <div>
           <div className="form-group has-search">
             <span className="fa fa-search form-control-feedback"></span>
@@ -41,7 +39,7 @@ function DateSearchHero(props) {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="col-12 col-md-6 col-xl-4">
         <div className="form-group local-forms cal-icon">
@@ -70,7 +68,6 @@ function DateSearchHero(props) {
 // validate props
 DateSearchHero.propTypes = {
   handleDate: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired,
 };
 
 export default DateSearchHero;

@@ -18,7 +18,6 @@ function ChooseFile(props) {
   const uploadMutation = useUploadFile();
   const handleFiles = async (e) => {
     const file = e.target.files[0];
-
     if (file && file.size > MAX_FILE_SIZE) {
       // setUploadStatus("File size exceeds 2MB limit");
       e.target.value = ""; // Clear the input
@@ -59,7 +58,7 @@ function ChooseFile(props) {
         ) : (
           <>
             {!loading ? (
-              <img src={fileURL} alt="profile" width={100} height={100} />
+              <img src={fileURL} alt="profile" width={100} height={100}/>
             ) : (
               <ComponentLoader />
             )}

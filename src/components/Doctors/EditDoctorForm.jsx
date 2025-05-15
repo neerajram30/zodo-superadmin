@@ -11,6 +11,7 @@ import { useDoctorById } from "../../hooks/doctors/useDoctorById";
 import { useSpecialisationList } from "../../hooks/specialisation/useSpecialisationList";
 import { useEditDoctor } from "../../hooks/doctors/useEditDoctor";
 import { toast } from "react-toastify";
+import TextArea from "../InputFields/TextArea";
 function EditDoctorForm() {
   const { data, isLoading } = useSpecialisationList();
   const { id } = useParams();
@@ -63,6 +64,7 @@ function EditDoctorForm() {
         bankname: doctorDetails?.bank_details?.bank_name,
         ifsc: doctorDetails?.bank_details?.ifsc,
         upiid: doctorDetails?.bank_details?.upi_id,
+        about: doctorDetails?.about
       });
     }
   }, [doctorDetails]);
@@ -93,8 +95,11 @@ function EditDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [{name:"registration_proof", file :document1},{name:"degree_proof", file :document2}]
-
+        documents: [
+          { name: "registration_proof", file: document1 },
+          { name: "degree_proof", file: document2 },
+        ],
+        about: data?.about,
       };
       console.log(doctorData);
       await mutate({ id: id, data: doctorData });
@@ -116,7 +121,7 @@ function EditDoctorForm() {
     <div className="bg-white rounded p-4 mt-3">
       <div className="row">
         <div className="col">
-          <h4>Doctor Onboarding</h4>
+          <h4>Edit Doctor</h4>
         </div>
         <div className="col d-flex justify-content-end">
           <Closebtn />
@@ -206,6 +211,17 @@ function EditDoctorForm() {
                   type="text"
                 />
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="form-group col-12">
+              <TextArea
+                name="about"
+                label="About"
+                // validation={{ required: "Description is required" }}
+                placeholder="Write here.."
+                // disabled={isSameAsCompanyAddress}
+              />
             </div>
           </div>
           <h4 className="card-title">Registration Details</h4>

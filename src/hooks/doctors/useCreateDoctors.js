@@ -12,15 +12,6 @@ export const useCreateDoctors = () => {
     onMutate: async () => {
       // Cancel any ongoing queries for doctors to prevent race conditions
       await queryClient.cancelQueries({ queryKey: ["doctors"] });
-
-      // // Get previous hospital list before deleting
-      // const previousDoctors = queryClient.getQueryData(["doctors"]);
-
-      // // Optimistically update the cache
-      // queryClient.setQueryData(["doctors"], (oldDoctors) =>
-      //   oldDoctors ? Array.isArray(oldDoctors) && oldDoctors.filter((h) => h.id !== id) : []
-      // );
-      // return { previousDoctors };
     },
     onSuccess: (data) => {
       const message = data?.message || "Doctor added successfully";

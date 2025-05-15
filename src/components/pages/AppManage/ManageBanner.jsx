@@ -1,7 +1,7 @@
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import HeaderTabs from "../../AppManage/HeaderTabs";
-import BannerForm from "../../AppManage/BannerForm";
+import BannerListing from "../../AppManage/BannerListing";
 
 function ManageBanner() {
   const breadCrumpData = [
@@ -22,7 +22,9 @@ function ManageBanner() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <HeaderTabs/>
-          <BannerForm/> 
+          <BannerListing/>
+          {/* <BannerForm/>  */}
+          {/* <BannerTable/> */}
         </div>
       </div>
     </Layout>

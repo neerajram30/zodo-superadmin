@@ -189,7 +189,7 @@ function Finance() {
 
       {/* Finance details */}
 
-      <div className="row finance-card-container">
+      <div className="row finance-card-container mt-2">
         {financeData.map((item) => (
           <OverViewCard
             varient="col-md-4 col-sm-6 col-lg-4 col-xl-4 finance-card"

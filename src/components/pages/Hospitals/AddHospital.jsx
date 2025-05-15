@@ -265,6 +265,7 @@ function AddHospital() {
                       placeholder="Fasttag issues per day"
                       type="number"
                       disabled={!toggleFasttag}
+                      defaultValue={5}
                     />
                   </div>
                 </div>

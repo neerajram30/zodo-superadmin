@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { getDoctorById } from "../../apis/doctors";
+import { getDoctorDocuments } from "../../apis/doctors";
 
-export const useDoctorById = (id) => {
+export const useDoctorsDocument = (id) => {
   if (!id || typeof id !== "string" || id.trim() === "" || id === undefined) {
     return { data: null, isLoading: false, isError: true };
   }
-  // const queryClient = useQueryClient();
 
   return useQuery({
-    queryKey: ["doctor", id], // Unique query key
-    queryFn: () => getDoctorById(id)
+    queryKey: ["documents", id], // Unique query key
+    queryFn: () => getDoctorDocuments(id),
   });
 };

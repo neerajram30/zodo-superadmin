@@ -22,11 +22,11 @@ function HeaderTabs() {
       title: "Platform",
       link: "platform",
     },
-    {
-      id: 3,
-      title: "Notifications",
-      link: "notifications",
-    },
+    // {
+    //   id: 3,
+    //   title: "Notifications",
+    //   link: "notifications",
+    // },
   ];
   return (
     <div className="settings-menu-links">

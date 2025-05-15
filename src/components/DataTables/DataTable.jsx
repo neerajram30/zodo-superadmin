@@ -1,6 +1,5 @@
 import { Table } from "antd";
 import PropTypes from "prop-types";
-import React from "react";
 import { itemRender } from "../Pagination";
 
 function DataTable(props) {

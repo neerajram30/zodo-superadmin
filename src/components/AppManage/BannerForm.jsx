@@ -3,11 +3,69 @@ import FeatherIcon from "feather-icons-react";
 import { Link } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
+import { useUploadFile } from "../../hooks/useUploadFile";
+import { toast } from "react-toastify";
+import ComponentLoader from "../loadings/ComponentLoader";
+import { useAddBanner } from "../../hooks/appmanage/useAddBanner";
+import FullscreenLoader from "../loadings/FullscreenLoader";
 function BannerForm() {
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
+  const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [fileurl, setFileUrl] = useState("");
+  const [filekey, setFilekey] = useState("");
+  const uploadMutation = useUploadFile();
+  const { mutate, isLoading } = useAddBanner();
+  // const [fileurl, setFileurl] = useState(null);
   const methods = useForm();
   const onCreateBanner = (data) => {
+    const bannderData = {
+      title: data?.title,
+      description: "",
+      image: filekey,
+      url: fileurl,
+      // "hospital_id": ""
+    };
+    mutate(bannderData, {
+      onSuccess: () => {
+        methods.reset();
+      },
+    });
     console.log(data);
+  };
+  const handleFile = async (e) => {
+    const selecteFile = e.target.files[0];
+    setFile(selecteFile);
+    const formData = new FormData();
+    formData.append("file", selecteFile);
+    setLoading(true);
+    try {
+      const response = await uploadMutation.mutateAsync(formData, {
+        onSuccess: () => {
+          const message = "File uploaded successfully";
+          toast.success(message);
+          setLoading(false);
+        },
+      });
+      setLoading(false);
+      setFileUrl(response.data.url);
+      setFilekey(response.data.key);
+    } catch (error) {
+      // handleFileURL("");
+      // setFilepreview(null);
+      // setFile(null);
+
+      setFileUrl("");
+      setFilekey("");
+      setLoading(false);
+      const message = "File uploaded failed";
+      toast.error(message);
+    }
+  };
+  const handleCloseFile = () => {
+    setFileUrl("");
+    setFile(null);
+    setFilekey("");
   };
   return (
     <div className="row">
@@ -48,7 +106,7 @@ function BannerForm() {
                         accept="image/*"
                         name="image"
                         id="file"
-                        // onchange="loadFile(event)"
+                        onChange={handleFile}
                         className="hide-input"
                       />
                       <label htmlFor="file" className="upload">
@@ -60,23 +118,34 @@ function BannerForm() {
                     <h6 className="settings-size">
                       Recommended image size is <span>150px x 150px</span>
                     </h6>
-                    <div
-                      className="upload-images upload-banner"
-                      style={{ display: show ? "none" : "" }}
-                    >
-                      <img
-                        // src={favicon}
-                        alt="Image"
-                      />
-                      <Link to="#" className="btn-icon logo-hide-btn">
-                        <i
-                          className="feather-x-circle crossmark"
-                          onClick={() => setShow((s) => !s)}
+
+                    <>
+                      {file ? (
+                        <div
+                          className="upload-images upload-banner"
+                          // style={{ display: show ? "none" : "" }}
                         >
-                          <FeatherIcon icon="x-circle" />
-                        </i>
-                      </Link>
-                    </div>
+                          {!loading ? (
+                            <div>
+                              {console.log("file url", fileurl)}
+                              <img src={fileurl} alt="Image" />
+                              <Link to="#" className="btn-icon logo-hide-btn">
+                                <i
+                                  className="feather-x-circle crossmark"
+                                  onClick={handleCloseFile}
+                                >
+                                  <FeatherIcon icon="x-circle" />
+                                </i>
+                              </Link>
+                            </div>
+                          ) : (
+                            <ComponentLoader />
+                          )}
+                        </div>
+                      ) : (
+                        <div>No file</div>
+                      )}
+                    </>
                   </div>
                   <div className="form-group mb-0 d-flex justify-content-end">
                     <div className="settings-btns">
@@ -89,6 +158,7 @@ function BannerForm() {
                       <button
                         type="submit"
                         className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2 ms-2"
+                        disabled={loading}
                       >
                         Update
                       </button>
@@ -100,6 +170,7 @@ function BannerForm() {
           </div>
         </div>
       </div>
+      {isLoading && <FullscreenLoader/>}
     </div>
   );
 }
