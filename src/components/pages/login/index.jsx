@@ -141,7 +141,7 @@ const Login = () => {
                           </div>
                         )}
 
-                        <div className="forgotpass">
+                        {/* <div className="forgotpass">
                           <div className="remember-me">
                             <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
                               {" "}
@@ -151,7 +151,7 @@ const Login = () => {
                             </label>
                           </div>
                           <Link to="/forgotpassword">Forgot Password?</Link>
-                        </div>
+                        </div> */}
                         <div className="form-group login-btn">
                           <button
                             to

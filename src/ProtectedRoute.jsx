@@ -1,4 +1,3 @@
-import React from "react";
 import { useAuth } from "./hooks/auth/useAuth";
 import FullscreenLoader from "./components/loadings/FullscreenLoader";
 import { Navigate, Outlet } from "react-router-dom";

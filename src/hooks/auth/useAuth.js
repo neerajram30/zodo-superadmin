@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { login } from "../../apis/auth";
 import PropTypes from "prop-types";
 import { useGetUser } from "./useGetUser";
+import { toast } from "react-toastify";
 // import { login, logout, getUser } from "./authService";
 
 // Create Context for Authentication
@@ -21,10 +22,7 @@ export const AuthProvider = ({ children }) => {
       const user = await getUser(); // Fetch user data if token exists
       // console.log("User data from local storage", user);
       setUser(user?.data?.data);
-      const type = user?.data?.data?.user_type;
-      if(type !== "superAdmin"){
-        localStorage.removeItem("token");
-      }
+      
       
     } else {
       setUser(null); // Set user to null if no token is found
@@ -38,9 +36,16 @@ export const AuthProvider = ({ children }) => {
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      localStorage.setItem("token", data?.data?.tokens?.accessToken);
-      setUser(data.data);
-      queryClient.invalidateQueries(["user"]); // Refresh user data
+      console.log("Login",data?.data?.user_type);
+      const userType = data?.data?.user_type;
+      if(userType === "superAdmin"){
+        localStorage.setItem("token", data?.data?.tokens?.accessToken);
+        setUser(data.data);
+        queryClient.invalidateQueries(["user"]); // Refresh user data
+      }
+      else{
+        toast.error("Invalid user credentials")
+      }
     },
     onError: (error) => {
       const errorMessage = error?.response?.data?.message;

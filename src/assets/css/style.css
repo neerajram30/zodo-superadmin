@@ -11935,3 +11935,7 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   height: 100%;
   object-fit: cover;
 }
+.platform-name{
+  font-size: 1.1em;
+  font-weight: 600;
+}

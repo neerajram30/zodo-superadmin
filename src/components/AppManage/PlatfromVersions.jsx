@@ -29,12 +29,12 @@ function PlatfromVersions() {
         version_details_ios: {
           min_version: data.iosMinimumversion,
           latest_version: data.iosCurrentVersion,
-          last_update_date: new Date(formattedIosDate),
+          last_update_date: iosDate,
         },
         version_details_android: {
           min_version: data.androidMinimumversion,
           latest_version: data.androidCurrentVersion,
-          last_update_date: new Date(formattedAndroidDate),
+          last_update_date: androidDate,
         },
       };
       createAppdetails(details);
@@ -88,11 +88,11 @@ function PlatfromVersions() {
   return (
     <>
       <div className="card">
-        <div className="card-header">
+        {/* <div className="card-header">
           <h5 className="card-title">Platfrom Versions</h5>
-        </div>
+        </div> */}
         {!appLoading ? (
-          <div className="card-body pt-0 pb-5">
+          <div className="card-body pt-5 pb-5">
             <FormProvider {...methods}>
               <form
                 onSubmit={methods.handleSubmit(onPlatformVersion)}
@@ -100,19 +100,21 @@ function PlatfromVersions() {
               >
                 <div className="form-group d-flex w-100 justify-content-start">
                   <div className="row w-100">
-                    <div className="social-icon border border-success text-success manage-btn col-1 platform-btn">
+                    {/* <div className="social-icon border border-success text-success manage-btn col-1 platform-btn">
                       Android
-                    </div>
+                    </div> */}
+                    <h6 className="platform-name">Android</h6>
                     <div className="col-2">
-                      <div className="ms-2">
+                      <div className="">
                         <InputField
                           name="androidMinimumversion"
-                          label=""
+                          label="Minimum Version"
                           validation={{
                             required: "Android minimum version is required",
                           }}
                           placeholder="Minimum version"
                           type="text"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </div>
                     </div>
@@ -120,18 +122,20 @@ function PlatfromVersions() {
                       <div className="ms-2">
                         <InputField
                           name="androidCurrentVersion"
-                          label=""
+                          label="Current Version"
                           validation={{
                             required: "Android current version is required",
                           }}
                           placeholder="Current version"
                           type="text"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </div>
                     </div>
                     <div className="col-4">
                       <div className="ms-2">
                         <div className="form-group">
+                          <label className="form-label">Start date</label>
                           <DatePicker
                             className="form-control datetimepicker"
                             onChange={handelAndroidDate}
@@ -146,19 +150,21 @@ function PlatfromVersions() {
 
                 <div className="form-group d-flex w-100 justify-content-start">
                   <div className="row w-100">
-                    <div className="social-icon border border-success text-success  manage-btn col-1 platform-btn">
+                    {/* <div className="social-icon border border-success text-success  manage-btn col-1 platform-btn">
                       IOS
-                    </div>
+                    </div> */}
+                    <h6 className="platform-name">IOS</h6>
                     <div className="col-2">
-                      <div className="ms-2">
+                      <div className="">
                         <InputField
                           name="iosMinimumversion"
-                          label=""
+                          label="Minimum Version"
                           validation={{
                             required: "IOS minimum version is required",
                           }}
                           placeholder="Minimum version"
                           type="text"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </div>
                     </div>
@@ -166,18 +172,20 @@ function PlatfromVersions() {
                       <div className="ms-2">
                         <InputField
                           name="iosCurrentVersion"
-                          label=""
+                          label="Current Version"
                           validation={{
                             required: "Ios current version is required",
                           }}
                           placeholder="Current version"
                           type="text"
+                          pattern="[0-9]*[.,]?[0-9]*"
                         />
                       </div>
                     </div>
                     <div className="col-4">
                       <div className="ms-2">
                         <div className="form-group">
+                          <label className="form-label">Start date</label>
                           <DatePicker
                             className="form-control datetimepicker"
                             onChange={handelIodDate}

@@ -1,8 +1,20 @@
 import React from "react";
 import { dangericon, error1 } from "../../imagepath";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/auth/useAuth";
 
 const Error = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const handlClick = (e) => {
+    e.preventDefault();
+    if (user?.user_type === "superAdmin") {
+      navigate("/");
+    } else {
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
+  };
   return (
     <>
       <div className="main-wrapper error-wrapper">
@@ -13,7 +25,7 @@ const Error = () => {
             Service Unavailable
           </h3>
           <p>You may have mistyped the address or the page may have moved.</p>
-          <Link to="/" className="btn btn-primary go-home">
+          <Link to onClick={handlClick} className="btn btn-primary go-home">
             Back to Home
           </Link>
         </div>
