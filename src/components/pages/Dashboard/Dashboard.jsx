@@ -1,4 +1,3 @@
-import React from "react";
 import Layout from "../../layout/Layout";
 import Hero from "../../Dashboard/hero";
 import InfoCards from "../../Dashboard/Info_cards";
@@ -7,37 +6,38 @@ import RevenueInfo from "../../Dashboard/RevenueInfo";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Analytics from "../../Dashboard/Analytics";
 import DashboardTables from "../../Dashboard/DashboardTables";
-import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
-import { useDoctorsList } from "../../../hooks/doctors/useDoctorsList";
+import { useDashboardData } from "../../../hooks/useDashboardData";
+import FullscreenLoader from "../../loadings/FullscreenLoader";
 
 function Dashboard() {
-  const { data } = useGetHospitals();
-  const { data:doctorList } = useDoctorsList();
-  const hospitalCount = data?.data?.length;
-  const doctorCount = doctorList?.data?.length;
+  // const { data } = useGetHospitals();
+  // const hospitalCount = data?.data?.length;
+
+  const { data: dashboardData, isLoading } = useDashboardData();
+
   const basicInformation = [
     {
       id: 1,
       title: "Total hospitals",
       icon: profile_hospitals,
-      count: hospitalCount,
-      percentageUp: 20,
+      count: dashboardData?.activeHospitalsCount ?? 0,
+      percentageUp: 0,
       link: "/manage-hospitals",
     },
     {
       id: 2,
       title: "Total Doctors ( online )",
       icon: doctors,
-      count: doctorCount,
-      percentageUp: 40,
+      count: dashboardData?.activeDoctorsCount ?? 0,
+      percentageUp: 0,
       link: "/manage-doctors",
     },
     {
       id: 3,
       title: "Fast tag Issued",
       icon: fasttag,
-      count: 121,
-      percentageUp: 40,
+      count: dashboardData?.fast_tag?.count ?? 0,
+      percentageUp: 0,
       link: "/dashboard/fasttag-issued",
     },
   ];
@@ -48,7 +48,8 @@ function Dashboard() {
       link: "/dashboard",
     },
   ];
-
+  console.log("Dashboard data ",dashboardData);
+  
   return (
     <Layout activeClassName="dashboard">
       <div className="page-wrapper">
@@ -56,11 +57,12 @@ function Dashboard() {
           <Breadcrumb data={breadCrumpData} />
           <Hero />
           <InfoCards info={basicInformation} />
-          <RevenueInfo />
+          <RevenueInfo dashboardData={dashboardData}/>
           <Analytics />
           <DashboardTables />
         </div>
       </div>
+      {isLoading && <FullscreenLoader/>}
     </Layout>
   );
 }

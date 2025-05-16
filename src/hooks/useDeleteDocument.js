@@ -1,22 +1,20 @@
-// Custom hook for editing hospital
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { editDoctor } from "../../apis/doctors";
+import { deleteDocument } from "../apis/documents";
 
-export const useEditDoctor = () => {
+export const useDeleteDocument = (id) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: editDoctor, // API function to create
+    mutationFn: deleteDocument, // API function to delete hospital
     onMutate: async () => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
-      await queryClient.cancelQueries({ queryKey: ["hospitals"] });
+      await queryClient.cancelQueries({ queryKey: ["documents", id] });
     },
-    onSuccess: (data, variables) => {
-      const message = data?.message || "Doctor updated successfully";
-      queryClient.setQueryData(["doctors", variables.id], data);
-      queryClient.invalidateQueries({ queryKey: ["doctor"] });
-      queryClient.invalidateQueries({ queryKey: ["documents"] });
-      queryClient.invalidateQueries({ queryKey: ["doctors", variables.id] });
+    onSuccess: (data) => {
+      const message = data.message;
+      // Invalidate and refetch the hospitals query after a successful mutation
+      queryClient.invalidateQueries(["documents", id]);
+      queryClient.invalidateQueries(["documents"]);
       toast.success(message, {
         position: "top-right",
         autoClose: 5000,
@@ -28,13 +26,15 @@ export const useEditDoctor = () => {
       });
     },
     onError: (error, id, context) => {
+      console.log(error);
+
+      const errotMessage =
+        error?.response?.data?.message || "Failed to delete document";
       // Rollback if there is an error
-      if (context?.previousDoctors) {
-        queryClient.setQueryData(["doctors"], context.previousDoctors);
+      if (context?.previousDocuments) {
+        queryClient.setQueryData(["documents"], context.previousDocuments);
       }
-      const errorMessage =
-        error?.response?.data?.message || "Failed to edit hospital";
-      toast.error(errorMessage, {
+      toast.error(errotMessage, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -43,6 +43,7 @@ export const useEditDoctor = () => {
         draggable: true,
         progress: undefined,
       });
+      queryClient.invalidateQueries(["documents", id]);
     },
   });
 
@@ -51,3 +52,4 @@ export const useEditDoctor = () => {
     isLoading: mutation.isPending,
   };
 };
+

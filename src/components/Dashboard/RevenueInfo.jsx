@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { fasttag, fasttag_revenue } from "../imagepath";
 import CountUp from "react-countup";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-import Select from 'react-select'
+import Select from "react-select";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function RevenueInfo() {
-  const [bookingType] = useState([
-    { value: 1, label: "Hospital Booking" },
-  ]);
-const [selectedOption, setSelectedOption] = useState(bookingType[0]);
+function RevenueInfo(props) {
+  const { dashboardData } = props;
+  const [bookingType] = useState([{ value: 1, label: "Hospital Booking" }]);
+  const [selectedOption, setSelectedOption] = useState(bookingType[0]);
   return (
     <>
       <div className="row">
@@ -46,11 +46,15 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
                       minHeight: "45px",
                     }),
                     option: (provided, state) => ({
-                        ...provided, 
-                        backgroundColor: state.isSelected ? '#347D73' : provided.backgroundColor,
-                        '&:active':{
-                            backgroundColor: state.isSelected ? '#347D73' : provided.backgroundColor,
-                          }
+                      ...provided,
+                      backgroundColor: state.isSelected
+                        ? "#347D73"
+                        : provided.backgroundColor,
+                      "&:active": {
+                        backgroundColor: state.isSelected
+                          ? "#347D73"
+                          : provided.backgroundColor,
+                      },
                     }),
                     dropdownIndicator: (base, state) => ({
                       ...base,
@@ -65,7 +69,10 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
                 />
               </div>
             </div>
-            <Link className="dash-content dash-count flex-grow-1" to="settlement-requests"> 
+            <Link
+              className="dash-content dash-count flex-grow-1"
+              to="settlement-requests"
+            >
               <h4>Settlement Request</h4>
               <h2>
                 {" "}
@@ -83,7 +90,10 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
           </div>
         </div>
 
-        <Link className="col-md-6 col-sm-6 col-lg-6 col-xl-6" to='fasttag-revenue'>
+        <Link
+          className="col-md-6 col-sm-6 col-lg-6 col-xl-6"
+          to="fasttag-revenue"
+        >
           <div className="dash-widget">
             <div className="dash-boxs comman-flex-center">
               <img src={fasttag_revenue} alt="#" />
@@ -92,14 +102,14 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
               <h4>Fast tag Revenue</h4>
               <h2>
                 {" "}
-                $<CountUp delay={0.4} end={20250} duration={0.6} />
+                $<CountUp delay={0.4} end={dashboardData?.fasttag?.revenue ?? 0} duration={0.6} />
               </h2>
               <p>
                 <span className="passive-view">
                   <i className="feather-arrow-up-right me-1">
                     <FeatherIcon icon="arrow-up-right" />
                   </i>
-                  30%
+                  0%
                 </span>{" "}
                 vs last month
               </p>
@@ -110,5 +120,9 @@ const [selectedOption, setSelectedOption] = useState(bookingType[0]);
     </>
   );
 }
+
+RevenueInfo.propTypes = {
+  dashboardData: PropTypes.object,
+};
 
 export default RevenueInfo;

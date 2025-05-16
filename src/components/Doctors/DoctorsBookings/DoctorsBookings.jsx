@@ -2,8 +2,9 @@ import BookingsCard from "../../Hospitals/TotalBookings/BookingsCard";
 import { useParams } from "react-router-dom";
 import { useDoctorAppointments } from "../../../hooks/appointments/useDoctorAppointments";
 import SearchDateTable from "../../Tables/SearchDateTable";
-import { formatDate } from "../../configs/formatDate";
+// import { formatDate } from "../../configs/formatDate";
 import { useState } from "react";
+import { getDateFromIso } from "../../configs/getDateFromISO";
 
 function DoctorsBookings() {
   const { id } = useParams();
@@ -12,11 +13,11 @@ function DoctorsBookings() {
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };
-  console.log("Query ",query);
-  
+  console.log("Query ", query);
+
   const { data: appointments, isLoading } = useDoctorAppointments(id);
-  console.log("Data >",appointments);
-  
+  console.log("Data >", appointments);
+
   const bookinsDetails = [
     {
       id: 1,
@@ -39,7 +40,7 @@ function DoctorsBookings() {
   ];
   const columns = [
     {
-      title: "Booking ID",
+      title: "Booking Id",
       dataIndex: "booking_id",
       // sorter: (a, b) => a.id - b.id,
     },
@@ -50,10 +51,16 @@ function DoctorsBookings() {
       render: (item, record) => <div>{record.type}</div>,
     },
     {
-      title: "DUE ISSUE",
+      title: "BOOKED DATE",
       dataIndex: "createdAt",
       // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
-      render: (item) => <div>{formatDate(item)}</div>,
+      render: (item) => <div>{getDateFromIso(item)}</div>,
+    },
+    {
+      title: "APPOINTMENT DATE",
+      dataIndex: "appointmentDate",
+      // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
+      render: (item) => <div>{getDateFromIso(item)}</div>,
     },
     {
       title: "STATUS",
@@ -63,8 +70,7 @@ function DoctorsBookings() {
           className={`${
             (item === "cancelled" && "delete-badge status-red") ||
             (item === "started" && "delete-badge status-orange") ||
-            item === "completed" ||
-            (item === "accepted" && "delete-badge status-green")
+            (item === "completed" || item === "accepted" && "delete-badge status-green")
           }`}
         >
           {item}
@@ -72,16 +78,22 @@ function DoctorsBookings() {
       ),
     },
     {
-      title: "AMOUNT",
+      title: <div className="d-flex justify-content-center">AMOUNT</div>,
       dataIndex: "amount",
       // sorter: (a, b) => a.amount.length - b.amount.length,
-      render: (item, record) => <div>₹ {record?.amount}</div>,
+      render: (item) => (
+        <div className="d-flex justify-content-center">${item ?? 0}</div>
+      ),
     },
-    {
-      title: "ACTIONS",
-      dataIndex: "actions",
-      render: () => <div>view</div>,
-    },
+    // {
+    //   title:<div className="d-flex justify-content-center">ACTIONS</div>,
+    //   dataIndex: "prescriptionUrl",
+    //   render:(item)=>(
+    //     <div>
+    //       {item && <a className="d-flex justify-content-center" href={item} target="_blank" rel="noopener noreferrer">view</a>}
+    //     </div>
+    //   )
+    // },
   ];
   return (
     <div>

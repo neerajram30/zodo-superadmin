@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Breadcrumb from "../../breadcrump/Breadcrumb";
+import Breadcrumb from "../../breadcrump/Breadcrumb"
 import Layout from "../../layout/Layout";
 import DoctorRequestCard from "../../Doctors/DoctorRequest/DoctorRequestCard";
 import SettlementOperations from "../../Dashboard/Settlement/SettlementOperations";

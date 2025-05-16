@@ -8,8 +8,8 @@ function DoctorsFinance() {
   const { id } = useParams();
   const [query, setQuery] = useState("");
   const inputQuery = query ? `doctor_id=${id}&${query}` : `doctor_id=${id}`;
-  console.log("INPUT QUERY",inputQuery);
-    
+  console.log("INPUT QUERY", inputQuery);
+
   const { data: settlements, isLoading } = useAllSettlements(inputQuery);
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
@@ -35,27 +35,93 @@ function DoctorsFinance() {
     },
   ];
 
+  // const columns = [
+  //   {
+  //     title: "DATE ISSUED",
+  //     dataIndex: "created_at",
+  //     render: (item) => <div>{formatDate(item)}</div>,
+  //     // sorter: (a, b) => a.date.length - b.date.length,
+  //   },
+  //   {
+  //     title: "INVOICE#",
+  //     dataIndex: "invoiceNumber",
+  //     // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+  //   },
+  //   {
+  //     title: "TRANSACTION NAME",
+  //     dataIndex: "transactionName",
+  //     // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
+  //   },
+  //   {
+  //     title: "DUE DATE",
+  //     dataIndex: "dueDate",
+  //     // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+  //   },
+  //   {
+  //     title: "STATUS",
+  //     dataIndex: "status",
+  //     // sorter: (a, b) => a.status.length - b.status.length,
+  //     render: (item) => (
+  //       <div
+  //         className={`${
+  //           (item === "failed" && "delete-badge status-red") ||
+  //           (item === "requested" && "delete-badge status-orange") ||
+  //           (item === "completed" && "delete-badge status-green")
+  //         }`}
+  //       >
+  //         {item}
+  //       </div>
+  //     ),
+  //   },
+  //   {
+  //     title: "TOTAL",
+  //     dataIndex: "amount",
+  //     render: (item) => <div>₹ {item}</div>,
+  //     // sorter: (a, b) => a.total.length - b.total.length,
+  //   },
+  //   {
+  //     title: "BALANCE",
+  //     dataIndex: "balance",
+  //     // sorter: (a, b) => a.balance.length - b.balance.length,
+  //   },
+  //   {
+  //     title: "ACTIONS",
+  //     dataIndex: "actions",
+  //   },
+  // ];
+
   const columns = [
+    {
+      title: "TRANSATION ID",
+      dataIndex: "transaction_id",
+      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+    },
     {
       title: "DATE ISSUED",
       dataIndex: "created_at",
       render: (item) => <div>{formatDate(item)}</div>,
       // sorter: (a, b) => a.date.length - b.date.length,
     },
+    // {
+    //   title: "INVOICE#",
+    //   dataIndex: "invoiceNumber",
+    //   // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
+    // },
     {
-      title: "INVOICE#",
-      dataIndex: "invoiceNumber",
-      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
-    },
-    {
-      title: "TRANSACTION NAME",
-      dataIndex: "transactionName",
+      title: "PAYMENT METHOD",
+      dataIndex: "payment_method",
       // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
     },
+    // {
+    //   title: "DUE DATE",
+    //   dataIndex: "dueDate",
+    //   // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+    // },
     {
-      title: "DUE DATE",
-      dataIndex: "dueDate",
-      // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
+      title: "APPROVED DATE",
+      dataIndex: "approve_date",
+      render: (item) => <div>{item ? formatDate(item) : "N/A"}</div>,
+      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
     },
     {
       title: "STATUS",
@@ -64,9 +130,11 @@ function DoctorsFinance() {
       render: (item) => (
         <div
           className={`${
-            (item === "failed" && "delete-badge status-red") ||
+            item === "failed" ||
+            (item === "rejected" && "delete-badge status-red") ||
             (item === "requested" && "delete-badge status-orange") ||
-            (item === "completed" && "delete-badge status-green")
+            item === "completed" ||
+            (item === "approved" && "delete-badge status-green")
           }`}
         >
           {item}
@@ -79,15 +147,16 @@ function DoctorsFinance() {
       render: (item) => <div>₹ {item}</div>,
       // sorter: (a, b) => a.total.length - b.total.length,
     },
-    {
-      title: "BALANCE",
-      dataIndex: "balance",
-      // sorter: (a, b) => a.balance.length - b.balance.length,
-    },
-    {
-      title: "ACTIONS",
-      dataIndex: "actions",
-    },
+    // {
+    //   title: "BALANCE",
+    //   dataIndex: "balance",
+    //   // sorter: (a, b) => a.balance.length - b.balance.length,
+    // },
+    // {
+    //   title: <div className="text-center">ACTIONS</div>,
+    //   dataIndex: "actions",
+    //   render:()=><div className="text-center">view</div>
+    // },
   ];
   return (
     <div>

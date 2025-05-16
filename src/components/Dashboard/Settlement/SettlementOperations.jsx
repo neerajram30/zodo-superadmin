@@ -21,13 +21,13 @@ function SettlementOperations(props) {
 
       <div className="settings-btns col-md-6 col-sm-12 mt-md-0 mt-2">
         <div className="d-flex justify-content-md-end justify-content-center flex-column flex-md-row">
-          &nbsp;&nbsp;
+          {/* &nbsp;&nbsp;
           <button
             type="submit"
             className="btn-outline-primary rounded pt-2 pb-2 ps-4 pe-4"
           >
             Contact Them
-          </button>
+          </button> */}
           &nbsp;&nbsp;
           {status !== "rejected" && (
             <button

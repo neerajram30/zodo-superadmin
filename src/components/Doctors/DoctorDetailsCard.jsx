@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  arrow_left, email_icon, pdf_icon,
+  arrow_left,
+  email_icon,
+  eye_icon,
+  pdf_icon,
   pencil_icon,
   phone_icon,
-  three_dots_menu
+  three_dots_menu,
 } from "../imagepath";
 import DoctorsOverview from "./DoctorsOverview/DoctorsOverview";
 import DoctorsFinance from "./DoctorsFinance/DoctorsFinance";
@@ -140,7 +143,11 @@ function DoctorDetailsCard() {
               <div className="col-md-3">
                 <div className="doctor-img-wrap">
                   <div className="profile-img">
-                    <img className="img-fluid" src={data?.profile_pic} alt="#" />
+                    <img
+                      className="img-fluid"
+                      src={data?.profile_pic}
+                      alt="#"
+                    />
                   </div>
                 </div>
               </div>
@@ -182,7 +189,7 @@ function DoctorDetailsCard() {
             </button>
           </div>
         </div>
-        <div className="row">
+        <div className="row mt-3">
           <div className="col-md-6">
             <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1">
               <div className="col">
@@ -263,11 +270,11 @@ function DoctorDetailsCard() {
 
             {!documentLoading ? (
               <div className="mb-4">
-                {doctorDocuments?.map((item,i) => {
+                {doctorDocuments?.map((item, i) => {
                   return (
                     <div className="row mt-2" key={`row${item?.id}`}>
                       <div className="col-12 pt-2 col-md-2">
-                        Document {i+1}
+                        Document {i + 1}
                       </div>
                       <div className="col-12 col-md-10 md:mt-0 mt-1">
                         <div className="d-flex justify-content-between align-items-center file-upload-details ps-3 pe-3">
@@ -278,14 +285,20 @@ function DoctorDetailsCard() {
                               {/* <p>24MB</p> */}
                             </div>
                           </div>
-                          {/* <div className="d-flex">
-                            <div className="m-1">
+                          <div className="d-flex">
+                            <a
+                              className="m-1"
+                              href={`${item?.file}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
                               <img src={eye_icon} alt="" />
-                            </div>
-                            <div className="m-1">
+                            </a>
+
+                            {/* <div className="m-1">
                               <img src={cross_icon} alt="" />
-                            </div>
-                          </div> */}
+                            </div> */}
+                          </div>
                         </div>
                       </div>
                     </div>

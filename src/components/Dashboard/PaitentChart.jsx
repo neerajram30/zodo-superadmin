@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import ApexCharts from 'apexcharts';
+import PropTypes from 'prop-types';
 
-const PatientChart = () => {
+const PatientChart = (props) => {
+  const {data} = props;
+  console.log("Dataset ",data);
+  
   useEffect(() => {
     if (document.querySelector('#patient-chart')) {
       const sColStackedOptions = {
@@ -38,7 +42,7 @@ const PatientChart = () => {
           {
             name: '',
             color: '#2E37A4',
-            data: [20, 30, 41, 67, 22, 43, 40, 10, 30, 20, 40,40],
+            data: data,
           },
           // {
           //   name: '',
@@ -74,6 +78,10 @@ const PatientChart = () => {
   }, []);
 
   return <div id="patient-chart"></div>;
+};
+
+PatientChart.propTypes = {
+  data: PropTypes.array,
 };
 
 export default PatientChart;

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ConfirmDelete from "../../modals/ConfirmDelete";
 import ToggleDisable from "../../modals/ToggleDisable";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   arrow_left,
   cross_icon,
-  dr_profile,
   email_icon,
   eye_icon,
   pdf_icon,
@@ -15,15 +14,36 @@ import {
 } from "../../imagepath";
 import PropTypes from "prop-types";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
+import { useDoctorsDocument } from "../../../hooks/doctors/useDoctorsDocument";
+import ComponentLoader from "../../loadings/ComponentLoader";
+import { useDeleteDocument } from "../../../hooks/useDeleteDocument";
 
 function DoctorRequestCard(props) {
   const navigate = useNavigate();
   const { id } = useParams();
   const { doctorDetails, isLoading } = props;
   const [show, setShow] = useState(false);
+  const [documentId, setDocumentId] = useState("");
+  const [showDocumentDelete, setShowDocumentdelete] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
-
+  console.log("Doctor details", doctorDetails);
+  const { data: doctorDocuments, isLoading: documentLoading } =
+    useDoctorsDocument(id);
+  const { mutate: deleteDocument, isLoading: deleteLoading } =
+    useDeleteDocument();
+  const handelDeleteDocumentClick = (id) => {
+    setShowDocumentdelete(true);
+    setDocumentId(id);
+  };
+  const handelDeleteDocument = () => {
+    // e.preventDefault();
+    deleteDocument(documentId, {
+      onSuccess: () => {
+        setShowDocumentdelete(false);
+      },
+    });
+  };
   return (
     <div>
       <div className="card-box profile-header mt-3 mb-5">
@@ -57,7 +77,6 @@ function DoctorRequestCard(props) {
                   />
                   <span>Edit</span>
                 </Link>
-                <div className="dropdown-divider" />
               </div>
             </div>
           </div>
@@ -69,17 +88,24 @@ function DoctorRequestCard(props) {
               <div className="col-md-3">
                 <div className="doctor-img-wrap">
                   <div className="profile-img">
-                    {/* <Link to="#"> */}
-                    <img className="" src={dr_profile} alt="#" />
-                    {/* </Link> */}
+                    <img
+                      className="img-fluid"
+                      src={doctorDetails?.profile_pic}
+                      alt="#"
+                    />
                   </div>
                 </div>
               </div>
               <div className="col">
                 {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
-                  <h3 className="user-name m-t-0 mb-0">Dr {doctorDetails?.name}</h3>
-                  <small className="text-muted">{doctorDetails?.registration_details?.qualification}</small>
+                  <h3 className="user-name m-t-0 mb-0">
+                    Dr {doctorDetails?.name}
+                  </h3>
+                  <small className="text-muted">
+                    {" "}
+                    {doctorDetails?.registration_details?.qualification}
+                  </small>
                 </div>
                 {/* </div> */}
               </div>
@@ -156,7 +182,9 @@ function DoctorRequestCard(props) {
                   <li className="mt-3 mb-3">
                     <span className="payment-title">
                       Bank Name :{" "}
-                      <span className="fw-semibold text-black">{doctorDetails?.bank_details?.bank_name}</span>
+                      <span className="fw-semibold text-black">
+                        {doctorDetails?.bank_details?.bank_name}
+                      </span>
                     </span>
                   </li>
                 </ul>
@@ -174,7 +202,9 @@ function DoctorRequestCard(props) {
                   <li className="mt-3 mb-3">
                     <span className="payment-title">
                       UPI ID :{" "}
-                      <span className="fw-semibold text-black">{doctorDetails?.bank_details?.upi_id}</span>
+                      <span className="fw-semibold text-black">
+                        {doctorDetails?.bank_details?.upi_id}
+                      </span>
                     </span>
                   </li>
                 </ul>
@@ -186,11 +216,14 @@ function DoctorRequestCard(props) {
           <div className="col border border-secondary-subtle pt-3 pb-1 ms-1 me-1 mt-3 file-upload-card">
             <h5>Specialisation</h5>
             <div className="overflow-auto add-specialisation">
-              {
-                doctorDetails?.specialisations?.map((item)=>(
-                  <div className="border border-secondary-subtle p-2 mt-2" key={item.id}>{item.name}</div>
-                ))
-              }
+              {doctorDetails?.specialisations?.map((item) => (
+                <div
+                  className="border border-secondary-subtle p-2 mt-2"
+                  key={item.id}
+                >
+                  {item.name}
+                </div>
+              ))}
             </div>
             {/* <div className="pt-2">
               <Link
@@ -207,17 +240,17 @@ function DoctorRequestCard(props) {
                 <h5>Uploaded Documents</h5>
               </div>
 
-              <div className="col">
+              {/* <div className="col">
                 <Link
                   to={`/manage-doctors/request/${id}/edit`}
                   className="d-flex justify-content-end"
                 >
                   <img src={pencil_icon} alt="" />
                 </Link>
-              </div>
+              </div> */}
             </div>
-            <div className="mb-4">
-              {[1, 2, 3].map((item) => {
+            {/* <div className="mb-4"> */}
+            {/* {[1, 2, 3].map((item) => {
                 return (
                   <div className="row mt-2" key={`row${item}`}>
                     <div className="col-12 pt-2 col-md-2">
@@ -244,12 +277,63 @@ function DoctorRequestCard(props) {
                     </div>
                   </div>
                 );
-              })}
-            </div>
+              })} */}
+
+            {doctorDocuments?.length > 0 && (
+              <div className="row">
+                {!documentLoading ? (
+                  <div className="mb-4">
+                    {doctorDocuments?.map((item, i) => {
+                      console.log("ITEM ", item);
+
+                      return (
+                        <div className="row mt-2" key={`row${item?.id}`}>
+                          <div className="col-12 pt-2 col-md-2">
+                            Document {i + 1}
+                          </div>
+                          <div className="col-12 col-md-10 md:mt-0 mt-1">
+                            <div className="d-flex justify-content-between align-items-center file-upload-details ps-3 pe-3">
+                              <div className="d-flex align-items-center">
+                                <img src={pdf_icon} alt="pdf_icon" />
+                                <div className="d-flex flex-column justify-content-center file-details ms-2">
+                                  <h6>{item.name}</h6>
+                                  {/* <p>24MB</p> */}
+                                </div>
+                              </div>
+                              <div className="d-flex">
+                                <a
+                                  className="m-1"
+                                  href={`${item?.file}`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <img src={eye_icon} alt="" />
+                                </a>
+                                <a
+                                  className="m-1"
+                                  onClick={() =>
+                                    handelDeleteDocumentClick(item.id)
+                                  }
+                                >
+                                  <img src={cross_icon} alt="" />
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <ComponentLoader />
+                )}
+              </div>
+            )}
+            {/* </div> */}
           </div>
         </div>
       </div>
-      {isLoading && <FullscreenLoader/>}
+      {isLoading && <FullscreenLoader />}
       <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
       <ToggleDisable
         show={disableshow}
@@ -257,6 +341,13 @@ function DoctorRequestCard(props) {
         setdisable={setdisable}
         disable={disable}
         title="Doctor"
+      />
+      <ConfirmDelete
+        show={showDocumentDelete}
+        setShow={setShowDocumentdelete}
+        title="Document"
+        handleDelete={handelDeleteDocument}
+        isLoading={deleteLoading}
       />
     </div>
   );

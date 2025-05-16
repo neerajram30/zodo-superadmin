@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AddSpecialization from "../modals/AddSpecialization";
-import { addicon, uploadfiles_icon } from "../imagepath";
+import { addicon } from "../imagepath";
 import PropTypes from "prop-types";
 import { useDebounce } from "../../hooks/useDebounce";
 
@@ -37,7 +37,7 @@ function SpecializationHero(props) {
 
         <div className="w-50 d-flex align-items-center justify-content-end flex-column flex-md-row">
           <div className="d-flex w-100 flex-column flex-md-row justify-content-end">
-            <Link
+            {/* <Link
               to="#"
               // data-bs-toggle="modal"
               // data-bs-target="#save_invocies_details"
@@ -45,7 +45,7 @@ function SpecializationHero(props) {
             >
               <img src={uploadfiles_icon} alt="upload" />
               <span className="ms-2 me-2"> Upload Files</span>
-            </Link>
+            </Link> */}
             <Link
               to
               // data-bs-toggle="modal"
