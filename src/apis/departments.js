@@ -7,7 +7,7 @@ export const getDepartmentList = async (id) => {
 
 export const getDepartmentListByQuery = async (id,query) => {
   const response = await apiClient.get(
-    `/departments/?hospital_id=${id}&${query}`
+    `/departments?hospital_id=${id}&${query}`
   );
   return response.data || [];
 };

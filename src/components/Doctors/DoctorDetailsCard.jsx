@@ -21,6 +21,7 @@ import ToggleModal from "../Hospitals/ToggleModal";
 import TransparentTabs from "../tabs/TransparentTabs";
 import { useDoctorsDocument } from "../../hooks/doctors/useDoctorsDocument";
 import ComponentLoader from "../loadings/ComponentLoader";
+import StatusButton from "../assests/StatusButton";
 
 function DoctorDetailsCard() {
   const navigate = useNavigate();
@@ -184,9 +185,11 @@ function DoctorDetailsCard() {
           </div>
 
           <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
-            <button className="btn hospital-draft-btn text-primary w-75 mt-1">
+            {/* <button className="btn hospital-draft-btn text-primary w-75 mt-1">
               {data?.status ?? "Inactive"}
-            </button>
+            </button> */}
+              
+            <StatusButton status={data?.status ?? "Inactive"}/>
           </div>
         </div>
         <div className="row mt-3">

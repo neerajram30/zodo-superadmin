@@ -22,7 +22,7 @@ function SettlementRequestCard(props) {
   };
   return (
     <div className="card invoices-grid-card w-100" key={data?.id}>
-      <Link to>
+      <div>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
@@ -66,7 +66,7 @@ function SettlementRequestCard(props) {
             </div>
           </div>
         </div>
-      </Link>
+      </div>
       <ApproveRequestModal
         show={showApprove}
         setShow={setshowApprove}

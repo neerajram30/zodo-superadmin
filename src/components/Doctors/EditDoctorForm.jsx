@@ -12,13 +12,18 @@ import { useSpecialisationList } from "../../hooks/specialisation/useSpecialisat
 import { useEditDoctor } from "../../hooks/doctors/useEditDoctor";
 import { toast } from "react-toastify";
 import TextArea from "../InputFields/TextArea";
+import { useDoctorsDocument } from "../../hooks/doctors/useDoctorsDocument";
 function EditDoctorForm() {
   const { data, isLoading } = useSpecialisationList();
   const { id } = useParams();
+  const { data: doctorDocuments, isLoading: documentLoading } =
+    useDoctorsDocument(id);
   const [fileURL, setFileURL] = useState("");
   const handleFileURL = (url) => {
     setFileURL(url);
   };
+  const [file1, setFile1] = useState(null);
+  const [file2, setFile2] = useState(null);
   const [document1, setDocument1] = useState("");
   const [document2, setDocument2] = useState("");
 
@@ -41,6 +46,16 @@ function EditDoctorForm() {
     }));
 
   useEffect(() => {
+    if (doctorDocuments?.length > 0) {
+      setFile1({
+        name: doctorDocuments[0]?.name,
+        id: doctorDocuments[0]?.id,
+      });
+      setFile2({
+        name: doctorDocuments[1]?.name,
+        id: doctorDocuments[1]?.id,
+      });
+    }
     if (doctorDetails) {
       setFileURL(doctorDetails?.profile_pic);
       const specialisation = doctorDetails?.specialisations;
@@ -64,10 +79,10 @@ function EditDoctorForm() {
         bankname: doctorDetails?.bank_details?.bank_name,
         ifsc: doctorDetails?.bank_details?.ifsc,
         upiid: doctorDetails?.bank_details?.upi_id,
-        about: doctorDetails?.about
+        about: doctorDetails?.about,
       });
     }
-  }, [doctorDetails]);
+  }, [doctorDetails, methods, doctorDocuments]);
 
   const onEditDoctor = async (data) => {
     if (data.accountNumber === data.verifyAccountnumber) {
@@ -134,7 +149,9 @@ function EditDoctorForm() {
           <ChooseFile handleFileURL={handleFileURL} fileURL={fileURL} />
         </div>
       </div>
-      {doctorLoading || (editingLoader && <FullscreenLoader />)}
+      {doctorLoading ||
+        documentLoading ||
+        (editingLoader && <FullscreenLoader />)}
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onEditDoctor)}>
@@ -397,11 +414,19 @@ function EditDoctorForm() {
             <div className="row mt-4 pb-5">
               <div className="col-md-6">
                 <label className="pb-2">Registration Proof</label>
-                <UploadFiles handleFileKey={handleFileKeyDoc1} />
+                <UploadFiles
+                  handleFileKey={handleFileKeyDoc1}
+                  fileDetails={file1}
+                  setFileDetails={setFile1}
+                />
               </div>
               <div className="col-md-6">
                 <label className="pb-2">Degree Proof</label>
-                <UploadFiles handleFileKey={handleFileKeyDoc2} />
+                <UploadFiles
+                  handleFileKey={handleFileKeyDoc2}
+                  fileDetails={file2}
+                  setFileDetails={setFile2}
+                />
               </div>
             </div>
           </div>

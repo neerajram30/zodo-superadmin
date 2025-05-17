@@ -88,5 +88,9 @@ export const changeHospitalStatus = async ({id, data}) => {
   return response.data;
 };
 
+export const getHospitalDocuments = async (id) => {
+  const response = await apiClient.get(`/documents?hospital_id=${id}`);
+  return response?.data?.data || [];
+};
 
 

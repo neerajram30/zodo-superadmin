@@ -34,6 +34,5 @@ export const changeDoctorStatus = async ({id, data}) => {
 export const getDoctorDocuments = async (id) => {
   const response = await apiClient.get(`/documents?doctor_id=${id}`);
   console.log("Response !",response?.data?.data);
-  
   return response?.data?.data || [];
 };

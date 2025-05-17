@@ -21,6 +21,7 @@ import PropTypes from "prop-types";
 import FullscreenLoader from "../loadings/FullscreenLoader";
 import { useChangeHospitalStatus } from "../../hooks/hospitals/useChangeHospitalStatus";
 import TransparentTabs from "../tabs/TransparentTabs";
+import StatusButton from "../assests/StatusButton";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
@@ -237,9 +238,10 @@ function HospitalDetailsCard(props) {
                   {hospitalDetails?.gst}
                 </span>
               </h6>
-              <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
+              {/* <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
                 {hospitalDetails?.status}
-              </button>
+              </button> */}
+              <StatusButton status={hospitalDetails?.status} />
             </div>
           </div>
 

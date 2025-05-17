@@ -1,15 +1,21 @@
 import PropTypes from "prop-types";
-import React from "react";
 
 function StatusButton(props) {
   const { status } = props;
+  console.log("Button status ", status);
+
   return (
     <button
       className={`btn hospital-draft-btn w-75 mt-1 ${
-        (status === "active" || status === "approved" && "text-success border border-success") ||
-        (status === "disabled" && "text-secondary border border-secondary") ||
+        status === "active" ||
+        (status === "approved" && "text-success border border-success") ||
+        (status === "approved" &&
+          "text-success border border-success"(
+            status === "disabled" && "text-secondary border border-secondary"
+          )) ||
         (status === "rejected" && "text-danger border border-danger") ||
-        (status === "pending" || status === "requested" && "text-warning border border-warning")
+        (status === "pending" && "text-warning border border-warning") ||
+        (status === "requested" && "text-warning border border-warning")
       }`}
     >
       {status ?? "Inactive"}

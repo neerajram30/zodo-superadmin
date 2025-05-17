@@ -13,11 +13,21 @@ import TextArea from "../InputFields/TextArea";
 import UploadFiles from "./UploadFiles";
 import SelectField from "../InputFields/SelectField";
 import { toast } from "react-toastify";
+import { useHospitalDocuments } from "../../hooks/hospitals/useHospitalDocuments";
 
 function HospitalEditForm() {
   const { id } = useParams();
+  const { data: hospitalDocuments, isLoading: documentLoading } =
+    useHospitalDocuments(id);
+  console.log("Hospital documents ", hospitalDocuments);
+  console.log(documentLoading);
+  
   const [toggleFasttag, setToggleFasttag] = useState(false);
   const [fileURL, setFileUrl] = useState("");
+  const [file1, setFile1] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [file3, setFile3] = useState(null);
+
   const { mutate, isLoading } = useEditHostpital();
   const { data: hospitalDetails } = useViewHospital(id);
   const [document1, setDocument1] = useState("");
@@ -46,9 +56,22 @@ function HospitalEditForm() {
   const methods = useForm();
   // const control = methods.control;
   const navigate = useNavigate();
-  console.log("isloading", isLoading);
 
   useEffect(() => {
+    if (hospitalDocuments?.length > 0) {
+      setFile1({
+        name: hospitalDocuments[0]?.name,
+        id: hospitalDocuments[0]?.id,
+      });
+      setFile2({
+        name: hospitalDocuments[1]?.name,
+        id: hospitalDocuments[1]?.id,
+      });
+      setFile3({
+        name: hospitalDocuments[2]?.name,
+        id: hospitalDocuments[2]?.id,
+      });
+    }
     if (hospitalDetails) {
       setFileUrl(hospitalDetails?.logo);
       const fastTag = hospitalDetails?.fastTag?.enabled;
@@ -90,10 +113,7 @@ function HospitalEditForm() {
         billingPincode: hospitalDetails?.billing_address?.pincode,
       });
     }
-  }, [hospitalDetails, methods]);
-
-  console.log("File url ", fileURL);
-
+  }, [hospitalDetails, methods, hospitalDocuments]);
   const handleFileURL = (fileURLResponse) => {
     setFileUrl(fileURLResponse);
   };
@@ -180,7 +200,7 @@ function HospitalEditForm() {
           <Closebtn />
         </div>
       </div>
-      {isLoading && <FullscreenLoader />}
+      {isLoading || documentLoading && <FullscreenLoader />}
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onEditHospital)}>
@@ -569,13 +589,25 @@ function HospitalEditForm() {
             </div>
             <div className="row mt-4 pb-5">
               <div className="col-md-4 mt-2">
-                <UploadFiles handleFileKey={handleFileKeyDoc1} />
+                <UploadFiles
+                  handleFileKey={handleFileKeyDoc1}
+                  fileDetails={file1}
+                  setFileDetails={setFile1}
+                />
               </div>
               <div className="col-md-4 mt-2">
-                <UploadFiles handleFileKey={handleFileKeyDoc2} />
+                <UploadFiles
+                  handleFileKey={handleFileKeyDoc2}
+                  fileDetails={file2}
+                  setFileDetails={setFile2}
+                />
               </div>
               <div className="col-md-4 mt-2">
-                <UploadFiles handleFileKey={handleFileKeyDoc3} />
+                <UploadFiles
+                  handleFileKey={handleFileKeyDoc3}
+                  fileDetails={file3}
+                  setFileDetails={setFile3}
+                />
               </div>
             </div>
           </div>

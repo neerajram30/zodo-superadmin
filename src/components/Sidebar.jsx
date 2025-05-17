@@ -1,12 +1,22 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { dashboard, logout_01, menuicon08 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
+import { useAuth } from "../hooks/auth/useAuth";
 
 const Sidebar = (props) => {
   const [sidebar, setSidebar] = useState("");
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token"); // Remove the token from local storage
+    // const token = localStorage.getItem("token"); // Check if the token is removed
+    setUser(null); // Clear the user state
+    navigate("/login"); // Redirect to the login page
+  };
   const handleClick = (e, item, item1, item3) => {
     const div = document.querySelector(`#${item}`);
     const ulDiv = document.querySelector(`.${item1}`);
@@ -149,7 +159,8 @@ const Sidebar = (props) => {
             </ul>
             <div className="logout-btn submenu">
               <Link
-                to="/login"
+                to
+                onClick={handleLogout}
                 className={
                   props?.activeClassName === "dashboard" ? "active" : ""
                 }

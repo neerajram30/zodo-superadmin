@@ -17,6 +17,7 @@ import FullscreenLoader from "../../loadings/FullscreenLoader";
 import { useDoctorsDocument } from "../../../hooks/doctors/useDoctorsDocument";
 import ComponentLoader from "../../loadings/ComponentLoader";
 import { useDeleteDocument } from "../../../hooks/useDeleteDocument";
+import StatusButton from "../../assests/StatusButton";
 
 function DoctorRequestCard(props) {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ function DoctorRequestCard(props) {
               <Link to onClick={() => navigate(-1)}>
                 <img src={arrow_left} alt="" />
               </Link>
-              <span className="ms-3">Doctor Details</span>
+              <span className="ms-3">Doctor Request</span>
             </div>
             <div className="dropdown">
               <Link
@@ -134,9 +135,10 @@ function DoctorRequestCard(props) {
           </div>
 
           <div className="col-md-4 pt-4 ps-md-5 pt-md-2">
-            <button className="btn hospital-draft-btn text-primary w-75 mt-1">
+            {/* <button className="btn hospital-draft-btn text-primary w-75 mt-1">
               {doctorDetails?.status ? doctorDetails?.status : "inactive"}
-            </button>
+            </button> */}
+            <StatusButton status={doctorDetails?.status ? doctorDetails?.status : "inactive"}/>
           </div>
         </div>
 

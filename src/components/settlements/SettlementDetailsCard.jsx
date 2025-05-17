@@ -2,14 +2,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   apollo_logo,
   arrow_left,
-  bin_icon_red,
-  cross_icon,
-  email_icon,
-  eye_icon,
-  pdf_icon,
-  phone_icon,
+  bin_icon_red, email_icon, phone_icon,
   search_outline_icon,
-  three_dots_menu,
+  three_dots_menu
 } from "../imagepath";
 import StatusButton from "../assests/StatusButton";
 import { formatDate } from "fullcalendar/index.js";
@@ -253,7 +248,7 @@ function SettlementDetailsCard(props) {
             </div>
           </div>
         </div>
-        <div className="mb-4 mt-5">
+        {/* <div className="mb-4 mt-5">
           <div className="row mt-2">
             <div className="col-12 pt-2 col-md-2">Documents</div>
             <div className="col-12 col-md-10 md:mt-0 mt-1">
@@ -276,7 +271,7 @@ function SettlementDetailsCard(props) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* <HospitalModal
