@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Dropzone from "react-dropzone";
 import { useUploadFile } from "../../hooks/useUploadFile";
 import { toast } from "react-toastify";
@@ -15,54 +14,57 @@ function UploadFiles(props) {
   const { mutate: deleteDocument, isLoading: deleteLoading } =
     useDeleteDocument();
   // const [fileurl, setFileurl] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const uploadMutation = useUploadFile();
+  const { mutate: uploadDocument, isLoading: documentLoading } =
+    useUploadFile();
   const handleFile = async (acceptedFiles) => {
-    console.log("Accepted file ", acceptedFiles);
     const file = acceptedFiles[0];
     const formData = new FormData();
     formData.append("file", file);
-    setLoading(true);
+    // setLoading(true);
     try {
-      const response = await uploadMutation.mutateAsync(formData, {
+      const response = await uploadDocument(formData, {
         onSuccess: () => {
           const message = "File uploaded successfully";
           toast.success(message);
-          setLoading(false);
+          // setLoading(false);
         },
       });
-      setLoading(false);
+      // setLoading(false);
       // setFilepreview(response?.data?.url);
       console.log(response);
-      
+
       handleFileKey(response?.data?.key);
-      setFileDetails({ name: response?.data?.filename, id: response?.data?.key });
+      setFileDetails({
+        name: response?.data?.filename,
+        id: response?.data?.key,
+      });
     } catch (error) {
       handleFileKey("");
       // setFilepreview(null);
       // setFile(null);
-      setLoading(false);
+      // setLoading(false);
       setFileDetails(null);
       const message = "File uploaded failed";
       toast.error(message);
     }
   };
   const clearFile = (id) => {
-    deleteDocument(id,{
-      onSuccess:()=>{
+    deleteDocument(id, {
+      onSuccess: () => {
         setFileDetails(null);
         handleFileKey("");
-      }
-    })
+      },
+    });
   };
-  console.log("File details",fileDetails);
-  
+  console.log("File details", fileDetails);
+
   return (
     <Dropzone onDrop={handleFile}>
       {({ getRootProps, getInputProps }) => (
         <section className="hospital-file-upload">
-          {!loading || deleteLoading ? (
+          {!documentLoading || deleteLoading ? (
             !fileDetails?.name ? (
               <div {...getRootProps()}>
                 <input {...getInputProps()} />

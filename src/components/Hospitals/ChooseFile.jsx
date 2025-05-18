@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useUploadFile } from "../../hooks/useUploadFile";
 import ComponentLoader from "../loadings/ComponentLoader";
@@ -6,16 +5,12 @@ import PropTypes from "prop-types";
 
 function ChooseFile(props) {
   const { handleFileURL, fileURL } = props;
-  console.log("Choose file url ", fileURL);
-
-  // const [file, setFile] = useState(null);
-  // const [filePreview, setFilepreview] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB in bytes
   const handleButtonClick = () => {
     document.getElementById("fileInput").click();
   };
-  const uploadMutation = useUploadFile();
+  const { mutate, isLoading } = useUploadFile();
   const handleFiles = async (e) => {
     const file = e.target.files[0];
     if (file && file.size > MAX_FILE_SIZE) {
@@ -27,24 +22,17 @@ function ChooseFile(props) {
       // setFile(file);
       const formData = new FormData();
       formData.append("file", file);
-      setLoading(true);
+      // setLoading(true);
       try {
-        const response = await uploadMutation.mutateAsync(formData, {
+        const response = await mutate(formData, {
           onSuccess: () => {
             const message = "File uploaded successfully";
             toast.success(message);
-            setLoading(false);
           },
         });
-        setLoading(false);
-        console.log("File upload ", response.data);
-        // setFilepreview(response?.data?.url);
         handleFileURL(response?.data?.url);
       } catch (error) {
         handleFileURL("");
-        // setFilepreview(null);
-        // setFile(null);
-        setLoading(false);
         const message = "File uploaded failed";
         toast.error(message);
       }
@@ -57,8 +45,8 @@ function ChooseFile(props) {
           <small className="text-muted text-center">Perview</small>
         ) : (
           <>
-            {!loading ? (
-              <img src={fileURL} alt="profile" width={100} height={100}/>
+            {!isLoading ? (
+              <img src={fileURL} alt="profile" width={100} height={100} />
             ) : (
               <ComponentLoader />
             )}
@@ -79,7 +67,6 @@ function ChooseFile(props) {
           <input
             type="file"
             className="form-control d-none"
-            // id="inputGroupFile02"
             id="fileInput"
             onChange={handleFiles}
             accept="image/jpeg, image/png, image/gif"

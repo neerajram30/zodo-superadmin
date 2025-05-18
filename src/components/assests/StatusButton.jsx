@@ -7,7 +7,7 @@ function StatusButton(props) {
   return (
     <button
       className={`btn hospital-draft-btn w-75 mt-1 ${
-        status === "active" ||
+        (status === "active" && "text-success border border-success") ||
         (status === "approved" && "text-success border border-success") ||
         (status === "approved" &&
           "text-success border border-success"(

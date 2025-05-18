@@ -16,7 +16,8 @@ function AddDoctorForm() {
   const [fileURL, setFileURL] = useState("");
   const [document1, setDocument1] = useState("");
   const [document2, setDocument2] = useState("");
-
+  const [file1, setFile1] = useState(null);
+  const [file2, setFile2] = useState(null);
   const handleFileKeyDoc1 = (filekey) => {
     setDocument1(filekey);
   };
@@ -66,7 +67,7 @@ function AddDoctorForm() {
           { name: "registration_proof", file: document1 },
           { name: "degree_proof", file: document2 },
         ],
-        about:data?.about
+        about: data?.about,
       };
       await mutate(doctorData, { onSuccess: () => methods.reset() });
     } else {
@@ -363,11 +364,19 @@ function AddDoctorForm() {
             <div className="row mt-4 pb-5">
               <div className="col-md-6">
                 <label className="pb-2">Registration Proof</label>
-                <UploadFiles handleFileKey={handleFileKeyDoc1} />
+                <UploadFiles
+                  handleFileKey={handleFileKeyDoc1}
+                  setFileDetails={setFile1}
+                  fileDetails={file1}
+                />
               </div>
               <div className="col-md-6">
                 <label className="pb-2">Degree Proof</label>
-                <UploadFiles handleFileKey={handleFileKeyDoc2} />
+                <UploadFiles
+                  fileDetails={file2}
+                  handleFileKey={handleFileKeyDoc2}
+                  setFileDetails={setFile2}
+                />
               </div>
             </div>
           </div>

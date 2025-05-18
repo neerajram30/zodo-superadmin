@@ -11,13 +11,13 @@ import FullscreenLoader from "../loadings/FullscreenLoader";
 import TextArea from "../InputFields/TextArea";
 import PropTypes from "prop-types";
 function BannerForm(props) {
-  const {handleClose} = props;
+  const { handleClose } = props;
   // const [show, setShow] = useState(false);
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [fileurl, setFileUrl] = useState("");
   const [filekey, setFilekey] = useState("");
-  const uploadMutation = useUploadFile();
+  const { mutate: uploadFile, isLoading: uploadLoading } = useUploadFile();
+
   const { mutate, isLoading } = useAddBanner();
   // const [fileurl, setFileurl] = useState(null);
   const methods = useForm();
@@ -42,16 +42,16 @@ function BannerForm(props) {
     setFile(selecteFile);
     const formData = new FormData();
     formData.append("file", selecteFile);
-    setLoading(true);
+    // setLoading(true);
     try {
-      const response = await uploadMutation.mutateAsync(formData, {
+      const response = await uploadFile(formData, {
         onSuccess: () => {
           const message = "File uploaded successfully";
           toast.success(message);
-          setLoading(false);
+          // setLoading(false);
         },
       });
-      setLoading(false);
+      // setLoading(false);
       setFileUrl(response.data.url);
       setFilekey(response.data.key);
     } catch (error) {
@@ -61,7 +61,7 @@ function BannerForm(props) {
 
       setFileUrl("");
       setFilekey("");
-      setLoading(false);
+      // setLoading(false);
       const message = "File uploaded failed";
       toast.error(message);
     }
@@ -129,7 +129,7 @@ function BannerForm(props) {
                     className="upload-images upload-banner"
                     // style={{ display: show ? "none" : "" }}
                   >
-                    {!loading ? (
+                    {!uploadLoading ? (
                       <div>
                         {console.log("file url", fileurl)}
                         <img src={fileurl} alt="Image" />
@@ -159,7 +159,7 @@ function BannerForm(props) {
                 <button
                   type="submit"
                   className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2 ms-2"
-                  disabled={loading}
+                  disabled={uploadLoading}
                 >
                   Update
                 </button>
@@ -174,7 +174,7 @@ function BannerForm(props) {
 }
 
 BannerForm.propTypes = {
-  handleClose: PropTypes.func
+  handleClose: PropTypes.func,
 };
 
 export default BannerForm;

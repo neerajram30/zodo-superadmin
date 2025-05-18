@@ -3,8 +3,7 @@ import { uploadFile } from "../apis/uploadFile";
 
 export const useUploadFile = () => {
   const queryClient = useQueryClient();
-
-  useMutation({
+  const mutation = useMutation({
     mutationFn: uploadFile,
     onMutate: async () => {
       // Cancel any ongoing queries for hospitals to prevent race conditions
@@ -15,4 +14,9 @@ export const useUploadFile = () => {
       queryClient.invalidateQueries(["documents"]);
     },
   });
+
+  return {
+    mutate: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

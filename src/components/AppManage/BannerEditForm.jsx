@@ -12,15 +12,13 @@ import { useViewBanner } from "../../hooks/appmanage/useViewBanner";
 import { useUpdateBanner } from "../../hooks/appmanage/useUpdateBanner";
 function BannerEditForm(props) {
   const { bannerId, handleClose } = props;
-  console.log("Banner id ", bannerId);
-
   const { data: viewBanner, isLoading: vieBannerLoading } =
     useViewBanner(bannerId);
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [fileurl, setFileUrl] = useState("");
   const [filekey, setFilekey] = useState("");
-  const uploadMutation = useUploadFile();
+  const { mutate: uploadFile, isLoading: uploadLoading } = useUploadFile();
   const { mutate, isLoading } = useUpdateBanner();
   const methods = useForm();
   useEffect(() => {
@@ -42,12 +40,15 @@ function BannerEditForm(props) {
       url: fileurl,
       // "hospital_id": ""
     };
-    mutate({id:bannerId,data:bannderData }, {
-      onSuccess: () => {
-        methods.reset();
-        handleClose();
+    mutate(
+      { id: bannerId, data: bannderData },
+      {
+        onSuccess: () => {
+          methods.reset();
+          handleClose();
+        },
       }
-    });
+    );
     console.log(data);
   };
   const handleFile = async (e) => {
@@ -55,22 +56,22 @@ function BannerEditForm(props) {
     setFile(selecteFile);
     const formData = new FormData();
     formData.append("file", selecteFile);
-    setLoading(true);
+    // setLoading(true);
     try {
-      const response = await uploadMutation.mutateAsync(formData, {
+      const response = await uploadFile(formData, {
         onSuccess: () => {
           const message = "File uploaded successfully";
           toast.success(message);
-          setLoading(false);
+          // setLoading(false);
         },
       });
-      setLoading(false);
+      // setLoading(false);
       setFileUrl(response.data.url);
       setFilekey(response.data.key);
     } catch (error) {
       setFileUrl("");
       setFilekey("");
-      setLoading(false);
+      // setLoading(false);
       const message = "File uploaded failed";
       toast.error(message);
     }
@@ -139,7 +140,7 @@ function BannerEditForm(props) {
                       className="upload-images upload-banner"
                       // style={{ display: show ? "none" : "" }}
                     >
-                      {!loading ? (
+                      {!uploadLoading ? (
                         <div>
                           <img src={fileurl} alt="Image" />
                           <Link to="#" className="btn-icon logo-hide-btn">
@@ -171,7 +172,7 @@ function BannerEditForm(props) {
                   <button
                     type="submit"
                     className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2 ms-2"
-                    disabled={loading}
+                    disabled={uploadLoading}
                   >
                     {isLoading && (
                       <span
@@ -195,7 +196,7 @@ function BannerEditForm(props) {
 
 BannerEditForm.propTypes = {
   bannerId: PropTypes.string,
-  handleClose: PropTypes.func
+  handleClose: PropTypes.func,
 };
 
 export default BannerEditForm;
