@@ -5,14 +5,12 @@ import PropTypes from "prop-types";
 import ComponentLoader from "../loadings/ComponentLoader";
 import { cross_icon, pdf_icon } from "../imagepath";
 import { Link } from "react-router-dom";
-import { useDeleteDocument } from "../../hooks/useDeleteDocument";
+import { useRemoveDocuments } from "../../hooks/useRemoveDocument";
 
 function UploadFiles(props) {
   const { fileDetails, setFileDetails } = props;
-  // const [fileDetails, setFileDetails] = useState(null);
-  // console.log(handleFileKey);
-  const { mutate: deleteDocument, isLoading: deleteLoading } =
-    useDeleteDocument();
+  const { mutate: removeDocument, isLoading: removeLoading } =
+    useRemoveDocuments();
   // const [fileurl, setFileurl] = useState("");
   // const [loading, setLoading] = useState(false);
 
@@ -51,7 +49,8 @@ function UploadFiles(props) {
     }
   };
   const clearFile = (id) => {
-    deleteDocument(id, {
+    const data = { fileId: id };
+    removeDocument(data, {
       onSuccess: () => {
         setFileDetails(null);
         // handleFileKey("");
@@ -64,7 +63,7 @@ function UploadFiles(props) {
     <Dropzone onDrop={handleFile}>
       {({ getRootProps, getInputProps }) => (
         <section className="hospital-file-upload">
-          {!documentLoading || deleteLoading ? (
+          {!documentLoading || removeLoading ? (
             !fileDetails?.name ? (
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
