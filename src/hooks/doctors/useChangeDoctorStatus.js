@@ -12,8 +12,8 @@ export const useChangeDoctorStatus = () => {
       await queryClient.cancelQueries({ queryKey: ["doctors"] });
     },
     onSuccess: (data, variables) => {
-      const message = data?.message || "Hospital updated successfully";
-      queryClient.setQueryData(["hospitals", variables.id], data);
+      const message = data?.message || "Doctor updated successfully";
+      queryClient.setQueryData(["doctors", variables.id], data);
       queryClient.invalidateQueries({ queryKey: ["doctors"] });
       queryClient.invalidateQueries({ queryKey: ["doctor", variables.id] });
       toast.success(message, {
@@ -32,7 +32,7 @@ export const useChangeDoctorStatus = () => {
         queryClient.setQueryData(["doctors"], context.previousHospitals);
       }
       const errorMessage =
-        error?.response?.data?.message || "Failed to edit hospital";
+        error?.response?.data?.message || "Failed to edit doctor";
       toast.error(errorMessage, {
         position: "top-right",
         autoClose: 5000,

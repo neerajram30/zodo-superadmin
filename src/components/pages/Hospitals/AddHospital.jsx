@@ -24,19 +24,20 @@ function AddHospital() {
   const methods = useForm();
   const control = methods.control;
   const isSameAsCompanyAddress = useWatch({ control, name: "sameascompany" });
-  const [document1, setDocument1] = useState("");
-  const [document2, setDocument2] = useState("");
-  const [document3, setDocument3] = useState("");
 
-  const handleFileKeyDoc1 = (filekey) => {
-    setDocument1(filekey);
-  };
-  const handleFileKeyDoc2 = (filekey) => {
-    setDocument2(filekey);
-  };
-  const handleFileKeyDoc3 = (filekey) => {
-    setDocument3(filekey);
-  };
+  const [file1, setFile1] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [file3, setFile3] = useState(null);
+
+  // const handleFileKeyDoc1 = (filekey) => {
+  //   setDocument1(filekey);
+  // };
+  // const handleFileKeyDoc2 = (filekey) => {
+  //   setDocument2(filekey);
+  // };
+  // const handleFileKeyDoc3 = (filekey) => {
+  //   setDocument3(filekey);
+  // };
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -105,7 +106,7 @@ function AddHospital() {
           website: data?.website,
         },
         gst: data?.gstnumber,
-        documents: [{name:"doc1", file :document1},{name:"doc2", file :document2},{name:"doc3", file :document3}],
+        documents: [file1, file2, file3],
       };
       await mutate(hospital);
       // methods.reset();
@@ -146,7 +147,7 @@ function AddHospital() {
               <form onSubmit={methods.handleSubmit(onCreateHospital)}>
                 <div className="row mt-4">
                   <div className="col-md-8 ms-md-3">
-                    <ChooseFile handleFileURL={handleFileURL} />
+                    <ChooseFile handleFileURL={handleFileURL} fileURL={profilePic}/>
                   </div>
                 </div>
                 <div className="w-100 mt-4 mt-md-2">
@@ -583,13 +584,22 @@ function AddHospital() {
                   </div>
                   <div className="row mt-4 pb-5">
                     <div className="col-md-4 mt-2">
-                      <UploadFiles handleFileKey={handleFileKeyDoc1} />
+                      <UploadFiles
+                        fileDetails={file1}
+                        setFileDetails={setFile1}
+                      />
                     </div>
                     <div className="col-md-4 mt-2">
-                      <UploadFiles handleFileKey={handleFileKeyDoc2} />
+                      <UploadFiles
+                        fileDetails={file2}
+                        setFileDetails={setFile2}
+                      />
                     </div>
                     <div className="col-md-4 mt-2">
-                      <UploadFiles handleFileKey={handleFileKeyDoc3} />
+                      <UploadFiles
+                        fileDetails={file3}
+                        setFileDetails={setFile3}
+                      />
                     </div>
                   </div>
                 </div>

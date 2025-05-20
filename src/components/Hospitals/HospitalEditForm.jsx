@@ -19,9 +19,6 @@ function HospitalEditForm() {
   const { id } = useParams();
   const { data: hospitalDocuments, isLoading: documentLoading } =
     useHospitalDocuments(id);
-  console.log("Hospital documents ", hospitalDocuments);
-  console.log(documentLoading);
-  
   const [toggleFasttag, setToggleFasttag] = useState(false);
   const [fileURL, setFileUrl] = useState("");
   const [file1, setFile1] = useState(null);
@@ -30,18 +27,18 @@ function HospitalEditForm() {
 
   const { mutate, isLoading } = useEditHostpital();
   const { data: hospitalDetails } = useViewHospital(id);
-  const [document1, setDocument1] = useState("");
-  const [document2, setDocument2] = useState("");
-  const [document3, setDocument3] = useState("");
-  const handleFileKeyDoc1 = (filekey) => {
-    setDocument1(filekey);
-  };
-  const handleFileKeyDoc2 = (filekey) => {
-    setDocument2(filekey);
-  };
-  const handleFileKeyDoc3 = (filekey) => {
-    setDocument3(filekey);
-  };
+  // const [document1, setDocument1] = useState("");
+  // const [document2, setDocument2] = useState("");
+  // const [document3, setDocument3] = useState("");
+  // const handleFileKeyDoc1 = (filekey) => {
+  //   setDocument1(filekey);
+  // };
+  // const handleFileKeyDoc2 = (filekey) => {
+  //   setDocument2(filekey);
+  // };
+  // const handleFileKeyDoc3 = (filekey) => {
+  //   setDocument3(filekey);
+  // };
   // const selectedHospital = useSelectedHospital(
   //   (state) => state.selectedHospital
   // );
@@ -61,15 +58,15 @@ function HospitalEditForm() {
     if (hospitalDocuments?.length > 0) {
       setFile1({
         name: hospitalDocuments[0]?.name,
-        id: hospitalDocuments[0]?.id,
+        file: hospitalDocuments[0]?.id,
       });
       setFile2({
         name: hospitalDocuments[1]?.name,
-        id: hospitalDocuments[1]?.id,
+        file: hospitalDocuments[1]?.id,
       });
       setFile3({
         name: hospitalDocuments[2]?.name,
-        id: hospitalDocuments[2]?.id,
+        file: hospitalDocuments[2]?.id,
       });
     }
     if (hospitalDetails) {
@@ -114,6 +111,7 @@ function HospitalEditForm() {
       });
     }
   }, [hospitalDetails, methods, hospitalDocuments]);
+  
   const handleFileURL = (fileURLResponse) => {
     setFileUrl(fileURLResponse);
   };
@@ -160,11 +158,7 @@ function HospitalEditForm() {
           website: data?.website,
         },
         gst: data?.gstnumber,
-        documents: [
-          { name: "doc1", file: document1 },
-          { name: "doc2", file: document2 },
-          { name: "doc3", file: document3 },
-        ],
+        documents: [file1, file2, file3],
       };
       // console.log("hospital !!", hospital);
       // console.log(mutate);
@@ -200,7 +194,7 @@ function HospitalEditForm() {
           <Closebtn />
         </div>
       </div>
-      {isLoading || documentLoading && <FullscreenLoader />}
+      {isLoading || (documentLoading && <FullscreenLoader />)}
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onEditHospital)}>
@@ -590,21 +584,21 @@ function HospitalEditForm() {
             <div className="row mt-4 pb-5">
               <div className="col-md-4 mt-2">
                 <UploadFiles
-                  handleFileKey={handleFileKeyDoc1}
+                  // handleFileKey={handleFileKeyDoc1}
                   fileDetails={file1}
                   setFileDetails={setFile1}
                 />
               </div>
               <div className="col-md-4 mt-2">
                 <UploadFiles
-                  handleFileKey={handleFileKeyDoc2}
+                  // handleFileKey={handleFileKeyDoc2}
                   fileDetails={file2}
                   setFileDetails={setFile2}
                 />
               </div>
               <div className="col-md-4 mt-2">
                 <UploadFiles
-                  handleFileKey={handleFileKeyDoc3}
+                  // handleFileKey={handleFileKeyDoc3}
                   fileDetails={file3}
                   setFileDetails={setFile3}
                 />

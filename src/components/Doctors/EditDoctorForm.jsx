@@ -19,20 +19,25 @@ function EditDoctorForm() {
   const { data: doctorDocuments, isLoading: documentLoading } =
     useDoctorsDocument(id);
   const [fileURL, setFileURL] = useState("");
+  console.log("Doctor profile url >>>>", fileURL);
   const handleFileURL = (url) => {
     setFileURL(url);
   };
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
-  const [document1, setDocument1] = useState("");
-  const [document2, setDocument2] = useState("");
+  // const [document1, setDocument1] = useState("");
+  // const [document2, setDocument2] = useState("");
 
-  const handleFileKeyDoc1 = (filekey) => {
-    setDocument1(filekey);
-  };
-  const handleFileKeyDoc2 = (filekey) => {
-    setDocument2(filekey);
-  };
+  // const handleFileKeyDoc1 = (filekey) => {
+  //   console.log("Document ", filekey);
+
+  //   // setDocument1(filekey);
+  // };
+  // const handleFileKeyDoc2 = (filekey) => {
+  //   console.log("Document ", filekey);
+
+  //   // setDocument2(filekey);
+  // };
   const { data: doctorDetails, isLoading: doctorLoading } = useDoctorById(id);
   console.log("Doctor", doctorDetails);
   const { mutate, isLoading: editingLoader } = useEditDoctor();
@@ -49,13 +54,16 @@ function EditDoctorForm() {
     if (doctorDocuments?.length > 0) {
       setFile1({
         name: doctorDocuments[0]?.name,
-        id: doctorDocuments[0]?.id,
+        file: doctorDocuments[0]?.id,
       });
       setFile2({
         name: doctorDocuments[1]?.name,
-        id: doctorDocuments[1]?.id,
+        file: doctorDocuments[1]?.id,
       });
     }
+  }, [doctorDocuments]);
+
+  useEffect(() => {
     if (doctorDetails) {
       setFileURL(doctorDetails?.profile_pic);
       const specialisation = doctorDetails?.specialisations;
@@ -82,7 +90,7 @@ function EditDoctorForm() {
         about: doctorDetails?.about,
       });
     }
-  }, [doctorDetails, methods, doctorDocuments]);
+  }, [doctorDetails]);
 
   const onEditDoctor = async (data) => {
     if (data.accountNumber === data.verifyAccountnumber) {
@@ -110,10 +118,7 @@ function EditDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [
-          { name: "registration_proof", file: document1 },
-          { name: "degree_proof", file: document2 },
-        ],
+        documents: [file1, file2],
         about: data?.about,
       };
       console.log(doctorData);
@@ -415,7 +420,7 @@ function EditDoctorForm() {
               <div className="col-md-6">
                 <label className="pb-2">Registration Proof</label>
                 <UploadFiles
-                  handleFileKey={handleFileKeyDoc1}
+                  // handleFileKey={handleFileKeyDoc1}
                   fileDetails={file1}
                   setFileDetails={setFile1}
                 />
@@ -423,7 +428,7 @@ function EditDoctorForm() {
               <div className="col-md-6">
                 <label className="pb-2">Degree Proof</label>
                 <UploadFiles
-                  handleFileKey={handleFileKeyDoc2}
+                  // handleFileKey={handleFileKeyDoc2}
                   fileDetails={file2}
                   setFileDetails={setFile2}
                 />

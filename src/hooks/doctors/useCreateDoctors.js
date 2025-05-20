@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addDoctors } from "../../apis/doctors";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 export const useCreateDoctors = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const mutation = useMutation({
     mutationFn: addDoctors, // API function to create
@@ -16,7 +15,7 @@ export const useCreateDoctors = () => {
     onSuccess: (data) => {
       const message = data?.message || "Doctor added successfully";
       queryClient.invalidateQueries(["doctors"]);
-      navigate("/manage-doctors");
+      // navigate("/manage-doctors");
       toast.success(message, {
         position: "top-right",
         autoClose: 5000,

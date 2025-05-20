@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 
 function ChooseFile(props) {
   const { handleFileURL, fileURL } = props;
+  // useEffect(() => {
+  //   setFile(fileURL);
+  // }, [fileURL]);
+
   // const [loading, setLoading] = useState(false);
   const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB in bytes
   const handleButtonClick = () => {
@@ -30,6 +34,8 @@ function ChooseFile(props) {
             toast.success(message);
           },
         });
+        console.log("S3 URL ", response?.data?.url);
+        // setFile(response?.data?.url);
         handleFileURL(response?.data?.url);
       } catch (error) {
         handleFileURL("");

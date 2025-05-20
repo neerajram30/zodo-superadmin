@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 
 function UploadFiles(props) {
-  const { handleFileKey, fileDetails, setFileDetails } = props;
+  const { fileDetails, setFileDetails } = props;
   // const [fileDetails, setFileDetails] = useState(null);
-  console.log(handleFileKey);
+  // console.log(handleFileKey);
   const { mutate: deleteDocument, isLoading: deleteLoading } =
     useDeleteDocument();
   // const [fileurl, setFileurl] = useState("");
@@ -33,15 +33,15 @@ function UploadFiles(props) {
       });
       // setLoading(false);
       // setFilepreview(response?.data?.url);
-      console.log(response);
+      // console.log(response);
 
-      handleFileKey(response?.data?.key);
+      // handleFileKey(response?.data?.key);
       setFileDetails({
         name: response?.data?.filename,
-        id: response?.data?.key,
+        file: response?.data?.key,
       });
     } catch (error) {
-      handleFileKey("");
+      // handleFileKey("");
       // setFilepreview(null);
       // setFile(null);
       // setLoading(false);
@@ -54,7 +54,7 @@ function UploadFiles(props) {
     deleteDocument(id, {
       onSuccess: () => {
         setFileDetails(null);
-        handleFileKey("");
+        // handleFileKey("");
       },
     });
   };
@@ -83,7 +83,7 @@ function UploadFiles(props) {
                     </div>
 
                     <Link
-                      onClick={() => clearFile(fileDetails?.id)}
+                      onClick={() => clearFile(fileDetails?.file)}
                       className="ms-2"
                     >
                       <img src={cross_icon} alt="" />
@@ -101,7 +101,7 @@ function UploadFiles(props) {
   );
 }
 UploadFiles.propTypes = {
-  handleFileKey: PropTypes.func,
+  // handleFileKey: PropTypes.func,
   fileDetails: PropTypes.string,
   setFileDetails: PropTypes.func,
 };

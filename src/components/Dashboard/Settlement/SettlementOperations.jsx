@@ -39,7 +39,7 @@ function SettlementOperations(props) {
             </button>
           )}
           &nbsp;&nbsp;
-          { status !== "approved" && (
+          {status !== "active" && (
             <button
               type="submit"
               className="border-0 btn-primary btn-main-primary text-white ps-5 pe-5"

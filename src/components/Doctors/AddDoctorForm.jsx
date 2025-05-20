@@ -14,16 +14,14 @@ import TextArea from "../InputFields/TextArea";
 function AddDoctorForm() {
   const { data, isLoading } = useSpecialisationList();
   const [fileURL, setFileURL] = useState("");
-  const [document1, setDocument1] = useState("");
-  const [document2, setDocument2] = useState("");
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
-  const handleFileKeyDoc1 = (filekey) => {
-    setDocument1(filekey);
-  };
-  const handleFileKeyDoc2 = (filekey) => {
-    setDocument2(filekey);
-  };
+  // const handleFileKeyDoc1 = (filekey) => {
+  //   setDocument1(filekey);
+  // };
+  // const handleFileKeyDoc2 = (filekey) => {
+  //   setDocument2(filekey);
+  // };
   const handleFileURL = (url) => {
     setFileURL(url);
   };
@@ -63,13 +61,15 @@ function AddDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [
-          { name: "registration_proof", file: document1 },
-          { name: "degree_proof", file: document2 },
-        ],
+        documents: [file1, file2],
         about: data?.about,
       };
-      await mutate(doctorData, { onSuccess: () => methods.reset() });
+      await mutate(doctorData, {
+        onSuccess: () => {
+          methods.reset();
+          navigate('/manage-doctors')
+        },
+      });
     } else {
       const errorMessage = "Account number mismatch";
       toast.error(errorMessage, {
@@ -365,7 +365,7 @@ function AddDoctorForm() {
               <div className="col-md-6">
                 <label className="pb-2">Registration Proof</label>
                 <UploadFiles
-                  handleFileKey={handleFileKeyDoc1}
+                  // handleFileKey={handleFileKeyDoc1}
                   setFileDetails={setFile1}
                   fileDetails={file1}
                 />
@@ -374,7 +374,7 @@ function AddDoctorForm() {
                 <label className="pb-2">Degree Proof</label>
                 <UploadFiles
                   fileDetails={file2}
-                  handleFileKey={handleFileKeyDoc2}
+                  // handleFileKey={handleFileKeyDoc2}
                   setFileDetails={setFile2}
                 />
               </div>
