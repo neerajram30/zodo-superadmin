@@ -3,7 +3,7 @@ import { useUploadFile } from "../../hooks/useUploadFile";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import ComponentLoader from "../loadings/ComponentLoader";
-import { cross_icon, pdf_icon } from "../imagepath";
+// import { cross_icon, pdf_icon } from "../imagepath";
 import { Link } from "react-router-dom";
 import { useRemoveDocuments } from "../../hooks/useRemoveDocument";
 
@@ -73,8 +73,46 @@ function UploadFiles(props) {
                 </p>
               </div>
             ) : (
-              <div className="d-flex justify-content-center">
-                <div className="d-flex align-items-center w-100">
+              // <div className="d-flex justify-content-center">
+              //   <div className="d-flex align-items-center w-100">
+              //     <div className="d-flex align-items-center justify-content-center">
+              //       <img src={pdf_icon} alt="pdf_icon" />
+              //       <div className="d-flex flex-column justify-content-center file-details ms-2 upload-document-name">
+              //         <h6>{fileDetails?.name}</h6>
+              //       </div>
+
+              //       <Link
+              //         onClick={() => clearFile(fileDetails?.file)}
+              //         className="ms-2"
+              //       >
+              //         <img src={cross_icon} alt="" />
+              //       </Link>
+              //     </div>
+              //   </div>
+              // </div>
+              <div className="d-flex justify-content-center w-75">
+                {/* <div className="d-flex align-items-center justify-content-center"> */}
+                <div className="d-flex border border-success bg-white position-relative">
+                  <div className="pdf-btn">
+                    <img src={pdf_icon} alt="pdf_icon" />
+                  </div>
+                  <div className="preview-file-text">
+                    <h6>{fileDetails?.name}</h6>
+                  </div>
+                  <Link
+                    to="#"
+                    className="btn-icon logo-hide-btn position-absolute upload-close-btn"
+                  >
+                    <i
+                      className="feather-x-circle crossmark"
+                      onClick={() => clearFile(fileDetails.file)}
+                    >
+                      <FeatherIcon icon="x-circle" />
+                    </i>
+                  </Link>
+                </div>
+                {/* </div> */}
+                {/* <div className="d-flex align-items-center w-100">
                   <div className="d-flex align-items-center justify-content-center">
                     <img src={pdf_icon} alt="pdf_icon" />
                     <div className="d-flex flex-column justify-content-center file-details ms-2 upload-document-name">
@@ -88,7 +126,7 @@ function UploadFiles(props) {
                       <img src={cross_icon} alt="" />
                     </Link>
                   </div>
-                </div>
+                </div> */}
               </div>
             )
           ) : (
