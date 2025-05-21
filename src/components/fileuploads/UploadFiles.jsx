@@ -3,9 +3,10 @@ import { useUploadFile } from "../../hooks/useUploadFile";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import ComponentLoader from "../loadings/ComponentLoader";
-import { cross_icon, pdf_icon } from "../imagepath";
+import { pdf_icon } from "../imagepath";
 import { Link } from "react-router-dom";
 import { useRemoveDocuments } from "../../hooks/useRemoveDocument";
+import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 
 function UploadFiles(props) {
   const { fileDetails, setFileDetails } = props;
@@ -73,11 +74,11 @@ function UploadFiles(props) {
                 </p>
               </div>
             ) : (
-              <div className="d-flex justify-content-center w-75">
+              <div className="d-flex justify-content-center">
                 {/* <div className="d-flex align-items-center justify-content-center"> */}
-                <div className="d-flex border border-success bg-white position-relative">
-                  <div className="pdf-btn">
-                    <img src={pdf_icon} alt="pdf_icon" />
+                <div className="bg-white position-relative preview-container text-center">
+                  <div className="pdf-btn pt-2 pb-2">
+                    <img src={pdf_icon} alt="pdf_icon" width={50} height={50}/>
                   </div>
                   <div className="preview-file-text">
                     <h6>{fileDetails?.name}</h6>

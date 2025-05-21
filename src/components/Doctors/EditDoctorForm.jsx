@@ -5,7 +5,7 @@ import FullscreenLoader from "../loadings/FullscreenLoader";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import SelectField from "../InputFields/SelectField";
-import UploadFiles from "../Hospitals/UploadFiles";
+import UploadFiles from "../fileuploads/UploadFiles";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDoctorById } from "../../hooks/doctors/useDoctorById";
 import { useSpecialisationList } from "../../hooks/specialisation/useSpecialisationList";
@@ -54,11 +54,11 @@ function EditDoctorForm() {
     if (doctorDocuments?.length > 0) {
       setFile1({
         name: doctorDocuments[0]?.name,
-        file: doctorDocuments[0]?.id,
+        file: doctorDocuments[0]?.key,
       });
       setFile2({
         name: doctorDocuments[1]?.name,
-        file: doctorDocuments[1]?.id,
+        file: doctorDocuments[1]?.key,
       });
     }
   }, [doctorDocuments]);

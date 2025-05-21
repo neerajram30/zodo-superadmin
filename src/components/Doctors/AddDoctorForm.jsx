@@ -6,7 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import Closebtn from "../assests/Closebtn";
 import ChooseFile from "../Hospitals/ChooseFile";
 import InputField from "../InputFields/InputField";
-import UploadFiles from "../Hospitals/UploadFiles";
+import UploadFiles from "../fileuploads/UploadFiles";
 import FullscreenLoader from "../loadings/FullscreenLoader";
 import SelectField from "../InputFields/SelectField";
 import { toast } from "react-toastify";

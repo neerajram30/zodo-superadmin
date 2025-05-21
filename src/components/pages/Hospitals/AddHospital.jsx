@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Layout from "../../layout/Layout";
 import ChooseFile from "../../Hospitals/ChooseFile";
-import UploadFiles from "../../Hospitals/UploadFiles";
 import { useNavigate } from "react-router-dom";
 import FasttagToggle from "../../FasttagRevenue/FasttagToggle";
 import Closebtn from "../../assests/Closebtn";
@@ -15,6 +14,7 @@ import Checkbox from "../../InputFields/Checkbox";
 import { toast } from "react-toastify";
 import { useGetDistrict } from "../../../hooks/useGetDistrict";
 import SelectField from "../../InputFields/SelectField";
+import UploadFiles from "../../fileuploads/UploadFiles";
 
 function AddHospital() {
   const [toggleFasttag, setToggleFasttag] = useState(false);

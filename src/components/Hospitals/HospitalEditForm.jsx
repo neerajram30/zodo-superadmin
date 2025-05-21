@@ -10,10 +10,10 @@ import ChooseFile from "./ChooseFile";
 import InputField from "../InputFields/InputField";
 import FasttagToggle from "../FasttagRevenue/FasttagToggle";
 import TextArea from "../InputFields/TextArea";
-import UploadFiles from "./UploadFiles";
 import SelectField from "../InputFields/SelectField";
 import { toast } from "react-toastify";
 import { useHospitalDocuments } from "../../hooks/hospitals/useHospitalDocuments";
+import UploadFiles from "../fileuploads/UploadFiles";
 
 function HospitalEditForm() {
   const { id } = useParams();
