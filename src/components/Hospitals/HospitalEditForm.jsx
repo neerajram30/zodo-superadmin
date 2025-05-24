@@ -58,15 +58,18 @@ function HospitalEditForm() {
     if (hospitalDocuments?.length > 0) {
       setFile1({
         name: hospitalDocuments[0]?.name,
-        file: hospitalDocuments[0]?.id,
+        key: hospitalDocuments[0]?.key,
+        id: hospitalDocuments[0]?.id,
       });
       setFile2({
         name: hospitalDocuments[1]?.name,
-        file: hospitalDocuments[1]?.id,
+        key: hospitalDocuments[1]?.key,
+        id: hospitalDocuments[1]?.id,
       });
       setFile3({
         name: hospitalDocuments[2]?.name,
-        file: hospitalDocuments[2]?.id,
+        key: hospitalDocuments[2]?.key,
+        id: hospitalDocuments[2]?.id,
       });
     }
     if (hospitalDetails) {
@@ -111,13 +114,25 @@ function HospitalEditForm() {
       });
     }
   }, [hospitalDetails, methods, hospitalDocuments]);
-  
+
   const handleFileURL = (fileURLResponse) => {
     setFileUrl(fileURLResponse);
   };
 
   const onEditHospital = async (data) => {
     if (data.accountNumber === data.verifyAccountnumber) {
+      const file1Details = {
+        name: file1?.name,
+        file: file1?.key || file1?.file,
+      };
+      const file2Details = {
+        name: file2?.name,
+        file: file2?.key || file2?.file,
+      };
+      const file3Details = {
+        name: file3?.name,
+        file: file3?.key || file3?.file,
+      };
       const hospital = {
         name: data?.hospitalName,
         logo: fileURL,
@@ -158,7 +173,7 @@ function HospitalEditForm() {
           website: data?.website,
         },
         gst: data?.gstnumber,
-        documents: [file1, file2, file3],
+        documents: [file1Details, file2Details, file3Details],
       };
       // console.log("hospital !!", hospital);
       // console.log(mutate);

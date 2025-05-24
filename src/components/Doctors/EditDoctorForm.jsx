@@ -19,12 +19,12 @@ function EditDoctorForm() {
   const { data: doctorDocuments, isLoading: documentLoading } =
     useDoctorsDocument(id);
   const [fileURL, setFileURL] = useState("");
-  console.log("Doctor profile url >>>>", fileURL);
   const handleFileURL = (url) => {
     setFileURL(url);
   };
-  const [file1, setFile1] = useState(null);
-  const [file2, setFile2] = useState(null);
+  const [registrationProof, setRegistrationProof] = useState(null);
+  const [degreeProof, setDegreeProof] = useState(null);
+  // const [fileDetails, setFileDetails] = useState({});
   // const [document1, setDocument1] = useState("");
   // const [document2, setDocument2] = useState("");
 
@@ -39,7 +39,6 @@ function EditDoctorForm() {
   //   // setDocument2(filekey);
   // };
   const { data: doctorDetails, isLoading: doctorLoading } = useDoctorById(id);
-  console.log("Doctor", doctorDetails);
   const { mutate, isLoading: editingLoader } = useEditDoctor();
   const methods = useForm();
   const navigate = useNavigate();
@@ -51,17 +50,22 @@ function EditDoctorForm() {
     }));
 
   useEffect(() => {
+    console.log("doctorDocuments", doctorDocuments);
     if (doctorDocuments?.length > 0) {
-      setFile1({
+      // if (doctorDocuments?.length === 2) {
+      setRegistrationProof({
         name: doctorDocuments[0]?.name,
-        file: doctorDocuments[0]?.key,
+        id: doctorDocuments[0]?.id,
+        key: doctorDocuments[0]?.key,
       });
-      setFile2({
+      setDegreeProof({
         name: doctorDocuments[1]?.name,
-        file: doctorDocuments[1]?.key,
+        id: doctorDocuments[1]?.id,
+        key: doctorDocuments[1]?.key,
       });
     }
   }, [doctorDocuments]);
+  console.log("Degree proof", degreeProof);
 
   useEffect(() => {
     if (doctorDetails) {
@@ -95,6 +99,14 @@ function EditDoctorForm() {
   const onEditDoctor = async (data) => {
     if (data.accountNumber === data.verifyAccountnumber) {
       const specifications = data["specialisation"].map((item) => item.value);
+      const registrationDetails = {
+        name: registrationProof.name,
+        file: registrationProof?.key || registrationProof?.file,
+      };
+      const degreeDetails = {
+        name: degreeProof.name,
+        file: degreeProof?.key || degreeProof?.file,
+      };
       const doctorData = {
         name: data["doctorName"],
         email: data["doctorEmail"],
@@ -118,10 +130,9 @@ function EditDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [file1, file2],
+        documents: [registrationDetails, degreeDetails],
         about: data?.about,
       };
-      console.log(doctorData);
       await mutate({ id: id, data: doctorData });
     } else {
       const errorMessage = "Account number mismatch";
@@ -275,65 +286,6 @@ function EditDoctorForm() {
             </div>
           </div>
 
-          {/* <h4 className="card-title">Address Locations</h4>
-                    <div className="row">
-                      <div className="col-md-4">
-                        <div className="form-group">
-                          <InputField
-                            name="house"
-                            // validation={{ required: "House name is required" }}
-                            placeholder="House / Building / Appartment"
-                            type="text"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-8">
-                        <div className="form-group">
-                          <InputField
-                            name="street"
-                            // validation={{ required: "Street is required" }}
-                            placeholder="Street"
-                            type="text"
-                          />
-                        </div>
-                      </div>
-                    </div>
-    
-                    <div className="form-group">
-                      <TextArea
-                        name="address"
-                        label=""
-                        validation={{ required: "Address is required" }}
-                        placeholder="Enter Address"
-                      />
-                    </div>
-    
-                    <div className="row">
-                      <div className="col-md-7">
-                        <div className="form-group">
-                          <SelectField
-                            options={districtOptions || []}
-                            label=""
-                            isLoading={districtLoading}
-                            name="district"
-                            isMultiSelect={false}
-                            placeholder="Select District"
-                            validationMessage="District is required"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-md-5">
-                        <div className="form-group">
-                          <InputField
-                            name="state"
-                            validation={{ required: "State is required" }}
-                            placeholder="Enter State"
-                            type="text"
-                          />
-                        </div>
-                      </div>
-                    </div> */}
-
           <h4 className="card-title">Add Bank Account</h4>
           <div className="row">
             <div className="col-md-6">
@@ -421,16 +373,16 @@ function EditDoctorForm() {
                 <label className="pb-2">Registration Proof</label>
                 <UploadFiles
                   // handleFileKey={handleFileKeyDoc1}
-                  fileDetails={file1}
-                  setFileDetails={setFile1}
+                  fileDetails={registrationProof}
+                  setFileDetails={setRegistrationProof}
                 />
               </div>
               <div className="col-md-6">
                 <label className="pb-2">Degree Proof</label>
                 <UploadFiles
                   // handleFileKey={handleFileKeyDoc2}
-                  fileDetails={file2}
-                  setFileDetails={setFile2}
+                  fileDetails={degreeProof}
+                  setFileDetails={setDegreeProof}
                 />
               </div>
             </div>

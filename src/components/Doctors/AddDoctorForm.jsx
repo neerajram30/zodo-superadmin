@@ -14,14 +14,8 @@ import TextArea from "../InputFields/TextArea";
 function AddDoctorForm() {
   const { data, isLoading } = useSpecialisationList();
   const [fileURL, setFileURL] = useState("");
-  const [file1, setFile1] = useState(null);
-  const [file2, setFile2] = useState(null);
-  // const handleFileKeyDoc1 = (filekey) => {
-  //   setDocument1(filekey);
-  // };
-  // const handleFileKeyDoc2 = (filekey) => {
-  //   setDocument2(filekey);
-  // };
+  const [registrationProof, setRegistrationProof] = useState(null);
+  const [degreeProof, setDegreeProof] = useState(null);
   const handleFileURL = (url) => {
     setFileURL(url);
   };
@@ -38,6 +32,14 @@ function AddDoctorForm() {
   const onCreateDoctor = async (data) => {
     const specifications = data["specialisation"].map((item) => item.value);
     if (data.accountNumber === data.verifyAccountnumber) {
+      const registrationDetails = {
+        name: registrationProof.name,
+        file: registrationProof?.key || registrationProof?.file,
+      };
+      const degreeDetails = {
+        name: degreeProof.name,
+        file: degreeProof?.key || degreeProof?.file,
+      };
       const doctorData = {
         name: data["doctorName"],
         email: data["doctorEmail"],
@@ -61,13 +63,13 @@ function AddDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [file1, file2],
+        documents: [registrationDetails, degreeDetails],
         about: data?.about,
       };
       await mutate(doctorData, {
         onSuccess: () => {
           methods.reset();
-          navigate('/manage-doctors')
+          navigate("/manage-doctors");
         },
       });
     } else {
@@ -366,16 +368,16 @@ function AddDoctorForm() {
                 <label className="pb-2">Registration Proof</label>
                 <UploadFiles
                   // handleFileKey={handleFileKeyDoc1}
-                  setFileDetails={setFile1}
-                  fileDetails={file1}
+                  setFileDetails={setRegistrationProof}
+                  fileDetails={registrationProof}
                 />
               </div>
               <div className="col-md-6">
                 <label className="pb-2">Degree Proof</label>
                 <UploadFiles
-                  fileDetails={file2}
+                  fileDetails={degreeProof}
                   // handleFileKey={handleFileKeyDoc2}
-                  setFileDetails={setFile2}
+                  setFileDetails={setDegreeProof}
                 />
               </div>
             </div>

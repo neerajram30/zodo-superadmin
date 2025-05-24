@@ -1,3 +1,5 @@
+import React from 'react'
+import Dropzone from 'react-dropzone'
 import Dropzone from "react-dropzone";
 import { useUploadFile } from "../../hooks/useUploadFile";
 import { toast } from "react-toastify";
@@ -7,76 +9,62 @@ import { pdf_icon } from "../imagepath";
 import { Link } from "react-router-dom";
 import { useRemoveDocuments } from "../../hooks/useRemoveDocument";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
-import { useDeleteDocument } from "../../hooks/useDeleteDocument";
-
-function UploadFiles(props) {
-  const { fileDetails, setFileDetails } = props;
+function UploadFileEdit() {
+const { fileDetails, setFileDetails } = props;
   const { mutate: removeDocument, isLoading: removeLoading } =
     useRemoveDocuments();
-  const { mutate: deleteDocument, isLoading: deleteLoading } =
-    useDeleteDocument();
   // const [fileurl, setFileurl] = useState("");
   // const [loading, setLoading] = useState(false);
 
   const { mutate: uploadDocument, isLoading: documentLoading } =
     useUploadFile();
-  console.log("File details ", fileDetails);
-
   const handleFile = async (acceptedFiles) => {
     const file = acceptedFiles[0];
     const formData = new FormData();
     formData.append("file", file);
     // setLoading(true);
     try {
-      uploadDocument(formData, {
-        onSuccess: (response) => {
-          console.log("upload response ", response);
+      const response = await uploadDocument(formData, {
+        onSuccess: () => {
           const message = "File uploaded successfully";
           toast.success(message);
-          setFileDetails({
-            ...fileDetails,
-            name: response?.data?.filename,
-            id: null,
-            key: response?.data?.key,
-          });
           // setLoading(false);
         },
       });
+      // setLoading(false);
+      // setFilepreview(response?.data?.url);
+      // console.log(response);
+
+      // handleFileKey(response?.data?.key);
+      setFileDetails({
+        name: response?.data?.filename,
+        file: response?.data?.key,
+      });
     } catch (error) {
+      // handleFileKey("");
+      // setFilepreview(null);
+      // setFile(null);
+      // setLoading(false);
       setFileDetails(null);
       const message = "File uploaded failed";
       toast.error(message);
     }
   };
-
-  const clearFile = (id, key) => {
-    if (id) {
-      deleteDocument(id, {
-        onSuccess: () => {
-          setFileDetails(null);
-          setFileDetails({
-            name: null,
-            id: null,
-            key: null,
-          });
-        },
-      });
-    } else if (key) {
-      const data = { fileId: key };
-      removeDocument(data, {
-        onSuccess: () => {
-          setFileDetails(null);
-          // handleFileKey("");
-        },
-      });
-    }
+  const clearFile = (id) => {
+    const data = { fileId: id };
+    removeDocument(data, {
+      onSuccess: () => {
+        setFileDetails(null);
+        // handleFileKey("");
+      },
+    });
   };
-
+  console.log("File details", fileDetails);
   return (
     <Dropzone onDrop={handleFile}>
       {({ getRootProps, getInputProps }) => (
         <section className="hospital-file-upload">
-          {!documentLoading || removeLoading || deleteLoading ? (
+          {!documentLoading || removeLoading ? (
             !fileDetails?.name ? (
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
@@ -90,7 +78,7 @@ function UploadFiles(props) {
                 {/* <div className="d-flex align-items-center justify-content-center"> */}
                 <div className="bg-white position-relative preview-container text-center">
                   <div className="pdf-btn pt-2 pb-2">
-                    <img src={pdf_icon} alt="pdf_icon" width={50} height={50} />
+                    <img src={pdf_icon} alt="pdf_icon" width={50} height={50}/>
                   </div>
                   <div className="preview-file-text">
                     <h6>{fileDetails?.name}</h6>
@@ -101,7 +89,7 @@ function UploadFiles(props) {
                   >
                     <i
                       className="feather-x-circle crossmark"
-                      onClick={() => clearFile(fileDetails.id, fileDetails.key)}
+                      onClick={() => clearFile(fileDetails.file)}
                     >
                       <FeatherIcon icon="x-circle" />
                     </i>
@@ -131,11 +119,13 @@ function UploadFiles(props) {
         </section>
       )}
     </Dropzone>
-  );
+  )
 }
-UploadFiles.propTypes = {
+
+UploadFileEdit.propTypes = {
   // handleFileKey: PropTypes.func,
   fileDetails: PropTypes.string,
   setFileDetails: PropTypes.func,
 };
-export default UploadFiles;
+
+export default UploadFileEdit

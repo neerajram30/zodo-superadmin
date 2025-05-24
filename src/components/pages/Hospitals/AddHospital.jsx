@@ -61,6 +61,18 @@ function AddHospital() {
   };
   const onCreateHospital = async (data) => {
     if (data.accountNumber === data.verifyAccountnumber) {
+      const file1Details = {
+        name: file1?.name,
+        file: file1?.key || file1?.file,
+      };
+      const file2Details = {
+        name: file2?.name,
+        file: file2?.key || file2?.file,
+      };
+      const file3Details = {
+        name: file3?.name,
+        file: file3?.key || file3?.file,
+      };
       const hospital = {
         name: data?.hospitalName,
         logo: profilePic,
@@ -106,7 +118,7 @@ function AddHospital() {
           website: data?.website,
         },
         gst: data?.gstnumber,
-        documents: [file1, file2, file3],
+        documents: [file1Details, file2Details, file3Details],
       };
       await mutate(hospital);
       // methods.reset();
@@ -147,7 +159,10 @@ function AddHospital() {
               <form onSubmit={methods.handleSubmit(onCreateHospital)}>
                 <div className="row mt-4">
                   <div className="col-md-8 ms-md-3">
-                    <ChooseFile handleFileURL={handleFileURL} fileURL={profilePic}/>
+                    <ChooseFile
+                      handleFileURL={handleFileURL}
+                      fileURL={profilePic}
+                    />
                   </div>
                 </div>
                 <div className="w-100 mt-4 mt-md-2">

@@ -11944,8 +11944,10 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   right: -10px;
 }
 .preview-container{
-  width: 35%;
-  height: 90%;
+  width: 150px;
+  height: 100px;
+  /* width: 35%; */
+  /* height: 90%; */
   /* overflow: hidden; */
 }
 .preview-file-text h6{
