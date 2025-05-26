@@ -1,23 +1,25 @@
 import React from "react";
 import OverViewCard from "../../Hospitals/OverViewCard";
+import PropTypes from "prop-types";
 
-function DoctorsOverview() {
+function DoctorsOverview(props) {
+  const { analytics } = props;
   const revenueOverview = [
     {
       id: 1,
-      amount: "$ 20,000",
+      amount: `$ ${analytics?.settlement?.requested || 0}`,
       status: "No Dues",
       operation: "Settlement",
     },
     {
       id: 2,
-      amount: "$ 20,000",
+      amount: `$ ${analytics?.settlement?.requested || 0}`,
       status: "No Dues",
-      operation: "Total C",
+      operation: "Requested Settlements",
     },
     {
       id: 3,
-      amount: "$ 2000",
+      amount: `$ ${analytics?.settlement?.total || 0}`,
       status: "No Dues",
       operation: "Total Balance",
     },
@@ -71,5 +73,10 @@ function DoctorsOverview() {
     </div>
   );
 }
+
+// props validation
+DoctorsOverview.propTypes = {
+  analytics: PropTypes.object,
+};
 
 export default DoctorsOverview;

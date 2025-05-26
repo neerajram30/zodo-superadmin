@@ -1,38 +1,41 @@
-import React from "react";
 import OverViewCard from "./OverViewCard";
+import PropTypes from "prop-types";
 
-function Overview() {
+function Overview(props) {
+  const { analytics } = props;
+  console.log("Hospital Analytics Overview", analytics);
+
   const revenueOverview = [
     {
       id: 1,
-      amount: "$ 20,000",
+      amount: `$ ${analytics?.settlement?.total || 0}`,
       status: "No Dues",
-      operation: "Settlement",
+      operation: "Total Settlement",
     },
     {
       id: 2,
-      amount: "$ 20,000",
+      amount: `$ ${analytics?.settlement?.requested || 0}`,
       status: "No Dues",
-      operation: "Total C",
+      operation: "Requested Settlements",
     },
     {
       id: 3,
-      amount: "$ 2000",
+      amount: `$ ${analytics?.settlement?.pending || 0}`,
       status: "No Dues",
-      operation: "Total Balance",
+      operation: "Pending Settlements",
     },
   ];
 
   const tagDetails = [
     {
       id: 1,
-      amount: "10",
+      amount: analytics?.fastTag?.count || 0,
       status: "",
       operation: "Total Fast Tag Issued",
     },
     {
       id: 2,
-      amount: "$ 20,000",
+      amount: `$ ${analytics?.fastTag?.revenue || 0}`,
       status: "No Dues",
       operation: "Fast Tag Revenue",
     },
@@ -60,5 +63,9 @@ function Overview() {
     </div>
   );
 }
+// props validation
+Overview.propTypes = {
+  analytics: PropTypes.object.isRequired,
+};
 
 export default Overview;

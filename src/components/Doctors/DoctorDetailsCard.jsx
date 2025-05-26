@@ -22,6 +22,7 @@ import TransparentTabs from "../tabs/TransparentTabs";
 import { useDoctorsDocument } from "../../hooks/doctors/useDoctorsDocument";
 import ComponentLoader from "../loadings/ComponentLoader";
 import StatusButton from "../assests/StatusButton";
+import { useDoctorAnalytics } from "../../hooks/doctors/useDoctorsAnalytics";
 
 function DoctorDetailsCard() {
   const navigate = useNavigate();
@@ -33,23 +34,28 @@ function DoctorDetailsCard() {
   const [disable, setdisable] = useState(false);
   const { data: doctorDocuments, isLoading: documentLoading } =
     useDoctorsDocument(id);
+  const { data: doctorAnalytics, isLoading: analyticsLoading } =
+    useDoctorAnalytics(id);
+
+  console.log("DOCTOR ANALYTICS",doctorAnalytics);
+
   const tabData = [
     {
       id: "dr_overview",
       title: "Overview",
-      content: <DoctorsOverview />,
+      content: <DoctorsOverview analytics={doctorAnalytics}/>,
       link: "overview",
     },
     {
       id: "dr_finance",
       title: "Finance",
-      content: <DoctorsFinance />,
+      content: <DoctorsFinance analytics={doctorAnalytics}/>,
       link: "finance",
     },
     {
       id: "dr_bookings",
       title: "Total Bookings",
-      content: <DoctorsBookings />,
+      content: <DoctorsBookings analytics={doctorAnalytics}/>,
       link: "total-bookings",
     },
   ];
@@ -188,8 +194,8 @@ function DoctorDetailsCard() {
             {/* <button className="btn hospital-draft-btn text-primary w-75 mt-1">
               {data?.status ?? "Inactive"}
             </button> */}
-              
-            <StatusButton status={data?.status ?? "Inactive"}/>
+
+            <StatusButton status={data?.status ?? "Inactive"} />
           </div>
         </div>
         <div className="row mt-3">
@@ -315,7 +321,7 @@ function DoctorDetailsCard() {
         )}
       </div>
       <TransparentTabs tabData={tabData} />
-      {isLoading && <FullscreenLoader />}
+      {isLoading || (analyticsLoading && <FullscreenLoader />)}
       <ConfirmDelete show={show} setShow={setShow} title="Doctors" />
       <ToggleModal
         show={disableshow}

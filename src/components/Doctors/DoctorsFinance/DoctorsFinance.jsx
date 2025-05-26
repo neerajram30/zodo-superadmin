@@ -4,7 +4,9 @@ import SearchDateTable from "../../Tables/SearchDateTable";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../../configs/formatDate";
 import { useAllSettlements } from "../../../hooks/settlements/useAllSettlements";
-function DoctorsFinance() {
+import PropTypes from "prop-types";
+function DoctorsFinance(props) {
+  const { analytics } = props;
   const { id } = useParams();
   const [query, setQuery] = useState("");
   const inputQuery = query ? `doctor_id=${id}&${query}` : `doctor_id=${id}`;
@@ -17,19 +19,19 @@ function DoctorsFinance() {
   const financeData = [
     {
       id: 1,
-      amount: "$ 20,000",
+      amount: `$ ${analytics?.settlement?.requested || 0}`,
       status: "No Dues",
       operation: "Settlement",
     },
     {
       id: 2,
-      amount: "$ 20,000",
+      amount: `$ 20,000`,
       status: "No Dues",
       operation: "Total Revenue In Month",
     },
     {
       id: 3,
-      amount: "$ 2000",
+      amount: `$ ${analytics?.settlement?.total || 0}`,
       status: "No Dues",
       operation: "Total Balance",
     },
@@ -179,5 +181,10 @@ function DoctorsFinance() {
     </div>
   );
 }
+
+// props validation
+DoctorsFinance.propTypes = {
+  analytics: PropTypes.object.isRequired,
+};
 
 export default DoctorsFinance;

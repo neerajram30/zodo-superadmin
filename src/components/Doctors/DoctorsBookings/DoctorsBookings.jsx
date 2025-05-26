@@ -5,8 +5,10 @@ import SearchDateTable from "../../Tables/SearchDateTable";
 // import { formatDate } from "../../configs/formatDate";
 import { useState } from "react";
 import { getDateFromIso } from "../../configs/getDateFromISO";
+import PropTypes from "prop-types";
 
-function DoctorsBookings() {
+function DoctorsBookings(props) {
+  const { analytics } = props;
   const { id } = useParams();
   const [query, setQuery] = useState("");
 
@@ -17,11 +19,12 @@ function DoctorsBookings() {
 
   const { data: appointments, isLoading } = useDoctorAppointments(id);
   console.log("Data >", appointments);
-
+  const completed_count = analytics?.booking?.count_completed || 0;
+  const remaining_count = analytics?.booking?.count_remaining || 0;
   const bookinsDetails = [
     {
       id: 1,
-      bookings: "12,000",
+      bookings: completed_count + remaining_count,
       dueStatus: "",
       operation: "Total Bookings",
     },
@@ -118,5 +121,10 @@ function DoctorsBookings() {
     </div>
   );
 }
+
+// props validation
+DoctorsBookings.propTypes = {  
+  analytics: PropTypes.object.isRequired,
+};
 
 export default DoctorsBookings;

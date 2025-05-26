@@ -22,6 +22,7 @@ import FullscreenLoader from "../loadings/FullscreenLoader";
 import { useChangeHospitalStatus } from "../../hooks/hospitals/useChangeHospitalStatus";
 import TransparentTabs from "../tabs/TransparentTabs";
 import StatusButton from "../assests/StatusButton";
+import { useHospitalAnalytics } from "../../hooks/hospitals/useHospitalAnalytics";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
@@ -33,11 +34,13 @@ function HospitalDetailsCard(props) {
   const [disable, setdisable] = useState(false);
   // const { mutate, isLoading } = useEditHostpital();
   const { mutate, isLoading } = useChangeHospitalStatus();
+  const { data: hospitalAnalytics, isLoading: analyticsLoading } =
+    useHospitalAnalytics(id);
   const tabData = [
     {
       id: "overview",
       title: "Overview",
-      content: <Overview />,
+      content: <Overview analytics={hospitalAnalytics} />,
       link: "overview",
     },
     {
@@ -46,7 +49,7 @@ function HospitalDetailsCard(props) {
       content: <Department hospitalId={id} />,
       link: "department",
     },
-    { id: "finance", title: "Finance", content: <Finance />, link: "finance" },
+    { id: "finance", title: "Finance", content: <Finance analytics={hospitalAnalytics}/>, link: "finance" },
     {
       id: "total-bookings",
       title: "Total Bookings",
@@ -238,9 +241,6 @@ function HospitalDetailsCard(props) {
                   {hospitalDetails?.gst}
                 </span>
               </h6>
-              {/* <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
-                {hospitalDetails?.status}
-              </button> */}
               <StatusButton status={hospitalDetails?.status} />
             </div>
           </div>
@@ -376,7 +376,7 @@ function HospitalDetailsCard(props) {
           isLoading={isLoading}
           title="Hospital"
         />
-        {isLoading && <FullscreenLoader />}
+        {isLoading || (analyticsLoading && <FullscreenLoader />)}
       </div>
     )
   );

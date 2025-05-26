@@ -5,7 +5,9 @@ import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettl
 import { useState } from "react";
 import SearchDateTable from "../Tables/SearchDateTable";
 import { formatDate } from "fullcalendar/index.js";
-function Finance() {
+import PropTypes from "prop-types";
+function Finance(props) {
+  const { analytics } = props;
   const { id } = useParams();
   const [query, setQuery] = useState("");
   const [selectedItemsList, setSelecteditemsList] = useState([]);
@@ -16,24 +18,24 @@ function Finance() {
 
   const { data: settlements, isLoading } = useHospitalSettlements(id, query);
   const financeData = [
-    {
-      id: 1,
-      amount: "$ 20,000",
-      status: "No Dues",
-      operation: "Settlement",
-    },
-    {
-      id: 2,
-      amount: "$ 20,000",
-      status: "No Dues",
-      operation: "Total Revenue In Month",
-    },
-    {
-      id: 3,
-      amount: "$ 2000",
-      status: "No Dues",
-      operation: "Total Balance",
-    },
+    // {
+    //   id: 1,
+    //   amount: "$ 20,000",
+    //   status: "No Dues",
+    //   operation: "Settlement",
+    // },
+    // {
+    //   id: 2,
+    //   amount: "$ 20,000",
+    //   status: "No Dues",
+    //   operation: "Total Revenue In Month",
+    // },
+    // {
+    //   id: 3,
+    //   amount: "$ 2000",
+    //   status: "No Dues",
+    //   operation: "Total Balance",
+    // },
     {
       id: 4,
       amount: "20%",
@@ -48,7 +50,7 @@ function Finance() {
     },
     {
       id: 6,
-      amount: "$ 20,000",
+      amount: `$ ${analytics?.fastag?.revenue || 0}`,
       status: "No Dues",
       operation: "Fast Tag Revenue",
     },
@@ -128,7 +130,7 @@ function Finance() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 20,000</h6>
+              <h6>$ {analytics?.settlement?.requested || 0}</h6>
               <p>
                 <span className="delete-badge status-orange">
                   REQUESTED AMOUNT
@@ -154,7 +156,7 @@ function Finance() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card pt-5">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 0</h6>
+              <h6>$ {analytics?.settlement?.pending || 0}</h6>
               <p>
                 <span className="text-danger custom-badge status-red">
                   NO DUES
@@ -185,7 +187,7 @@ function Finance() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 20,000</h6>
+              <h6>$ {analytics?.settlement?.total || 0}</h6>
               <p>
                 <span className="passive-view">No Dues</span>
               </p>
@@ -222,5 +224,10 @@ function Finance() {
     </div>
   );
 }
+
+// props validation
+Finance.propTypes = {
+  analytics: PropTypes.object.isRequired,
+};
 
 export default Finance;
