@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { dashboard, logout_01, menuicon08 } from "./imagepath";
+import { dashboard, logout_01, menuicon08, menuicon09, menuicon16 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
 import { useAuth } from "../hooks/auth/useAuth";
 
@@ -136,7 +136,7 @@ const Sidebar = (props) => {
                   to="/finance"
                 >
                   <span className="menu-side">
-                    <img src={menuicon08} alt="" />
+                    <img src={menuicon09} alt="" />
                   </span>{" "}
                   <span> Finance </span>
                 </Link>
@@ -151,7 +151,7 @@ const Sidebar = (props) => {
                   to="/app-manage"
                 >
                   <span className="menu-side">
-                    <img src={menuicon08} alt="" />
+                    <img src={menuicon16} alt="" />
                   </span>{" "}
                   <span> App Manage </span>
                 </Link>

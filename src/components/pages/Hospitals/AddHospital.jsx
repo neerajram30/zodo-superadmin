@@ -210,7 +210,7 @@ function AddHospital() {
                         name="website"
                         label="Hospital Website"
                         // validation={{ required: "Hospital Website is required" }}
-                        placeholder="Enter hospital website"
+                        // placeholder="Enter hospital website"
                         type="text"
                       />
                     </div>

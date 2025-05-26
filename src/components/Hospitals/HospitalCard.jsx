@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { right_chevron } from "../imagepath";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import ImageBox from "../assests/ImageBox";
 
 function HospitalCard(props) {
   const { hospitalData, hospitalId } = props;
@@ -10,8 +11,7 @@ function HospitalCard(props) {
   const handelClick = () => {
     queryClient.invalidateQueries(["departments", hospitalId]);
     navigate(`/manage-hospitals/${hospitalId}`);
-  }
-
+  };
 
   return (
     <div className="card invoices-grid-card w-100" key={hospitalId}>
@@ -19,7 +19,14 @@ function HospitalCard(props) {
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={hospitalData?.logo} alt="#" width={75} height={75}/>
+              <ImageBox
+                src={hospitalData?.logo}
+                alt="Hospital Logo"
+                width="75px"
+                height="75px"
+              />
+
+              {/* <img src={hospitalData?.logo} alt="#" width={75} height={75}/> */}
             </div>
             <div className="col-auto">
               <img src={right_chevron} alt="#" />

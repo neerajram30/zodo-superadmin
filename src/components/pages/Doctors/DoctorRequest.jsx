@@ -51,7 +51,7 @@ function DoctorRequest() {
       { id: id, data: statusUpdate },
       {
         onSuccess: () => {
-          setShowApprovemodal(false);
+          setShowDeclineMoadl(false);
         },
       }
     );

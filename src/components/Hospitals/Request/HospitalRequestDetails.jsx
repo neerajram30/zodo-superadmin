@@ -1,7 +1,5 @@
-import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  apollo_logo,
   arrow_left,
   email_icon,
   pencil_icon,
@@ -13,6 +11,8 @@ import FullscreenLoader from "../../loadings/FullscreenLoader";
 import FastTag from "../FastTag";
 import HospitalDocuments from "./HospitalDocuments";
 import PropTypes from "prop-types";
+import ImageBox from "../../assests/ImageBox";
+import StatusButton from "../../assests/StatusButton";
 
 function HospitalRequestDetails(props) {
   const { id } = useParams();
@@ -60,15 +60,16 @@ function HospitalRequestDetails(props) {
           <div className="col-md-4">
             <div className="row">
               <div className="col-md-3">
-                <div className="hospital-img-wrap">
-                  <div className="profile-img">
-                    <Link to="#">
-                      <img className="" src={apollo_logo} alt="#" />
-                    </Link>
-                  </div>
-                </div>
+                <Link to="#">
+                  <ImageBox
+                    src={hospitalDetails?.logo}
+                    alt="Hospital Logo"
+                    width="75x"
+                    height="75px"
+                  />
+                </Link>
               </div>
-              <div className="col ps-4">
+              <div className="col ps-2">
                 {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
                   <h3 className="user-name m-t-0 mb-0">
@@ -128,9 +129,10 @@ function HospitalRequestDetails(props) {
                 {hospitalDetails?.gst}
               </span>
             </h6>
-            <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
+            <StatusButton status={hospitalDetails?.status}/>
+            {/* <button className="hospital-draft-btn text-primary w-75 mt-1 pt-1 pb-1">
               {!hospitalDetails?.isDisabled ? "Active" : "Inactive"}
-            </button>
+            </button> */}
           </div>
         </div>
 

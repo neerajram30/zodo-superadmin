@@ -23,6 +23,7 @@ import { useChangeHospitalStatus } from "../../hooks/hospitals/useChangeHospital
 import TransparentTabs from "../tabs/TransparentTabs";
 import StatusButton from "../assests/StatusButton";
 import { useHospitalAnalytics } from "../../hooks/hospitals/useHospitalAnalytics";
+import ImageBox from "../assests/ImageBox";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
@@ -49,7 +50,12 @@ function HospitalDetailsCard(props) {
       content: <Department hospitalId={id} />,
       link: "department",
     },
-    { id: "finance", title: "Finance", content: <Finance analytics={hospitalAnalytics}/>, link: "finance" },
+    {
+      id: "finance",
+      title: "Finance",
+      content: <Finance analytics={hospitalAnalytics} />,
+      link: "finance",
+    },
     {
       id: "total-bookings",
       title: "Total Bookings",
@@ -173,15 +179,17 @@ function HospitalDetailsCard(props) {
             <div className="col-md-4">
               <div className="row">
                 <div className="col-md-3">
-                  <div className="hospital-img-wrap">
-                    <div className="profile-img">
-                      <Link to="#">
-                        <img className="" src={hospitalDetails?.logo} alt="#" />
-                      </Link>
-                    </div>
-                  </div>
+                  <Link to="#">
+                    <ImageBox
+                      src={hospitalDetails?.logo}
+                      alt="Hospital Logo"
+                      width="75x"
+                      height="75px"
+                    />
+                    {/* <img className="" src={hospitalDetails?.logo} alt="#" /> */}
+                  </Link>
                 </div>
-                <div className="col ps-4">
+                <div className="col ps-2">
                   {/* <div className="col-md-4"> */}
                   <div className="profile-info-left pt-3">
                     <h3 className="user-name m-t-0 mb-0">

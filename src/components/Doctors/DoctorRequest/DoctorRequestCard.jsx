@@ -18,6 +18,7 @@ import { useDoctorsDocument } from "../../../hooks/doctors/useDoctorsDocument";
 import ComponentLoader from "../../loadings/ComponentLoader";
 import { useDeleteDocument } from "../../../hooks/useDeleteDocument";
 import StatusButton from "../../assests/StatusButton";
+import ImageBox from "../../assests/ImageBox";
 
 function DoctorRequestCard(props) {
   const navigate = useNavigate();
@@ -87,18 +88,14 @@ function DoctorRequestCard(props) {
           <div className="col-md-4">
             <div className="row">
               <div className="col-md-3">
-                <div className="doctor-img-wrap">
-                  <div className="profile-img">
-                    <img
-                      className="img-fluid"
-                      src={doctorDetails?.profile_pic}
-                      alt="#"
-                    />
-                  </div>
-                </div>
+                <ImageBox
+                  src={doctorDetails?.profile_pic}
+                  alt="Doctor profile"
+                  width="75x"
+                  height="75px"
+                />
               </div>
               <div className="col">
-                {/* <div className="col-md-4"> */}
                 <div className="profile-info-left pt-3">
                   <h3 className="user-name m-t-0 mb-0">
                     Dr {doctorDetails?.name}
@@ -138,7 +135,11 @@ function DoctorRequestCard(props) {
             {/* <button className="btn hospital-draft-btn text-primary w-75 mt-1">
               {doctorDetails?.status ? doctorDetails?.status : "inactive"}
             </button> */}
-            <StatusButton status={doctorDetails?.status ? doctorDetails?.status : "inactive"}/>
+            <StatusButton
+              status={
+                doctorDetails?.status ? doctorDetails?.status : "inactive"
+              }
+            />
           </div>
         </div>
 

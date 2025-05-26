@@ -5,6 +5,8 @@ import ConfirmDelete from "../modals/ConfirmDelete";
 import DoctorRequestHero from "../heros/DoctorRequestHero";
 import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
 import { reduceArraytoString } from "../configs/reduceArraytoString";
+import CircularImage from "../assests/CircularImage";
+import { user_profile } from "../imagepath";
 function DoctorRequests() {
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchterm] = useState("");
@@ -26,31 +28,26 @@ function DoctorRequests() {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => (
+      render: (text, record) => (
         <>
-          <h2 className="profile-image">
-            {/* <Link
-                  to={`/manage-doctors/${record.id}`}
-                  className="avatar avatar-sm me-2"
-                >
-                  <img
-                    className="avatar-img rounded-circle"
-                    src={blogimg12}
-                    alt="User Image"
-                  />
-                {text}
-                </Link> */}
-            <Link to>{text}</Link>
-          </h2>
+          <div className="d-flex">
+            <div>
+              <CircularImage
+                src={record?.profile_pic ?? user_profile}
+                alt={record.name}
+                size={40}
+                fallback={user_profile}
+              />
+            </div>
+            <div className="ms-2 table-profile">
+              <h6>{record.name}</h6>
+              <p className="text-muted mb-0">{record.email}</p>
+            </div>
+          </div>
         </>
       ),
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a, b) => a.name.localeCompare(b.name),
     },
-    // {
-    //   title: "Department",
-    //   dataIndex: "Department",
-    //   // sorter: (a, b) => a.Department.length - b.Department.length,
-    // },
     {
       title: "Specialisation",
       dataIndex: "Specialization",
@@ -73,20 +70,20 @@ function DoctorRequests() {
     {
       title: "Mobile",
       dataIndex: "phone_number",
-      sorter: (a, b) => a.phone_number.length - b.phone_number.length,
+      // sorter: (a, b) => a.phone_number.length - b.phone_number.length,
       render: (text) => (
         <>
           <Link to="#">{text}</Link>
         </>
       ),
     },
+    // {
+    //   title: "Email",
+    //   dataIndex: "email",
+    //   sorter: (a, b) => a.email.localeCompare(b.email),
+    // },
     {
-      title: "Email",
-      dataIndex: "email",
-      sorter: (a, b) => a.email.length - b.email.length,
-    },
-    {
-      title: "Action",
+      title: <div className="text-center">Action</div>,
       dataIndex: "FIELD8",
       render: (item, record) => (
         <div className="d-flex justify-content-center">

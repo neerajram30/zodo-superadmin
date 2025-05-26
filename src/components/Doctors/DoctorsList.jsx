@@ -8,40 +8,44 @@ import ConfirmDelete from "../modals/ConfirmDelete";
 import DoctorListHero from "../heros/DoctorListHero";
 import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
 import { reduceArraytoString } from "../configs/reduceArraytoString";
+import CircularImage from "../assests/CircularImage";
+import { user_profile } from "../imagepath";
+import StatusBadge from "../assests/StatusBadge";
+// import { blogimg12 } from "../imagepath";
 
 function DoctorsList() {
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchterm] = useState("");
-  const query = searchTerm ?  `name=${searchTerm}` : "";
+  const query = searchTerm ? `name=${searchTerm}` : "";
   const { data: doctorList, isLoading } = useDoctorsList(query);
-  
-  const handelSearchTerm = (term)=>{
+
+  const handelSearchTerm = (term) => {
     setSearchterm(term);
-  }
+  };
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => (
+      render: (text, record) => (
         <>
-          <h2 className="profile-image">
-            {/* <Link
-              to={`/manage-doctors/${record.id}`}
-              className="avatar avatar-sm me-2"
-            >
-              <img
-                className="avatar-img rounded-circle"
-                src={blogimg12}
-                alt="User Image"
+          <div className="d-flex">
+            <div>
+              <CircularImage
+                src={record?.profile_pic ?? user_profile}
+                alt={record.name}
+                size={40}
+                fallback={user_profile}
               />
-            {text}
-            </Link> */}
-            <Link to>{text}</Link>
-          </h2>
+            </div>
+            <div className="ms-2 table-profile">
+              <h6>{record.name}</h6>
+              <p className="text-muted mb-0">{record.email}</p>
+            </div>
+          </div>
         </>
       ),
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a, b) => a.name.localeCompare(b.name),
     },
     // {
     //   title: "Department",
@@ -63,13 +67,12 @@ function DoctorsList() {
       title: "Type",
       dataIndex: "hospital_id",
       render: (item) => (item ? "ofline" : "online"),
-
       // sorter: (a, b) => a.Degree.length - b.Degree.length,
     },
     {
       title: "Mobile",
       dataIndex: "phone_number",
-      sorter: (a, b) => a.phone_number.length - b.phone_number.length,
+      // sorter: (a, b) => a.phone_number.length - b.phone_number.length,
       render: (text) => (
         <>
           <Link to="#">{text}</Link>
@@ -77,9 +80,13 @@ function DoctorsList() {
       ),
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      sorter: (a, b) => a.email.length - b.email.length,
+      title: <div className="d-flex justify-content-center">Status</div>,
+      dataIndex: "status",
+      render: (item) => (
+        <div className="d-flex justify-content-center">
+          <StatusBadge status={item ? item : "unavailable"} />
+        </div>
+      ),
     },
     {
       title: "JoiningDate",
@@ -122,13 +129,6 @@ function DoctorsList() {
                   <i className="far fa-edit me-2" />
                   Edit
                 </Link>
-                {/* <Link
-                  className="dropdown-item"
-                  to="#"
-                  onClick={() => setShow(true)}
-                >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
-                </Link> */}
               </div>
             </div>
           </div>
@@ -143,9 +143,13 @@ function DoctorsList() {
         <div className="card card-table show-entire">
           <div className="card-body">
             {/* Table Header */}
-            <DoctorListHero handelSearchTerm={handelSearchTerm}/>
+            <DoctorListHero handelSearchTerm={handelSearchTerm} />
             <div className="doctor-list">
-              <DataTable data={doctorList ?? []} columns={columns} isLoading={isLoading}/>
+              <DataTable
+                data={doctorList ?? []}
+                columns={columns}
+                isLoading={isLoading}
+              />
             </div>
           </div>
         </div>

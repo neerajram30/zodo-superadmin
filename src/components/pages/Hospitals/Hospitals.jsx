@@ -35,19 +35,19 @@ function Hospitals() {
     {
       id: "allhospitals",
       title: "All Hosptitals",
-      content: <AllHospitals hospitalList={hospitalList ?? []} />,
+      content: <AllHospitals hospitalList={hospitalList ?? []} loading={isLoading}/>,
       link:'all'
     },
     {
       id: "requested",
       title: `Requested Hospitals (${requestHospitalCount})`,
-      content: <HospitalRequest hospitalList={requestedHospitals ?? []} />,
+      content: <HospitalRequest hospitalList={requestedHospitals ?? []} loading={isLoading}/>,
       link:'requested'
     },
     {
       id: "rejected",
       title: `Rejected Hospitals (${rejectedHospitalCount})`,
-      content: <HospitalRequest hospitalList={rejectedHospitals ?? []} />,
+      content: <HospitalRequest hospitalList={rejectedHospitals ?? []} loading={isLoading}/>,
       link:'rejected'
     },
   ];

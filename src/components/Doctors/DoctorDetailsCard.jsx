@@ -23,6 +23,7 @@ import { useDoctorsDocument } from "../../hooks/doctors/useDoctorsDocument";
 import ComponentLoader from "../loadings/ComponentLoader";
 import StatusButton from "../assests/StatusButton";
 import { useDoctorAnalytics } from "../../hooks/doctors/useDoctorsAnalytics";
+import ImageBox from "../assests/ImageBox";
 
 function DoctorDetailsCard() {
   const navigate = useNavigate();
@@ -37,25 +38,25 @@ function DoctorDetailsCard() {
   const { data: doctorAnalytics, isLoading: analyticsLoading } =
     useDoctorAnalytics(id);
 
-  console.log("DOCTOR ANALYTICS",doctorAnalytics);
+  console.log("DOCTOR ANALYTICS", doctorAnalytics);
 
   const tabData = [
     {
       id: "dr_overview",
       title: "Overview",
-      content: <DoctorsOverview analytics={doctorAnalytics}/>,
+      content: <DoctorsOverview analytics={doctorAnalytics} />,
       link: "overview",
     },
     {
       id: "dr_finance",
       title: "Finance",
-      content: <DoctorsFinance analytics={doctorAnalytics}/>,
+      content: <DoctorsFinance analytics={doctorAnalytics} />,
       link: "finance",
     },
     {
       id: "dr_bookings",
       title: "Total Bookings",
-      content: <DoctorsBookings analytics={doctorAnalytics}/>,
+      content: <DoctorsBookings analytics={doctorAnalytics} />,
       link: "total-bookings",
     },
   ];
@@ -148,13 +149,19 @@ function DoctorDetailsCard() {
           <div className="col-md-4">
             <div className="row">
               <div className="col-md-3">
-                <div className="doctor-img-wrap">
-                  <div className="profile-img">
-                    <img
+                <div className="">
+                  <div className="">
+                    <ImageBox
+                      src={data?.profile_pic}
+                      alt="Doctor profile"
+                      width="75x"
+                      height="75px"
+                    />
+                    {/* <img
                       className="img-fluid"
                       src={data?.profile_pic}
                       alt="#"
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
@@ -198,7 +205,7 @@ function DoctorDetailsCard() {
             <StatusButton status={data?.status ?? "Inactive"} />
           </div>
         </div>
-        <div className="row mt-3">
+        <div className="row mt-4">
           <div className="col-md-6">
             <div className="row border border-secondary-subtle pt-3 pb-1 ms-1 me-1">
               <div className="col">
