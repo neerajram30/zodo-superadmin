@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import ApproveRequestModal from "../modals/ApproveRequestModal";
-import { apollo_logo } from "../imagepath";
 import { Link } from "react-router-dom";
 import { useChangeSettlementStatus } from "../../hooks/settlements/useChageSettlementStatus";
+import ImageBox from "../assests/ImageBox";
 
 function SettlementRequestCard(props) {
-  const { data} = props;
+  const { data } = props;
   const [showApprove, setshowApprove] = useState(false);
   const { mutate, isLoading } = useChangeSettlementStatus();
   console.log(isLoading);
@@ -26,7 +26,12 @@ function SettlementRequestCard(props) {
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={apollo_logo} alt="#" />
+              <ImageBox
+                src={data?.hospital?.logo}
+                alt={data?.hospital?.name || "Hospital Logo"}
+                width="75px"
+                height="75px"
+              />
             </div>
             {/* <div className="col-auto">
                   <img src={right_chevron} alt="#" />

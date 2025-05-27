@@ -9,6 +9,8 @@ function SettlementList(props) {
   if (loading) {
     return <FullscreenLoader />;
   }
+  console.log("SettlementList data:", data);
+  
   return (
     <div className="row mt-2">
       {data.map((item) => (
