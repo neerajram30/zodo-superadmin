@@ -13,7 +13,7 @@ function FasttagHospitals() {
         </div>
       ) : (
         <div className="row mt-2">
-          {hospitalDetails.map((item) => (
+          {hospitalDetails?.map((item) => (
             <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
               <FasttagCard
                 hospitalData={item}

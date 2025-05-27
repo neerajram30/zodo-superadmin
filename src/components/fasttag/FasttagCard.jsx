@@ -1,17 +1,22 @@
-import PropTypes from 'prop-types';
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { right_chevron } from '../imagepath';
+import PropTypes from "prop-types";
+import { right_chevron } from "../imagepath";
+import ImageBox from "../assests/ImageBox";
 
 function FasttagCard(props) {
-    const { hospitalData, setshowDetails } = props;
+  const { hospitalData, hospitalId } = props;
   return (
-    <div className="card invoices-grid-card w-100" key={hospitalData.id}>
-      <Link to onClick={()=> setshowDetails(true)}>
+    <div className="card invoices-grid-card w-100" key={hospitalId}>
+      <div>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
-              <img src={hospitalData.logo} alt="#" />
+              <ImageBox
+                src={hospitalData?.logo}
+                alt="Hospital Logo"
+                width="75px"
+                height="75px"
+              />
+
             </div>
             <div className="col-auto">
               <img src={right_chevron} alt="#" />
@@ -21,7 +26,7 @@ function FasttagCard(props) {
                 <h5>{hospitalData.name}</h5>
               </div>
               <div className="col-auto">
-                <h5 className="text-primary">{hospitalData.status}</h5>
+                <h5 className="text-primary">{hospitalData?.current}</h5>
               </div>
             </div>
 
@@ -30,19 +35,19 @@ function FasttagCard(props) {
                 <p>TOTAL FAST TAG</p>
               </div>
               <div className="col-auto">
-                <h5>{hospitalData.totalFasttags}</h5>
+                <h5>{hospitalData?.fastTag?.count}</h5>
               </div>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
-  )
+  );
 }
 
 FasttagCard.propTypes = {
-    hospitalData: PropTypes.node,
-    setshowDetails: PropTypes.node,
-  };
+  hospitalData: PropTypes.node,
+  hospitalId: PropTypes.node,
+};
 
-export default FasttagCard
+export default FasttagCard;

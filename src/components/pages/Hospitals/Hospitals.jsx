@@ -12,7 +12,6 @@ import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
 function Hospitals() {
   const [searchTerm, setSearchterm] = useState("");
   const { data: hospitalList, isLoading } = useGetHospitals(searchTerm);
-  // console.log("Data",hospitalList?.data);
 
   const setHospitalList = useHospitalList((state) => state.setHospitalList);
   setHospitalList(hospitalList);

@@ -1,37 +1,41 @@
-import React from "react";
 import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
-import HospitalHero from "../../heros/HospitalHero";
 
-import HospitalsList from "../../Hospitals/HospitalsList";
-import HospitalRequest from "../../Hospitals/HospitalRequest";
-import FasttagHospitals from "../../fasttag/FasttagHospitals";
+import BasicSearchHero from "../../heros/BasicSearchHero";
+import FasttagList from "../../fasttag/FasttagList";
+import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
+import { useState } from "react";
 
 function FasttagIssued() {
-  const tabData = [
-    { id: "allhospitals", title: "All Hosptitals", content: <FasttagHospitals/> },
-    { id: "requested", title: "Requested Hospitals", content: <HospitalRequest/> },
-  ];
+  const [searchTerm, setSearchterm] = useState("");
+  const { data: hospitalList, isLoading } = useGetHospitals(searchTerm);
   const breadCrumpData = [
     {
       name: "Dashboard",
       status: "inactive",
-      link:"/dashboard"
+      link: "/dashboard",
     },
     {
       name: "Fasttag Issued",
       status: "active",
-      link:"/dashboard/fasttag-issued",
+      link: "/dashboard/fasttag-issued",
     },
   ];
+  const handleSearch = (searchTerm) => {
+    // Implement search functionality if needed
+    setSearchterm(searchTerm);
+  };
+  const fasttagList =
+    hospitalList?.filter((hospital) => hospital?.fastTag?.enabled) || [];
   return (
     <Layout activeClassName="dashboard">
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          {/* <FasttagRevenueHeader/> */}
-          <HospitalHero tabData={tabData}/>
-          <HospitalsList tabData={tabData} />
+          <div className="mt-3">
+            <BasicSearchHero handleSearchterm={handleSearch} />
+            <FasttagList hospitalList={fasttagList} loading={isLoading} />
+          </div>
         </div>
       </div>
     </Layout>

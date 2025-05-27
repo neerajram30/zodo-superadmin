@@ -1,18 +1,18 @@
 import React from "react";
-import HospitalRequestCard from "./HospitalRequestCard";
-import PropTypes from "prop-types";
+import FasttagCard from "./FasttagCard";
 import ComponentLoader from "../loadings/ComponentLoader";
+import PropTypes from "prop-types";
 
-function HospitalRequest(props) {
+function FasttagList(props) {
   const { hospitalList, loading } = props;
 
   return (
-    <div className="row mt-2">
+    <div className="row mt-3">
       {!loading ? (
         <>
           {hospitalList?.map((item) => (
             <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
-              <HospitalRequestCard hospitalData={item} />
+              <FasttagCard hospitalData={item} hospitalId={item?.id} />
             </div>
           ))}
         </>
@@ -23,9 +23,10 @@ function HospitalRequest(props) {
   );
 }
 
-HospitalRequest.propTypes = {
-  hospitalList: PropTypes.node,
-  loading: PropTypes.node,
+// props validation
+FasttagList.propTypes = {
+  hospitalList: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-export default HospitalRequest;
+export default FasttagList;
