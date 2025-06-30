@@ -8,6 +8,7 @@ import { Eye, EyeOff } from "feather-icons-react/build/IconComponents";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../../hooks/auth/useAuth";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
+import CenteredModal from "../../modals/CenteredModal";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -35,14 +36,14 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-    useEffect(() => {
-      const token = localStorage.getItem("token"); 
-      if(token) {
-        navigate("/dashboard"); // Redirect to dashboard if token exists
-      }
-      console.log("Token", token);
-      
-    }, [])
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard"); // Redirect to dashboard if token exists
+    }
+    console.log("Token", token);
+  }, []);
+
   
 
   return (
@@ -152,7 +153,9 @@ const Login = () => {
                           </div>
                           <Link to="/forgotpassword">Forgot Password?</Link>
                         </div> */}
-                        <div className="form-group login-btn">
+                        {/* <Link to="/forgotpassword">Forgot Password?</Link> */}
+
+                        <div className="form-group login-btn mt-3">
                           <button
                             to
                             className="btn btn-primary btn-block"
@@ -163,6 +166,11 @@ const Login = () => {
                           </button>
                         </div>
                       </form>
+                      <CenteredModal>
+                          <div>
+                            hi
+                          </div>
+                      </CenteredModal>
                     </div>
                   </div>
                 </div>

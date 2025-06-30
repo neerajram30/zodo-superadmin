@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { logo, baricon1, user06 } from "./imagepath";
+import { logo, baricon1, user_profile } from "./imagepath";
 import { useAuth } from "../hooks/auth/useAuth";
-import PropTypes from "prop-types";
+import CenteredModal from "./modals/CenteredModal";
+import ConfirmLogout from "./modals/ConfirmLogout";
 
-const Header = ({ handelSidebar }) => {
+const Header = () => {
   const { user, setUser } = useAuth();
+  console.log("user", user);
+
   const userName = user?.first_name + user?.last_name || "User";
   const userRole = user?.user_type || "Role";
   const handlesidebar = () => {
@@ -19,7 +22,6 @@ const Header = ({ handelSidebar }) => {
     document
       .getElementsByClassName("sidebar-overlay")[0]
       .classList.toggle("opened");
-    handelSidebar();
   };
 
   const openDrawer = () => {
@@ -56,6 +58,8 @@ const Header = ({ handelSidebar }) => {
     setUser(null); // Clear the user state
     navigate("/login"); // Redirect to the login page
   };
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="main-wrapper">
@@ -97,7 +101,7 @@ const Header = ({ handelSidebar }) => {
                 <span>{userRole}</span>
               </div>
               <span className="user-img">
-                <img src={user06} alt="Admin" />
+                <img src={user?.profile_picture || user_profile} alt="Admin" />
               </span>
             </Link>
             <div className="dropdown-menu">
@@ -110,7 +114,11 @@ const Header = ({ handelSidebar }) => {
               {/* <Link className="dropdown-item" to="/settingssociallink">
                 Settings
               </Link> */}
-              <Link className="dropdown-item" to onClick={handleLogout}>
+              <Link
+                className="dropdown-item"
+                to
+                onClick={() => setIsOpen(true)}
+              >
                 Logout
               </Link>
             </div>
@@ -144,15 +152,11 @@ const Header = ({ handelSidebar }) => {
               Logout
             </Link>
           </div>
+          <ConfirmLogout show={isOpen} setShow={setIsOpen} handleLogout={handleLogout}/>
         </div>
       </div>
     </div>
   );
-};
-
-// props validation
-Header.propTypes = {
-  handelSidebar: PropTypes.func,
 };
 
 export default Header;

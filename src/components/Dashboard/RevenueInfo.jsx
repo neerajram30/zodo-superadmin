@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { fasttag, fasttag_revenue } from "../imagepath";
 import CountUp from "react-countup";
-import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import Select from "react-select";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -104,7 +103,7 @@ function RevenueInfo(props) {
                 {" "}
                 $<CountUp delay={0.4} end={dashboardData?.fasttag?.revenue ?? 0} duration={0.6} />
               </h2>
-              <p>
+              {/* <p>
                 <span className="passive-view">
                   <i className="feather-arrow-up-right me-1">
                     <FeatherIcon icon="arrow-up-right" />
@@ -112,7 +111,7 @@ function RevenueInfo(props) {
                   0%
                 </span>{" "}
                 vs last month
-              </p>
+              </p> */}
             </div>
           </div>
         </Link>

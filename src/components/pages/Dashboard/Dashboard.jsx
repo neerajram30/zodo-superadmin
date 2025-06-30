@@ -14,7 +14,8 @@ function Dashboard() {
   // const hospitalCount = data?.data?.length;
 
   const { data: dashboardData, isLoading } = useDashboardData();
-
+  console.log(dashboardData);
+  
   const basicInformation = [
     {
       id: 1,
@@ -48,7 +49,6 @@ function Dashboard() {
       link: "/dashboard",
     },
   ];
-  console.log("Dashboard data ",dashboardData);
   
   return (
     <Layout activeClassName="dashboard">
