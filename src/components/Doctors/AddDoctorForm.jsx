@@ -103,7 +103,7 @@ function AddDoctorForm() {
         </div>
       </div>
       {doctorLoading && <FullscreenLoader />}
-
+      
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onCreateDoctor)}>
           <div className="row mt-4">

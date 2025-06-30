@@ -133,7 +133,11 @@ function EditDoctorForm() {
         documents: [registrationDetails, degreeDetails],
         about: data?.about,
       };
-      await mutate({ id: id, data: doctorData });
+      await mutate({ id: id, data: doctorData },{
+        onSuccess: () => {
+          
+        }
+      });
     } else {
       const errorMessage = "Account number mismatch";
       toast.error(errorMessage, {

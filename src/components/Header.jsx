@@ -1,19 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  logo,
-  baricon,
-  baricon1,
-  searchnormal,
-  noteicon,
-  user06,
-  settingicon01,
-  noteicon1,
-} from "./imagepath";
+import { logo, baricon1, user06 } from "./imagepath";
 import { useAuth } from "../hooks/auth/useAuth";
+import PropTypes from "prop-types";
 
-const Header = () => {
+const Header = ({ handelSidebar }) => {
   const { user, setUser } = useAuth();
   const userName = user?.first_name + user?.last_name || "User";
   const userRole = user?.user_type || "Role";
@@ -27,6 +19,7 @@ const Header = () => {
     document
       .getElementsByClassName("sidebar-overlay")[0]
       .classList.toggle("opened");
+    handelSidebar();
   };
 
   const openDrawer = () => {
@@ -155,6 +148,11 @@ const Header = () => {
       </div>
     </div>
   );
+};
+
+// props validation
+Header.propTypes = {
+  handelSidebar: PropTypes.func,
 };
 
 export default Header;

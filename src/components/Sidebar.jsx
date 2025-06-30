@@ -1,50 +1,56 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { dashboard, logout_01, menuicon08, menuicon09, menuicon16 } from "./imagepath";
 import Scrollbars from "react-custom-scrollbars-2";
+import {
+  dashboard,
+  logout_01,
+  menuicon08,
+  menuicon09,
+  menuicon16,
+} from "./imagepath";
 import { useAuth } from "../hooks/auth/useAuth";
 
-const Sidebar = (props) => {
-  const [sidebar, setSidebar] = useState("");
+const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
+
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem("token"); // Remove the token from local storage
-    // const token = localStorage.getItem("token"); // Check if the token is removed
-    setUser(null); // Clear the user state
-    navigate("/login"); // Redirect to the login page
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/login");
+    onClose(); // close sidebar on logout
   };
-  const handleClick = (e, item, item1, item3) => {
+
+  const handleClick = (e, item, item1) => {
     const div = document.querySelector(`#${item}`);
     const ulDiv = document.querySelector(`.${item1}`);
 
-    ulDiv.style.display === "block"
-      ? (ulDiv.style.display = "none")
-      : (ulDiv.style.display = "block");
-    div.classList.contains("subdrop")
-      ? div.classList.remove("subdrop")
-      : div.classList.add("subdrop");
+    if (ulDiv && div) {
+      ulDiv.style.display = ulDiv.style.display === "block" ? "none" : "block";
+      div.classList.toggle("subdrop");
+    }
   };
 
   useEffect(() => {
-    if (props?.id && props?.id1) {
-      const ele = document.getElementById(`${props?.id}`);
-      handleClick(ele, props?.id, props?.id1);
+    if (id && id1) {
+      const ele = document.getElementById(id);
+      handleClick(ele, id, id1);
     }
-  }, []);
+  }, [id, id1]);
 
-  const expandMenu = () => {
-    document.body.classList.remove("expand-menu");
-  };
-  const expandMenuOpen = () => {
-    document.body.classList.add("expand-menu");
+  const handleMenuClick = () => {
+    // This will remove mobile sidebar overlay & classes
+    document.body.classList.remove("slide-nav");
+    document.documentElement.classList.remove("menu-opened");
+
+    const overlay = document.getElementsByClassName("sidebar-overlay")[0];
+    if (overlay) overlay.classList.remove("opened");
   };
 
   return (
-    <div className="sidebar" id="sidebar">
+    <div className={`sidebar ${isOpen ? "sidebar-open" : ""}`} id="sidebar">
       <Scrollbars
         autoHide
         autoHideTimeout={1000}
@@ -53,73 +59,64 @@ const Sidebar = (props) => {
         autoHeightMin={0}
         autoHeightMax="95vh"
         thumbMinSize={30}
-        universal={false}
-        hideTracksWhenNotNeeded={true}
       >
         <div className="sidebar-inner slimscroll">
-          <div
-            id="sidebar-menu"
-            className="sidebar-menu"
-            onMouseLeave={expandMenu}
-            onMouseOver={expandMenuOpen}
-          >
+          <div id="sidebar-menu" className="sidebar-menu">
             <ul className="mt-5">
               <li className="submenu">
                 <Link
-                  className={
-                    props?.activeClassName === "dashboard" ? "active" : ""
-                  }
-                  id="menu-item"
                   to="/dashboard"
+                  onClick={handleMenuClick}
+                  className={activeClassName === "dashboard" ? "active" : ""}
                 >
                   <span className="menu-side">
                     <img src={dashboard} alt="" />
-                  </span>{" "}
-                  <span> Dashboard </span>
+                  </span>
+                  <span>Dashboard</span>
                 </Link>
               </li>
 
               <li className="submenu">
                 <Link
-                  to
+                  to="#"
                   id="menu-item3"
-                  onClick={(e) =>
-                    handleClick(e, "menu-item3", "menu-items3", "menu-items3")
-                  }
+                  onClick={(e) => handleClick(e, "menu-item3", "menu-items3")}
                   className={
-                    props?.activeClassName === "manage-hospitals" ||
-                    props?.activeClassName === "manage-doctors"
+                    activeClassName === "manage-hospitals" ||
+                    activeClassName === "manage-doctors"
                       ? "active"
                       : ""
                   }
                 >
                   <span className="menu-side">
                     <img src={menuicon08} alt="" />
-                  </span>{" "}
-                  <span> Manage </span> <span className="menu-arrow" />
+                  </span>
+                  <span>Manage</span>
+                  <span className="menu-arrow" />
                 </Link>
-                <ul style={{ display: "none" }} className="menu-items3">
+                <ul className="menu-items3" style={{ display: "none" }}>
                   <li>
                     <Link
+                      to="/manage-hospitals"
                       className={
-                        props?.activeClassName === "manage-hospitals"
+                        activeClassName === "manage-hospitals"
                           ? "submenu-active"
                           : "submenu-normal"
                       }
-                      to="/manage-hospitals"
+                      onClick={handleMenuClick}
                     >
                       Hospitals
                     </Link>
                   </li>
                   <li>
                     <Link
+                      to="/manage-doctors"
                       className={
-                        props?.activeClassName === "manage-doctors"
+                        activeClassName === "manage-doctors"
                           ? "submenu-active"
                           : "submenu-normal"
                       }
-                      // to="#"
-                      to="/manage-doctors"
+                      onClick={handleMenuClick}
                     >
                       Doctors
                     </Link>
@@ -129,45 +126,36 @@ const Sidebar = (props) => {
 
               <li className="submenu">
                 <Link
-                  className={
-                    props?.activeClassName === "finance" ? "active" : ""
-                  }
-                  id="menu-item4"
                   to="/finance"
+                  className={activeClassName === "finance" ? "active" : ""}
+                  onClick={handleMenuClick}
                 >
                   <span className="menu-side">
                     <img src={menuicon09} alt="" />
-                  </span>{" "}
-                  <span> Finance </span>
+                  </span>
+                  <span>Finance</span>
                 </Link>
               </li>
-                  {console.log("App manage >",props?.activeClassName)}
+
               <li className="submenu">
                 <Link
-                  className={
-                    props?.activeClassName === "appmanage" ? "active" : ""
-                  }
-                  id="menu-item2"
                   to="/app-manage"
+                  className={activeClassName === "appmanage" ? "active" : ""}
+                  onClick={handleMenuClick}
                 >
                   <span className="menu-side">
                     <img src={menuicon16} alt="" />
-                  </span>{" "}
-                  <span> App Manage </span>
+                  </span>
+                  <span>App Manage</span>
                 </Link>
               </li>
             </ul>
+
             <div className="logout-btn submenu">
-              <Link
-                to
-                onClick={handleLogout}
-                className={
-                  props?.activeClassName === "dashboard" ? "active" : ""
-                }
-              >
+              <Link to="#" onClick={handleLogout}>
                 <span className="menu-side">
                   <img src={logout_01} alt="" />
-                </span>{" "}
+                </span>
                 <span>Logout</span>
               </Link>
             </div>
@@ -177,4 +165,5 @@ const Sidebar = (props) => {
     </div>
   );
 };
+
 export default Sidebar;

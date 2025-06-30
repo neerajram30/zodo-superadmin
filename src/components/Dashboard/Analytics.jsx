@@ -6,10 +6,7 @@ function Analytics() {
   const [bookingType] = useState([{ value: 1, label: "Hospital Booking" }]);
   const [selectedOption, setSelectedOption] = useState(bookingType[0]);
   const { data } = useAnalyticsData();
-  console.log("Analytics", data);
-
   const countsPeryear = data?.map((item) => item.count);
-  console.log("countsPeryear", countsPeryear);
   
   return (
     <>

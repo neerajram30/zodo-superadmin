@@ -33,18 +33,10 @@ function SettlementRequestCard(props) {
                 height="75px"
               />
             </div>
-            {/* <div className="col-auto">
-                  <img src={right_chevron} alt="#" />
-                </div> */}
             <div className="d-flex mt-3 justify-content-between">
               <div className="">
                 <h5>{data?.hospital?.name}</h5>
               </div>
-              {/* <div className="">
-                    <span className="text-primary">
-                      {data.completed} Completed
-                    </span>
-                  </div> */}
             </div>
 
             <div className="mt-2">
