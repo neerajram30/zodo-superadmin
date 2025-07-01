@@ -75,7 +75,7 @@ function RevenueInfo(props) {
               <h4>Settlement Request</h4>
               <h2>
                 {" "}
-                <CountUp delay={0.4} end={0} duration={0.6} />
+                <CountUp delay={0.4} end={dashboardData?.settlement?.requested ?? 0} duration={0.6} />
               </h2>
               <p>
                 <span className="passive-view">
@@ -101,7 +101,7 @@ function RevenueInfo(props) {
               <h4>Fast tag Revenue</h4>
               <h2>
                 {" "}
-                $<CountUp delay={0.4} end={dashboardData?.fasttag?.revenue ?? 0} duration={0.6} />
+                $<CountUp delay={0.4} end={dashboardData?.fast_tag?.revenue ?? 0} duration={0.6} />
               </h2>
               {/* <p>
                 <span className="passive-view">

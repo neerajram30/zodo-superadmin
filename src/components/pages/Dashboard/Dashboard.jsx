@@ -14,7 +14,7 @@ function Dashboard() {
   // const hospitalCount = data?.data?.length;
 
   const { data: dashboardData, isLoading } = useDashboardData();
-  console.log(dashboardData);
+  console.log("Dashboard data ",dashboardData);
   
   const basicInformation = [
     {
