@@ -1,4 +1,3 @@
-import React from "react";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 // import { useParams } from "react-router-dom";
 import HospitalDetailsCard from "../../Hospitals/HospitalDetailsCard";
@@ -6,7 +5,6 @@ import Layout from "../../layout/Layout";
 import { useParams } from "react-router-dom";
 import { useViewHospital } from "../../../hooks/hospitals/useViewHospital";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
-import useSelectedHospital from "../../../store/useSelectedHospital";
 
 function HospitalDetails() {
   const { id } = useParams();
@@ -16,15 +14,9 @@ function HospitalDetails() {
     // isError,
     error,
   } = useViewHospital(id);
-  const setSelectedHospital = useSelectedHospital(
-    (state) => state.setSelectedHospital
-  );
-
-  const selectedHospital = useSelectedHospital(
-    (state) => state.selectedHospital
-  );
-  setSelectedHospital(hospitalDetails);
-  console.log("selected hospital", selectedHospital);
+  
+  const hospitalName = hospitalDetails?.name
+  console.log("hospital details ",hospitalName);
 
   const breadCrumpData = [
     {
@@ -33,7 +25,7 @@ function HospitalDetails() {
       link: "/manage-hospitals",
     },
     {
-      name: id,
+      name: hospitalName,
       status: "active",
       link: `/manage-hospitals/${id}`,
     },

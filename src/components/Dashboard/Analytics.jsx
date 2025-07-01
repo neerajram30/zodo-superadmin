@@ -3,11 +3,12 @@ import Select from "react-select";
 import PatientChart from "./PaitentChart";
 import { useAnalyticsData } from "../../hooks/useAnalyticsData";
 function Analytics() {
-  const [bookingType] = useState([{ value: 1, label: "Hospital Booking" }]);
+  const [bookingType] = useState([{ value: "normal", label: "Hospital Booking" }, { value: "fast_tag", label: "Fasttag" }]);
   const [selectedOption, setSelectedOption] = useState(bookingType[0]);
-  const { data } = useAnalyticsData();
+  const query = `?type=${selectedOption?.value}`
+  const { data } = useAnalyticsData(query);
   const countsPeryear = data?.map((item) => item.count);
-  
+    
   return (
     <>
       <div className="row">
@@ -74,7 +75,7 @@ function Analytics() {
                 </div>
               </div>
               <div id="patient-chart" />
-              <PatientChart data={countsPeryear} />
+              <PatientChart data={countsPeryear}/>
             </div>
           </div>
         </div>

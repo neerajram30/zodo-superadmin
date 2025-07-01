@@ -3,9 +3,11 @@ import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import DoctorDetailsCard from "../../Doctors/DoctorDetailsCard";
 import { useParams } from "react-router-dom";
+import { useDoctorById } from "../../../hooks/doctors/useDoctorById";
 
 function DoctorDetails() {
   const { id } = useParams();
+  const { data, isLoading } = useDoctorById(id);
   const breadCrumpData = [
     {
       name: "Doctors",
@@ -13,7 +15,7 @@ function DoctorDetails() {
       link: "/manage-doctors",
     },
     {
-      name: id,
+      name: data?.name,
       status: "active",
       link: `/manage-doctors/${id}`,
     },
@@ -23,7 +25,7 @@ function DoctorDetails() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          <DoctorDetailsCard />
+          <DoctorDetailsCard data={data} isLoading={isLoading}/>
         </div>
       </div>
     </Layout>

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEditHostpital } from "../../hooks/hospitals/useEditHospital";
-import { useViewHospital } from "../../hooks/hospitals/useViewHospital";
 import { useGetDistrict } from "../../hooks/useGetDistrict";
 import { FormProvider, useForm } from "react-hook-form";
 import Closebtn from "../assests/Closebtn";
@@ -14,8 +13,9 @@ import SelectField from "../InputFields/SelectField";
 import { toast } from "react-toastify";
 import { useHospitalDocuments } from "../../hooks/hospitals/useHospitalDocuments";
 import UploadFiles from "../fileuploads/UploadFiles";
+import PropTypes from "prop-types";
 
-function HospitalEditForm() {
+function HospitalEditForm({ hospitalDetails }) {
   const { id } = useParams();
   const { data: hospitalDocuments, isLoading: documentLoading } =
     useHospitalDocuments(id);
@@ -26,7 +26,6 @@ function HospitalEditForm() {
   const [file3, setFile3] = useState(null);
 
   const { mutate, isLoading } = useEditHostpital();
-  const { data: hospitalDetails } = useViewHospital(id);
   // const [document1, setDocument1] = useState("");
   // const [document2, setDocument2] = useState("");
   // const [document3, setDocument3] = useState("");
@@ -656,5 +655,9 @@ function HospitalEditForm() {
     </div>
   );
 }
+
+HospitalEditForm.propTypes = {
+  hospitalDetails: PropTypes.object,
+};
 
 export default HospitalEditForm;

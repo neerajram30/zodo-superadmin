@@ -11,11 +11,6 @@ function ManageBanner() {
   const [show, setShow] = useState(false);
   const breadCrumpData = [
     {
-      name: "Dashboard",
-      status: "inactive",
-      link: "/dashboard",
-    },
-    {
       name: "Manage Banner",
       status: "active",
       link: "/app-manage",

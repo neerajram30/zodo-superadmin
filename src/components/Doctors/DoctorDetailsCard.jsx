@@ -13,7 +13,6 @@ import DoctorsOverview from "./DoctorsOverview/DoctorsOverview";
 import DoctorsFinance from "./DoctorsFinance/DoctorsFinance";
 import DoctorsBookings from "./DoctorsBookings/DoctorsBookings";
 import ConfirmDelete from "../modals/ConfirmDelete";
-import { useDoctorById } from "../../hooks/doctors/useDoctorById";
 import FullscreenLoader from "../loadings/FullscreenLoader";
 import { reduceArraytoString } from "../configs/reduceArraytoString";
 import { useChangeDoctorStatus } from "../../hooks/doctors/useChangeDoctorStatus";
@@ -24,11 +23,11 @@ import ComponentLoader from "../loadings/ComponentLoader";
 import StatusButton from "../assests/StatusButton";
 import { useDoctorAnalytics } from "../../hooks/doctors/useDoctorsAnalytics";
 import ImageBox from "../assests/ImageBox";
+import PropTypes from "prop-types";
 
-function DoctorDetailsCard() {
+function DoctorDetailsCard({ data, isLoading }) {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data, isLoading } = useDoctorById(id);
   const { mutate, isLoading: statusChangeLoading } = useChangeDoctorStatus();
   const [show, setShow] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
@@ -37,8 +36,6 @@ function DoctorDetailsCard() {
     useDoctorsDocument(id);
   const { data: doctorAnalytics, isLoading: analyticsLoading } =
     useDoctorAnalytics(id);
-
-  console.log("DOCTOR ANALYTICS", doctorAnalytics);
 
   const tabData = [
     {
@@ -342,5 +339,10 @@ function DoctorDetailsCard() {
     </div>
   );
 }
+
+DoctorDetailsCard.propTypes = {
+  data: PropTypes.object,
+  isLoading: PropTypes.bool,
+};
 
 export default DoctorDetailsCard;

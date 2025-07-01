@@ -6,7 +6,7 @@ const PatientChart = (props) => {
   const { data } = props;
   const chartRef = React.useRef(null);
   const chartInstanceRef = React.useRef(null);
-
+  
   useEffect(() => {
     if (chartInstanceRef.current) {
       chartInstanceRef.current.destroy();
@@ -87,7 +87,7 @@ const PatientChart = (props) => {
 };
 
 PatientChart.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.array
 };
 
 export default React.memo(PatientChart);
