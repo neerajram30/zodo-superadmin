@@ -30,6 +30,8 @@ function BannerListing() {
       },
     });
   };
+  console.log("Banner data !",data);
+  
   return (
     <div className="row mt-2">
       {data?.map((item) => (
@@ -37,39 +39,10 @@ function BannerListing() {
           <div className="blog grid-blog">
             <div className="blog-image">
               <Link to>
-                <img className="img-fluid" src={item.image} alt="#" />
+                <img className="img-fluid" src={item.url} alt="#" />
               </Link>
-              {/* <ul className="nav view-blog-list blog-views">
-                <li>
-                  <i className="feather-message-square me-1" />
-                  <FeatherIcon icon="message-square" />
-                  58
-                </li>
-                <li>
-                  <i className="feather-eye me-1" />
-                  <FeatherIcon icon="eye" />
-                  500
-                </li>
-              </ul> */}
             </div>
             <div className="blog-content">
-              {/* <div className="blog-grp-blk">
-                <div className="blog-img-blk">
-                  <Link to="/blog">
-                    <img className="img-fluid" src={blogimg2} alt="#" />
-                  </Link>
-                  <div className="content-blk-blog ms-2">
-                    <h4>
-                      <Link to="profile.html">Jenifer Robinson</Link>
-                    </h4>
-                    <h5>M.B.B.S, Diabetologist</h5>
-                  </div>
-                </div>
-                <span>
-                  <i className="feather-calendar me-1" />
-                  05 Sep 2022
-                </span>
-              </div> */}
               <div className="d-flex">
                 <h3 className="blog-title pe-2">
                   <Link to="/blog">{item.title}</Link>
@@ -105,11 +78,6 @@ function BannerListing() {
                 </div>
               </div>
               <p>{item.description}</p>
-              {/* <Link to="/blog" className="read-more d-flex">
-                {" "}
-                Read more in 8 Minutes
-                <i className="fa fa-long-arrow-right ms-2" />
-              </Link> */}
             </div>
           </div>
         </div>

@@ -161,7 +161,7 @@ function BannerForm(props) {
                   className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2 ms-2"
                   disabled={uploadLoading}
                 >
-                  Update
+                  Create
                 </button>
               </div>
             </div>

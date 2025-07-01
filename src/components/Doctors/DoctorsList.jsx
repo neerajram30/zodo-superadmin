@@ -29,8 +29,8 @@ function DoctorsList() {
       key: "name",
       render: (text, record) => (
         <>
-          {console.log("record", record )}
-          
+          {console.log("record", record)}
+
           <div className="d-flex">
             <div>
               <CircularImage
@@ -91,7 +91,7 @@ function DoctorsList() {
       ),
     },
     {
-      title: "JoiningDate",
+      title: <div className="text-center">JoiningDate</div>,
       dataIndex: "work_start_date",
       render: (item) => (
         <div className="d-flex justify-content-center">
