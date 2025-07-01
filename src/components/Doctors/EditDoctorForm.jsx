@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Closebtn from "../assests/Closebtn";
 import ChooseFile from "../Hospitals/ChooseFile";
 import FullscreenLoader from "../loadings/FullscreenLoader";
@@ -7,13 +7,13 @@ import InputField from "../InputFields/InputField";
 import SelectField from "../InputFields/SelectField";
 import UploadFiles from "../fileuploads/UploadFiles";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDoctorById } from "../../hooks/doctors/useDoctorById";
 import { useSpecialisationList } from "../../hooks/specialisation/useSpecialisationList";
 import { useEditDoctor } from "../../hooks/doctors/useEditDoctor";
 import { toast } from "react-toastify";
 import TextArea from "../InputFields/TextArea";
 import { useDoctorsDocument } from "../../hooks/doctors/useDoctorsDocument";
-function EditDoctorForm() {
+import PropTypes from "prop-types";
+function EditDoctorForm({ doctorDetails, doctorLoading }) {
   const { data, isLoading } = useSpecialisationList();
   const { id } = useParams();
   const { data: doctorDocuments, isLoading: documentLoading } =
@@ -38,7 +38,7 @@ function EditDoctorForm() {
 
   //   // setDocument2(filekey);
   // };
-  const { data: doctorDetails, isLoading: doctorLoading } = useDoctorById(id);
+  // const { data: doctorDetails, isLoading: doctorLoading } = useDoctorById(id);
   const { mutate, isLoading: editingLoader } = useEditDoctor();
   const methods = useForm();
   const navigate = useNavigate();
@@ -133,11 +133,12 @@ function EditDoctorForm() {
         documents: [registrationDetails, degreeDetails],
         about: data?.about,
       };
-      await mutate({ id: id, data: doctorData },{
-        onSuccess: () => {
-          
+      await mutate(
+        { id: id, data: doctorData },
+        {
+          onSuccess: () => {},
         }
-      });
+      );
     } else {
       const errorMessage = "Account number mismatch";
       toast.error(errorMessage, {
@@ -427,5 +428,9 @@ function EditDoctorForm() {
     </div>
   );
 }
+EditDoctorForm.propTypes = {
+  doctorDetails: PropTypes.object,
+  doctorLoading: PropTypes.bool,
+};
 
 export default EditDoctorForm;

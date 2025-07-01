@@ -3,9 +3,12 @@ import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import EditDoctorForm from "../../Doctors/EditDoctorForm";
 import { useParams } from "react-router-dom";
+import { useDoctorById } from "../../../hooks/doctors/useDoctorById";
 
 function EditDoctotRequest() {
   const { id } = useParams();
+  const { data: doctorDetails, isLoading: doctorLoading } = useDoctorById(id);
+
   const editBreadcrump = [
     {
       name: "Doctors",
@@ -13,7 +16,7 @@ function EditDoctotRequest() {
       link: "/manage-doctors",
     },
     {
-      name: id,
+      name: doctorDetails?.name,
       status: "inactive",
       link: `/manage-doctors/request/${id}`,
     },
@@ -28,7 +31,10 @@ function EditDoctotRequest() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={editBreadcrump} />
-          <EditDoctorForm />
+          <EditDoctorForm
+            doctorDetails={doctorDetails}
+            doctorLoading={doctorLoading}
+          />
         </div>
       </div>
     </Layout>

@@ -3,9 +3,12 @@ import Layout from "../../layout/Layout";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import HospitalEditForm from "../../Hospitals/HospitalEditForm";
 import { useParams } from "react-router-dom";
+import { useViewHospital } from "../../../hooks/hospitals/useViewHospital";
 
 function ReviewEdit() {
   const { id } = useParams();
+  const { data: hospitalDetails } = useViewHospital(id);
+
   const breadCrumpData = [
     {
       name: "Dashboard",
@@ -18,7 +21,7 @@ function ReviewEdit() {
       link: "/manage-hospitals",
     },
     {
-      name: id,
+      name: hospitalDetails?.name,
       status: "inactive",
       link: `/manage-hospitals/manage-request/${id}`,
     },
@@ -37,7 +40,7 @@ function ReviewEdit() {
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
-          <HospitalEditForm />
+          <HospitalEditForm hospitalDetails={hospitalDetails}/>
         </div>
       </div>
     </Layout>

@@ -22,7 +22,7 @@ function DoctorRequest() {
       link: "/manage-doctors",
     },
     {
-      name: id,
+      name: doctorDetails?.name,
       status: "active",
       link: `/manage-doctors/request/${id}`,
     },

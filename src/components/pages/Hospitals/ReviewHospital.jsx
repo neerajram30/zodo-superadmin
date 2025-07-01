@@ -30,7 +30,7 @@ function ReviewHospital() {
       link: "/manage-hospitals",
     },
     {
-      name: id,
+      name: hospitalDetails?.name,
       status: "active",
       link: `/manage-hospitals/manage-request/${id}`,
     },

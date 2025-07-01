@@ -73,6 +73,9 @@ function AddHospital() {
         name: file3?.name,
         file: file3?.key || file3?.file,
       };
+      const fileArray = [file1Details, file2Details, file3Details].filter(
+        (file) => file.name && file.file
+      );
       const hospital = {
         name: data?.hospitalName,
         logo: profilePic,
@@ -118,7 +121,7 @@ function AddHospital() {
           website: data?.website,
         },
         gst: data?.gstnumber,
-        documents: [file1Details, file2Details, file3Details],
+        documents: fileArray,
       };
       await mutate(hospital);
       // methods.reset();
