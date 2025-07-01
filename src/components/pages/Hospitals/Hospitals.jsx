@@ -5,16 +5,13 @@ import Breadcrumb from "../../breadcrump/Breadcrumb";
 import HospitalHero from "../../heros/HospitalHero";
 import AllHospitals from "../../Hospitals/AllHospitals";
 import HospitalRequest from "../../Hospitals/HospitalRequest";
-import useHospitalList from "../../../store/useHospitalList";
 import { useRequestedHospitals } from "../../../hooks/hospitals/useRequestedHospital";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
-import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
 function Hospitals() {
   const [searchTerm, setSearchterm] = useState("");
-  const { data: hospitalList, isLoading } = useGetHospitals(searchTerm);
-
-  const setHospitalList = useHospitalList((state) => state.setHospitalList);
-  setHospitalList(hospitalList);
+  
+  // const setHospitalList = useHospitalList((state) => state.setHospitalList);
+  // setHospitalList(hospitalList);
 
   const { data: requestedHospitals, isLoading: requestedLoading } =
     useRequestedHospitals("pending");
@@ -34,26 +31,40 @@ function Hospitals() {
     {
       id: "allhospitals",
       title: "All Hosptitals",
-      content: <AllHospitals hospitalList={hospitalList ?? []} loading={isLoading}/>,
-      link:'all'
+      content: (
+        <AllHospitals searchTerm={searchTerm}/>
+      ),
+      link: "all",
     },
     {
       id: "requested",
       title: `Requested Hospitals (${requestHospitalCount})`,
-      content: <HospitalRequest hospitalList={requestedHospitals ?? []} loading={isLoading}/>,
-      link:'requested'
+      content: (
+        <HospitalRequest
+          hospitalList={requestedHospitals ?? []}
+          loading={false}
+        />
+      ),
+      link: "requested",
     },
     {
       id: "rejected",
       title: `Rejected Hospitals (${rejectedHospitalCount})`,
-      content: <HospitalRequest hospitalList={rejectedHospitals ?? []} loading={isLoading}/>,
-      link:'rejected'
+      content: (
+        <HospitalRequest
+          hospitalList={rejectedHospitals ?? []}
+          loading={false}
+        />
+      ),
+      link: "rejected",
     },
   ];
 
   const handleSearch = (searchTerm) => {
     setSearchterm(searchTerm);
   };
+
+  
 
   return (
     <Layout
@@ -65,9 +76,8 @@ function Hospitals() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <HospitalHero tabData={tabData} handleSearch={handleSearch} />
-          {isLoading ||
-            rejectedLoading ||
-            (requestedLoading && <FullscreenLoader />)}
+         
+          {rejectedLoading || (requestedLoading && <FullscreenLoader />)}
         </div>
       </div>
     </Layout>

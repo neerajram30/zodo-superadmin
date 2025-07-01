@@ -28,9 +28,18 @@ export const addHospital = async (hospitalData) => {
  * @returns {Promise<Array>} A list of all hospitals.
  */
 
-export const getHospitals = async () => {
-  const response = await apiClient.get("/hospitals");
-  return response?.data?.data;
+export const getHospitals = async ({ pageParam = 1, query = "", status ="" }) => {
+  const response = await apiClient.get("/hospitals", {
+    params: {
+      page: pageParam,
+      limit: 20,
+      sortBy: "id:ASC",
+      name: query || undefined,
+      status: status || undefined,
+    },
+  });
+
+  return response;
 };
 
 export const getHospitalsBySearch = async (query) => {
@@ -60,7 +69,7 @@ export const getHospital = async (id) => {
  * @returns {Promise<Object>} The updated hospital data.
  */
 
-export const editHospital = async ({id, data}) => {
+export const editHospital = async ({ id, data }) => {
   const response = await apiClient.patch(`/hospitals/${id}`, data);
   return response.data;
 };
@@ -83,8 +92,11 @@ export const getRequestedHospitalList = async (status) => {
   return response.data?.data;
 };
 
-export const changeHospitalStatus = async ({id, data}) => {
-  const response = await apiClient.patch(`/hospitals/${id}/change-status`, data);
+export const changeHospitalStatus = async ({ id, data }) => {
+  const response = await apiClient.patch(
+    `/hospitals/${id}/change-status`,
+    data
+  );
   return response.data;
 };
 
@@ -92,5 +104,3 @@ export const getHospitalDocuments = async (id) => {
   const response = await apiClient.get(`/documents?hospital_id=${id}`);
   return response?.data?.data || [];
 };
-
-
