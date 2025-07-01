@@ -40,6 +40,7 @@ import ManageBanner from "./components/pages/AppManage/ManageBanner";
 import AppLink from "./components/pages/AppManage/AppLink";
 import Platform from "./components/pages/AppManage/Platform";
 import Notifications from "./components/pages/AppManage/Notifications";
+import UserManage from "./components/pages/UserManage/UserManage";
 
 //Accounts
 const Approuter = () => {
@@ -171,6 +172,11 @@ const Approuter = () => {
             <Route
               path="/app-manage"
               element={<ManageBanner/>}
+            />
+
+            <Route
+              path="/user-manage"
+              element={<UserManage/>}
             />
             <Route
               path="/app-link"

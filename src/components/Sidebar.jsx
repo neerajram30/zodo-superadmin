@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Scrollbars from "react-custom-scrollbars-2";
 import {
   dashboard,
   logout_01,
-  menuicon08,
+  menuicon03, menuicon08,
   menuicon09,
-  menuicon16,
+  menuicon16
 } from "./imagepath";
 import { useAuth } from "../hooks/auth/useAuth";
 
@@ -137,6 +137,18 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                 </Link>
               </li>
 
+              <li className="submenu">
+                <Link
+                  to="/user-manage"
+                  className={activeClassName === "userManage" ? "active" : ""}
+                  onClick={handleMenuClick}
+                >
+                  <span className="menu-side">
+                    <img src={menuicon03} alt="" />
+                  </span>
+                  <span>User Manage</span>
+                </Link>
+              </li>
               <li className="submenu">
                 <Link
                   to="/app-manage"
