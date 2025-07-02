@@ -68,31 +68,26 @@ function RevenueInfo(props) {
                 />
               </div>
             </div>
-            <Link
-              className="dash-content dash-count flex-grow-1"
-              to="settlement-requests"
-            >
+            <div className="dash-content dash-count flex-grow-1">
               <h4>Settlement Request</h4>
               <h2>
                 {" "}
-                <CountUp delay={0.4} end={dashboardData?.settlement?.requested ?? 0} duration={0.6} />
+                <CountUp
+                  delay={0.4}
+                  end={dashboardData?.settlement?.requested ?? 0}
+                  duration={0.6}
+                />
               </h2>
               <p>
-                <span className="passive-view">
-                  {/* <i className="feather-arrow-up-right me-1">
-                    <FeatherIcon icon="arrow-up-right" />
-                  </i> */}
+                <Link to="settlement-requests" className="passive-view">
                   See All Request
-                </span>{" "}
+                </Link>{" "}
               </p>
-            </Link>
+            </div>
           </div>
         </div>
 
-        <Link
-          className="col-md-6 col-sm-6 col-lg-6 col-xl-6"
-          to="fasttag-revenue"
-        >
+        <div className="col-md-6 col-sm-6 col-lg-6 col-xl-6">
           <div className="dash-widget">
             <div className="dash-boxs comman-flex-center">
               <img src={fasttag_revenue} alt="#" />
@@ -101,20 +96,22 @@ function RevenueInfo(props) {
               <h4>Fast tag Revenue</h4>
               <h2>
                 {" "}
-                $<CountUp delay={0.4} end={dashboardData?.fast_tag?.revenue ?? 0} duration={0.6} />
+                $
+                <CountUp
+                  delay={0.4}
+                  end={dashboardData?.fast_tag?.revenue ?? 0}
+                  duration={0.6}
+                />
               </h2>
-              {/* <p>
-                <span className="passive-view">
-                  <i className="feather-arrow-up-right me-1">
-                    <FeatherIcon icon="arrow-up-right" />
-                  </i>
-                  0%
-                </span>{" "}
-                vs last month
-              </p> */}
+
+              <p>
+                <Link to="fasttag-revenue" className="passive-view">
+                  View Details
+                </Link>{" "}
+              </p>
             </div>
           </div>
-        </Link>
+        </div>
       </div>
     </>
   );

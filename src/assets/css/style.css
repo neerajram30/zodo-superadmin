@@ -510,6 +510,16 @@ table.table td h2 span {
   border-color: #347D73;
   /* color: #000; */
 }
+.btn-outline-danger {
+  border: 1px solid #e30808;
+  border-color:#e30808;
+  color: #e30808;
+}
+.btn-outline-danger:hover {
+  background-color: #f8dddd;
+  border-color: #e30808;
+  /* color: #000; */
+}
 .btn-outline-primary.active:not(:disabled):not(.disabled),
 .btn-outline-primary:active:not(:disabled):not(.disabled),
 .show > .btn-outline-primary.dropdown-toggle {
@@ -11978,4 +11988,9 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   min-height: 30px;
   display: flex;
   align-items: center;
+}
+
+.contact-details{
+  font-size: 1rem;
+  padding-top: 10px;
 }

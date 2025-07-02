@@ -9,9 +9,9 @@ function HospitalList(props) {
   const columns = [
     { title: "Hospital Name", dataIndex: "name" },
     {
-      title: "No. Fast Tags/day",
+      title:<div className="text-center">No. Fast Tags/day</div>,
       dataIndex: "fastTagsPerday",
-      render: (item, record) => <div>{record?.fastTag?.count}</div>,
+      render: (item, record) => <div className="text-center">{record?.fastTag?.count}</div>,
     },
     { title: "Monthly Sales", dataIndex: "monthlySales" },
     { title: "Revenue/Month", dataIndex: "revenuePerMonth" },
@@ -23,10 +23,10 @@ function HospitalList(props) {
       ),
     },
     {
-      title: "Action",
+      title: <div className="text-center">Action</div>,
       dataIndex: "action",
       render: (item, record) => (
-        <Link to={`/manage-hospitals/${record.id}`}>view</Link>
+        <Link to={`/manage-hospitals/${record.id}`} className="d-flex justify-content-center">view</Link>
       ),
     },
   ];

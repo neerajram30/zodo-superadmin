@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ContactHospital from "../../modals/ContactHospital";
 
 function SettlementOperations(props) {
-  const { approveRequest, isLoading, status, declineRequest } = props;
+  const { approveRequest, isLoading, status, declineRequest, hospitalDetails } =
+    props;
   const navigate = useNavigate();
-  
+  const [show,setShow] = useState(false);
   return (
     <div className="row pb-4">
       <div className="settings-btns col-md-6 col-sm-12">
@@ -28,11 +30,18 @@ function SettlementOperations(props) {
           >
             Contact Them
           </button> */}
+            <button
+              type="submit"
+              className="btn-outline-primary rounded pt-2 pb-2 ps-5 pe-5"
+              onClick={() =>setShow(true)}
+            >
+              Contact Them
+            </button>
           &nbsp;&nbsp;
           {status !== "rejected" && (
             <button
               type="submit"
-              className="btn-outline-primary rounded pt-2 pb-2 ps-5 pe-5"
+              className="btn-outline-danger rounded pt-2 pb-2 ps-5 pe-5"
               onClick={() => declineRequest()}
             >
               Decline
@@ -56,6 +65,11 @@ function SettlementOperations(props) {
           )}
         </div>
       </div>
+      <ContactHospital
+        setShow={setShow}
+        show={show}
+        data={hospitalDetails}
+      />
     </div>
   );
 }
@@ -65,6 +79,7 @@ SettlementOperations.propTypes = {
   isLoading: PropTypes.bool,
   status: PropTypes.string,
   declineRequest: PropTypes.func,
+  hospitalDetails: PropTypes.object,
 };
 
 export default SettlementOperations;

@@ -8,7 +8,9 @@ import { useState } from "react";
 
 function FasttagIssued() {
   const [searchTerm, setSearchterm] = useState("");
-  const { data: hospitalList, isLoading } = useGetHospitals(searchTerm);
+  const { data, isLoading } = useGetHospitals(searchTerm);
+  const hospitalList =
+    data?.pages.flatMap((page) => page?.data?.data || []) || [];
   const breadCrumpData = [
     {
       name: "Dashboard",

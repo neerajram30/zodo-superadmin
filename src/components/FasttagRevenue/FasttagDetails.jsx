@@ -6,26 +6,31 @@ import { useGetHospitals } from "../../hooks/hospitals/useGetHospitals";
 import { useRequestedHospitals } from "../../hooks/hospitals/useRequestedHospital";
 // fasttag
 function FasttagDetails() {
-  const { data: hospitalList, isLoading } = useGetHospitals();
+  const { data, isLoading } = useGetHospitals();
+  const hospitalList =
+    data?.pages.flatMap((page) => page?.data?.data || []) || [];
   // console.log("Data",hospitalList?.data);
-  console.log(isLoading);
-
+  // console.log(isLoading);
+  console.log("Hospital list ",hospitalList);
+  
   const { data: requestedHospitals, isLoading: requestedLoading } =
     useRequestedHospitals("pending");
   console.log(requestedLoading);
-
-  // const { data: rejectedHospitals, isLoading: rejectedLoading } =
-  //   useRequestedHospitals("rejected");
   const tabData = [
     {
       id: "all-hospitals",
-      title: "All Hospitals",
-      content: <HospitalList data={hospitalList || []} />,
+      title: `All Hospitals (${hospitalList?.length || 0})`,
+      content: <HospitalList data={hospitalList || []} isLoading={isLoading} />,
     },
     {
       id: "requested-hospitals",
-      title: "Requested Hospitals",
-      content: <RequestedHospitals data={requestedHospitals || []} />,
+      title: `Requested Hospitals (${requestedHospitals?.length || 0})`,
+      content: (
+        <RequestedHospitals
+          data={requestedHospitals || []}
+          isLoading={requestedLoading}
+        />
+      ),
     },
   ];
   return (

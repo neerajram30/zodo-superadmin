@@ -1,14 +1,17 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ContactHospital from "../modals/ContactHospital";
 
 function ManageAccess(props) {
   const { record } = props;
+  const [show, setShow] = useState(false);
   return (
     <div className="row mt-2 w-75">
       <div className="invoices-create-btn-table">
         <Link
           to="#"
+          onClick={() => setShow(true)}
           // data-bs-toggle="modal"
           // data-bs-target="#delete_invoices_details"
           className="hospital-draft-btn rounded-pill text-primary manage-access"
@@ -23,6 +26,7 @@ function ManageAccess(props) {
         >
           Approve
         </Link>
+        <ContactHospital setShow={setShow} show={show} data={record} />
       </div>
     </div>
   );

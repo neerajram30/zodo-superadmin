@@ -109,7 +109,7 @@ function DashboardTable() {
           <div className="dash-widget dashboard-table-card">
             <div className="d-flex justify-content-between">
               <h4>Recent Doctor Request</h4>
-              <Link to="/manage-doctors?tab=requested"><small>See all</small></Link>
+              <Link to="/manage-doctors?tab=requests"><small>See all</small></Link>
             </div>
             <Table
               columns={doctorColumns}

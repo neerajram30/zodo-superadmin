@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 import { useGetHospitals } from "../../hooks/hospitals/useGetHospitals";
 
 function AllHospitals(props) {
-  const { searchTerm } = props;
+  const { searchTerm, loading } = props;
   
   const { ref, inView } = useInView();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -24,7 +24,7 @@ function AllHospitals(props) {
   
   return (
     <div className="row mt-2">
-      {!isLoading ? (
+      {!isLoading || !loading ? (
         <>
           {hospitalList?.map((item) => (
             <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
@@ -42,7 +42,8 @@ function AllHospitals(props) {
 }
 
 AllHospitals.propTypes = {
-  searchTerm: PropTypes.string
+  searchTerm: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 export default AllHospitals;

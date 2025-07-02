@@ -7,7 +7,6 @@ import AllHospitals from "../../Hospitals/AllHospitals";
 // import { useRequestedHospitals } from "../../../hooks/hospitals/useRequestedHospital";
 import HospitalRequest from "../../Hospitals/HospitalRequest";
 import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
-import FullscreenLoader from "../../loadings/FullscreenLoader";
 function Hospitals() {
   const [searchTerm, setSearchterm] = useState("");
 
@@ -39,7 +38,7 @@ function Hospitals() {
     {
       id: "allhospitals",
       title: `All Hosptitals (${hospitalList?.length ?? 0})`,
-      content: <AllHospitals searchTerm={searchTerm}/>,
+      content: <AllHospitals searchTerm={searchTerm} loading={isLoading}/>,
       link: "all",
     },
     {
@@ -70,7 +69,6 @@ function Hospitals() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <HospitalHero tabData={tabData} handleSearch={handleSearch} />
-          {isLoading && <FullscreenLoader />}
         </div>
       </div>
     </Layout>

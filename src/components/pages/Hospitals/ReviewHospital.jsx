@@ -81,6 +81,7 @@ function ReviewHospital() {
             // isLoading={approveLoading}
             status={status}
             declineRequest={handleDeclineModal}
+            hospitalDetails={hospitalDetails}
           />
           <ApproveRequestModal
             show={showApprovemodal}
