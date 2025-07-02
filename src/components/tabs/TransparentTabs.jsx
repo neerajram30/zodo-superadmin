@@ -4,7 +4,10 @@ import { Link, useSearchParams } from "react-router-dom";
 function TransparentTabs(props) {
   const { tabData } = props;
   const [searchParams] = useSearchParams();
-  const tabs = searchParams.get("tab") || tabData[0]?.link;
+  const currentTab = searchParams.get("tab") || tabData[0]?.link;
+
+  const activeTab = tabData.find((tab) => tab.link === currentTab);
+
   return (
     <>
       <div className="profile-tabs">
@@ -13,10 +16,12 @@ function TransparentTabs(props) {
             <li key={tabItem.id + i} className="pb-2">
               <Link
                 className={`nav-link`}
-                style={tabs === tabItem.link ? {borderBottom:'2px solid #05A95C'} : {}}
-                // to={`#${tabItem.id}`}
+                style={
+                  currentTab === tabItem.link
+                    ? { borderBottom: "2px solid #05A95C" }
+                    : {}
+                }
                 to={`?tab=${tabItem.link}`}
-                // data-bs-toggle="tab"
               >
                 {tabItem.title}
               </Link>
@@ -24,23 +29,27 @@ function TransparentTabs(props) {
           ))}
         </ul>
       </div>
+
       <div className="tab-content">
-        {tabData.map((tabItem, i) => (
-          <div
-            className={`tab-pane ${tabs === tabItem.link ? "show active" : ""}`}
-            id={tabItem.id}
-            key={tabItem.id + i}
-          >
-            {tabItem.content}
+        {activeTab && (
+          <div className="tab-pane show active" id={activeTab.id}>
+            {activeTab.content}
           </div>
-        ))}
+        )}
       </div>
     </>
   );
 }
 
 TransparentTabs.propTypes = {
-  tabData: PropTypes.node,
+  tabData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+      content: PropTypes.node.isRequired,
+    })
+  ).isRequired,
 };
 
 export default TransparentTabs;

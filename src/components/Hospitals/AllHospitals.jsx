@@ -8,6 +8,7 @@ import { useGetHospitals } from "../../hooks/hospitals/useGetHospitals";
 
 function AllHospitals(props) {
   const { searchTerm } = props;
+  
   const { ref, inView } = useInView();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useGetHospitals(searchTerm);
@@ -19,6 +20,8 @@ function AllHospitals(props) {
       fetchNextPage();
     }
   }, [inView, hasNextPage]);
+  
+  
   return (
     <div className="row mt-2">
       {!isLoading ? (
@@ -39,7 +42,7 @@ function AllHospitals(props) {
 }
 
 AllHospitals.propTypes = {
-  searchTerm: PropTypes.string,
+  searchTerm: PropTypes.string
 };
 
 export default AllHospitals;

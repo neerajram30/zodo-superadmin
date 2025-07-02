@@ -11972,3 +11972,10 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   font-size: 0.9em;
   margin-top: -8px;
 }
+
+.hospital-title{
+  max-height: 50px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+}

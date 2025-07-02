@@ -29,6 +29,8 @@ export const addHospital = async (hospitalData) => {
  */
 
 export const getHospitals = async ({ pageParam = 1, query = "", status ="" }) => {
+  console.log("Status ",status);
+  
   const response = await apiClient.get("/hospitals", {
     params: {
       page: pageParam,
@@ -38,7 +40,8 @@ export const getHospitals = async ({ pageParam = 1, query = "", status ="" }) =>
       status: status || undefined,
     },
   });
-
+  console.log("Response ",response);
+  
   return response;
 };
 

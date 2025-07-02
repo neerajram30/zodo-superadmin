@@ -3,7 +3,7 @@ import { getHospitals } from "../../apis/hospitals";
 
 export const useGetHospitals = (query = "", status="") => {
   return useInfiniteQuery({
-    queryKey: ["hospitals", query], // Unique query key
+    queryKey: ["hospitals", query, status], // Unique query key
     queryFn: ({ pageParam = 1 }) => getHospitals({ pageParam, query, status }),
     getNextPageParam: (lastPage) => {
       const currentPage = lastPage?.meta?.currentPage ?? 1;

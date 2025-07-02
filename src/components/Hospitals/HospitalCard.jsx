@@ -3,6 +3,7 @@ import { right_chevron } from "../imagepath";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import ImageBox from "../assests/ImageBox";
+import StatusBadge from "../assests/StatusBadge";
 
 function HospitalCard(props) {
   const { hospitalData, hospitalId } = props;
@@ -31,12 +32,13 @@ function HospitalCard(props) {
             <div className="col-auto">
               <img src={right_chevron} alt="#" />
             </div>
-            <div className="row mt-3">
+            <div className="row mt-3 pe-0 hospital-title">
               <div className="col">
                 <h5>{hospitalData.name}</h5>
               </div>
-              <div className="col-auto">
-                <h5 className="text-primary">{hospitalData?.current}</h5>
+              <div className="col-auto pe-0">
+                <StatusBadge status={hospitalData?.status}/>
+                {/* <h5 className="text-primary">{hospitalData?.status }</h5> */}
               </div>
             </div>
 

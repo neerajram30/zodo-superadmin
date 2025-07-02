@@ -4,22 +4,23 @@ import Breadcrumb from "../../breadcrump/Breadcrumb";
 // import LoadMore from "../../Hospitals/LoadMore";
 import HospitalHero from "../../heros/HospitalHero";
 import AllHospitals from "../../Hospitals/AllHospitals";
+// import { useRequestedHospitals } from "../../../hooks/hospitals/useRequestedHospital";
 import HospitalRequest from "../../Hospitals/HospitalRequest";
-import { useRequestedHospitals } from "../../../hooks/hospitals/useRequestedHospital";
+import { useGetHospitals } from "../../../hooks/hospitals/useGetHospitals";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 function Hospitals() {
   const [searchTerm, setSearchterm] = useState("");
-  
+
   // const setHospitalList = useHospitalList((state) => state.setHospitalList);
   // setHospitalList(hospitalList);
 
-  const { data: requestedHospitals, isLoading: requestedLoading } =
-    useRequestedHospitals("pending");
-  const { data: rejectedHospitals, isLoading: rejectedLoading } =
-    useRequestedHospitals("rejected");
-  console.log(requestedHospitals, requestedLoading);
-  const requestHospitalCount = requestedHospitals?.length ?? 0;
-  const rejectedHospitalCount = rejectedHospitals?.length ?? 0;
+  // const { data: requestedHospitals, isLoading: requestedLoading } =
+  //   useRequestedHospitals("pending");
+  // const { data: rejectedHospitals, isLoading: rejectedLoading } =
+  //   useRequestedHospitals("rejected");
+  // console.log(requestedHospitals, requestedLoading);
+  // const requestHospitalCount = requestedHospitals?.length ?? 0;
+  // const rejectedHospitalCount = rejectedHospitals?.length ?? 0;
   const breadCrumpData = [
     {
       name: "Hospitals",
@@ -27,35 +28,30 @@ function Hospitals() {
       link: "/manage-hospitals",
     },
   ];
+  const { data, isLoading } =
+      useGetHospitals(searchTerm);
+    // const hospitalList = []
+    const hospitalList =
+      data?.pages.flatMap((page) => page?.data?.data || []) || [];
+  const requestedHospitals = hospitalList?.filter((item)=> item.status === "pending");
+  const rejectedHospitals = hospitalList?.filter((item)=> item.status === "rejected");
   const tabData = [
     {
       id: "allhospitals",
-      title: "All Hosptitals",
-      content: (
-        <AllHospitals searchTerm={searchTerm}/>
-      ),
+      title: `All Hosptitals (${hospitalList?.length ?? 0})`,
+      content: <AllHospitals searchTerm={searchTerm}/>,
       link: "all",
     },
     {
       id: "requested",
-      title: `Requested Hospitals (${requestHospitalCount})`,
-      content: (
-        <HospitalRequest
-          hospitalList={requestedHospitals ?? []}
-          loading={false}
-        />
-      ),
+      title: `Requested Hospitals (${requestedHospitals?.length ?? 0})`,
+      content: <HospitalRequest searchTerm={searchTerm} status="pending" />,
       link: "requested",
     },
     {
       id: "rejected",
-      title: `Rejected Hospitals (${rejectedHospitalCount})`,
-      content: (
-        <HospitalRequest
-          hospitalList={rejectedHospitals ?? []}
-          loading={false}
-        />
-      ),
+      title: `Rejected Hospitals (${rejectedHospitals?.length ?? 0})`,
+      content: <HospitalRequest searchTerm={searchTerm} status="rejected" />,
       link: "rejected",
     },
   ];
@@ -63,8 +59,6 @@ function Hospitals() {
   const handleSearch = (searchTerm) => {
     setSearchterm(searchTerm);
   };
-
-  
 
   return (
     <Layout
@@ -76,8 +70,7 @@ function Hospitals() {
         <div className="content">
           <Breadcrumb data={breadCrumpData} />
           <HospitalHero tabData={tabData} handleSearch={handleSearch} />
-         
-          {rejectedLoading || (requestedLoading && <FullscreenLoader />)}
+          {isLoading && <FullscreenLoader />}
         </div>
       </div>
     </Layout>
