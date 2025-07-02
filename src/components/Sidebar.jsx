@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Scrollbars from "react-custom-scrollbars-2";
 import {
   dashboard,
-  logout_01,
-  menuicon03, menuicon08,
+  logout_01, menuicon08,
   menuicon09,
   menuicon16
 } from "./imagepath";
@@ -137,7 +136,7 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                 </Link>
               </li>
 
-              <li className="submenu">
+              {/* <li className="submenu">
                 <Link
                   to="/user-manage"
                   className={activeClassName === "userManage" ? "active" : ""}
@@ -148,7 +147,58 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                   </span>
                   <span>User Manage</span>
                 </Link>
+              </li> */}
+
+
+
+                <li className="submenu">
+                <Link
+                  to="#"
+                  id="menu-item4"
+                  onClick={(e) => handleClick(e, "menu-item4", "menu-items4")}
+                  className={
+                    activeClassName === "manage-users" ||
+                    activeClassName === "create-user"
+                      ? "active"
+                      : ""
+                  }
+                >
+                  <span className="menu-side">
+                    <img src={menuicon08} alt="" />
+                  </span>
+                  <span>Manage Users</span>
+                  <span className="menu-arrow" />
+                </Link>
+                <ul className="menu-items4" style={{ display: "none" }}>
+                  <li>
+                    <Link
+                      to="/manage-users"
+                      className={
+                        activeClassName === "manage-users"
+                          ? "submenu-active"
+                          : "submenu-normal"
+                      }
+                      onClick={handleMenuClick}
+                    >
+                      Users
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/create-user"
+                      className={
+                        activeClassName === "create-user"
+                          ? "submenu-active"
+                          : "submenu-normal"
+                      }
+                      onClick={handleMenuClick}
+                    >
+                      Create User
+                    </Link>
+                  </li>
+                </ul>
               </li>
+
               <li className="submenu">
                 <Link
                   to="/app-manage"

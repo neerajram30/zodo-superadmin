@@ -2,14 +2,17 @@ import React from "react";
 import DataTable from "../DataTables/DataTable";
 import CircularImage from "../assests/CircularImage";
 import { user_profile } from "../imagepath";
-import { Link } from "feather-icons-react/build/IconComponents";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { formatDate } from "fullcalendar/index.js";
 
 function UserTable({ usersList, isLoading }) {
+  console.log("users list ",usersList);
+  
   const columns = [
     {
-      title: "Staff Name",
-      dataIndex: "first_name",
+      title: "User Name",
+      dataIndex: "",
       // sorter: (a, b) => a.name.length - b.name.length,
       render: (item, record) => (
         <div className="d-flex">
@@ -22,7 +25,7 @@ function UserTable({ usersList, isLoading }) {
             />
           </div>
           <div className="ms-2 table-profile">
-            <h6>{item}</h6>
+            <h6>{record?.first_name}</h6>
             <p className="text-muted mb-0">{record.email}</p>
           </div>
         </div>
@@ -34,12 +37,17 @@ function UserTable({ usersList, isLoading }) {
       // sorter: (a, b) => a.empid.length - b.empid.length,
     },
     {
+      title: <div className="text-center">Age</div>,
+      dataIndex: "age",
+      render:(item)=>(
+        <div className="text-center">{item}</div>
+      )
+      // sorter: (a, b) => a.empid.length - b.empid.length,
+    },
+    {
       title: "Department",
       dataIndex: "",
-      // sorter: (a, b) => a.department.length - b.department.length,
       render: (item, record) => {
-        // const department = record?.departments[0]
-        // console.log("Department ",record?.departments);
         const departmentLen = record?.departments?.length;
         const departments =
           departmentLen !== 0 &&
@@ -50,9 +58,15 @@ function UserTable({ usersList, isLoading }) {
       },
     },
     {
-      title: "Type",
-      dataIndex: "user_type",
-      // sorter: (a, b) => a.pricing.length - b.pricing.length,
+      title: "Gender",
+      dataIndex: "gender",
+    },
+    {
+      title: <div className="text-center">Joining Date</div>,
+      dataIndex: "created_at",
+      render:(item)=>(
+        <div className="text-center">{formatDate(item)}</div>
+      )
     },
     {
       title: "",
@@ -100,10 +114,10 @@ function UserTable({ usersList, isLoading }) {
     },
   ];
   return (
-    <div className="mt-3">
+    <div className="mt-3 table-responsive">
       <DataTable
         columns={columns}
-        dataSource={usersList}
+        data={usersList}
         loading={isLoading}
       />
     </div>

@@ -12,7 +12,8 @@ import { useChangeSettlementStatus } from "../../../hooks/settlements/useChageSe
 function SettlementDetails() {
   const { id } = useParams();
   const { data, isLoading } = useViewSettlements(id);
-
+  console.log("Settlement data ",data);
+    
   const [showApprovemodal, setShowApprovemodal] = useState(false);
   const [showDeclineModal, setShowDeclineMoadl] = useState(false);
   const { mutate, isLoading: approveLoading } = useChangeSettlementStatus();
@@ -23,7 +24,7 @@ function SettlementDetails() {
       link: "/manage-hospitals",
     },
     {
-      name: id,
+      name: data?.hospital?.name,
       status: "active",
       link: `/manage-hospitals/${id}`,
     },
@@ -69,6 +70,7 @@ function SettlementDetails() {
               approveRequest={handleApproveModal}
               // isLoading={approveLoading}
               declineRequest={handleDeclineModal}
+              hospitalDetails={data?.hospital}
             />
             <ApproveRequestModal
               show={showApprovemodal}

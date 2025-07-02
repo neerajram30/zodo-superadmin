@@ -175,7 +175,7 @@ const Approuter = () => {
             />
 
             <Route
-              path="/user-manage"
+              path="/manage-users"
               element={<UserManage/>}
             />
             <Route

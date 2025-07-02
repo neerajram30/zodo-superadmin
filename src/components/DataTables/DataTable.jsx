@@ -4,7 +4,8 @@ import { itemRender } from "../Pagination";
 
 function DataTable(props) {
   const { columns, data, isLoading } = props;
-
+  console.log(" The data!",data);
+  
   // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // const onSelectChange = (newSelectedRowKeys) => {
   //   setSelectedRowKeys(newSelectedRowKeys);
