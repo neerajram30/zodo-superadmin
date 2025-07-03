@@ -8,18 +8,29 @@ import StatusBadge from "../assests/StatusBadge";
 import { useUserStatusToggle } from "../../hooks/users/useUserStatusToggle";
 import ToggleUser from "../modals/ToggleUser";
 import { useState } from "react";
+import SideModal from "../modals/SideModal";
+import UserDetails from "./UserDetails";
 
 function UserTable({ usersList, isLoading }) {
   const { mutate } = useUserStatusToggle();
   const [show, setShow] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const handleBlockUser = (id) => {
     mutate(id);
+    setUserDetails({});
   };
   const handelBlockClick = (record) => {
     setUserDetails(record);
     setShow(true);
   };
+  const handlePreview = (record)=>{
+    setUserDetails(record);
+    setShowPreview(true);
+  }
+  const handleClose = ()=>{
+    setShowPreview(false);
+  }
   const columns = [
     {
       title: "User Name",
@@ -110,7 +121,7 @@ function UserTable({ usersList, isLoading }) {
                 <Link
                   className="dropdown-item"
                   to
-                  //   onClick={() => handleEditClick(record.id, record.user_type)}
+                    onClick={() => handlePreview(record)}
                 >
                   <i className="fa fa-eye m-r-5"></i>
                   <span className="ps-1">View</span>
@@ -143,11 +154,14 @@ function UserTable({ usersList, isLoading }) {
       <ToggleUser
         show={show}
         setShow={setShow}
-        title={userDetails?.name}
+        title={userDetails?.first_name}
         status={userDetails?.is_active}
         handleStatusChange={handleBlockUser}
         userId={userDetails?.id}
       />
+      <SideModal show={showPreview} handleClose={handleClose} title="">
+        <UserDetails userDetails={userDetails}/>
+      </SideModal>
     </div>
   );
 }

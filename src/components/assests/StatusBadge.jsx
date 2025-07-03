@@ -8,6 +8,7 @@ function StatusBadge(props) {
       className={`custom-badge ${
         (status === "active" && "status-green") ||
         (status === "approved" && "status-green") ||
+        
         (status === "disabled" && "status-grey") ||
         (status === "unavailable" && "status-grey") ||
         (status === "blocked" && "status-grey") ||

@@ -6705,6 +6705,7 @@ a.status-orange {
   background-color: #fef5e4;
   color: #ff9b01;
 }
+
 .status-blue,
 a.status-blue {
   background-color: #e5f3fe;
@@ -11993,4 +11994,45 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 .contact-details{
   font-size: 1rem;
   padding-top: 10px;
+}
+
+.doctor-custom-modal .modal-dialog{
+  position: fixed; 
+  bottom: 0; 
+  right: 0; 
+  margin: 0;
+  width: 80%; 
+  max-width: 80%;
+  height: 98%;
+}
+
+.doctor-custom-modal .modal-content { 
+  height: 100%; /* Ensure the content fills the modal */ 
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.schedule-profile{
+  height: 80px;
+  width: 80px;
+  background-color: #474d52;
+  border-radius: 100%;
+}
+
+.schedule-modal{
+  margin-left: 20px;
+  padding-top: 5px;
+}
+
+.schedule-modal h5{
+  font-size: 18px;
+}
+
+.schedule-modal small{
+  font-size: 14px;
+}
+
+.user-details {
+  font-size: 0.85em;
 }

@@ -157,8 +157,7 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                   id="menu-item4"
                   onClick={(e) => handleClick(e, "menu-item4", "menu-items4")}
                   className={
-                    activeClassName === "manage-users" ||
-                    activeClassName === "create-user"
+                    activeClassName === "manage-users"
                       ? "active"
                       : ""
                   }
@@ -183,7 +182,7 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                       Users
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       to="/create-user"
                       className={
@@ -195,7 +194,7 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                     >
                       Create User
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
 
