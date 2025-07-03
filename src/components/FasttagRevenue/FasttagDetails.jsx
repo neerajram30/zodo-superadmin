@@ -11,7 +11,7 @@ function FasttagDetails() {
     data?.pages.flatMap((page) => page?.data?.data || []) || [];
   // console.log("Data",hospitalList?.data);
   // console.log(isLoading);
-  console.log("Hospital list ",hospitalList);
+
   
   const { data: requestedHospitals, isLoading: requestedLoading } =
     useRequestedHospitals("pending");

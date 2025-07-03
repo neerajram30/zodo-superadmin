@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Select from "react-select";
 import PatientChart from "./PaitentChart";
 import { useAnalyticsData } from "../../hooks/useAnalyticsData";
-function Analytics() {
+import PropTypes from "prop-types";
+function Analytics({selectedOptionIndex}) {
   const [bookingType] = useState([{ value: "normal", label: "Hospital Booking" }, { value: "fast_tag", label: "Fasttag" }]);
-  const [selectedOption, setSelectedOption] = useState(bookingType[0]);
+  const [selectedOption, setSelectedOption] = useState(selectedOptionIndex ? bookingType[selectedOptionIndex] : bookingType[0]);
   const query = `?type=${selectedOption?.value}`
   const { data } = useAnalyticsData(query);
   const countsPeryear = data?.map((item) => item.count);
@@ -83,5 +84,10 @@ function Analytics() {
     </>
   );
 }
+
+Analytics.propTypes = {
+  selectedOptionIndex: PropTypes.number,
+};
+
 
 export default Analytics;

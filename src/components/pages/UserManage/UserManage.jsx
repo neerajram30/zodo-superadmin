@@ -24,7 +24,7 @@ function UserManage() {
   const handleSearch = (term) => {
     // logic
     // setSearchterm(term)
-    console.log(term);
+    // console.log(term);
     setSearchterm(term);
     
   };

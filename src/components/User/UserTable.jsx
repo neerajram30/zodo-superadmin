@@ -1,14 +1,25 @@
-import React from "react";
 import DataTable from "../DataTables/DataTable";
 import CircularImage from "../assests/CircularImage";
 import { user_profile } from "../imagepath";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { formatDate } from "fullcalendar/index.js";
+import StatusBadge from "../assests/StatusBadge";
+import { useUserStatusToggle } from "../../hooks/users/useUserStatusToggle";
+import ToggleUser from "../modals/ToggleUser";
+import { useState } from "react";
 
 function UserTable({ usersList, isLoading }) {
-  console.log("users list ",usersList);
-  
+  const { mutate } = useUserStatusToggle();
+  const [show, setShow] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
+  const handleBlockUser = (id) => {
+    mutate(id);
+  };
+  const handelBlockClick = (record) => {
+    setUserDetails(record);
+    setShow(true);
+  };
   const columns = [
     {
       title: "User Name",
@@ -39,13 +50,11 @@ function UserTable({ usersList, isLoading }) {
     {
       title: <div className="text-center">Age</div>,
       dataIndex: "age",
-      render:(item)=>(
-        <div className="text-center">{item}</div>
-      )
+      render: (item) => <div className="text-center">{item}</div>,
       // sorter: (a, b) => a.empid.length - b.empid.length,
     },
     {
-      title: "Department",
+      title: <div className="text-center">Departments</div>,
       dataIndex: "",
       render: (item, record) => {
         const departmentLen = record?.departments?.length;
@@ -54,8 +63,17 @@ function UserTable({ usersList, isLoading }) {
           record?.departments?.reduce((acc, current) => {
             return acc + current.name + " ";
           }, "");
-        return <div>{departments}</div>;
+        return <div className="text-center">{departments}</div>;
       },
+    },
+    {
+      title: <div className="text-center">status</div>,
+      dataIndex: "is_active",
+      render: (item) => (
+        <div className="d-flex justify-content-center">
+          <StatusBadge status={item ? "active" : "blocked"} />
+        </div>
+      ),
     },
     {
       title: "Gender",
@@ -64,14 +82,12 @@ function UserTable({ usersList, isLoading }) {
     {
       title: <div className="text-center">Joining Date</div>,
       dataIndex: "created_at",
-      render:(item)=>(
-        <div className="text-center">{formatDate(item)}</div>
-      )
+      render: (item) => <div className="text-center">{formatDate(item)}</div>,
     },
     {
       title: "",
       dataIndex: "",
-      render: () => (
+      render: (item, record) => (
         <>
           <div className="text-end">
             <div className="dropdown dropdown-action">
@@ -96,15 +112,23 @@ function UserTable({ usersList, isLoading }) {
                   to
                   //   onClick={() => handleEditClick(record.id, record.user_type)}
                 >
-                  <i className="far fa-edit me-2" />
-                  Edit
+                  <i className="fa fa-eye m-r-5"></i>
+                  <span className="ps-1">View</span>
                 </Link>
                 <Link
                   className="dropdown-item"
-                  to="#"
-                  //   onClick={() => handleDeleteClick(record.id)}
+                  to
+                  onClick={() => handelBlockClick(record)}
                 >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
+                  {record?.is_active ? (
+                    <span>
+                      <i className="fa fa-user-slash m-r-5"></i> Block
+                    </span>
+                  ) : (
+                    <span>
+                      <i className="fa fa-user-check m-r-5"></i> Activate
+                    </span>
+                  )}
                 </Link>
               </div>
             </div>
@@ -115,10 +139,14 @@ function UserTable({ usersList, isLoading }) {
   ];
   return (
     <div className="mt-3 table-responsive">
-      <DataTable
-        columns={columns}
-        data={usersList}
-        loading={isLoading}
+      <DataTable columns={columns} data={usersList} loading={isLoading} />
+      <ToggleUser
+        show={show}
+        setShow={setShow}
+        title={userDetails?.name}
+        status={userDetails?.is_active}
+        handleStatusChange={handleBlockUser}
+        userId={userDetails?.id}
       />
     </div>
   );

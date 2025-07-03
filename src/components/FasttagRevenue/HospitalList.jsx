@@ -13,13 +13,16 @@ function HospitalList(props) {
       dataIndex: "fastTagsPerday",
       render: (item, record) => <div className="text-center">{record?.fastTag?.count}</div>,
     },
-    { title: "Monthly Sales", dataIndex: "monthlySales" },
-    { title: "Revenue/Month", dataIndex: "revenuePerMonth" },
+    // { title: "Monthly Sales", dataIndex: "monthlySales" },
+    { title: <div className="text-center">Price</div>, dataIndex: "", render:(item, record)=><div className="text-center">₹{record?.fastTag?.price}</div> },
     {
-      title: "Fast Tag",
+      title: <div className="text-center">Fast Tag</div>,
       dataIndex: "fastTag",
       render: (item, record) => (
+        <div className="d-flex justify-content-center">
+
         <FasttagToggle toggleFasttag={record.fastTag?.enabled} />
+        </div>
       ),
     },
     {

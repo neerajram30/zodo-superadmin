@@ -25,7 +25,7 @@ function FasttagRevenue() {
           <Breadcrumb data={breadCrumpData} />
           {/* <FasttagRevenueHeader/> */}
           <BasicHero title="Fast Tag Revenue" />
-          <Analytics />
+          <Analytics selectedOptionIndex={1}/>
           <FasttagDetails />
         </div>
       </div>
