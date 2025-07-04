@@ -1,7 +1,7 @@
 import Layout from "../../layout/Layout";
 import Hero from "../../Dashboard/hero";
 import InfoCards from "../../Dashboard/Info_cards";
-import { fasttag, profile_hospitals, doctors } from "../../imagepath";
+import { fasttag, profile_hospitals, dep_icon1 } from "../../imagepath";
 import RevenueInfo from "../../Dashboard/RevenueInfo";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Analytics from "../../Dashboard/Analytics";
@@ -28,7 +28,7 @@ function Dashboard() {
     {
       id: 2,
       title: "Total Doctors ( online )",
-      icon: doctors,
+      icon: dep_icon1,
       count: dashboardData?.activeDoctorsCount ?? 0,
       percentageUp: 0,
       link: "/manage-doctors",

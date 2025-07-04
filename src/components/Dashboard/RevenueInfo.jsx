@@ -1,14 +1,10 @@
-import { useState } from "react";
 import { fasttag, fasttag_revenue } from "../imagepath";
 import CountUp from "react-countup";
-import Select from "react-select";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 function RevenueInfo(props) {
   const { dashboardData } = props;
-  const [bookingType] = useState([{ value: 1, label: "Hospital Booking" }]);
-  const [selectedOption, setSelectedOption] = useState(bookingType[0]);
   return (
     <>
       <div className="row">
@@ -17,55 +13,6 @@ function RevenueInfo(props) {
             <div className="d-flex justify-content-between">
               <div className="dash-boxs comman-flex-center">
                 <img src={fasttag} alt="#" />
-              </div>
-              <div>
-                <Select
-                  className="custom-react-select"
-                  defaultValue={selectedOption}
-                  onChange={setSelectedOption}
-                  options={bookingType}
-                  id="search-commodity"
-                  components={{
-                    IndicatorSeparator: () => null,
-                  }}
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      borderColor: state.isFocused
-                        ? "none"
-                        : "2px solid rgba(46, 55, 164, 0.1);",
-                      boxShadow: state.isFocused ? "0 0 0 1px #05A95C" : "none",
-                      "&:hover": {
-                        borderColor: state.isFocused
-                          ? "none"
-                          : "2px solid rgba(46, 55, 164, 0.1)",
-                      },
-                      borderRadius: "10px",
-                      fontSize: "14px",
-                      minHeight: "45px",
-                    }),
-                    option: (provided, state) => ({
-                      ...provided,
-                      backgroundColor: state.isSelected
-                        ? "#347D73"
-                        : provided.backgroundColor,
-                      "&:active": {
-                        backgroundColor: state.isSelected
-                          ? "#347D73"
-                          : provided.backgroundColor,
-                      },
-                    }),
-                    dropdownIndicator: (base, state) => ({
-                      ...base,
-                      transform: state.selectProps.menuIsOpen
-                        ? "rotate(-180deg)"
-                        : "rotate(0)",
-                      transition: "250ms",
-                      width: "35px",
-                      height: "35px",
-                    }),
-                  }}
-                />
               </div>
             </div>
             <div className="dash-content dash-count flex-grow-1">

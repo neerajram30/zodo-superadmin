@@ -12042,3 +12042,14 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
 .user-details {
   font-size: 0.85em;
 }
+.no-content-box{
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no-content-box p{
+  font-size: 0.85rem;
+  color: gray;
+}

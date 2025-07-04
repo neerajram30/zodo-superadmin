@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Breadcrumb from "../../breadcrump/Breadcrumb"
+import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Layout from "../../layout/Layout";
 import DoctorRequestCard from "../../Doctors/DoctorRequest/DoctorRequestCard";
 import SettlementOperations from "../../Dashboard/Settlement/SettlementOperations";
@@ -14,6 +14,7 @@ function DoctorRequest() {
   const [showApprovemodal, setShowApprovemodal] = useState(false);
   const [showDeclineModal, setShowDeclineMoadl] = useState(false);
   const { mutate, isLoading: approveLoading } = useChangeDoctorStatus();
+  console.log("Doctor details ", doctorDetails);
 
   const breadCrumpData = [
     {
@@ -56,6 +57,14 @@ function DoctorRequest() {
       }
     );
   };
+
+  const details = {
+    contact_details: {
+      mobile: doctorDetails?.phone_number,
+      email: doctorDetails?.email,
+      website: "",
+    },
+  };
   return (
     <Layout activeClassName="manage-doctors" id="menu-item3" id1="menu-items3">
       <div className="page-wrapper">
@@ -70,6 +79,7 @@ function DoctorRequest() {
             // isLoading={approveLoading}
             status={doctorDetails?.status}
             declineRequest={handleDeclineModal}
+            hospitalDetails={details}
           />
           <ApproveRequestModal
             show={showApprovemodal}

@@ -53,11 +53,6 @@ function Review(props) {
                                 (review?.user?.last_name ?? "")}
                             </p>
                             <div>
-                              {/* <i className="fa fa-star active"></i>
-                              <i className="fa fa-star active"></i>
-                              <i className="fa fa-star active"></i>
-                              <i className="fa fa-star"></i>
-                              <i className="fa fa-star"></i> */}
                               {[...Array(5)].map((_, index) => (
                                 <i
                                   key={index}

@@ -24,15 +24,23 @@ function HospitalRequest(props) {
   return (
     <div className="row mt-2">
       {!isLoading ? (
-        <>
-          {hospitalList?.map((item) => (
-            <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
-              <HospitalRequestCard hospitalData={item} />
-            </div>
-          ))}
-        </>
+        hospitalList?.length > 0 ? (
+          <>
+            {hospitalList?.map((item) => (
+              <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
+                <HospitalRequestCard hospitalData={item} />
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className="no-content-box">
+            <p>No Hospitals Found</p>
+          </div>
+        )
       ) : (
-        <ComponentLoader />
+        <div className="no-content-box">
+          <ComponentLoader />
+        </div>
       )}
       <div ref={ref} />
       {isFetchingNextPage && <ComponentLoader />}

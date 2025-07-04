@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Scrollbars from "react-custom-scrollbars-2";
 import {
   dashboard,
-  logout_01, menuicon08,
+  logout_01,
+  menuicon03,
+  menuicon08,
   menuicon09,
-  menuicon16
+  menuicon16,
 } from "./imagepath";
 import { useAuth } from "../hooks/auth/useAuth";
 
@@ -122,7 +124,18 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                   </li>
                 </ul>
               </li>
-
+              <li className="submenu">
+                <Link
+                  to="/manage-users"
+                  className={activeClassName === "manage-users" ? "active" : ""}
+                  onClick={handleMenuClick}
+                >
+                  <span className="menu-side">
+                    <img src={menuicon03} alt="" />
+                  </span>
+                  <span>Manage Users</span>
+                </Link>
+              </li>
               <li className="submenu">
                 <Link
                   to="/finance"
@@ -135,6 +148,8 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                   <span>Finance</span>
                 </Link>
               </li>
+
+              
 
               {/* <li className="submenu">
                 <Link
@@ -149,9 +164,7 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                 </Link>
               </li> */}
 
-
-
-                <li className="submenu">
+              {/* <li className="submenu">
                 <Link
                   to="#"
                   id="menu-item4"
@@ -182,7 +195,7 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                       Users
                     </Link>
                   </li>
-                  {/* <li>
+                  <li>
                     <Link
                       to="/create-user"
                       className={
@@ -194,9 +207,9 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                     >
                       Create User
                     </Link>
-                  </li> */}
+                  </li>
                 </ul>
-              </li>
+              </li> */}
 
               <li className="submenu">
                 <Link
