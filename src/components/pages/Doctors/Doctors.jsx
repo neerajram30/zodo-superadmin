@@ -3,6 +3,7 @@ import Layout from "../../layout/Layout";
 import DoctorsList from "../../Doctors/DoctorsList";
 import DoctorRequests from "../../Doctors/DoctorRequests";
 import TransparentTabs from "../../tabs/TransparentTabs";
+import RejectedDoctors from "../../Doctors/RejectedDoctors";
 
 function Doctors() {
   const breadCrumpData = [
@@ -19,6 +20,12 @@ function Doctors() {
       title: "Doctor Requests",
       content: <DoctorRequests />,
       link:'requests'
+    },
+    {
+      id: "rejected_dr",
+      title: "Rejected Doctors",
+      content: <RejectedDoctors />,
+      link:'rejected'
     },
   ];
 

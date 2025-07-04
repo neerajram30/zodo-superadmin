@@ -24,6 +24,8 @@ import StatusButton from "../assests/StatusButton";
 import { useDoctorAnalytics } from "../../hooks/doctors/useDoctorsAnalytics";
 import ImageBox from "../assests/ImageBox";
 import PropTypes from "prop-types";
+import Review from "../Hospitals/Reviews/Review";
+import { useDoctorReview } from "../../hooks/review/useDoctorReview";
 
 function DoctorDetailsCard({ data, isLoading }) {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ function DoctorDetailsCard({ data, isLoading }) {
     useDoctorsDocument(id);
   const { data: doctorAnalytics, isLoading: analyticsLoading } =
     useDoctorAnalytics(id);
-
+  const { data: doctorReview, isLoading: reviewLoading } = useDoctorReview(id);
   const tabData = [
     {
       id: "dr_overview",
@@ -55,6 +57,12 @@ function DoctorDetailsCard({ data, isLoading }) {
       title: "Total Bookings",
       content: <DoctorsBookings analytics={doctorAnalytics} />,
       link: "total-bookings",
+    },
+    {
+      id: "dr_reviews",
+      title: "Reviews",
+      content: <Review reviews={doctorReview} isLoading={reviewLoading} />,
+      link: "doctor-review",
     },
   ];
 

@@ -53,7 +53,7 @@ function HospitalDetailsCard(props) {
     {
       id: "finance",
       title: "Finance",
-      content: <Finance analytics={hospitalAnalytics} />,
+      content: <Finance analytics={hospitalAnalytics}/>,
       link: "finance",
     },
     {
@@ -186,18 +186,13 @@ function HospitalDetailsCard(props) {
                       width="75x"
                       height="75px"
                     />
-                    {/* <img className="" src={hospitalDetails?.logo} alt="#" /> */}
                   </Link>
                 </div>
                 <div className="col ps-2">
-                  {/* <div className="col-md-4"> */}
                   <div className="profile-info-left pt-3">
                     <h3 className="user-name m-t-0 mb-0">
                       {hospitalDetails?.name}
                     </h3>
-                    {/* <small className="text-muted">
-                      multinational healthcare group
-                    </small> */}
                   </div>
                   {/* </div> */}
                 </div>
@@ -341,39 +336,11 @@ function HospitalDetailsCard(props) {
           </div>
         </div>
         <TransparentTabs tabData={tabData} />
-        {/* <div className="profile-tabs">
-          <ul className="nav nav-tabs nav-tabs-bottom">
-            {tabData.map((tabItem, i) => (
-              <li key={tabItem.id + i}>
-                <Link
-                  className={`nav-link ${i == 0 ? "active" : ""}`}
-                  to={`/manage-hospitals/${id}#${tabItem.id}`}
-                  data-bs-toggle="tab"
-                >
-                  {tabItem.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="tab-content mt-1">
-            {tabData.map((tabItem, i) => (
-              <div
-                className={`tab-pane ${i == 0 ? "show active" : ""}`}
-                id={tabItem.id}
-                key={tabItem.id + i}
-                aria-current={tabItem.id}
-              >
-                {tabItem.content}
-              </div>
-            ))}
-          </div>
-        </div> */}
         <HospitalModal
           show={show}
           setShow={setShow}
           hospitalId={hospitalDetails?.id}
-          // setShowToast={setShowToast}
-          // showToast={setShowToast}
+          
         />
         <ToggleModal
           show={disableshow}

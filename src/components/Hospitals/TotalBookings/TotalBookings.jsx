@@ -1,25 +1,35 @@
 import React from "react";
 import BookingsCard from "./BookingsCard";
 import BookingTabs from "./BookingTabs";
+import { useHospitalAppointments } from "../../../hooks/appointments/useHospitalAppointments";
+import { useParams } from "react-router-dom";
 
 function TotalBookings() {
+  const { id } = useParams();
+  const { data: bookings } = useHospitalAppointments(id);
+  console.log("Hospital bookings",bookings);
+  const total = bookings?.length || 0;
+  const fastTagBookings = bookings?.filter((item)=> item.is_fast_tag);
+  const cancelledBookings = bookings?.filter((item) => item?.status === "cancelled");
+  const fastTagBookingCount = fastTagBookings?.length || 0;
+  const cancelledCount = cancelledBookings?.length || 0;
   const bookinsDetails = [
     {
       id: 1,
-      bookings: "12,000",
+      bookings: total,
       dueStatus: "",
       operation: "Total Bookings",
     },
     {
       id: 2,
-      bookings: "5000",
+      bookings: fastTagBookingCount,
       dueStatus: "",
       operation: "Total Fast Tag Booking",
     },
     {
       id: 3,
-      bookings: "12",
-      dueStatus: "No Dues",
+      bookings: cancelledCount,
+      dueStatus: "  ",
       operation: "Cancellation",
     },
   ];

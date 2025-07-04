@@ -82,6 +82,7 @@ function UserDetails(props) {
         </div>
       </div>
       <div className="ms-2 me-2 mt-4">
+        <h4>Appointments</h4>
         <UserAppointmentTable
           appointmentList={appointments}
           loading={isLoading}

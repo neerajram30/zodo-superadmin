@@ -29,13 +29,13 @@ function Overview(props) {
   const tagDetails = [
     {
       id: 1,
-      amount: analytics?.fastTag?.count || 0,
-      status: "",
+      amount: analytics?.fast_tag?.count || 0,
+      status: "No Dues",
       operation: "Total Fast Tag Issued",
     },
     {
       id: 2,
-      amount: `$ ${analytics?.fastTag?.revenue || 0}`,
+      amount: `$ ${analytics?.fast_tag?.revenue || 0}`,
       status: "No Dues",
       operation: "Fast Tag Revenue",
     },

@@ -9,9 +9,9 @@ function OverViewCard(props) {
       <div className="dash-widget mt-2">
         <div className="dash-content dash-count flex-grow-1">
           <h6 className={`text-black ${data.status ? "" : "pt-3"}`}>{data.amount}</h6>
-          <p>
+          {/* <p>
             <span className="passive-view">{data.status}</span>
-          </p>
+          </p> */}
           <div className="row">
             <p className="text-dark mt-2 col">{data.operation}</p>
             <div className="col-auto">

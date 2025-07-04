@@ -20,8 +20,7 @@ function DoctorRequests() {
   };
   // const query = "status=pending";
   const { data: doctorList, isLoading } = useDoctorsList(query);
-  console.log(doctorList);
-  console.log(isLoading);
+  const requestedDoctors = doctorList?.filter((item)=> !item?.hospital_id)
 
   const columns = [
     {
@@ -108,7 +107,7 @@ function DoctorRequests() {
           <div className="card-body">
             <DoctorRequestHero handelSearchTerm={handelSearchTerm} />
             <div className="doctor-list">
-              <DataTable data={doctorList ?? []} columns={columns} />
+              <DataTable data={requestedDoctors ?? []} columns={columns} isLoading={isLoading}/>
             </div>
           </div>
         </div>

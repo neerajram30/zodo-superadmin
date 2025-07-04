@@ -10,6 +10,16 @@ export const getHospitalReviewByQuery = async (id, query) => {
   return response?.data?.data || [];
 };
 
+export const getDoctorReview = async (id) => {
+  const response = await apiClient.get(`/reviews?doctor_id=${id}`);
+  return response?.data?.data || [];
+};
+
+export const getDoctorReviewByQuery = async (id, query) => {
+  const response = await apiClient.get(`/reviews?doctor_id=${id}&${query}`);
+  return response?.data?.data || [];
+};
+
 export const removeReview = async (id) => {
   const response = await apiClient.delete(`/reviews/${id}`);
   return response?.data || {};

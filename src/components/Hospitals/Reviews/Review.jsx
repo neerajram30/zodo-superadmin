@@ -8,6 +8,8 @@ import { useDeleteReview } from "../../../hooks/review/useDeleteReview";
 
 function Review(props) {
   const { reviews, isLoading } = props;
+  console.log("Reviews", reviews);
+
   const [show, setShow] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
   const { mutate, isLoading: deleteLoading } = useDeleteReview(selectedReview);
@@ -31,7 +33,7 @@ function Review(props) {
       {!isLoading ? (
         <>
           {reviews.length > 0 ? (
-            <div>
+            <div className="row">
               {reviews.map((review) => {
                 return (
                   <div
@@ -48,18 +50,26 @@ function Review(props) {
                             <p>
                               {review?.user?.first_name +
                                 " " +
-                                review?.user?.last_name}
+                                (review?.user?.last_name ?? "")}
                             </p>
                             <div>
-                              <i className="fa fa-star active"></i>
+                              {/* <i className="fa fa-star active"></i>
                               <i className="fa fa-star active"></i>
                               <i className="fa fa-star active"></i>
                               <i className="fa fa-star"></i>
-                              <i className="fa fa-star"></i>
+                              <i className="fa fa-star"></i> */}
+                              {[...Array(5)].map((_, index) => (
+                                <i
+                                  key={index}
+                                  className={`fa fa-star ${
+                                    index < parseInt(review.rating) ? "active" : ""
+                                  }`}
+                                ></i>
+                              ))}
                             </div>
                           </div>
                           <div className="col mt-2">
-                            <div className="dropdown">
+                            <div className="dropdown position-relative">
                               <Link
                                 to="#"
                                 role="button"
@@ -72,10 +82,12 @@ function Review(props) {
                               <div
                                 className="dropdown-menu"
                                 aria-labelledby="customdropdown"
+                                style={{ zIndex: 1050 }}
                               >
                                 <Link
                                   className="dropdown-item d-flex"
                                   to=""
+                                  style={{ zIndex: 1050 }}
                                   onClick={() => handleDeleteClick(review.id)}
                                 >
                                   <img

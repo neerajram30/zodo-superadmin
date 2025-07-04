@@ -6,11 +6,13 @@ import { useState } from "react";
 import SearchDateTable from "../Tables/SearchDateTable";
 import { formatDate } from "fullcalendar/index.js";
 import PropTypes from "prop-types";
+import { useDepartmentList } from "../../hooks/departments/useDepartmentList";
 function Finance(props) {
   const { analytics } = props;
   const { id } = useParams();
   const [query, setQuery] = useState("");
   const [selectedItemsList, setSelecteditemsList] = useState([]);
+  const { data: departmentList } = useDepartmentList(id);
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };
@@ -39,19 +41,19 @@ function Finance(props) {
     {
       id: 4,
       amount: "20%",
-      status: "No Dues",
+      // status: "No Dues",
       operation: "Fast Tag Commission %",
     },
     {
       id: 5,
-      amount: "4",
-      status: "",
+      amount: departmentList?.length,
+      // status: "",
       operation: "Department",
     },
     {
       id: 6,
-      amount: `$ ${analytics?.fastag?.revenue || 0}`,
-      status: "No Dues",
+      amount: `$ ${analytics?.fast_tag?.revenue || 0}`,
+      // status: "No Dues",
       operation: "Fast Tag Revenue",
     },
   ];
