@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import DeleteDepartment from "./DeleteDepartment";
 import EditDepartment from "./EditDepartment";
 
@@ -13,35 +12,6 @@ function DepartmentCard(props) {
       <div className="dash-content dash-count flex-grow-1 department-card">
         <div className="d-flex justify-content-between">
           <h6>{data.name}</h6>
-          <div className="">
-            <div className="dropdown dropdown-action bg-white">
-              <Link
-                to="#"
-                className=""
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i className="fas fa-ellipsis-v" />
-              </Link>
-              <div className="dropdown-menu dropdown-menu-end">
-                <Link
-                  className="dropdown-item"
-                  // to={`/manage-doctors/edit-doctor/${record.id}`}
-                  onClick={() => setShowEdit(true)}
-                >
-                  <i className="far fa-edit me-2" />
-                  Edit
-                </Link>
-                <Link
-                  className="dropdown-item"
-                  to="#"
-                  onClick={() => setShowDelete(true)}
-                >
-                  <i className="fa fa-trash-alt m-r-5"></i> Delete
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="row">
           <p className="text-dark col">{data.status}</p>

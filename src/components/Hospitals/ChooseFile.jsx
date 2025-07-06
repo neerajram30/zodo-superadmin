@@ -5,11 +5,6 @@ import PropTypes from "prop-types";
 
 function ChooseFile(props) {
   const { handleFileURL, fileURL } = props;
-  // useEffect(() => {
-  //   setFile(fileURL);
-  // }, [fileURL]);
-
-  // const [loading, setLoading] = useState(false);
   const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB in bytes
   const handleButtonClick = () => {
     document.getElementById("fileInput").click();
@@ -18,15 +13,12 @@ function ChooseFile(props) {
   const handleFiles = async (e) => {
     const file = e.target.files[0];
     if (file && file.size > MAX_FILE_SIZE) {
-      // setUploadStatus("File size exceeds 2MB limit");
       e.target.value = ""; // Clear the input
       const message = "File size exceeds 2MB limit";
       toast.error(message);
     } else {
-      // setFile(file);
       const formData = new FormData();
       formData.append("file", file);
-      // setLoading(true);
       try {
         const response = await mutate(formData, {
           onSuccess: () => {
@@ -35,7 +27,6 @@ function ChooseFile(props) {
           },
         });
         console.log("S3 URL ", response?.data?.url);
-        // setFile(response?.data?.url);
         handleFileURL(response?.data?.url);
       } catch (error) {
         handleFileURL("");

@@ -6,13 +6,17 @@ const PatientChart = (props) => {
   const { data } = props;
   const chartRef = React.useRef(null);
   const chartInstanceRef = React.useRef(null);
+  console.log("Analytics data ",data);
+  const countsPeryear = data?.map((item) => item.count);
+  const categories = data?.map((item)=> item.month)
+  console.log(categories);
   
   useEffect(() => {
     if (chartInstanceRef.current) {
       chartInstanceRef.current.destroy();
       chartInstanceRef.current = null;
     }
-    if (chartRef.current && data) {
+    if (chartRef.current && countsPeryear) {
       const sColStackedOptions = {
         chart: {
           height: 230,
@@ -47,24 +51,11 @@ const PatientChart = (props) => {
           {
             name: "",
             color: "#2E37A4",
-            data: data,
+            data: countsPeryear,
           },
         ],
         xaxis: {
-          categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
+          categories: categories,
         },
       };
 
@@ -81,7 +72,7 @@ const PatientChart = (props) => {
         chartInstanceRef.current = null;
       }
     };
-  }, [data]);
+  }, [countsPeryear]);
 
   return <div id="patient-chart" ref={chartRef}></div>;
 };

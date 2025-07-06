@@ -8,7 +8,6 @@ import ConfirmLogout from "./modals/ConfirmLogout";
 
 const Header = () => {
   const { user, setUser } = useAuth();
-  console.log("user", user);
 
   const userName = user?.first_name + user?.last_name || "User";
   const userRole = user?.user_type || "Role";

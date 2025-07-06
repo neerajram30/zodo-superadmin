@@ -23,19 +23,19 @@ function SettlementDetails() {
   const financeData = [
     {
       id: 1,
-      amount: "$ 20,000",
+      amount: "₹ 20,000",
       status: "No Dues",
       operation: "Settlement",
     },
     {
       id: 2,
-      amount: "$ 20,000",
+      amount: "₹ 20,000",
       status: "No Dues",
       operation: "Total Revenue In Month",
     },
     {
       id: 3,
-      amount: "$ 2000",
+      amount: "₹ 2000",
       status: "No Dues",
       operation: "Total Balance",
     },
@@ -53,7 +53,7 @@ function SettlementDetails() {
     },
     {
       id: 6,
-      amount: "$ 20,000",
+      amount: "₹ 20,000",
       status: "No Dues",
       operation: "Fast Tag Revenue",
     },
@@ -120,7 +120,7 @@ function SettlementDetails() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ {settlement?.amount}</h6>
+              <h6>₹ {settlement?.amount}</h6>
               <p>
                 <span className="delete-badge status-orange">
                   REQUESTED AMOUNT
@@ -146,7 +146,7 @@ function SettlementDetails() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card pt-5">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 0</h6>
+              <h6>₹ 0</h6>
               <p>
                 <span className="text-danger custom-badge status-red">
                   NO DUES
@@ -159,7 +159,7 @@ function SettlementDetails() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card pt-5">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 20,000</h6>
+              <h6>₹ 20,000</h6>
               <div className="row">
                 <div className="col">
                   <p>
@@ -177,7 +177,7 @@ function SettlementDetails() {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 20,000</h6>
+              <h6>₹ 20,000</h6>
               <p>
                 <span className="passive-view">No Dues</span>
               </p>

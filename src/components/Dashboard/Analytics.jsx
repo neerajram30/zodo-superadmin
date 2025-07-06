@@ -8,7 +8,7 @@ function Analytics({selectedOptionIndex}) {
   const [selectedOption, setSelectedOption] = useState(selectedOptionIndex ? bookingType[selectedOptionIndex] : bookingType[0]);
   const query = `?type=${selectedOption?.value}`
   const { data } = useAnalyticsData(query);
-  const countsPeryear = data?.map((item) => item.count);
+  console.log("Analytics data ",data);
     
   return (
     <>
@@ -76,7 +76,7 @@ function Analytics({selectedOptionIndex}) {
                 </div>
               </div>
               <div id="patient-chart" />
-              <PatientChart data={countsPeryear}/>
+              <PatientChart data={data} />
             </div>
           </div>
         </div>

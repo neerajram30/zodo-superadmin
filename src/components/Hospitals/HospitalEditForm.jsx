@@ -119,6 +119,8 @@ function HospitalEditForm({ hospitalDetails }) {
   };
 
   const onEditHospital = async (data) => {
+    console.log("Fasttag toggle", toggleFasttag);
+
     if (data.accountNumber === data.verifyAccountnumber) {
       const file1Details = {
         name: file1?.name,
@@ -160,7 +162,7 @@ function HospitalEditForm({ hospitalDetails }) {
         },
         fastTag: {
           enabled: toggleFasttag,
-          count: parseInt(data?.fastTagcount),
+          count: toggleFasttag ? parseInt(data?.fastTagcount) : 0,
           price: 0,
         },
         bank_details: {
@@ -265,9 +267,8 @@ function HospitalEditForm({ hospitalDetails }) {
                 <InputField
                   name="website"
                   label="Hospital Website"
-                  // validation={{ required: "Hospital Website is required" }}
-                  // placeholder="Enter hospital website"
                   type="text"
+                  placeholder="Hospital website"
                 />
               </div>
             </div>
@@ -277,7 +278,6 @@ function HospitalEditForm({ hospitalDetails }) {
             <InputField
               name="gstnumber"
               label="GST Number"
-              validation={{ required: "GST Number is required" }}
               placeholder="GST Number"
               type="text"
             />
@@ -304,6 +304,12 @@ function HospitalEditForm({ hospitalDetails }) {
                 placeholder="Fasttag issues per day"
                 type="number"
                 disabled={!toggleFasttag}
+                validation={{
+                  validate: (value) =>
+                    Number(value) >= 5 ||
+                    "Value must be greater than or equal to 5",
+                }}
+                minValue={5}
               />
             </div>
           </div>
@@ -336,9 +342,9 @@ function HospitalEditForm({ hospitalDetails }) {
             <div className="col-md-4">
               <InputField
                 name="companyName"
-                label=""
-                validation={{ required: "Company name is required" }}
-                placeholder="Company Name"
+                label="Hospital Name"
+                validation={{ required: "Hospital name is required" }}
+                placeholder="Hospital Name"
                 type="text"
               />
             </div>
@@ -346,7 +352,7 @@ function HospitalEditForm({ hospitalDetails }) {
             <div className="col-md-8">
               <InputField
                 name="street"
-                label=""
+                label="Street"
                 validation={{ required: "Street is required" }}
                 placeholder="Area / Street / Sector"
                 type="text"
@@ -354,10 +360,10 @@ function HospitalEditForm({ hospitalDetails }) {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group mt-3">
             <TextArea
               name="address"
-              label=""
+              label="Address"
               validation={{ required: "Address is required" }}
               placeholder="Enter Address"
             />
@@ -368,7 +374,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="town"
-                  label=""
+                  label="Town"
                   validation={{ required: "Town is required" }}
                   placeholder="Town"
                   type="text"
@@ -388,7 +394,7 @@ function HospitalEditForm({ hospitalDetails }) {
 
                 <SelectField
                   options={districtOptions || []}
-                  label=""
+                  label="District"
                   isLoading={districtLoading}
                   name="district"
                   isMultiSelect={false}
@@ -404,7 +410,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="state"
-                  label=""
+                  label="State"
                   validation={{ required: "State is required" }}
                   placeholder="State"
                   type="text"
@@ -416,7 +422,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="pincode"
-                  label=""
+                  label="Pincode"
                   validation={{ required: "Pincode is required" }}
                   placeholder="Pincode"
                   type="text"
@@ -431,7 +437,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="accountNumber"
-                  label=""
+                  label="Account Number"
                   validation={{ required: "Account Number is required" }}
                   placeholder="Account Number"
                   type="text"
@@ -442,7 +448,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="verifyAccountnumber"
-                  label=""
+                  label="Verify Account Number"
                   validation={{ required: "Account Number is required" }}
                   placeholder="Verify Account Number"
                   type="text"
@@ -456,7 +462,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="accountHoldername"
-                  label=""
+                  label="Account Holder Name"
                   validation={{
                     required: "Account Holder Name is required",
                   }}
@@ -469,7 +475,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="bankname"
-                  label=""
+                  label="Bank Name"
                   validation={{ required: "Bank name is required" }}
                   placeholder="Bank name"
                   type="text"
@@ -482,7 +488,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="ifsc"
-                  label=""
+                  label="IFSC Code"
                   validation={{ required: "IFSC Code is required" }}
                   placeholder="IFSC"
                   type="text"
@@ -493,7 +499,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="upiid"
-                  label=""
+                  label="UPI ID"
                   // validation={{ required: "IFSC Code is required" }}
                   placeholder="Upi id (optional)"
                   type="text"
@@ -501,12 +507,14 @@ function HospitalEditForm({ hospitalDetails }) {
               </div>
             </div>
           </div>
+          <h4 className="card-title mt-3">Billing Address</h4>
+
           <div className="row">
             <div className="col-md-4">
               <div className="form-group">
                 <InputField
                   name="billingAccountHoldername"
-                  label=""
+                  label="Account Holder Name"
                   validation={{
                     required: "Account Holder Name is required",
                   }}
@@ -520,7 +528,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="billingStreet"
-                  label=""
+                  label="Location"
                   validation={{ required: "Street is required" }}
                   placeholder="Area / Street / Sector"
                   type="text"
@@ -533,7 +541,7 @@ function HospitalEditForm({ hospitalDetails }) {
           <div className="form-group">
             <TextArea
               name="billingAddress"
-              label=""
+              label="Address"
               validation={{ required: "Address is required" }}
               placeholder="Enter Address"
               // disabled={isSameAsCompanyAddress}
@@ -545,7 +553,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="billingTown"
-                  label=""
+                  label="Town"
                   validation={{ required: "Town is required" }}
                   placeholder="Town / City"
                   type="text"
@@ -558,7 +566,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <SelectField
                   options={districtOptions || []}
-                  label=""
+                  label="District"
                   isLoading={districtLoading}
                   name="billingDistrict"
                   isMultiSelect={false}
@@ -574,7 +582,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="billingState"
-                  label=""
+                  label="State"
                   validation={{ required: "State is required" }}
                   placeholder="State"
                   type="text"
@@ -585,7 +593,7 @@ function HospitalEditForm({ hospitalDetails }) {
               <div className="form-group">
                 <InputField
                   name="billingPincode"
-                  label=""
+                  label="Pincode"
                   validation={{ required: "Pincode is required" }}
                   placeholder="Pincode"
                   type="text"

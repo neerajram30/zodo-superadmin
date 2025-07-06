@@ -2,10 +2,10 @@ import { useState } from "react";
 import DepartmentCard from "./DepartmentCard";
 import { useDepartmentList } from "../../../hooks/departments/useDepartmentList";
 import PropTypes from "prop-types";
-import ButtonSerchHero from "../../heros/ButtonSerchHero";
 import CenteredModal from "../../modals/CenteredModal";
 import AddDepartmentForm from "./AddDepartmentForm";
 import ComponentLoader from "../../loadings/ComponentLoader";
+import BasicSearchHero from "../../heros/BasicSearchHero";
 
 function Department(props) {
   const { hospitalId } = props;
@@ -30,7 +30,7 @@ function Department(props) {
 
   return (
     <div className="mt-3">
-      <ButtonSerchHero
+      <BasicSearchHero
         title="All Departments"
         handleSearchterm={handelSearchTerm}
         handleShow={handleShow}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   arrow_left,
   bin_icon_red,
@@ -27,7 +27,6 @@ import ImageBox from "../assests/ImageBox";
 
 function HospitalDetailsCard(props) {
   const { hospitalDetails } = props;
-  const navigate = useNavigate();
   const { id } = useParams();
   // const [showToast, setShowToast] = useState(() => () => {});
   const [show, setShow] = useState(false);
@@ -94,7 +93,7 @@ function HospitalDetailsCard(props) {
           <div className="row">
             <div className="d-flex justify-content-between">
               <div className="basic-hero-header">
-                <Link to onClick={() => navigate(-1)}>
+                <Link to="/manage-hospitals">
                   <img src={arrow_left} alt="" />
                 </Link>
                 <span className="ms-3">Hospital Details</span>
@@ -330,7 +329,7 @@ function HospitalDetailsCard(props) {
             <div className="col mt-4 mt-md-0">
               <FastTag
                 fastTagDetails={hospitalDetails?.fastTag}
-                toggleFasttag={true}
+                toggleFasttag={hospitalDetails?.fastTag?.enabled}
               />
             </div>
           </div>

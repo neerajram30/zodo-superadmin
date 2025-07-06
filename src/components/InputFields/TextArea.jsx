@@ -3,7 +3,8 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 function TextArea(props) {
-  const { name, label, validation, placeholder, disabled, defaultValue } = props;
+  const { name, label, validation, placeholder, disabled, defaultValue } =
+    props;
   const {
     register,
     formState: { errors },
@@ -12,6 +13,11 @@ function TextArea(props) {
     <div>
       <label htmlFor={name} className="form-label">
         {label}
+        {validation?.required && (
+          <span style={{ color: "red" }} className="ms-1">
+            *
+          </span>
+        )}
       </label>
       <textarea
         rows={5}

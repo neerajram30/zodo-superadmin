@@ -3,7 +3,15 @@ import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import Select from "react-select";
 function SelectField(props) {
-    const { name, label, options, validationMessage, placeholder, isMultiSelect, isLoading } = props;
+  const {
+    name,
+    label,
+    options,
+    validationMessage,
+    placeholder,
+    isMultiSelect,
+    isLoading,
+  } = props;
   const {
     control,
     formState: { errors },
@@ -26,6 +34,11 @@ function SelectField(props) {
       {label && (
         <label htmlFor={name} className="mb-2">
           {label}
+          {validationMessage && (
+            <span style={{ color: "red" }} className="ms-1">
+              *
+            </span>
+          )}
         </label>
       )}
       <Controller
