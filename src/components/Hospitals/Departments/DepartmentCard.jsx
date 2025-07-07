@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import DeleteDepartment from "./DeleteDepartment";
 import EditDepartment from "./EditDepartment";
+import StatusBadge from "../../assests/StatusBadge";
 
 function DepartmentCard(props) {
   const { data } = props;
@@ -14,7 +15,7 @@ function DepartmentCard(props) {
           <h6>{data.name}</h6>
         </div>
         <div className="row">
-          <p className="text-dark col">{data.status}</p>
+          <p className="text-dark col"><StatusBadge status={data?.status}/></p>
           {/* <div className="col-auto">
             <img src={right_chevron} alt="#" />
           </div> */}

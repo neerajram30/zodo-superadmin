@@ -1,63 +1,21 @@
 import { right_chevron } from "../imagepath";
-import OverViewCard from "./OverViewCard";
 import { useParams } from "react-router-dom";
 import { useHospitalSettlements } from "../../hooks/settlements/useHospitalSettlements";
 import { useState } from "react";
 import SearchDateTable from "../Tables/SearchDateTable";
 import { formatDate } from "fullcalendar/index.js";
 import PropTypes from "prop-types";
-import { useDepartmentList } from "../../hooks/departments/useDepartmentList";
+import StatusBadge from "../assests/StatusBadge";
 function Finance(props) {
   const { analytics } = props;
   const { id } = useParams();
   const [query, setQuery] = useState("");
-  const [selectedItemsList, setSelecteditemsList] = useState([]);
-  const { data: departmentList } = useDepartmentList(id);
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };
-  console.log("Selected items -->", selectedItemsList);
 
   const { data: settlements, isLoading } = useHospitalSettlements(id, query);
-  const financeData = [
-    // {
-    //   id: 1,
-    //   amount: "$ 20,000",
-    //   status: "No Dues",
-    //   operation: "Settlement",
-    // },
-    // {
-    //   id: 2,
-    //   amount: "$ 20,000",
-    //   status: "No Dues",
-    //   operation: "Total Revenue In Month",
-    // },
-    // {
-    //   id: 3,
-    //   amount: "$ 2000",
-    //   status: "No Dues",
-    //   operation: "Total Balance",
-    // },
-    {
-      id: 4,
-      amount: "20%",
-      // status: "No Dues",
-      operation: "Fast Tag Commission %",
-    },
-    {
-      id: 5,
-      amount: departmentList?.length,
-      // status: "",
-      operation: "Department",
-    },
-    {
-      id: 6,
-      amount: `$ ${analytics?.fast_tag?.revenue || 0}`,
-      // status: "No Dues",
-      operation: "Fast Tag Revenue",
-    },
-  ];
-
+  
   const columns = [
     {
       title: "TRANSATION ID",
@@ -132,33 +90,34 @@ function Finance(props) {
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ {analytics?.settlement?.requested || 0}</h6>
-              <p>
-                <span className="delete-badge status-orange">
-                  REQUESTED AMOUNT
-                </span>
-              </p>
+              <h6>₹ {analytics?.settlement?.requested || 0}</h6>
+              <div className="row">
+                <div className="col">
+                  <p>
+                    <span className="text-black">Requested Amount</span>
+                  </p>
+                </div>
+              </div>
               <div className="row">
                 <p className="col">Requested On 24-11-2024</p>
               </div>
-              <div>
-                <button
-                  to="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#save_invocies_details"
+              <div className="mt-2">
+                {/* <button
+                  to=""
                   className="hospital-add-btn rounded-pill text-white border-0 text ps-3 pe-3 pt-1 pb-1 paid-btn"
                 >
                   Paid Fully
-                </button>
+                </button> */}
+                <StatusBadge status="Paid Fully"/>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
+        {/* <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card pt-5">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ {analytics?.settlement?.pending || 0}</h6>
+              <h6>₹ {analytics?.settlement?.pending || 0}</h6>
               <p>
                 <span className="text-danger custom-badge status-red">
                   NO DUES
@@ -166,12 +125,30 @@ function Finance(props) {
               </p>
             </div>
           </div>
+        </div> */}
+
+        <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
+          <div className="dash-widget settlement-card pt-5">
+            <div className="dash-content dash-count flex-grow-1">
+              <h6>₹ {analytics?.settlement?.pending ?? 0}</h6>
+              <div className="row">
+                <div className="col">
+                  <p>
+                    <span className="text-black">Pending Settlement</span>
+                  </p>
+                </div>
+                <div className="col-auto">
+                  <img src={right_chevron} alt="#" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card pt-5">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ 20,000</h6>
+              <h6>₹ 0</h6>
               <div className="row">
                 <div className="col">
                   <p>
@@ -187,9 +164,27 @@ function Finance(props) {
         </div>
 
         <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
+          <div className="dash-widget settlement-card pt-5">
+            <div className="dash-content dash-count flex-grow-1">
+              <h6>₹ {analytics?.settlement?.total ?? 0}</h6>
+              <div className="row">
+                <div className="col">
+                  <p>
+                    <span className="text-black">Total Balance</span>
+                  </p>
+                </div>
+                <div className="col-auto">
+                  <img src={right_chevron} alt="#" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="col-md-4 col-sm-6 col-lg-3 col-xl-3">
           <div className="dash-widget settlement-card">
             <div className="dash-content dash-count flex-grow-1">
-              <h6>$ {analytics?.settlement?.total || 0}</h6>
+              <h6>₹ {analytics?.settlement?.total || 0}</h6>
               <p>
                 <span className="passive-view">No Dues</span>
               </p>
@@ -201,27 +196,16 @@ function Finance(props) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Finance details */}
-
-      <div className="row finance-card-container mt-2">
-        {financeData.map((item) => (
-          <OverViewCard
-            varient="col-md-4 col-sm-6 col-lg-4 col-xl-4 finance-card"
-            data={item}
-            key={item.id}
-          />
-        ))}
-      </div>
       <SearchDateTable
         data={settlements}
         isLoading={isLoading}
         handelQuery={handelQuery}
         columns={columns}
         title="Transactions"
-        setSelecteditemsList={setSelecteditemsList}
       />
     </div>
   );

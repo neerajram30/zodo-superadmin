@@ -7,7 +7,8 @@ import { useParams } from "react-router-dom";
 function TotalBookings() {
   const { id } = useParams();
   const { data: bookings } = useHospitalAppointments(id);
-  console.log("Hospital bookings",bookings);
+  console.log("Bookings",bookings);
+  
   const total = bookings?.length || 0;
   const fastTagBookings = bookings?.filter((item)=> item.is_fast_tag);
   const cancelledBookings = bookings?.filter((item) => item?.status === "cancelled");
@@ -29,7 +30,7 @@ function TotalBookings() {
     {
       id: 3,
       bookings: cancelledCount,
-      dueStatus: "  ",
+      dueStatus: "",
       operation: "Cancellation",
     },
   ];

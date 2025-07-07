@@ -3,24 +3,23 @@ import PropTypes from "prop-types";
 
 function Overview(props) {
   const { analytics } = props;
-  console.log("Hospital Analytics Overview", analytics);
-
+  
   const revenueOverview = [
     {
       id: 1,
-      amount: `$ ${analytics?.settlement?.total || 0}`,
+      amount: `₹ ${analytics?.settlement?.total || 0}`,
       status: "No Dues",
       operation: "Total Settlement",
     },
     {
       id: 2,
-      amount: `$ ${analytics?.settlement?.requested || 0}`,
+      amount: `₹ ${analytics?.settlement?.requested || 0}`,
       status: "No Dues",
       operation: "Requested Settlements",
     },
     {
       id: 3,
-      amount: `$ ${analytics?.settlement?.pending || 0}`,
+      amount: `₹ ${analytics?.settlement?.pending || 0}`,
       status: "No Dues",
       operation: "Pending Settlements",
     },
@@ -35,7 +34,7 @@ function Overview(props) {
     },
     {
       id: 2,
-      amount: `$ ${analytics?.fast_tag?.revenue || 0}`,
+      amount: `₹ ${analytics?.fast_tag?.revenue || 0}`,
       status: "No Dues",
       operation: "Fast Tag Revenue",
     },

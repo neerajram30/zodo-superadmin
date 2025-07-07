@@ -1,6 +1,7 @@
 import DataTable from "../../DataTables/DataTable";
 import PropTypes from "prop-types";
 import { getDateFromIso } from "../../configs/getDateFromISO";
+import StatusBadge from "../../assests/StatusBadge";
 
 function BookingsTable(props) {
   const { data, isLoading } = props;
@@ -37,15 +38,11 @@ function BookingsTable(props) {
     {
       title: "STATUS",
       dataIndex: "status",
-      render: (item) => (
+      render: (item,record) => (
         <div
-          className={`${
-            (item === "cancelled" && "delete-badge status-red") ||
-            (item === "started" && "delete-badge status-orange") ||
-            (item === "completed" && "delete-badge status-green")
-          }`}
+          
         >
-          {item}
+          <StatusBadge status={record?.status}/>
         </div>
       ),
     },

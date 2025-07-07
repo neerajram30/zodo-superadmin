@@ -10,12 +10,7 @@ import { useDashboardData } from "../../../hooks/useDashboardData";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
 
 function Dashboard() {
-  // const { data } = useGetHospitals();
-  // const hospitalCount = data?.data?.length;
-
-  const { data: dashboardData, isLoading } = useDashboardData();
-  console.log("Dashboard data ",dashboardData);
-  
+  const { data: dashboardData, isLoading } = useDashboardData();  
   const basicInformation = [
     {
       id: 1,
