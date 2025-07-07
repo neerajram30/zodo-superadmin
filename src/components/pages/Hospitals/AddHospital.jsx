@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import Layout from "../../layout/Layout";
 import ChooseFile from "../../Hospitals/ChooseFile";
@@ -28,7 +28,11 @@ function AddHospital() {
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
   const [file3, setFile3] = useState(null);
-
+  useEffect(() => {
+    methods.reset({
+      fastTagcount: toggleFasttag ? 5 : 0,
+    });
+  }, [toggleFasttag]);
   // const handleFileKeyDoc1 = (filekey) => {
   //   setDocument1(filekey);
   // };
@@ -60,8 +64,6 @@ function AddHospital() {
     setProfilePic(fileURL);
   };
   const onCreateHospital = async (data) => {
-    console.log("Fasttag toggle", toggleFasttag);
-
     if (data.accountNumber === data.verifyAccountnumber) {
       const file1Details = {
         name: file1?.name,
@@ -108,7 +110,7 @@ function AddHospital() {
         fastTag: {
           enabled: toggleFasttag,
           count: toggleFasttag ? parseInt(data?.fastTagcount) : 0,
-          price: 0,
+          price: toggleFasttag ? parseInt(data?.fasttagPrice) : 0,
         },
         bank_details: {
           account_number: data?.accountNumber,
@@ -129,15 +131,7 @@ function AddHospital() {
       // methods.reset();
     } else {
       const errorMessage = "Account number mismatch";
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(errorMessage);
     }
   };
   return (
@@ -270,7 +264,7 @@ function AddHospital() {
                 <h4 className="card-title mt-4">Fast Tag</h4>
                 <div className="row">
                   <div className="col-md-3">
-                    <div className="d-flex pt-2">
+                    <div className="d-flex pt-5">
                       <label className="">Enable Fast Tag</label>
                       <div className="ms-2">
                         <FasttagToggle setToggleFasttag={setToggleFasttag} />
@@ -280,7 +274,7 @@ function AddHospital() {
                   <div className="col-md-4">
                     <InputField
                       name="fastTagcount"
-                      label=""
+                      label="Fasttag Count"
                       // validation={{ required: "Fasttag issues per day is required" }}
                       placeholder="Fasttag issues per day"
                       type="number"
@@ -294,7 +288,16 @@ function AddHospital() {
                       minValue={5}
                     />
                   </div>
-                  
+                  <div className="col-md-4">
+                    <InputField
+                      name="fasttagPrice"
+                      label="Fasttag Price"
+                      // validation={{ required: "Fasttag issues per day is required" }}
+                      placeholder="Fasttag Price"
+                      type="price"
+                      disabled={!toggleFasttag}
+                    />
+                  </div>
                 </div>
 
                 <div className="row mt-4">

@@ -16,6 +16,7 @@ function StatusBadge(props) {
         (statusCheck === "disabled" && "status-grey") ||
         (statusCheck === "unavailable" && "status-grey") ||
         (statusCheck === "blocked" && "status-grey") ||
+        (statusCheck === "inactive" && "status-grey") ||
         (statusCheck === "rejected" && "status-red") ||
         (statusCheck === "pending" && "status-orange") ||
         (statusCheck === "requested" && "status-orange") ||

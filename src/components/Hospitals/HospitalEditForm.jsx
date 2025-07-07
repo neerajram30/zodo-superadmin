@@ -54,6 +54,13 @@ function HospitalEditForm({ hospitalDetails }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    methods.reset({
+      fastTagcount: toggleFasttag ? hospitalDetails?.fastTag?.count || 5: 0,
+      fasttagPrice: toggleFasttag ? hospitalDetails?.fastTag?.price : 0,
+    });
+  }, [toggleFasttag]);
+
+  useEffect(() => {
     if (hospitalDocuments?.length > 0) {
       setFile1({
         name: hospitalDocuments[0]?.name,
@@ -72,6 +79,8 @@ function HospitalEditForm({ hospitalDetails }) {
       });
     }
     if (hospitalDetails) {
+      console.log("Hospital details", hospitalDetails);
+
       setFileUrl(hospitalDetails?.logo);
       const fastTag = hospitalDetails?.fastTag?.enabled;
       setToggleFasttag(fastTag);
@@ -87,6 +96,7 @@ function HospitalEditForm({ hospitalDetails }) {
         email: hospitalDetails?.contact_details?.email,
         phone: hospitalDetails?.contact_details?.mobile,
         fastTagcount: hospitalDetails?.fastTag?.count,
+        fasttagPrice: hospitalDetails?.fastTag?.price,
         website: hospitalDetails?.contact_details?.website,
         gstnumber: hospitalDetails?.gst,
         companyName: hospitalDetails?.address?.lineOne,
@@ -163,7 +173,7 @@ function HospitalEditForm({ hospitalDetails }) {
         fastTag: {
           enabled: toggleFasttag,
           count: toggleFasttag ? parseInt(data?.fastTagcount) : 0,
-          price: 0,
+          price: toggleFasttag ? parseInt(data?.fasttagPrice) : 0,
         },
         bank_details: {
           account_number: data?.accountNumber,
@@ -286,7 +296,7 @@ function HospitalEditForm({ hospitalDetails }) {
           <h4 className="card-title mt-4">Fast Tag</h4>
           <div className="row">
             <div className="col-md-3">
-              <div className="d-flex pt-2">
+              <div className="d-flex pt-5">
                 <label className="">Enable Fast Tag</label>
                 <div className="ms-2">
                   <FasttagToggle
@@ -299,7 +309,7 @@ function HospitalEditForm({ hospitalDetails }) {
             <div className="col-md-4">
               <InputField
                 name="fastTagcount"
-                label=""
+                label="Fasttag Count"
                 // validation={{ required: "Fasttag issues per day is required" }}
                 placeholder="Fasttag issues per day"
                 type="number"
@@ -310,6 +320,16 @@ function HospitalEditForm({ hospitalDetails }) {
                     "Value must be greater than or equal to 5",
                 }}
                 minValue={5}
+              />
+            </div>
+            <div className="col-md-4">
+              <InputField
+                name="fasttagPrice"
+                label="Fasttag Price"
+                // validation={{ required: "Fasttag issues per day is required" }}
+                placeholder="Fasttag Price"
+                type="price"
+                disabled={!toggleFasttag}
               />
             </div>
           </div>

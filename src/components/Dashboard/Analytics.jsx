@@ -3,13 +3,18 @@ import Select from "react-select";
 import PatientChart from "./PaitentChart";
 import { useAnalyticsData } from "../../hooks/useAnalyticsData";
 import PropTypes from "prop-types";
-function Analytics({selectedOptionIndex}) {
-  const [bookingType] = useState([{ value: "normal", label: "Hospital Booking" }, { value: "fast_tag", label: "Fasttag" }]);
-  const [selectedOption, setSelectedOption] = useState(selectedOptionIndex ? bookingType[selectedOptionIndex] : bookingType[0]);
-  const query = `?type=${selectedOption?.value}`
+function Analytics({ selectedOptionIndex }) {
+  const [bookingType] = useState([
+    { value: "normal", label: "Hospital Booking" },
+    { value: "fast_tag", label: "Fasttag" },
+  ]);
+  const [selectedOption, setSelectedOption] = useState(
+    selectedOptionIndex ? bookingType[selectedOptionIndex] : bookingType[0]
+  );
+  const query = `?type=${selectedOption?.value}`;
   const { data } = useAnalyticsData(query);
-  console.log("Analytics data ",data);
-    
+  const count = data?.reduce((acc, item) => acc + (item.count || 0), 0);
+
   return (
     <>
       <div className="row">
@@ -20,7 +25,7 @@ function Analytics({selectedOptionIndex}) {
                 <h4>Analytics</h4>
                 <div>
                   <h6>
-                    Total bookings <span className="analytics-count">2000</span>
+                    Total bookings <span className="analytics-count">{count}</span>
                   </h6>
                 </div>
                 <div className="form-group mb-0">
@@ -88,6 +93,5 @@ function Analytics({selectedOptionIndex}) {
 Analytics.propTypes = {
   selectedOptionIndex: PropTypes.number,
 };
-
 
 export default Analytics;
