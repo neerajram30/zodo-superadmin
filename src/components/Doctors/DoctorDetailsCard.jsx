@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   arrow_left,
   email_icon,
@@ -28,7 +28,6 @@ import Review from "../Hospitals/Reviews/Review";
 import { useDoctorReview } from "../../hooks/review/useDoctorReview";
 
 function DoctorDetailsCard({ data, isLoading }) {
-  const navigate = useNavigate();
   const { id } = useParams();
   const { mutate, isLoading: statusChangeLoading } = useChangeDoctorStatus();
   const [show, setShow] = useState(false);
@@ -73,8 +72,6 @@ function DoctorDetailsCard({ data, isLoading }) {
   const doctorStatus = data?.status;
 
   const handleDisable = async () => {
-    console.log("Trigger");
-
     const updatedStatus = {
       status: doctorStatus === "active" ? "disabled" : "active",
     };
@@ -93,7 +90,7 @@ function DoctorDetailsCard({ data, isLoading }) {
         <div className="row">
           <div className="d-flex justify-content-between">
             <div className="basic-hero-header">
-              <Link to onClick={() => navigate(-1)}>
+              <Link to="/manage-doctors">
                 <img src={arrow_left} alt="" />
               </Link>
               <span className="ms-3">Doctor Details</span>

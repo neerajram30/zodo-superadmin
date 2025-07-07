@@ -20,7 +20,9 @@ function StatusBadge(props) {
         (statusCheck === "rejected" && "status-red") ||
         (statusCheck === "pending" && "status-orange") ||
         (statusCheck === "requested" && "status-orange") ||
-        (statusCheck === "accepted" && "status-orange")
+        (statusCheck === "accepted" && "status-orange") ||
+        (statusCheck === "started" && "status-orange")
+
 
       }`}
     >

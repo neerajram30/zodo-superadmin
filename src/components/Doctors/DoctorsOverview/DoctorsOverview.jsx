@@ -3,7 +3,7 @@ import OverViewCard from "../../Hospitals/OverViewCard";
 import PropTypes from "prop-types";
 
 function DoctorsOverview(props) {
-  const { analytics } = props;
+  const { analytics } = props;  
   const revenueOverview = [
     {
       id: 1,

@@ -6,6 +6,7 @@ import SearchDateTable from "../../Tables/SearchDateTable";
 import { useState } from "react";
 import { getDateFromIso } from "../../configs/getDateFromISO";
 import PropTypes from "prop-types";
+import StatusBadge from "../../assests/StatusBadge";
 
 function DoctorsBookings(props) {
   const { analytics } = props;
@@ -15,12 +16,11 @@ function DoctorsBookings(props) {
   const handelQuery = (queryResult) => {
     setQuery(queryResult);
   };
-  console.log("Query ", query);
 
-  const { data: appointments, isLoading } = useDoctorAppointments(id);
-  console.log("Data >", appointments);
+  const { data: appointments, isLoading } = useDoctorAppointments(id, query);
   const completed_count = analytics?.booking?.count_completed || 0;
   const remaining_count = analytics?.booking?.count_remaining || 0;
+
   const bookinsDetails = [
     {
       id: 1,
@@ -30,15 +30,15 @@ function DoctorsBookings(props) {
     },
     {
       id: 2,
-      bookings: "5000",
+      bookings: remaining_count,
       dueStatus: "",
-      operation: "Total Fast Tag Booking",
+      operation: "Ongoing Bookings",
     },
     {
       id: 3,
-      bookings: "12",
-      dueStatus: "No Dues",
-      operation: "Cancellation",
+      bookings: completed_count,
+      dueStatus: "",
+      operation: "Completed Bookings",
     },
   ];
   const columns = [
@@ -69,14 +69,8 @@ function DoctorsBookings(props) {
       title: "STATUS",
       dataIndex: "status",
       render: (item) => (
-        <div
-          className={`${
-            (item === "cancelled" && "delete-badge status-red") ||
-            (item === "started" && "delete-badge status-orange") ||
-            (item === "completed" || item === "accepted" && "delete-badge status-green")
-          }`}
-        >
-          {item}
+        <div>
+          <StatusBadge status={item} />
         </div>
       ),
     },
@@ -123,7 +117,7 @@ function DoctorsBookings(props) {
 }
 
 // props validation
-DoctorsBookings.propTypes = {  
+DoctorsBookings.propTypes = {
   analytics: PropTypes.object.isRequired,
 };
 

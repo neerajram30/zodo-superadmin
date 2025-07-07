@@ -176,7 +176,7 @@ function AddDoctorForm() {
                   label="Pricing"
                   validation={{ required: "Pricing is required" }}
                   placeholder="Enter Pricing"
-                  type="text"
+                  type="price"
                 />
               </div>
             </div>
