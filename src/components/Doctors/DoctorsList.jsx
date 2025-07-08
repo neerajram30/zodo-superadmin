@@ -11,8 +11,9 @@ import { reduceArraytoString } from "../configs/reduceArraytoString";
 import CircularImage from "../assests/CircularImage";
 import { user_profile } from "../imagepath";
 import StatusBadge from "../assests/StatusBadge";
+import { formatDateDDMMYY } from "../configs/fomatDateDDMMYY";
 // import { blogimg12 } from "../imagepath";
-
+import { FilterFilled } from "@ant-design/icons";
 function DoctorsList() {
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchterm] = useState("");
@@ -68,8 +69,18 @@ function DoctorsList() {
     {
       title: "Type",
       dataIndex: "hospital_id",
+      filters: [
+        { text: "online", value: "online" },
+        { text: "ofline", value: "ofline" },
+      ],
+      onFilter: (value, record) => {
+        const type = record.hospital_id ? "ofline" : "online";
+        return type === value;
+      },
+       filterIcon: (filtered) => (
+    <FilterFilled style={{ color: filtered ? "#05A95C" : "#aaa" }} />
+  ),
       render: (item) => (item ? "ofline" : "online"),
-      // sorter: (a, b) => a.Degree.length - b.Degree.length,
     },
     {
       title: "Mobile",
@@ -95,7 +106,7 @@ function DoctorsList() {
       dataIndex: "work_start_date",
       render: (item) => (
         <div className="d-flex justify-content-center">
-          {item ? item : "N/A"}
+          {item ? formatDateDDMMYY(item) : "N/A"}
         </div>
       ),
       // sorter: (a, b) => a.JoiningDate.length - b.JoiningDate.length,

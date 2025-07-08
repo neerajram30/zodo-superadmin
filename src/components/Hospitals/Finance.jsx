@@ -6,6 +6,7 @@ import SearchDateTable from "../Tables/SearchDateTable";
 import { formatDate } from "fullcalendar/index.js";
 import PropTypes from "prop-types";
 import StatusBadge from "../assests/StatusBadge";
+import { useFetchWallet } from "../../hooks/settlements/useFetchWallet";
 function Finance(props) {
   const { analytics } = props;
   const { id } = useParams();
@@ -15,7 +16,10 @@ function Finance(props) {
   };
 
   const { data: settlements, isLoading } = useHospitalSettlements(id, query);
-  
+  const { data: walletDetails } = useFetchWallet(id);
+  console.log("Wallet details ",walletDetails);
+  const requestedDate = walletDetails?.latest_settlement?.created_at;
+  const status = walletDetails?.latest_settlement?.status;
   const columns = [
     {
       title: "TRANSATION ID",
@@ -73,16 +77,6 @@ function Finance(props) {
       render: (item) => <div>₹ {item}</div>,
       // sorter: (a, b) => a.total.length - b.total.length,
     },
-    // {
-    //   title: "BALANCE",
-    //   dataIndex: "balance",
-    //   // sorter: (a, b) => a.balance.length - b.balance.length,
-    // },
-    // {
-    //   title: <div className="text-center">ACTIONS</div>,
-    //   dataIndex: "actions",
-    //   render:()=><div className="text-center">view</div>
-    // },
   ];
   return (
     <div className="pb-3 mt-2">
@@ -99,7 +93,7 @@ function Finance(props) {
                 </div>
               </div>
               <div className="row">
-                <p className="col">Requested On 24-11-2024</p>
+               {requestedDate && <p className="col">Requested On {formatDate(requestedDate)}</p>}
               </div>
               <div className="mt-2">
                 {/* <button
@@ -108,7 +102,7 @@ function Finance(props) {
                 >
                   Paid Fully
                 </button> */}
-                <StatusBadge status="Paid Fully"/>
+                <StatusBadge status={status} />
               </div>
             </div>
           </div>

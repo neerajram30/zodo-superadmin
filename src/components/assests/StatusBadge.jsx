@@ -1,11 +1,8 @@
 import PropTypes from "prop-types";
-import React from "react";
 
 function StatusBadge(props) {
   const { status } = props;
-  const statusCheck = status?.toLowerCase();
-  console.log("Status",statusCheck);
-  
+  const statusCheck = status?.toLowerCase();  
   return (
     <div
       className={`custom-badge ${

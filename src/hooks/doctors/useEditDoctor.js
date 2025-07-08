@@ -16,6 +16,7 @@ export const useEditDoctor = () => {
       queryClient.setQueryData(["doctors", variables.id], data);
       queryClient.invalidateQueries({ queryKey: ["doctor"] });
       queryClient.invalidateQueries({ queryKey: ["documents"] });
+      queryClient.invalidateQueries({ queryKey: ["doctors"] });
       queryClient.invalidateQueries({ queryKey: ["doctors", variables.id] });
       toast.success(message, {
         position: "top-right",

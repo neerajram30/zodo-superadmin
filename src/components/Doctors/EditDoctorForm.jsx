@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import TextArea from "../InputFields/TextArea";
 import { useDoctorsDocument } from "../../hooks/doctors/useDoctorsDocument";
 import PropTypes from "prop-types";
+import { toInputDateFormat } from "../configs/toInputDateFormat";
 function EditDoctorForm({ doctorDetails, doctorLoading }) {
   const { data, isLoading } = useSpecialisationList();
   const { id } = useParams();
@@ -24,21 +25,6 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
   };
   const [registrationProof, setRegistrationProof] = useState(null);
   const [degreeProof, setDegreeProof] = useState(null);
-  // const [fileDetails, setFileDetails] = useState({});
-  // const [document1, setDocument1] = useState("");
-  // const [document2, setDocument2] = useState("");
-
-  // const handleFileKeyDoc1 = (filekey) => {
-  //   console.log("Document ", filekey);
-
-  //   // setDocument1(filekey);
-  // };
-  // const handleFileKeyDoc2 = (filekey) => {
-  //   console.log("Document ", filekey);
-
-  //   // setDocument2(filekey);
-  // };
-  // const { data: doctorDetails, isLoading: doctorLoading } = useDoctorById(id);
   const { mutate, isLoading: editingLoader } = useEditDoctor();
   const methods = useForm();
   const navigate = useNavigate();
@@ -50,7 +36,6 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
     }));
 
   useEffect(() => {
-    console.log("doctorDocuments", doctorDocuments);
     if (doctorDocuments?.length > 0) {
       // if (doctorDocuments?.length === 2) {
       setRegistrationProof({
@@ -65,7 +50,6 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
       });
     }
   }, [doctorDocuments]);
-  console.log("Degree proof", degreeProof);
 
   useEffect(() => {
     if (doctorDetails) {
@@ -75,6 +59,8 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
         label: item.name,
         value: item.id,
       }));
+      const workstartDate = toInputDateFormat(doctorDetails.work_start_date);
+
       methods.reset({
         doctorName: doctorDetails?.name,
         doctorEmail: doctorDetails?.email,
@@ -92,6 +78,8 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
         ifsc: doctorDetails?.bank_details?.ifsc,
         upiid: doctorDetails?.bank_details?.upi_id,
         about: doctorDetails?.about,
+        duration: doctorDetails?.consultation_duration,
+        workstartDate: workstartDate,
       });
     }
   }, [doctorDetails]);
@@ -100,16 +88,23 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
     if (data.accountNumber === data.verifyAccountnumber) {
       const specifications = data["specialisation"].map((item) => item.value);
       const registrationDetails = {
-        name: registrationProof.name,
+        name: registrationProof?.name,
         file: registrationProof?.key || registrationProof?.file,
       };
       const degreeDetails = {
-        name: degreeProof.name,
+        name: degreeProof?.name,
         file: degreeProof?.key || degreeProof?.file,
       };
+
+      const documents = [registrationDetails, degreeDetails]
+        .filter((doc) => doc?.name)
+        .map((doc) => ({
+          name: doc.name,
+          file: doc?.key || doc?.file,
+        }));
       const doctorData = {
-        name: data["doctorName"],
-        email: data["doctorEmail"],
+        name: data.doctorName,
+        email: data.doctorEmail,
         profile_pic: fileURL,
         city: data["city"],
         pricing: parseInt(data?.pricing),
@@ -130,8 +125,10 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [registrationDetails, degreeDetails],
+        documents: documents,
         about: data?.about,
+        consultation_duration: parseInt(data?.duration),
+        work_start_date: data?.workstartDate,
       };
       await mutate(
         { id: id, data: doctorData },
@@ -141,15 +138,7 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
       );
     } else {
       const errorMessage = "Account number mismatch";
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(errorMessage);
     }
     // await mutate(doctorData, { onSuccess: () => methods.reset() });
   };
@@ -228,7 +217,7 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
           </div>
 
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="form-group">
                 <InputField
                   name="qualification"
@@ -239,14 +228,25 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
                 />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="form-group">
                 <InputField
                   name="pricing"
                   label="Pricing"
                   validation={{ required: "Pricing is required" }}
                   placeholder="Enter Pricing"
-                  type="text"
+                  type="price"
+                />
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="form-group">
+                <InputField
+                  name="duration"
+                  label="Consultation Duration ( Minutes )"
+                  validation={{ required: "Duration is required" }}
+                  placeholder="Enter Duration in minutes"
+                  type="number"
                 />
               </div>
             </div>
@@ -259,6 +259,20 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
                 // validation={{ required: "Description is required" }}
                 placeholder="Write here.."
                 // disabled={isSameAsCompanyAddress}
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="form-group col-md-4">
+              <InputField
+                name="workstartDate"
+                label="Work Start Date"
+                validation={{
+                  required: "Work start date is required",
+                }}
+                placeholder="Work start date"
+                type="date"
               />
             </div>
           </div>

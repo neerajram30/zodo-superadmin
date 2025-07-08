@@ -22,8 +22,6 @@ function InputField(props) {
 
   // 🛡️ Block value less than minValue
   const handleInput = (e) => {
-    console.log(e.target.type);
-
     const value = e.target.value;
     if (value === "") return; // Allow empty temporarily (optional)
     if (Number(value) < minValue) {

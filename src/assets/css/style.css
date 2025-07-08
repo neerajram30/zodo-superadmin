@@ -12054,3 +12054,9 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   font-size: 0.85rem;
   color: gray;
 }
+
+.ant-table-filter-dropdown-btns .ant-btn-primary {
+  background-color: #347D73 !important;
+  border-color: #347D73 !important;
+  color: #fff !important;
+}

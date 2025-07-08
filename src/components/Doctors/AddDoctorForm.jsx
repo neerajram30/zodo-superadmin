@@ -33,13 +33,20 @@ function AddDoctorForm() {
     const specifications = data["specialisation"].map((item) => item.value);
     if (data.accountNumber === data.verifyAccountnumber) {
       const registrationDetails = {
-        name: registrationProof.name,
+        name: registrationProof?.name,
         file: registrationProof?.key || registrationProof?.file,
       };
       const degreeDetails = {
-        name: degreeProof.name,
+        name: degreeProof?.name,
         file: degreeProof?.key || degreeProof?.file,
       };
+
+      const documents = [registrationDetails, degreeDetails]
+        .filter((doc) => doc?.name)
+        .map((doc) => ({
+          name: doc.name,
+          file: doc?.key || doc?.file,
+        }));
       const doctorData = {
         name: data["doctorName"],
         email: data["doctorEmail"],
@@ -63,8 +70,10 @@ function AddDoctorForm() {
           bank_name: data?.bankname,
           upi_id: data?.upiid,
         },
-        documents: [registrationDetails, degreeDetails],
+        documents: documents,
         about: data?.about,
+        consultation_duration: parseInt(data?.duration),
+        work_start_date: data?.workstartDate
       };
       await mutate(doctorData, {
         onSuccess: () => {
@@ -103,7 +112,7 @@ function AddDoctorForm() {
         </div>
       </div>
       {doctorLoading && <FullscreenLoader />}
-      
+
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onCreateDoctor)}>
           <div className="row mt-4">
@@ -158,7 +167,7 @@ function AddDoctorForm() {
           </div>
 
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="form-group">
                 <InputField
                   name="qualification"
@@ -169,7 +178,7 @@ function AddDoctorForm() {
                 />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="form-group">
                 <InputField
                   name="pricing"
@@ -179,6 +188,31 @@ function AddDoctorForm() {
                   type="price"
                 />
               </div>
+            </div>
+            <div className="col-md-4">
+              <div className="form-group">
+                <InputField
+                  name="duration"
+                  label="Consultation Duration"
+                  validation={{ required: "Duration is required" }}
+                  placeholder="Enter Duration in minutes"
+                  type="number"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="form-group col-md-4">
+              <InputField
+                name="workstartDate"
+                label="Work Start Date"
+                validation={{
+                  required: "Work start date is required",
+                }}
+                placeholder="Work start date"
+                type="date"
+              />
             </div>
           </div>
 

@@ -65,3 +65,8 @@ export const removeSettlement = async (id) => {
   const response = await apiClient.delete(`/settlements/${id}`);
   return response?.data || {};
 };
+
+export const fetchWallet = async (hospital_id) => {
+  const response = await apiClient.get(`/wallet/hospital/${hospital_id}`);
+  return response?.data ?? {};
+};
