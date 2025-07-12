@@ -9,14 +9,11 @@ import { useState } from "react";
 
 function UserDetails(props) {
   const { userDetails } = props;
-  console.log("USER DETAILS", userDetails);
   const [date,setDate] = useState(null)
   const userId = userDetails?.id;
   const query = date ? `date=${date?.startDate},${date?.endDate}` : ""
   const { data: appointments, isLoading } = useUserBookings(userId, query);
-  console.log("User appointments ", appointments);
   const handleDate = (date)=>{
-    console.log("Selected date ",date);
     setDate(date)
   }  
   return (

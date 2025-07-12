@@ -55,7 +55,7 @@ function HospitalEditForm({ hospitalDetails }) {
 
   useEffect(() => {
     methods.reset({
-      fastTagcount: toggleFasttag ? hospitalDetails?.fastTag?.count || 5: 0,
+      fastTagcount: toggleFasttag ? hospitalDetails?.fastTag?.count || 5 : 0,
       fasttagPrice: toggleFasttag ? hospitalDetails?.fastTag?.price : 0,
     });
   }, [toggleFasttag]);
@@ -306,32 +306,36 @@ function HospitalEditForm({ hospitalDetails }) {
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
-              <InputField
-                name="fastTagcount"
-                label="Fasttag Count"
-                // validation={{ required: "Fasttag issues per day is required" }}
-                placeholder="Fasttag issues per day"
-                type="number"
-                disabled={!toggleFasttag}
-                validation={{
-                  validate: (value) =>
-                    Number(value) >= 5 ||
-                    "Value must be greater than or equal to 5",
-                }}
-                minValue={5}
-              />
-            </div>
-            <div className="col-md-4">
-              <InputField
-                name="fasttagPrice"
-                label="Fasttag Price"
-                // validation={{ required: "Fasttag issues per day is required" }}
-                placeholder="Fasttag Price"
-                type="price"
-                disabled={!toggleFasttag}
-              />
-            </div>
+            {toggleFasttag && (
+              <div className="col-md-4">
+                <InputField
+                  name="fastTagcount"
+                  label="Fasttag Count"
+                  // validation={{ required: "Fasttag issues per day is required" }}
+                  placeholder="Fasttag issues per day"
+                  type="number"
+                  disabled={!toggleFasttag}
+                  validation={{
+                    validate: (value) =>
+                      Number(value) >= 5 ||
+                      "Value must be greater than or equal to 5",
+                  }}
+                  minValue={5}
+                />
+              </div>
+            )}
+            {toggleFasttag && (
+              <div className="col-md-4">
+                <InputField
+                  name="fasttagPrice"
+                  label="Fasttag Price"
+                  // validation={{ required: "Fasttag issues per day is required" }}
+                  placeholder="Fasttag Price"
+                  type="price"
+                  disabled={!toggleFasttag}
+                />
+              </div>
+            )}
           </div>
 
           <div className="row mt-4">

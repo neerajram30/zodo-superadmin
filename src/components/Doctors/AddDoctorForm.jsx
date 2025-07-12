@@ -73,7 +73,7 @@ function AddDoctorForm() {
         documents: documents,
         about: data?.about,
         consultation_duration: parseInt(data?.duration),
-        work_start_date: data?.workstartDate
+        work_start_date: data?.workstartDate,
       };
       await mutate(doctorData, {
         onSuccess: () => {
@@ -235,9 +235,6 @@ function AddDoctorForm() {
                 <InputField
                   name="registrationNumber"
                   label="Registration Number"
-                  // validation={{
-                  //   required: "Registration number is required",
-                  // }}
                   placeholder="Enter registration number"
                   type="text"
                 />
@@ -248,80 +245,19 @@ function AddDoctorForm() {
                 <InputField
                   name="councilName"
                   label="Council Name"
-                  // validation={{ required: "Council name is required" }}
                   placeholder="Enter council name"
                   type="text"
                 />
               </div>
             </div>
           </div>
-
-          {/* <h4 className="card-title">Address Locations</h4>
-                <div className="row">
-                  <div className="col-md-4">
-                    <div className="form-group">
-                      <InputField
-                        name="house"
-                        // validation={{ required: "House name is required" }}
-                        placeholder="House / Building / Appartment"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-8">
-                    <div className="form-group">
-                      <InputField
-                        name="street"
-                        // validation={{ required: "Street is required" }}
-                        placeholder="Street"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <TextArea
-                    name="address"
-                    label=""
-                    validation={{ required: "Address is required" }}
-                    placeholder="Enter Address"
-                  />
-                </div>
-
-                <div className="row">
-                  <div className="col-md-7">
-                    <div className="form-group">
-                      <SelectField
-                        options={districtOptions || []}
-                        label=""
-                        isLoading={districtLoading}
-                        name="district"
-                        isMultiSelect={false}
-                        placeholder="Select District"
-                        validationMessage="District is required"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-5">
-                    <div className="form-group">
-                      <InputField
-                        name="state"
-                        validation={{ required: "State is required" }}
-                        placeholder="Enter State"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                </div> */}
-
           <h4 className="card-title">Add Bank Account</h4>
           <div className="row">
             <div className="col-md-6">
               <div className="form-group">
                 <InputField
                   name="accountNumber"
-                  label=""
+                  label="Account Number"
                   validation={{ required: "Account Number is required" }}
                   placeholder="Account Number"
                   type="text"
@@ -332,7 +268,7 @@ function AddDoctorForm() {
               <div className="form-group">
                 <InputField
                   name="verifyAccountnumber"
-                  label=""
+                  label="Verify Account Number"
                   validation={{ required: "Account Number is required" }}
                   placeholder="Verify Account Number"
                   type="text"
@@ -346,11 +282,11 @@ function AddDoctorForm() {
               <div className="form-group">
                 <InputField
                   name="accountHoldername"
-                  label=""
+                  label="Account Holder Name"
                   validation={{
                     required: "Account Holder Name is required",
                   }}
-                  placeholder="Account Holder Name"
+                  placeholder="Account holder name"
                   type="text"
                 />
               </div>
@@ -359,7 +295,7 @@ function AddDoctorForm() {
               <div className="form-group">
                 <InputField
                   name="bankname"
-                  label=""
+                  label="Bank Name"
                   validation={{ required: "Bank name is required" }}
                   placeholder="Bank name"
                   type="text"
@@ -372,7 +308,7 @@ function AddDoctorForm() {
               <div className="form-group">
                 <InputField
                   name="ifsc"
-                  label=""
+                  label="IFSC Code"
                   validation={{ required: "IFSC Code is required" }}
                   placeholder="IFSC"
                   type="text"
@@ -383,8 +319,7 @@ function AddDoctorForm() {
               <div className="form-group">
                 <InputField
                   name="upiid"
-                  label=""
-                  // validation={{ required: "IFSC Code is required" }}
+                  label="UPI ID"
                   placeholder="Upi id (optional)"
                   type="text"
                 />

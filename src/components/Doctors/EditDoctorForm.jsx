@@ -284,9 +284,6 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
                 <InputField
                   name="registrationNumber"
                   label="Registration Number"
-                  // validation={{
-                  //   required: "Registration number is required",
-                  // }}
                   placeholder="Enter registration number"
                   type="text"
                 />
@@ -297,7 +294,6 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
                 <InputField
                   name="councilName"
                   label="Council Name"
-                  // validation={{ required: "Council name is required" }}
                   placeholder="Enter council name"
                   type="text"
                 />
@@ -311,7 +307,7 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
               <div className="form-group">
                 <InputField
                   name="accountNumber"
-                  label=""
+                  label="Account Number"
                   validation={{ required: "Account Number is required" }}
                   placeholder="Account Number"
                   type="text"
@@ -322,9 +318,9 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
               <div className="form-group">
                 <InputField
                   name="verifyAccountnumber"
-                  label=""
-                  validation={{ required: "Account Number is required" }}
-                  placeholder="Verify Account Number"
+                  label="Verify Account Number"
+                  validation={{ required: "Account number is required" }}
+                  placeholder="Verify account number"
                   type="text"
                 />
               </div>
@@ -336,11 +332,11 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
               <div className="form-group">
                 <InputField
                   name="accountHoldername"
-                  label=""
+                  label="Account Holder Name"
                   validation={{
-                    required: "Account Holder Name is required",
+                    required: "Account holder name is required",
                   }}
-                  placeholder="Account Holder Name"
+                  placeholder="Account holder name"
                   type="text"
                 />
               </div>
@@ -349,7 +345,7 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
               <div className="form-group">
                 <InputField
                   name="bankname"
-                  label=""
+                  label="Bank Name"
                   validation={{ required: "Bank name is required" }}
                   placeholder="Bank name"
                   type="text"
@@ -362,7 +358,7 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
               <div className="form-group">
                 <InputField
                   name="ifsc"
-                  label=""
+                  label="IFSC Code"
                   validation={{ required: "IFSC Code is required" }}
                   placeholder="IFSC"
                   type="text"
@@ -373,8 +369,7 @@ function EditDoctorForm({ doctorDetails, doctorLoading }) {
               <div className="form-group">
                 <InputField
                   name="upiid"
-                  label=""
-                  // validation={{ required: "IFSC Code is required" }}
+                  label="UPI ID"
                   placeholder="Upi id (optional)"
                   type="text"
                 />

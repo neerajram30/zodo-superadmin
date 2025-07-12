@@ -65,19 +65,6 @@ function UserTable({ usersList, isLoading }) {
       // sorter: (a, b) => a.empid.length - b.empid.length,
     },
     {
-      title: <div className="text-center">Departments</div>,
-      dataIndex: "",
-      render: (item, record) => {
-        const departmentLen = record?.departments?.length;
-        const departments =
-          departmentLen !== 0 &&
-          record?.departments?.reduce((acc, current) => {
-            return acc + current.name + " ";
-          }, "");
-        return <div className="text-center">{departments}</div>;
-      },
-    },
-    {
       title: <div className="text-center">status</div>,
       dataIndex: "is_active",
       render: (item) => (
@@ -111,13 +98,6 @@ function UserTable({ usersList, isLoading }) {
                 <i className="fas fa-ellipsis-v" />
               </Link>
               <div className="dropdown-menu dropdown-menu-end">
-                {/* <Link
-                  className="dropdown-item"
-                  to={`/staff-manage/${record.id}`}
-                >
-                  <i className="far fa-eye me-2" />
-                  View
-                </Link> */}
                 <Link
                   className="dropdown-item"
                   to
