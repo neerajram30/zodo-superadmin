@@ -74,6 +74,7 @@ function AddDoctorForm() {
         about: data?.about,
         consultation_duration: parseInt(data?.duration),
         work_start_date: data?.workstartDate,
+        status:"active"
       };
       await mutate(doctorData, {
         onSuccess: () => {

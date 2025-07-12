@@ -4,13 +4,10 @@ import ToggleDisable from "../../modals/ToggleDisable";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   arrow_left,
-  cross_icon,
-  email_icon,
-  eye_icon,
-  pdf_icon,
+  email_icon, pdf_icon,
   pencil_icon,
   phone_icon,
-  three_dots_menu,
+  three_dots_menu
 } from "../../imagepath";
 import PropTypes from "prop-types";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
@@ -228,67 +225,18 @@ function DoctorRequestCard(props) {
                 </div>
               ))}
             </div>
-            {/* <div className="pt-2">
-              <Link
-                to
-                className="hospital-draft-btn rounded text-primary ps-2 pe-2 pt-1 pb-1 text-primary"
-              >
-                Add New Row
-              </Link>
-            </div> */}
           </div>
           <div className="col-9 border border-secondary-subtle pt-3 pb-1 ms-1 me-1 mt-3 file-upload-card">
             <div className="row mb-1">
               <div className="col">
                 <h5>Uploaded Documents</h5>
               </div>
-
-              {/* <div className="col">
-                <Link
-                  to={`/manage-doctors/request/${id}/edit`}
-                  className="d-flex justify-content-end"
-                >
-                  <img src={pencil_icon} alt="" />
-                </Link>
-              </div> */}
             </div>
-            {/* <div className="mb-4"> */}
-            {/* {[1, 2, 3].map((item) => {
-                return (
-                  <div className="row mt-2" key={`row${item}`}>
-                    <div className="col-12 pt-2 col-md-2">
-                      Documents 0{item}
-                    </div>
-                    <div className="col-12 col-md-10 md:mt-0 mt-1">
-                      <div className="d-flex justify-content-between align-items-center file-upload-details ps-3 pe-3">
-                        <div className="d-flex align-items-center">
-                          <img src={pdf_icon} alt="pdf_icon" />
-                          <div className="d-flex flex-column justify-content-center file-details ms-2">
-                            <h6>Reg 0{item}</h6>
-                            <p>24MB</p>
-                          </div>
-                        </div>
-                        <div className="d-flex">
-                          <div className="m-1">
-                            <img src={eye_icon} alt="" />
-                          </div>
-                          <div className="m-1">
-                            <img src={cross_icon} alt="" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })} */}
-
             {doctorDocuments?.length > 0 && (
               <div className="row">
                 {!documentLoading ? (
                   <div className="mb-4">
                     {doctorDocuments?.map((item, i) => {
-                      console.log("ITEM ", item);
-
                       return (
                         <div className="row mt-2" key={`row${item?.id}`}>
                           <div className="col-12 pt-2 col-md-2">
@@ -310,16 +258,18 @@ function DoctorRequestCard(props) {
                                   target="_blank"
                                   rel="noreferrer"
                                 >
-                                  <img src={eye_icon} alt="" />
+                                  <i className="fa fa-eye text-black me-2" />
                                 </a>
-                                <a
+                                <Link
+                                  to
                                   className="m-1"
                                   onClick={() =>
                                     handelDeleteDocumentClick(item.id)
                                   }
                                 >
-                                  <img src={cross_icon} alt="" />
-                                </a>
+                                  {/* <img src={cross_icon} alt="" /> */}
+                                  <i className="fa fa-trash-alt text-danger me-2" />
+                                </Link>
                               </div>
                             </div>
                           </div>

@@ -126,7 +126,7 @@ function AddHospital() {
         },
         gst: data?.gstnumber,
         documents: fileArray,
-        // status: "active",
+        status: "active",
       };
       await mutate(hospital);
       // methods.reset();

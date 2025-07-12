@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   arrow_left,
-  email_icon,
-  eye_icon,
-  pdf_icon,
+  email_icon, pdf_icon,
   pencil_icon,
   phone_icon,
-  three_dots_menu,
+  three_dots_menu
 } from "../imagepath";
 import DoctorsOverview from "./DoctorsOverview/DoctorsOverview";
 import DoctorsFinance from "./DoctorsFinance/DoctorsFinance";
@@ -300,7 +298,6 @@ function DoctorDetailsCard({ data, isLoading }) {
                             <img src={pdf_icon} alt="pdf_icon" />
                             <div className="d-flex flex-column justify-content-center file-details ms-2">
                               <h6>{item.name}</h6>
-                              {/* <p>24MB</p> */}
                             </div>
                           </div>
                           <div className="d-flex">
@@ -310,12 +307,8 @@ function DoctorDetailsCard({ data, isLoading }) {
                               target="_blank"
                               rel="noreferrer"
                             >
-                              <img src={eye_icon} alt="" />
+                              <i className="fa fa-eye text-black me-2" />
                             </a>
-
-                            {/* <div className="m-1">
-                              <img src={cross_icon} alt="" />
-                            </div> */}
                           </div>
                         </div>
                       </div>
