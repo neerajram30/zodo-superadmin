@@ -1,67 +1,78 @@
 import DataTable from "../../DataTables/DataTable";
 import PropTypes from "prop-types";
-import { getDateFromIso } from "../../configs/getDateFromISO";
 import StatusBadge from "../../assests/StatusBadge";
+import { formatToDate } from "../../configs/formatToDate";
+import { formatTime } from "../../configs/formatTime";
 
 function BookingsTable(props) {
   const { data, isLoading } = props;
   const columns = [
     {
-      title: "Booking Id",
+      title: "Booking ID",
       dataIndex: "booking_id",
-      // sorter: (a, b) => a.id - b.id,
     },
     {
-      title: "TRANSACTION NAME",
-      dataIndex: "transactionName",
-      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
-      render:(item, record)=>(
-        <div>{record.type}</div>
-      )
+      title: "Type",
+      dataIndex: "type",
     },
     {
-      title: "BOOKED DATE",
-      dataIndex: "createdAt",
-      // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
-      render:(item)=>(
-        <div>{getDateFromIso(item)}</div>
-      )
-    },
-    {
-      title: "APPOINTMENT DATE",
-      dataIndex: "appointmentDate",
-      // sorter: (a, b) => a.dueIssue.length - b.dueIssue.length,
-      render:(item)=>(
-        <div>{getDateFromIso(item)}</div>
-      )
-    },
-    {
-      title: "STATUS",
-      dataIndex: "status",
-      render: (item,record) => (
-        <div
-          
-        >
-          <StatusBadge status={record?.status}/>
-        </div>
+      title: "Patient Name",
+      dataIndex: "patientname",
+      render: (_item, record) => (
+        <div>{record?.user_details?.name ?? record?.user?.first_name}</div>
       ),
     },
     {
-      title: <div className="d-flex justify-content-center">AMOUNT</div>,
-      dataIndex: "amount",
-      // sorter: (a, b) => a.amount.length - b.amount.length,
-      render:(item)=>(
-        <div className="d-flex justify-content-center">${item ?? 0}</div>
-      )
+      title: <div>Assigned Doctor</div>,
+      dataIndex: "assingned",
+      render: (_item, record) =>
+        record?.doctor?.name ? (
+          <div className="text-start">Dr.{record?.doctor?.name}</div>
+        ) : (
+          <div>N/A</div>
+        ),
+    },
+
+    {
+      title: "Time Slot",
+      dataIndex: "timeSlot",
+      render: (_item, record) => (
+        <div>{formatTime(record?.timeSlot) ?? "unassigned"}</div>
+      ),
+    },
+    {
+      title: <div className="text-center">Appointment Date</div>,
+      dataIndex: "appointmentDate",
+      render: (item) => <div className="text-center">{formatToDate(item)}</div>,
+    },
+    {
+      title: <div className="text-center">Status</div>,
+      dataIndex: "status",
+      render: (item) => (
+        <div className="d-flex justify-content-center">
+          <StatusBadge status={item} />
+        </div>
+      ),
     },
     // {
-    //   title:<div className="d-flex justify-content-center">ACTIONS</div>,
-    //   dataIndex: "prescriptionUrl",
-    //   render:(item)=>(
-    //     <div>
-    //       {item && <a className="d-flex justify-content-center" href={item} target="_blank" rel="noopener noreferrer">view</a>}
-    //     </div>
-    //   )
+    //   title: "Actions",
+    //   dataIndex: "actions",
+    //   render: (_item, record) => {
+    //     return (
+    //       <div style={{ display: "flex", gap: 8, paddingLeft: "20px" }}>
+    //         <Link
+    //           to="#"
+    //           onClick={(e) => {
+    //             e.preventDefault();
+    //             generateCaseSheetPDF(record);
+    //           }}
+    //           title="Print Case Sheet"
+    //         >
+    //           <img src={printericon} alt="Print Icon" width={17} />
+    //         </Link>
+    //       </div>
+    //     );
+    //   },
     // },
   ];
   return (
@@ -88,7 +99,7 @@ function BookingsTable(props) {
       <div>{/* <h5>{232} results found</h5> */}</div>
 
       <div className="table-responsive">
-        <DataTable data={data} columns={columns} isLoading={isLoading}/>
+        <DataTable data={data} columns={columns} isLoading={isLoading} />
       </div>
     </div>
   );
@@ -96,7 +107,7 @@ function BookingsTable(props) {
 
 BookingsTable.propTypes = {
   data: PropTypes.array,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 export default BookingsTable;

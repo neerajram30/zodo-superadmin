@@ -32,7 +32,7 @@ apiClient.interceptors.response.use(
       window.location.href = "/login"; // Redirect to login page
     }
     if(error?.response?.status === 404){
-      window.location.href = "/404"; // Redirect to login page
+      // window.location.href = "/404"; // Redirect to login page
     }    
     return Promise.reject(error);
   }

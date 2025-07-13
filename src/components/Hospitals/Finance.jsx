@@ -70,13 +70,6 @@ function Finance(props) {
       ),
     },
     {
-      title: "Initiated Date",
-      dataIndex: "created_at",
-      render: (item) => <div>{formatToDate(item)}</div>,
-      sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
-      sortDirections: ["descend", "ascend"],
-    },
-    {
       title: "Type",
       dataIndex: "type",
       render: (item) => <div>{item || "N/A"}</div>,

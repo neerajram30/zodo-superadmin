@@ -8,8 +8,6 @@ import { useDeleteReview } from "../../../hooks/review/useDeleteReview";
 
 function Review(props) {
   const { reviews, isLoading } = props;
-  console.log("Reviews", reviews);
-
   const [show, setShow] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
   const { mutate, isLoading: deleteLoading } = useDeleteReview(selectedReview);

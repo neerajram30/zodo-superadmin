@@ -1,37 +1,42 @@
-import React from "react";
 import BookingsCard from "./BookingsCard";
 import BookingTabs from "./BookingTabs";
-import { useHospitalAppointments } from "../../../hooks/appointments/useHospitalAppointments";
 import { useParams } from "react-router-dom";
+import { useHospitalAnalytics } from "../../../hooks/hospitals/useHospitalAnalytics";
 
 function TotalBookings() {
   const { id } = useParams();
-  const { data: bookings } = useHospitalAppointments(id);
-  console.log("Bookings",bookings);
+  // const { data: bookings } = useHospitalAppointments(id);
+  // console.log("Bookings",bookings);
   
-  const total = bookings?.length || 0;
-  const fastTagBookings = bookings?.filter((item)=> item.is_fast_tag);
-  const cancelledBookings = bookings?.filter((item) => item?.status === "cancelled");
-  const fastTagBookingCount = fastTagBookings?.length || 0;
-  const cancelledCount = cancelledBookings?.length || 0;
+  // const total = bookings?.length || 0;
+  // const fastTagBookings = bookings?.filter((item)=> item.is_fast_tag);
+  // const cancelledBookings = bookings?.filter((item) => item?.status === "cancelled");
+  // const fastTagBookingCount = fastTagBookings?.length || 0;
+  // const cancelledCount = cancelledBookings?.length || 0;
+  const {data: hospitalDashboard} = useHospitalAnalytics(id);
+  console.log("Hospitaal dash",hospitalDashboard)
+  
   const bookinsDetails = [
     {
       id: 1,
-      bookings: total,
+      bookings: hospitalDashboard?.booking?.count ?? 0,
       dueStatus: "",
-      operation: "Total Bookings",
+      operation: "Bookings",
+      type:"count"
     },
     {
       id: 2,
-      bookings: fastTagBookingCount,
+      bookings: hospitalDashboard?.booking?.request_count ?? 0,
       dueStatus: "",
-      operation: "Total Fast Tag Booking",
+      operation: "Requested Booking",
+      type:"count"
     },
     {
       id: 3,
-      bookings: cancelledCount,
+      bookings: hospitalDashboard?.booking?.revenue ?? 0,
       dueStatus: "",
-      operation: "Cancellation",
+      operation: "Booking Revenue",
+      type:"currency"
     },
   ];
   return (

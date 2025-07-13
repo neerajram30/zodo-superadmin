@@ -33,3 +33,13 @@ export const getDoctorAppointmentsByQuery = async (id, query) => {
 //   const response = await apiClient.get(`/bookings/doctor/${id}/bookings`);
 //   return response?.data?.data;
 // };
+
+export const exportHospitalBookings = async (hospital_id, query="") => {
+  const response = await apiClient.get(
+    `/bookings/hospital/${hospital_id}/export${query}`,
+    {
+      responseType: 'blob',
+    }
+  );
+  return response.data; 
+};

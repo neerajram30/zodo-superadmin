@@ -17,11 +17,11 @@ function BasicSearchHero(props) {
   return (
     <div className="page-header invoices-page-header">
       <div className="d-flex flex-column flex-md-row">
-        <div className="w-50 d-flex align-items-center flex-column flex-md-row">
+        <div className="w-md-50 w-100 d-flex align-items-md-center flex-column flex-md-row">
           <div className="search-hero-header">
             <h3>{title}</h3>
           </div>
-          <div className="ms-3 w-50">
+          <div className="ms-md-3 w-md-50">
             <div>
               <div className="form-group has-search">
                 <span className="fa fa-search form-control-feedback"></span>

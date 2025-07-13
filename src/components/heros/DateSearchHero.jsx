@@ -1,23 +1,11 @@
 import { DatePicker } from "antd";
 import PropTypes from "prop-types";
 import ExportSettlementTable from "../assests/ExportSettlementTable";
+import ExportAppointmentTable from "../assests/ExportAppointmentTable";
 const { RangePicker } = DatePicker;
 
 function DateSearchHero(props) {
   const { handleDate, query, type } = props;
-  //   const [show, setShow] = useState(false);
-  // const [searchTerm, setSearchterm] = useState("");
-  // const debouncedSearchTerm = useDebounce(searchTerm);
-  // useEffect(() => {
-  //   if (handleSearch) {
-  //     handleSearch(debouncedSearchTerm);
-  //   }
-  // }, [debouncedSearchTerm]);
-
-  // const handleSearchInput = (searchTerm) => {
-  //   setSearchterm(searchTerm);
-  // };
-
   return (
     <div className="row mt-4">
       <div className="col-12 col-md-6 col-xl-4">
@@ -33,6 +21,7 @@ function DateSearchHero(props) {
 
       <div className="col-12 col-md-6 col-xl-3">
         {type === "settlement" && <ExportSettlementTable query={query}/>}
+        {type === "appointment" && <ExportAppointmentTable query={query}/>}
         {/* <ExportTable /> */}
       </div>
     </div>
