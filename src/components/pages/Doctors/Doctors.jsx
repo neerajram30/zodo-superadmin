@@ -14,23 +14,26 @@ function Doctors() {
     },
   ];
   const tabData = [
-    { id: "dr_list", title: "All Doctors", content: <DoctorsList />,link:'all' },
+    {
+      id: "dr_list",
+      title: "All Doctors",
+      content: <DoctorsList />,
+      link: "all",
+    },
     {
       id: "dr_request",
       title: "Doctor Requests",
       content: <DoctorRequests />,
-      link:'requests'
+      link: "requests",
     },
     {
       id: "rejected_dr",
       title: "Rejected Doctors",
       content: <RejectedDoctors />,
-      link:'rejected'
+      link: "rejected",
     },
   ];
 
-
-  
   return (
     <Layout activeClassName="manage-doctors" id="menu-item3" id1="menu-items3">
       <div className="page-wrapper">
@@ -63,7 +66,7 @@ function Doctors() {
                 ))}
               </div>
             </div> */}
-            <TransparentTabs tabData={tabData}/>
+            <TransparentTabs tabData={tabData} />
           </div>
         </div>
       </div>

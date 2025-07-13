@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 // import {
 //   blogimg2
 // } from "../imagepath";
@@ -7,13 +7,13 @@ import DataTable from "../DataTables/DataTable";
 import ConfirmDelete from "../modals/ConfirmDelete";
 import DoctorListHero from "../heros/DoctorListHero";
 import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
-import { reduceArraytoString } from "../configs/reduceArraytoString";
 import CircularImage from "../assests/CircularImage";
 import { user_profile } from "../imagepath";
 import StatusBadge from "../assests/StatusBadge";
 import { formatDateDDMMYY } from "../configs/fomatDateDDMMYY";
 // import { blogimg12 } from "../imagepath";
 import { FilterFilled } from "@ant-design/icons";
+import { Tag } from "antd";
 function DoctorsList() {
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchterm] = useState("");
@@ -57,14 +57,17 @@ function DoctorsList() {
     // },
     {
       title: "Specialisation",
-      dataIndex: "Specialization",
+      dataIndex: "specialisations",
       // sorter: (a, b) => a.Specialization.length - b.Specialization.length,
-      render: (item, record) => {
-        const specialisations = reduceArraytoString(
-          record?.specialisations ?? []
-        );
-        return <div>{specialisations}</div>;
-      },
+      render: (specialisations) => (
+        <div className="d-flex flex-wrap gap-2" style={{ maxWidth: "200px" }}>
+          {specialisations?.map((specialisation) => (
+            <Tag key={specialisation.id} color="cyan">
+              {specialisation.name}
+            </Tag>
+          ))}
+        </div>
+      ),
     },
     {
       title: "Type",

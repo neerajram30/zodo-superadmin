@@ -14,11 +14,11 @@ function DoctorListHero(props) {
   return (
     <div className="page-header invoices-page-header mb-2">
       <div className="d-flex flex-column flex-md-row">
-        <div className="w-50 d-flex align-items-center flex-column flex-md-row">
+        <div className="w-md-50 w-100 d-flex align-items-md-center flex-column flex-md-row">
           <div className="search-hero-header">
             <h3>Doctors List</h3>
           </div>
-          <div className="ms-3 w-50">
+          <div className="ms-md-3 w-md-50">
             <div>
               <div className="form-group has-search">
                 <span className="fa fa-search form-control-feedback"></span>
@@ -33,7 +33,7 @@ function DoctorListHero(props) {
           </div>
         </div>
 
-        <div className="w-50 d-flex align-items-center justify-content-end flex-column flex-md-row">
+        <div className="w-md-50 w-75 d-flex align-items-md-center justify-content-end flex-column flex-md-row">
           <div className="d-flex w-100 flex-column flex-md-row">
             <Link
               to="/manage-doctors/specialization"
@@ -43,23 +43,12 @@ function DoctorListHero(props) {
             </Link>
             <Link
               to="/manage-doctors/add-doctors"
-              className="hospital-add-btn rounded-pill ms-1 text-white doctor-list-btn-add"
+              className="hospital-add-btn rounded-pill ms-1 text-white doctor-list-btn-add mt-md-0 mt-3"
             >
               <img src={addicon} alt="add" />
               <span className="ms-2 me-2">Add Doctor</span>
             </Link>
           </div>
-          {/* <div className="w-25 d-flex justify-content-between ps-3 pe-3">
-            <Link to="#" className="">
-              <img src={pdficon} alt="#" />
-            </Link>
-            <Link to="#" className="">
-              <img src={pdficon3} alt="#" />
-            </Link>
-            <Link to="#">
-              <img src={pdficon4} alt="#" />
-            </Link>
-          </div> */}
         </div>
       </div>
     </div>

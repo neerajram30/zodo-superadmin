@@ -4,24 +4,26 @@ import DateSearchHero from "../heros/DateSearchHero";
 import DataTable from "../DataTables/DataTable";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 import { formatDate } from "../configs/formatDate";
+import { generateDateQuery } from "../configs/generateDateQuery";
 function History() {
-  const [searchTerm, setsearchTerm] = useState("");
-  const [date, setdate] = useState(null);
-  const query =
-    (searchTerm &&
-      date &&
-      `name=${searchTerm}&from_date=${date.startDate}&to_date=${date.endDate}`) ||
-    (searchTerm && `name=${searchTerm}`) ||
-    (date && `updated_at=${date}`) ||
-    "";
+  // const [searchTerm, setsearchTerm] = useState("");
+  // const query =
+  //   (searchTerm &&
+  //     date &&
+  //     `name=${searchTerm}&from_date=${date.startDate}&to_date=${date.endDate}`) ||
+  //   (searchTerm && `name=${searchTerm}`) ||
+  //   (date && `updated_at=${date}`) ||
+  //   "";
+  const [query, setQuery] = useState("");
   const { data: settlements, isLoading } = useAllSettlements(query);
 
   const handleDate = (date) => {
-    setdate(date);
+    const dateQuery = generateDateQuery(date);
+    setQuery(dateQuery);
   };
-  const handleSearchTerm = (search) => {
-    setsearchTerm(search);
-  };
+  // const handleSearchTerm = (search) => {
+  //   setsearchTerm(search);
+  // };
   const columns = [
     {
       title: "Transaction ID",
@@ -85,7 +87,9 @@ function History() {
       <div>
         <DateSearchHero
           handleDate={handleDate}
-          handleSearch={handleSearchTerm}
+          // handleSearch={handleSearchTerm}
+          type="settlement"
+          query={`?${query}`}
         />
         <DataTable
           columns={columns}

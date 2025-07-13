@@ -11712,7 +11712,8 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   font-weight: 600;
 }
 .file-upload-details{
-  height: 40px;
+  overflow-y: hidden;
+  height: 50px;
   background-color: #F3F6FB;
 }
 .file-upload-details h6{

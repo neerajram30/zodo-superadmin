@@ -16,11 +16,11 @@ function SpecializationHero(props) {
   return (
     <div className="page-header invoices-page-header mb-2 mt-3">
       <div className="d-flex flex-column flex-md-row">
-        <div className="w-50 d-flex align-items-center flex-column flex-md-row">
+        <div className="w-md-50 d-flex align-items-md-center flex-column flex-md-row">
           <div className="search-hero-header">
             <h3>Specialisation</h3>
           </div>
-          <div className="ms-3 w-50">
+          <div className="ms-md-3 w-md-50">
             <div>
               <div className="form-group has-search">
                 <span className="fa fa-search form-control-feedback"></span>
@@ -35,8 +35,8 @@ function SpecializationHero(props) {
           </div>
         </div>
 
-        <div className="w-50 d-flex align-items-center justify-content-end flex-column flex-md-row">
-          <div className="d-flex w-100 flex-column flex-md-row justify-content-end">
+        <div className="w-md-50 w- d-flex align-items-center justify-content-end flex-column flex-md-row">
+          <div className="d-flex w-md-50 w-100 flex-column flex-md-row justify-content-end">
             {/* <Link
               to="#"
               // data-bs-toggle="modal"

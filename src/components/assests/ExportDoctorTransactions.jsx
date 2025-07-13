@@ -1,19 +1,18 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { useViewHospital } from "../../hooks/hospitals/useViewHospital";
-import { Link, useParams } from "react-router-dom";
-import { exporticon } from "../imagepath";
-import { exportHospitalBookings } from "../../apis/appointments";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import PropTypes from 'prop-types';
+import React from 'react'
+import { useDoctorById } from '../../hooks/doctors/useDoctorById';
+import { exportDoctorTransactions } from '../../apis/settlements';
+import { Link, useParams } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import { exporticon } from '../imagepath';
 
-function ExportAppointmentTable({query}) {
-  const { id } = useParams();
-  
-  const { data: hospital } = useViewHospital(id);
-  const hospitalName = hospital?.name ?? "";
+function ExportDoctorTransactions({query}) {
+   const { id } = useParams();
+  const { data: doctor } = useDoctorById(id);
+  const hospitalName = doctor?.name ?? "";
   const exportMutation = useMutation({
-    mutationFn: () => exportHospitalBookings(id, query),
+    mutationFn: () => exportDoctorTransactions(id, `?${query}`),
     onSuccess: (data) => {
       if (!data || !(data instanceof Blob)) {
         toast.error("Failed to export data - invalid response format");
@@ -23,7 +22,7 @@ function ExportAppointmentTable({query}) {
       const url = window.URL.createObjectURL(data);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `${hospitalName}_appointments_${
+      link.download = `${hospitalName}_tansactions_${
         new Date().toISOString().split("T")[0]
       }.xlsx`;
 
@@ -31,8 +30,7 @@ function ExportAppointmentTable({query}) {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-
-      toast.success("Appointments exported successfully!");
+      toast.success("Transactions exported successfully!");
     },
     onError: (error) => {
       console.error("Export failed:", error);
@@ -43,7 +41,6 @@ function ExportAppointmentTable({query}) {
   const handleDownload = () => {
     exportMutation.mutate();
   };
-
   return (
     <div className="form-group local-forms">
       <Link
@@ -67,8 +64,10 @@ function ExportAppointmentTable({query}) {
   );
 }
 
-ExportAppointmentTable.propTypes = {
+// validate props
+ExportDoctorTransactions.propTypes = {
   query: PropTypes.string,
 };
 
-export default ExportAppointmentTable;
+
+export default ExportDoctorTransactions

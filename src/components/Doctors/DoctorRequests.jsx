@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import DataTable from "../DataTables/DataTable";
 import ConfirmDelete from "../modals/ConfirmDelete";
 import DoctorRequestHero from "../heros/DoctorRequestHero";
 import { useDoctorsList } from "../../hooks/doctors/useDoctorsList";
-import { reduceArraytoString } from "../configs/reduceArraytoString";
 import CircularImage from "../assests/CircularImage";
 import { user_profile } from "../imagepath";
+import { Tag } from "antd";
 function DoctorRequests() {
   const [show, setShow] = useState(false);
   const [searchTerm, setSearchterm] = useState("");
@@ -49,14 +49,17 @@ function DoctorRequests() {
     },
     {
       title: "Specialisation",
-      dataIndex: "Specialization",
+      dataIndex: "specialisations",
       // sorter: (a, b) => a.Specialization.length - b.Specialization.length,
-      render: (item, record) => {
-        const specialisations = reduceArraytoString(
-          record?.specialisations ?? []
-        );
-        return <div>{specialisations}</div>;
-      },
+      render: (specialisations) => (
+        <div className="d-flex flex-wrap gap-2" style={{ maxWidth: "200px" }}>
+          {specialisations?.map((specialisation) => (
+            <Tag key={specialisation.id} color="cyan">
+              {specialisation.name}
+            </Tag>
+          ))}
+        </div>
+      ),
     },
     {
       title: "Type",

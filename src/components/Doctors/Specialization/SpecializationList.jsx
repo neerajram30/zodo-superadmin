@@ -1,13 +1,13 @@
-import { Table } from "antd";
 import { useState } from "react";
-import { itemRender, onShowSizeChange } from "../../Pagination";
-import { deleteicon, pencil_notebook } from "../../imagepath";
+import { three_dots_menu } from "../../imagepath";
 import EditSpecialization from "../../modals/EditSpecialization";
 import ConfirmDelete from "../../modals/ConfirmDelete";
 import PropTypes from "prop-types";
 import useDeleteSpecialisation from "../../../hooks/specialisation/useDeleteSpecialisation";
+import { Link } from "react-router-dom";
+import ImageBox from "../../assests/ImageBox";
+import { formatToDate } from "../../configs/formatToDate";
 import { formatDate } from "../../configs/formatDate";
-
 function SpecializationList(props) {
   const { specialisationList, isLoading } = props;
   // State for selected table rows
@@ -22,86 +22,9 @@ function SpecializationList(props) {
 
   // // Fetch delete mutation function and loading state from custom hook
   const { mutate, isLoading: deleteLoading } = useDeleteSpecialisation();
-  console.log("Delete loading", deleteLoading);
+  console.log(isLoading);
 
-  // // Get the setter for specialisations from the global store
-  // const setSpecialisations = useSpecialisations(
-  //   (state) => state.setSpecialisations
-  // );
-  // // Update the global store with the fetched data
-  // setSpecialisations(data);
-  // // Get the specialisations array from the global store
-  // const specialisationData = useSpecialisations(
-  //   (state) => state.specialisations
-  // );
-  // // State to store the currently selected specialisation for editing
   const [specialisation, setSpecialisation] = useState("");
-
-  // // Transform the specialisation data for the table
-  // const specialisationList = Array.isArray(specialisationData) && specialisationData.map((item) => {
-  //   return {
-  //     id: item.id, // Unique identifier for each row
-  //     specialisationName: item.name, // Name of the specialisation
-  //     createdDate: formatDate(item.createdAt), // Formatted creation date
-  //     lastUpdated: formatDate(item.updatedAt), // Formatted last updated date
-  //   };
-  // });
-
-  // Handler for row selection changes in the table
-  // const onSelectChange = (newSelectedRowKeys) => {
-  //   console.log("selectedRowKeys changed: ", selectedRowKeys);
-  //   setSelectedRowKeys(newSelectedRowKeys);
-  // };
-  // Row selection configuration for the table
-  // const rowSelection = {
-  //   selectedRowKeys,
-  //   onChange: onSelectChange,
-  // };
-  // Table columns configuration
-  const columns = [
-    {
-      title: "SPECIALISATION NAME",
-      dataIndex: "name",
-      // sorter: (a, b) => a.specialisationName.length - b.specialisationName.length,
-    },
-    {
-      title: "CREATED DATE",
-      dataIndex: "createdAt",
-      render: (item) => <div>{formatDate(item)}</div>,
-      // sorter: (a, b) => a.createdDate.length - b.createdDate.length,
-    },
-    {
-      title: "LAST UPDATED",
-      dataIndex: "updatedAt",
-      render: (item) => <div>{formatDate(item)}</div>,
-
-      // sorter: (a, b) => a.lastUpdated.length - b.lastUpdated.length,
-    },
-    {
-      title: "ACTIONS",
-      dataIndex: "actions",
-      render: (text, record) => {
-        return (
-          <div className="d-flex">
-            {/* Edit button */}
-            <button
-              className="ms-2 border-0 bg-transparent"
-              onClick={() => handleEdit(record.id)}
-            >
-              <img src={pencil_notebook} key={text} />
-            </button>
-            {/* Delete button */}
-            <button
-              className="ms-2 border-0 bg-transparent"
-              onClick={() => handleDelete(record.id)}
-            >
-              <img src={deleteicon} key={record.id} />
-            </button>
-          </div>
-        );
-      },
-    },
-  ];
 
   // Handler for edit button click
   const handleEdit = (specialisationId) => {
@@ -116,14 +39,10 @@ function SpecializationList(props) {
 
     setSpecialisation(selectedSpecialisation);
     setShowEdit(true);
-    // setSpecialisationId(specialisationId);
   };
 
   // Handler for delete button click
   const handleDelete = (id) => {
-    // const specialisationId = specialisation.id;
-    // console.log("Selecte specialisation ", id);
-    // mutate(id);
     setSpecialisationId(id);
     setShowDelete(true);
   };
@@ -136,23 +55,101 @@ function SpecializationList(props) {
     }
   };
   return (
-    <div className="mt-3">
-      {/* Ant Design Table for displaying specialisations */}
-      <Table
-        pagination={{
-          total: specialisationList?.length,
-          showSizeChanger: true,
-          // showTotal: (total, range) =>
-          //   `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-          onShowSizeChange: onShowSizeChange,
-          itemRender: itemRender,
-        }}
-        columns={columns}
-        dataSource={specialisationList}
-        // rowSelection={rowSelection}
-        // rowKey={(record) => record.id}
-        loading={isLoading}
-      />
+    <div>
+      <div className="row mt-3">
+        {Array.isArray(specialisationList) &&
+          specialisationList.map((item) => (
+            <div className="col-sm-6 col-lg-4 col-xl-4 d-flex" key={item.id}>
+              <div className="card invoices-grid-card w-100">
+                <Link to>
+                  <div className="card-body">
+                    <div className="row align-items-center hospital-card">
+                      <div className="col-3">
+                        <Link to="#">
+                          <ImageBox
+                            src={item?.image}
+                            alt="Specialisation Image"
+                            width="75px"
+                            height="100%"
+                          />
+                        </Link>
+                      </div>
+                      <div className="col-9 d-flex justify-content-end pe-4">
+                        <div className="dropdown">
+                          <Link
+                            // className="dropdown-toggle"
+                            to="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <img
+                              src={three_dots_menu}
+                              alt=""
+                              width={15}
+                              height={15}
+                            />
+                          </Link>
+                          <div className="dropdown-menu">
+          
+                            <Link
+                              className="dropdown-item"
+                              to
+                              onClick={() => handleEdit(item?.id)}
+                            >
+                              <i className="far fa-edit me-2" />
+                              Edit
+                            </Link>
+                            <div className="dropdown-divider" />
+
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              onClick={() => handleDelete(item.id)}
+                            >
+                              <i className="fa fa-trash-alt m-r-5"></i> Delete
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row mt-3">
+                        <div className="col">
+                          <h5 className="service-title">{item.name}</h5>
+                        </div>
+                      </div>
+
+                      <div className="row mt-2">
+                        <div className="col text-secondary align-middle">
+                          <p>CREATED AT</p>
+                        </div>
+                        <div className="col-auto">
+                          <h5>{formatToDate(item.createdAt)}</h5>
+                        </div>
+                      </div>
+                      <div className="row mt-2">
+                        <div className="col text-secondary align-middle">
+                          <p>LAST UPDATED</p>
+                        </div>
+                        <div className="col-auto">
+                          <h5>{formatDate(item.updatedAt)}</h5>
+                        </div>
+                      </div>
+                      {/* <div className="row mt-2">
+                        <div className="col text-secondary align-middle">
+                          <p>DISCOUNTED PRICE</p>
+                        </div>
+                        <div className="col-auto">
+                          <h5>0</h5>
+                        </div>
+                      </div> */}
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          ))}
+      </div>
+
       {/* Edit Specialization Modal */}
       <EditSpecialization
         show={showEdit}
@@ -168,6 +165,7 @@ function SpecializationList(props) {
         // deleteItem={onDelete}
         id={specialisationId}
         handleDelete={onDelete}
+        isLoading={deleteLoading}
       />
     </div>
   );

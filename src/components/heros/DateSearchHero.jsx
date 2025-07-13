@@ -2,6 +2,7 @@ import { DatePicker } from "antd";
 import PropTypes from "prop-types";
 import ExportSettlementTable from "../assests/ExportSettlementTable";
 import ExportAppointmentTable from "../assests/ExportAppointmentTable";
+import ExportDoctorTransactions from "../assests/ExportDoctorTransactions";
 const { RangePicker } = DatePicker;
 
 function DateSearchHero(props) {
@@ -22,6 +23,7 @@ function DateSearchHero(props) {
       <div className="col-12 col-md-6 col-xl-3">
         {type === "settlement" && <ExportSettlementTable query={query}/>}
         {type === "appointment" && <ExportAppointmentTable query={query}/>}
+        {type === "doctor-transactions" && <ExportDoctorTransactions query={query}/> }
         {/* <ExportTable /> */}
       </div>
     </div>

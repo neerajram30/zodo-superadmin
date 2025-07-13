@@ -1,8 +1,9 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  apollo_logo,
   arrow_left,
-  bin_icon_red, email_icon, phone_icon,
+  bin_icon_red,
+  email_icon,
+  phone_icon,
   search_outline_icon,
   three_dots_menu
 } from "../imagepath";
@@ -13,6 +14,7 @@ import { useDeleteSettlement } from "../../hooks/settlements/useDeleteSettlement
 import ConfirmDelete from "../modals/ConfirmDelete";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import ImageBox from "../assests/ImageBox";
 function SettlementDetailsCard(props) {
   const { data } = props;
   console.log("Settlement data ", data);
@@ -75,11 +77,22 @@ function SettlementDetailsCard(props) {
           <div className="col-md-4">
             <div className="row">
               <div className="col-md-3">
-                <div className="hospital-img-wrap">
+                {/* <div className="hospital-img-wrap">
                   <div className="profile-img">
                     <Link to="#">
                       <img className="" src={apollo_logo} alt="#" />
                     </Link>
+                  </div>
+                </div> */}
+
+                <div className="">
+                  <div className="">
+                    <ImageBox
+                      src={data?.hospital?.logo}
+                      alt="Doctor profile"
+                      width="75x"
+                      height="75px"
+                    />
                   </div>
                 </div>
               </div>

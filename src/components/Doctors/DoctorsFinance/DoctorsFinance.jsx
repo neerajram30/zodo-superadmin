@@ -1,19 +1,25 @@
 import { useState } from "react";
 import SearchDateTable from "../../Tables/SearchDateTable";
 import { useParams } from "react-router-dom";
-import { formatDate } from "../../configs/formatDate";
-import { useAllSettlements } from "../../../hooks/settlements/useAllSettlements";
 import StatusBadge from "../../assests/StatusBadge";
+import { generateDateQuery } from "../../configs/generateDateQuery";
+import { useDoctorTransactions } from "../../../hooks/settlements/useDoctorTransations";
+import { message, Tooltip } from "antd";
+import { Clipboard } from "react-feather";
+import { formatToDate } from "../../configs/formatToDate";
 function DoctorsFinance() {
   const { id } = useParams();
   const [query, setQuery] = useState("");
-  const inputQuery = query ? `doctor_id=${id}&${query}` : `doctor_id=${id}`;
-
-  const { data: settlements, isLoading } = useAllSettlements(inputQuery);
-  
-  const handelQuery = (queryResult) => {
-    setQuery(queryResult);
+  const handleDate = (date) => {
+    const dateQuery = generateDateQuery(date);
+    setQuery(dateQuery);
   };
+
+  const { data: transactions, isLoading } = useDoctorTransactions(
+    id,
+    `?${query}`
+  );
+
   // const financeData = [
   //   {
   //     id: 1,
@@ -35,61 +41,79 @@ function DoctorsFinance() {
   //   },
   // ];
 
-  
-
   const columns = [
     {
-      title: "TRANSATION ID",
-      dataIndex: "transaction_id",
-      // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
-    },
-    {
-      title: "DATE ISSUED",
-      dataIndex: "created_at",
-      render: (item) => <div>{formatDate(item)}</div>,
-      // sorter: (a, b) => a.date.length - b.date.length,
-    },
-    // {
-    //   title: "INVOICE#",
-    //   dataIndex: "invoiceNumber",
-    //   // sorter: (a, b) => a.invoiceNumber.length - b.invoiceNumber.length,
-    // },
-    {
-      title: "PAYMENT METHOD",
-      dataIndex: "payment_method",
-      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
-    },
-    // {
-    //   title: "DUE DATE",
-    //   dataIndex: "dueDate",
-    //   // sorter: (a, b) => a.dueDate.length - b.dueDate.length,
-    // },
-    {
-      title: "APPROVED DATE",
-      dataIndex: "approve_date",
-      render: (item) => <div>{item ? formatDate(item) : "N/A"}</div>,
-      // sorter: (a, b) => a.transactionName.length - b.transactionName.length,
-    },
-    {
-      title: "STATUS",
-      dataIndex: "status",
-      // sorter: (a, b) => a.status.length - b.status.length,
-      render: (item, record) => (
-        <div
-          
-        >
-          <StatusBadge status={record?.status}/>
-          {item}
+      title: "Order ID",
+      dataIndex: "order_id",
+      // sorter: (a, b) => a.bookingid.length - b.bookingid.length,
+      render: (text) => (
+        <div className="d-flex align-items-center gap-2">
+          <span
+            style={{
+              maxWidth: 120,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            title={text}
+          >
+            {text.slice(0, 16)}...
+          </span>
+          <Tooltip title="Copy Transaction ID">
+            <Clipboard
+              size={16}
+              style={{ cursor: "pointer", color: "#347D73" }}
+              onClick={() => {
+                navigator.clipboard.writeText(text);
+                message.success("Copied to clipboard");
+              }}
+            />
+          </Tooltip>
         </div>
       ),
     },
     {
-      title: "TOTAL",
-      dataIndex: "amount",
-      render: (item) => <div>₹ {item}</div>,
-      // sorter: (a, b) => a.total.length - b.total.length,
+      title: "Initiated by",
+      dataIndex: "",
+      render: (item, record) => (
+        <div className="d-flex align-items-center">
+          {record?.user?.first_name || "N/A"}
+        </div>
+      ),
     },
-    
+    {
+      title: "Type",
+      dataIndex: "type",
+      render: (item) => <div>{item || "N/A"}</div>,
+    },
+    {
+      title: <div className="text-center">Payment mode</div>,
+      dataIndex: "payment_type",
+      render: (item) => (
+        <div className="text-center">{item ? item : "unknown"}</div>
+      ),
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      render: (item) => <div>₹{item}</div>,
+    },
+
+    {
+      title: "Settlement Date",
+      dataIndex: "updated_at",
+      render: (item) => <div>{formatToDate(item)}</div>,
+      sorter: (a, b) => new Date(a.updated_at) - new Date(b.updated_at),
+      sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: <div className="text-center">Status</div>,
+      dataIndex: "status",
+      render: (item) => (
+        <div className="d-flex justify-content-center">
+          <StatusBadge status={item} />
+        </div>
+      ),
+    },
   ];
   return (
     <div>
@@ -103,18 +127,19 @@ function DoctorsFinance() {
         ))}
       </div> */}
       <div className="mt-2">
-        
-      <SearchDateTable
-        data={settlements}
-        isLoading={isLoading}
-        handelQuery={handelQuery}
-        columns={columns}
-        title="Transactions"
+        <SearchDateTable
+          data={transactions}
+          isLoading={isLoading}
+          // handelQuery={handelQuery}
+          columns={columns}
+          title="Transactions"
+          query={query}
+          type="doctor-transactions"
+          handleDate={handleDate}
         />
-        </div>
+      </div>
     </div>
   );
 }
-
 
 export default DoctorsFinance;

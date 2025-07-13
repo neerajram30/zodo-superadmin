@@ -64,9 +64,26 @@ export const getHospitalTransactions = async (hospital_id, query = "") => {
   return response?.data?.data ?? [];
 };
 
+export const getDoctorTransactions = async (doctor_id, query = "") => {
+  const response = await apiClient.get(
+    `transactions/doctors/${doctor_id}${query}`
+  );
+  return response?.data?.data ?? [];
+};
+
 export const exportHospitalSettlements = async (hospital_id, query="") => {
   const response = await apiClient.get(
     `transactions/hospitals/${hospital_id}/export${query}`,
+    {
+      responseType: "blob",
+    }
+  );
+  return response.data;
+};
+
+export const exportDoctorTransactions = async (doctor_id, query="") => {
+  const response = await apiClient.get(
+    `transactions/doctors/${doctor_id}/export${query}`,
     {
       responseType: "blob",
     }

@@ -1,18 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import TextArea from "../InputFields/TextArea";
 import { useEditSpecialisation } from "../../hooks/specialisation/useEditSpecialisation";
 import PropTypes from "prop-types";
 import { Modal } from "react-bootstrap";
+import ChooseFile from "../Hospitals/ChooseFile";
 
 function EditSpecialization(props) {
   const { show, setShow, specialisation } = props;
   const { mutate, isLoading } = useEditSpecialisation();
+  const [fileURL, setFileURL] = useState("");
   const defaultValues = {
     specialisationName: specialisation?.name,
     message: specialisation?.description,
   };
+
+  useEffect(() => {
+    setFileURL(specialisation.image);
+  }, [specialisation])
+  
   const methods = useForm({ defaultValues });
   const onEditSpecialisation = async (data) => {
     console.log("Edited ", data);
@@ -20,6 +27,7 @@ function EditSpecialization(props) {
     const editedSpecialisation = {
       name: data.specialisationName,
       description: data.message,
+      image: fileURL
     };
     await mutate({ id: specialisation?.id, data: editedSpecialisation });
     methods.reset();
@@ -31,7 +39,9 @@ function EditSpecialization(props) {
   }, [specialisation]);
 
   console.log("Specialisation", specialisation);
-
+  const handleFileURL = (url) => {
+    setFileURL(url);
+  };
   return (
     <div>
       <Modal
@@ -48,7 +58,12 @@ function EditSpecialization(props) {
         <Modal.Body className="border-0">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onEditSpecialisation)}>
-              <div className="form-group">
+              <div className="row">
+                <div className="col-md-12 ms-md-2">
+                  <ChooseFile handleFileURL={handleFileURL} fileURL={fileURL} />
+                </div>
+              </div>
+              <div className="form-group mt-3">
                 <div className="col-md-12">
                   <InputField
                     name="specialisationName"

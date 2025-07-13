@@ -1,23 +1,30 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useAddSpecialisation } from "../../hooks/specialisation/useAddSpecialisation";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import TextArea from "../InputFields/TextArea";
+import ChooseFile from "../Hospitals/ChooseFile";
 
 function AddSpecialization(props) {
   const { show, setShow } = props;
   const { mutate, isLoading } = useAddSpecialisation();
+  const [fileURL, setFileURL] = useState("");
   const methods = useForm();
   const onCreateSpecialisation = async (data) => {
     const specialisation = {
       name: data.specialisationName,
       description: data.message,
+      image:fileURL
     };
     await mutate(specialisation);
     methods.reset();
     setShow(false);
+  };
+
+  const handleFileURL = (url) => {
+    setFileURL(url);
   };
 
   return (
@@ -36,7 +43,12 @@ function AddSpecialization(props) {
         <Modal.Body className="border-0">
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onCreateSpecialisation)}>
-              <div className="form-group">
+              <div className="row">
+                <div className="col-md-12 ms-md-2">
+                  <ChooseFile handleFileURL={handleFileURL} fileURL={fileURL} />
+                </div>
+              </div>
+              <div className="form-group mt-3">
                 <div className="col-md-12">
                   <InputField
                     name="specialisationName"

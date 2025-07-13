@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useChangeSettlementStatus } from "../../../hooks/settlements/useChageSettlementStatus";
 
 function SettlementDetails() {
-  const { id } = useParams();
+  const { id } = useParams(); 
   const { data, isLoading } = useViewSettlements(id);
   console.log("Settlement data ",data);
     
