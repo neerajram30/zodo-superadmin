@@ -1,16 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  getHospitalSettlement,
-  getHospitalSettlementByquery,
-} from "../../apis/settlements";
+import { getHospitalTransactions } from "../../apis/settlements";
 
-export const useHospitalSettlements = (id, query) => {
+export const useHospitalSettlements = (hospital_id, query) => {
   return useQuery({
-    queryKey: ["settlements", id, query], // Unique query key
-    queryFn: () =>
-      query
-        ? getHospitalSettlementByquery(id, query)
-        : getHospitalSettlement(id),
-    enabled: !!id,
+    queryKey: ["settlements", hospital_id, query], // Unique query key
+    queryFn: () => getHospitalTransactions(hospital_id, query),
+    enabled: !!hospital_id,
   });
 };

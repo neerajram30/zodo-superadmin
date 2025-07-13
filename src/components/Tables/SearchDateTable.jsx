@@ -1,43 +1,42 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 import { Table } from "antd";
 import DateSearchHero from "../heros/DateSearchHero";
 import { itemRender, onShowSizeChange } from "../Pagination";
 
 function SearchDateTable(props) {
-  const { data, isLoading, handelQuery, columns, title } =
+  const { data, isLoading, handleDate, columns, title, query, type } =
     props;
   // const [selectedItems, setSelectedItems] = useState(null);
   // console.log(selectedItems);
-  const [searchTerm, setsearchTerm] = useState("");
-  const [date, setdate] = useState(null);
+  // const [searchTerm, setsearchTerm] = useState("");
+  // const [date, setdate] = useState(null);
   // const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // const onSelectChange = (newSelectedRowKeys) => {
   //   handleSelection(newSelectedRowKeys);
   //   setSelectedRowKeys(newSelectedRowKeys);
   //   setSelecteditemsList(newSelectedRowKeys);
   // };
-  const query =
-    (searchTerm &&
-      date &&
-      `name=${searchTerm}&from_date=${date.startDate}&to_date=${date.endDate}`) ||
-    (searchTerm && `name=${searchTerm}`) ||
-    (date && `from_date=${date.startDate}&to_date=${date.endDate}`) ||
-    "";
-  const handleDate = (date) => {
-    setdate(date);
-  };
+  // const query =
+  //   (searchTerm &&
+  //     date &&
+  //     `name=${searchTerm}&from_date=${date.startDate}&to_date=${date.endDate}`) ||
+  //   (searchTerm && `name=${searchTerm}`) ||
+  //   (date && `from_date=${date.startDate}&to_date=${date.endDate}`) ||
+  //   "";
+  // const handleDate = (date) => {
+  //   setdate(date);
+  // };
 
-  const handleSearch = (term) => {
-    setsearchTerm(term);
-  };
+  // const handleSearch = (term) => {
+  //   setsearchTerm(term);
+  // };
   // const handleSelection = (items) => {
   //   setSelectedItems(items);
   // };
 
-  useEffect(() => {
-    handelQuery(query);
-  }, [query]);
+  // useEffect(() => {
+  //   handelQuery(query);
+  // }, [query]);
 
   // const rowSelection = {
   //   selectedRowKeys,
@@ -47,7 +46,7 @@ function SearchDateTable(props) {
   return (
     <div className="card-box">
       <h5>{title}</h5>
-      <DateSearchHero handleDate={handleDate} handleSearch={handleSearch} hideSearchbox={true}/>
+      <DateSearchHero handleDate={handleDate} query={query} type={type}/>
       <div>
         {data?.length ? (
           <h5>
@@ -90,9 +89,11 @@ SearchDateTable.propTypes = {
   data: PropTypes.array,
   columns: PropTypes.array,
   isLoading: PropTypes.bool,
-  handelQuery: PropTypes.func,
+  handleDate: PropTypes.func,
   title: PropTypes.string,
   setSelecteditemsList: PropTypes.func,
+  query: PropTypes.string,
+  type:PropTypes.string
 };
 
 export default SearchDateTable;

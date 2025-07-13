@@ -1,10 +1,10 @@
 import { DatePicker } from "antd";
-import ExportTable from "../assests/ExportTable";
 import PropTypes from "prop-types";
+import ExportSettlementTable from "../assests/ExportSettlementTable";
 const { RangePicker } = DatePicker;
 
 function DateSearchHero(props) {
-  const { handleDate } = props;
+  const { handleDate, query, type } = props;
   //   const [show, setShow] = useState(false);
   // const [searchTerm, setSearchterm] = useState("");
   // const debouncedSearchTerm = useDebounce(searchTerm);
@@ -17,49 +17,23 @@ function DateSearchHero(props) {
   // const handleSearchInput = (searchTerm) => {
   //   setSearchterm(searchTerm);
   // };
-  const handleDatePicker = (dates) => {
-    if (dates && dates.length === 2) {
-      const startDate = dates[0].format("YYYY-MM-DD");
-      const endDate = dates[1].format("YYYY-MM-DD");
 
-      handleDate({ startDate, endDate });
-    }
-  };
   return (
     <div className="row mt-4">
-      {/* <div className="col-12 col-md-6 col-xl-3">
-        <div>
-          <div className="form-group has-search">
-            <span className="fa fa-search form-control-feedback"></span>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              onChange={(e) => handleSearchInput(e.target.value)}
-            />
-          </div>
-        </div>
-      </div> */}
-
       <div className="col-12 col-md-6 col-xl-4">
-        <div className="form-group local-forms cal-icon">
-          {/* <DatePicker
-            className="form-control datetimepicker"
-            // onChange={onChange}
-            onChange={handleDate}
-            suffixIcon={null}
-          /> */}
+        <div className="form-group local-forms">
           <RangePicker
-            showTime
-            onChange={handleDatePicker}
-            suffixIcon={null}
+            format="DD/MM/YYYY"
+            onChange={(date) => handleDate(date)}
             className="range-picker form-control d-flex datetimepicker"
+            allowClear
           />
         </div>
       </div>
 
       <div className="col-12 col-md-6 col-xl-3">
-        <ExportTable />
+        {type === "settlement" && <ExportSettlementTable query={query}/>}
+        {/* <ExportTable /> */}
       </div>
     </div>
   );
@@ -68,6 +42,8 @@ function DateSearchHero(props) {
 // validate props
 DateSearchHero.propTypes = {
   handleDate: PropTypes.func.isRequired,
+  type: PropTypes.string,
+  query: PropTypes.string,
 };
 
 export default DateSearchHero;
