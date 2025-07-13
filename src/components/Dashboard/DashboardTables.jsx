@@ -9,8 +9,6 @@ function DashboardTable() {
     useRequestedHospitals("pending");
   const query = "status=pending";
   const { data: doctorList, isLoading: doctorLoading } = useDoctorsList(query);
-  console.log(requestedHospitals);
-  console.log(requestedLoading);
   const hospitals = requestedHospitals?.slice(0, 3);
   const doctors = doctorList?.slice(0, 3);
   const hospitalColumns = [
@@ -39,62 +37,16 @@ function DashboardTable() {
       ),
     },
   ];
-  // const hospitalData = {
-  //   title: "Recent Hospital Request",
-  //   rows: [
-  //     {
-  //       name: "KIMS",
-  //       email: "james@gmail.com",
-  //       contact: "9497677914",
-  //       action: "See More",
-  //     },
-  //     {
-  //       name: "KIMS",
-  //       email: "james@gmail.com",
-  //       contact: "9497677914",
-  //       action: "See More",
-  //     },
-  //     {
-  //       name: "KIMS",
-  //       email: "james@gmail.com",
-  //       contact: "9497677914",
-  //       action: "See More",
-  //     },
-  //   ],
-  // };
-
-  // const doctorRequestData = {
-  //   title: "Recent Doctor Request",
-  //   columns: ["Doctor Name", "Date Of Request", "Action"],
-  //   rows: [
-  //     {
-  //       name: "J James",
-  //       email: "james@gmail.com",
-  //       contact: "9497677914",
-  //       action: "See More",
-  //     },
-  //     {
-  //       name: "J James",
-  //       email: "james@gmail.com",
-  //       contact: "9497677914",
-  //       action: "See More",
-  //     },
-  //     {
-  //       name: "J James",
-  //       email: "james@gmail.com",
-  //       contact: "9497677914",
-  //       action: "See More",
-  //     },
-  //   ],
-  // };
   return (
     <>
       <div className="row">
         <div className="col-md-6">
-          <div className="dash-widget dashboard-table-card">
+          <div className="dash-widget dashboard-table-card table-responsive">
             <div className="d-flex justify-content-between">
               <h4>Recent Hospital Request</h4>
-              <Link to="/manage-hospitals?tab=requested"><small>See all</small></Link>
+              <Link to="/manage-hospitals?tab=requested">
+                <small>See all</small>
+              </Link>
             </div>
             <Table
               columns={hospitalColumns}
@@ -106,10 +58,12 @@ function DashboardTable() {
         </div>
         <br />
         <div className="col-md-6">
-          <div className="dash-widget dashboard-table-card">
+          <div className="dash-widget dashboard-table-card table-responsive">
             <div className="d-flex justify-content-between">
               <h4>Recent Doctor Request</h4>
-              <Link to="/manage-doctors?tab=requests"><small>See all</small></Link>
+              <Link to="/manage-doctors?tab=requests">
+                <small>See all</small>
+              </Link>
             </div>
             <Table
               columns={doctorColumns}

@@ -5,9 +5,13 @@ import Layout from "../../layout/Layout";
 import { useParams } from "react-router-dom";
 import { useViewHospital } from "../../../hooks/hospitals/useViewHospital";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
+import { useValidateId } from "../../../hooks/useValidateId";
 
 function HospitalDetails() {
   const { id } = useParams();
+  const { validId } = useValidateId(id);
+  console.log("Valid id ",validId);
+  
   const {
     data: hospitalDetails,
     isLoading,

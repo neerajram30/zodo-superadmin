@@ -62,7 +62,7 @@ const Approuter = () => {
             <Route path="/changepassword" element={<ChangePassword />} />
             {/* <Route path="/error" element={<Error />} /> */}
             {/* <Route path="/server-error" element={<ServerError />} /> */}
-            <Route path="/blankpage" element={<BlankPage />} />
+            {/* <Route path="/blankpage" element={<BlankPage />} /> */}
           </Route>
           <Route
             element={
@@ -117,6 +117,7 @@ const Approuter = () => {
               path="/manage-hospitals/add-hospital"
               element={<AddHospital />}
             />
+
             <Route path="/manage-hospitals/:id" element={<HospitalDetails />} />
             {/* <Route
               path="/manage-hospitals/manage-request/:id"
@@ -124,7 +125,7 @@ const Approuter = () => {
             /> */}
 
             <Route
-              path="/manage-hospitals/manage-request/:id" 
+              path="/manage-hospitals/manage-request/:id"
               element={<ReviewHospital />}
             />
             {/* <Route
@@ -165,35 +166,18 @@ const Approuter = () => {
               path="/manage-doctors/specialization"
               element={<Specialization />}
             />
-            <Route
-              path="/finance"
-              element={<FinancePage/>}
-            />
-            <Route
-              path="/app-manage"
-              element={<ManageBanner/>}
-            />
+            <Route path="/finance" element={<FinancePage />} />
+            <Route path="/app-manage" element={<ManageBanner />} />
 
-            <Route
-              path="/manage-users"
-              element={<UserManage/>}
-            />
-            <Route
-              path="/app-link"
-              element={<AppLink/>}
-            />
-            <Route
-              path="/platform"
-              element={<Platform/>}
-            />
-            <Route
-              path="/notifications"
-              element={<Notifications/>}
-            />
+            <Route path="/manage-users" element={<UserManage />} />
+            <Route path="/app-link" element={<AppLink />} />
+            <Route path="/platform" element={<Platform />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Route>
           {/* Unauthorised routes       */}
           <Route path="/unauthorized" element={<ServerError />} />
           <Route path="*" element={<Error />} />
+          <Route path="/blankpage" element={<BlankPage />} />
         </Routes>
       </BrowserRouter>
       <div className="sidebar-overlay"></div>

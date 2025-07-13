@@ -4,13 +4,12 @@ import InfoCards from "../../Dashboard/Info_cards";
 import { fasttag, profile_hospitals, dep_icon1 } from "../../imagepath";
 import RevenueInfo from "../../Dashboard/RevenueInfo";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
-import Analytics from "../../Dashboard/Analytics";
-import DashboardTables from "../../Dashboard/DashboardTables";
 import { useDashboardData } from "../../../hooks/useDashboardData";
 import FullscreenLoader from "../../loadings/FullscreenLoader";
-
+import Analytics from "../../Dashboard/Analytics";
+import DashboardTable from "../../Dashboard/DashboardTables";
 function Dashboard() {
-  const { data: dashboardData, isLoading } = useDashboardData();  
+  const { data: dashboardData, isLoading } = useDashboardData();
   const basicInformation = [
     {
       id: 1,
@@ -44,7 +43,7 @@ function Dashboard() {
       link: "/dashboard",
     },
   ];
-  
+
   return (
     <Layout activeClassName="dashboard">
       <div className="page-wrapper">
@@ -52,12 +51,12 @@ function Dashboard() {
           <Breadcrumb data={breadCrumpData} />
           <Hero />
           <InfoCards info={basicInformation} />
-          <RevenueInfo dashboardData={dashboardData}/>
+          <RevenueInfo dashboardData={dashboardData} />
           <Analytics />
-          <DashboardTables />
+          <DashboardTable />
         </div>
       </div>
-      {isLoading && <FullscreenLoader/>}
+      {isLoading && <FullscreenLoader />}
     </Layout>
   );
 }

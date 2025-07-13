@@ -8,6 +8,7 @@ export const queryClient = new QueryClient({
       cacheTime: 1000 * 60 * 10, // 10 minutes
       retry: 2, // Retry failed requests twice
       onError: (error) => {
+        
         if (error?.response?.status >= 500) {
           window.location.href = "/error"; 
         }
