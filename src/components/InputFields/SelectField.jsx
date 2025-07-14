@@ -11,22 +11,45 @@ function SelectField(props) {
     placeholder,
     isMultiSelect,
     isLoading,
+    defaultValue,
   } = props;
   const {
     control,
     formState: { errors },
   } = useFormContext();
-
+  console.log(defaultValue);
+  
   const selectStyle = {
-    control: (base, state) => ({
-      ...base,
-      height: "45px",
-      borderRadius: "10px",
-      boxShadow: state.isFocused ? 0 : 0,
-      borderColor: state.isFocused ? "#0052cc" : "#ced4da",
+    control: (baseStyles, state) => ({
+      ...baseStyles,
+      borderColor: state.isFocused
+        ? "none"
+        : "2px solid rgba(46, 55, 164, 0.1);",
+      boxShadow: state.isFocused ? "0 0 0 1px #05A95C" : "none",
       "&:hover": {
-        borderColor: state.isFocused ? "#0052cc" : "#ced4da",
+        borderColor: state.isFocused
+          ? "none"
+          : "2px solid rgba(46, 55, 164, 0.1)",
       },
+      borderRadius: "10px",
+      fontSize: "14px",
+      minHeight: "45px",
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#347D73" : provided.backgroundColor,
+      "&:active": {
+        backgroundColor: state.isSelected
+          ? "#347D73"
+          : provided.backgroundColor,
+      },
+    }),
+    dropdownIndicator: (base, state) => ({
+      ...base,
+      transform: state.selectProps.menuIsOpen ? "rotate(-180deg)" : "rotate(0)",
+      transition: "250ms",
+      width: "35px",
+      height: "35px",
     }),
   };
   return (
@@ -44,7 +67,7 @@ function SelectField(props) {
       <Controller
         name={name}
         control={control}
-        defaultValue={null}
+        defaultValue={defaultValue}
         rules={{ required: validationMessage }}
         render={({ field }) => (
           <Select
@@ -72,6 +95,7 @@ SelectField.propTypes = {
   isMultiSelect: PropTypes.node,
   options: PropTypes.node,
   isLoading: PropTypes.node,
+  defaultValue: PropTypes.object,
 };
 
 export default SelectField;

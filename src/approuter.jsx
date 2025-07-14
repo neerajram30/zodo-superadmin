@@ -40,6 +40,7 @@ import AppLink from "./components/pages/AppManage/AppLink";
 import Platform from "./components/pages/AppManage/Platform";
 import Notifications from "./components/pages/AppManage/Notifications";
 import UserManage from "./components/pages/UserManage/UserManage";
+import ManageCoupen from "./components/pages/AppManage/ManageCoupen";
 
 //Accounts
 const Approuter = () => {
@@ -166,7 +167,7 @@ const Approuter = () => {
             />
             <Route path="/finance" element={<FinancePage />} />
             <Route path="/app-manage" element={<ManageBanner />} />
-
+            <Route path="/manage-coupen" element={<ManageCoupen />} />
             <Route path="/manage-users" element={<UserManage />} />
             <Route path="/app-link" element={<AppLink />} />
             <Route path="/platform" element={<Platform />} />

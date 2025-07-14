@@ -41,3 +41,8 @@ export const updateAppdetails = async (data) => {
   const response = await apiClient.patch("/app-details", data);
   return response?.data;
 };
+
+export const createCoupen = async (data) => {
+  const response = await apiClient.post("/coupons", data);
+  return response?.data;
+};

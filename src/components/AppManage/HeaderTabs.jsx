@@ -22,6 +22,11 @@ function HeaderTabs() {
       title: "Platform",
       link: "platform",
     },
+    {
+      id: 3,
+      title: "Coupen",
+      link: "manage-coupen",
+    },
     // {
     //   id: 3,
     //   title: "Notifications",
