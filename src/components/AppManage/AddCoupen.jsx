@@ -29,15 +29,14 @@ function AddCoupen({ handleClose }) {
   });
 
   const onCreateCoupen = (data) => {
-    console.log(data);
     const coupen_data = {
       coupon_code: data?.coupencode,
       discount_type: data?.discountOptions?.value,
       valid_untill: data?.expiry,
-      minimum_cart_amount: parseInt(data?.minimumcart),
-      minimum_discount_allowed: parseInt(data?.minimumdiscount),
-      usage_limit: parseInt(data?.usagelimit),
-      usage_limit_per_user: parseInt(data?.usagelimituser),
+      minimum_cart_amount: parseInt(data?.minimumcart ?? 0),
+      minimum_discount_allowed: parseInt(data?.minimumdiscount ?? 0),
+      usage_limit: parseInt(data?.usagelimit ?? 0),
+      usage_limit_per_user: parseInt(data?.usagelimituser ?? 0),
     };
 
     mutation.mutate(coupen_data, {
@@ -48,14 +47,16 @@ function AddCoupen({ handleClose }) {
         toast.success(message);
         queryClient.invalidateQueries(["coupens"]);
       },
-      onError:(error)=>{
+      onError: (error) => {
         const errorMessage =
-        error?.response?.data?.validationErrors || error?.response?.data?.message || "Failed to add coupen";
+          error?.response?.data?.validationErrors ||
+          error?.response?.data?.message ||
+          "Failed to add coupen";
         toast.error(errorMessage);
         queryClient.invalidateQueries(["coupens"]);
         handleClose();
         methods.reset();
-      }
+      },
     });
   };
   const loading = mutation.isPending;
@@ -145,17 +146,18 @@ function AddCoupen({ handleClose }) {
             </div>
           </div>
 
-          <div className="form-group mb-0 d-flex justify-content-end">
-            <div className="settings-btns">
-              <button
-                type="submit"
-                className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2 ms-2"
-                disabled={loading}
-              >
+            <div className="w-100 ms-2 mt-2 form-group mb-0 d-flex justify-content-end">
+              <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
+                {/* {appDetailsLoading || */}
+                {loading && (
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    aria-hidden="true"
+                  ></span>
+                )}
                 Create
               </button>
             </div>
-          </div>
         </div>
       </form>
     </FormProvider>

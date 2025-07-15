@@ -12045,7 +12045,7 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   font-size: 0.85em;
 }
 .no-content-box{
-  height: 60vh;
+  height: 55vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -12067,4 +12067,8 @@ tr.ant-table-row.ant-table-row-level-0.ant-table-row-selected,
   justify-content: center;
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+.coupen-code{
+  font-size: 1.5rem;
 }

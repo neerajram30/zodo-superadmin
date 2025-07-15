@@ -46,3 +46,8 @@ export const createCoupen = async (data) => {
   const response = await apiClient.post("/coupons", data);
   return response?.data;
 };
+
+export const getCoupens = async () => {
+  const response = await apiClient.get("/coupons");
+  return response?.data?.data || [];
+};
