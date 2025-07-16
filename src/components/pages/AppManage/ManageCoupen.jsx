@@ -32,7 +32,6 @@ function ManageCoupen() {
     queryFn: () => getCoupens(),
   });
 
-  console.log(coupens?.data);
   const loading = coupens?.isLoading;
 
   

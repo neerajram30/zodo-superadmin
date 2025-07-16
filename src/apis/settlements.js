@@ -90,3 +90,13 @@ export const exportDoctorTransactions = async (doctor_id, query="") => {
   );
   return response.data;
 };
+
+export const exportAdminSettlements = async (query="") => {
+  const response = await apiClient.get(
+    `settlements/admin/export${query}`,
+    {
+      responseType: "blob",
+    }
+  );
+  return response.data;
+};

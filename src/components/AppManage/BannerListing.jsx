@@ -5,6 +5,7 @@ import { useState } from "react";
 import BannerEditForm from "./BannerEditForm";
 import ConfirmDelete from "../modals/ConfirmDelete";
 import { useDeleteBanner } from "../../hooks/appmanage/useDeleteBanner";
+import ComponentLoader from "../loadings/ComponentLoader";
 function BannerListing() {
   const { data, isLoading } = useGetBanner();
   const [showEdit, setShowedit] = useState(false);
@@ -30,73 +31,85 @@ function BannerListing() {
       },
     });
   };
-  console.log("Banner data !",data);
-  
-  return (
-    <div className="row mt-2">
-      {data?.map((item) => (
-        <div className="col-sm-6 col-md-6 col-xl-4" key={item.id}>
-          <div className="blog grid-blog d-flex flex-column banner-card">
-            <div className="blog-image">
-              <Link to className="">
-                <img className="img-fluid" src={item.url} alt="#" />
-              </Link>
-            </div>
-            <div className="blog-content">
-              <div className="d-flex">
-                <h3 className="blog-title pe-2">
-                  <Link to="/blog">{item.title}</Link>
-                </h3>
-                <div>
-                  <div className="dropdown dropdown-action">
-                    <Link
-                      to="#"
-                      className="action-icon dropdown-toggle"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <i className="fa fa-ellipsis-v" />
-                    </Link>
-                    <div className="dropdown-menu dropdown-menu-end">
-                      <Link
-                        className="dropdown-item"
-                        onClick={() => handelEditClick(item?.id)}
-                      >
-                        <i className="fa-solid fa-pen-to-square m-r-5" /> Edit
-                      </Link>
-                      <Link
-                        className="dropdown-item"
-                        to="#"
-                        // data-bs-toggle="modal"
-                        data-bs-target="#delete_patient"
-                        onClick={() => handleDeleteClick(item?.id)}
-                      >
-                        <i className="fa fa-trash-alt m-r-5"></i> Delete
-                      </Link>
+  console.log("Banner data !", data);
+
+  return !isLoading ? (
+    <>
+      {data?.length !== 0 ? (
+        <div className="row mt-2">
+          {data?.map((item) => (
+            <div className="col-sm-6 col-md-6 col-xl-4" key={item.id}>
+              <div className="blog grid-blog d-flex flex-column banner-card">
+                <div className="blog-image">
+                  <Link to className="">
+                    <img className="img-fluid" src={item.url} alt="#" />
+                  </Link>
+                </div>
+                <div className="blog-content">
+                  <div className="d-flex">
+                    <h3 className="blog-title pe-2">
+                      <Link to="/blog">{item.title}</Link>
+                    </h3>
+                    <div>
+                      <div className="dropdown dropdown-action">
+                        <Link
+                          to="#"
+                          className="action-icon dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <i className="fa fa-ellipsis-v" />
+                        </Link>
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <Link
+                            className="dropdown-item"
+                            onClick={() => handelEditClick(item?.id)}
+                          >
+                            <i className="fa fa-edit me-1" /> Edit
+                          </Link>
+                          <Link
+                            className="dropdown-item text-danger"
+                            to="#"
+                            // data-bs-toggle="modal"
+                            data-bs-target="#delete_patient"
+                            onClick={() => handleDeleteClick(item?.id)}
+                          >
+                            <i className="fa fa-trash-alt m-r-5"></i> Delete
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <p>{item.description}</p>
                 </div>
               </div>
-              <p>{item.description}</p>
             </div>
-          </div>
-        </div>
-      ))}
-      <ConfirmDelete
-        show={showDelete}
-        setShow={setShowDelete}
-        title="Delete banner"
-        isLoading={deleteLoading}
-        handleDelete={handelDelete}
-      />
+          ))}
+          <ConfirmDelete
+            show={showDelete}
+            setShow={setShowDelete}
+            title="Delete banner"
+            isLoading={deleteLoading}
+            handleDelete={handelDelete}
+          />
 
-      <CenteredModal
-        show={showEdit}
-        handleClose={handleClose}
-        title="Edit banner"
-      >
-        <BannerEditForm bannerId={bannerId} handleClose={handleClose} />
-      </CenteredModal>
+          <CenteredModal
+            show={showEdit}
+            handleClose={handleClose}
+            title="Edit banner"
+          >
+            <BannerEditForm bannerId={bannerId} handleClose={handleClose} />
+          </CenteredModal>
+        </div>
+      ) : (
+        <div className="no-content-box d-flex justify-content-center align-items-center">
+          <p>No Banners Found</p>
+        </div>
+      )}
+    </>
+  ) : (
+    <div className="no-content-box">
+      <ComponentLoader />
     </div>
   );
 }

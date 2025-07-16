@@ -1,11 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import {
+  FormProvider,
+  useForm,
+  useFormContext,
+  useWatch,
+} from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import SelectField from "../InputFields/SelectField";
 import PropTypes from "prop-types";
 import { editCoupen } from "../../apis/appmanage";
 import { toast } from "react-toastify";
+import { toInputDateFormat } from "../configs/toInputDateFormat";
 
 function EditCoupen({ handleClose, coupen }) {
   const methods = useForm();
@@ -21,8 +27,24 @@ function EditCoupen({ handleClose, coupen }) {
     },
   ];
 
+  const [discountType, setDiscountType] = useState("");
+
+  const WatchDiscountTypeChange = () => {
+    const { control } = useFormContext();
+    const discountType = useWatch({ control, name: "discountOptions" }); // replace with your actual `name`
+    useEffect(() => {
+      if (discountType !== undefined) {
+        // You can trigger any side-effect here
+        setDiscountType(discountType.value);
+      }
+    }, [discountType]);
+
+    return null; // no UI output
+  };
+
   useEffect(() => {
     if (coupen) {
+      const inputDate = toInputDateFormat(coupen?.valid_untill);
       methods.reset({
         coupencode: coupen?.coupon_code || "",
         discountOptions:
@@ -32,7 +54,7 @@ function EditCoupen({ handleClose, coupen }) {
         minimumdiscount: coupen?.minimum_discount_allowed || "",
         usagelimit: coupen?.usage_limit || "",
         usagelimituser: coupen?.usage_limit_per_user || "",
-        expiry: coupen?.valid_untill,
+        expiry: inputDate,
       });
     }
   }, [coupen]);
@@ -52,10 +74,9 @@ function EditCoupen({ handleClose, coupen }) {
       usage_limit_per_user: parseInt(data?.usagelimituser ?? 0),
     };
     const coupenId = coupen?.id;
-    console.log(coupenId);
-    
+
     mutation.mutate(
-      { id:coupenId, data:coupen_data },
+      { id: coupenId, data: coupen_data },
       {
         onSuccess: (data) => {
           handleClose();
@@ -119,11 +140,15 @@ function EditCoupen({ handleClose, coupen }) {
               <div className="form-group">
                 <InputField
                   name="minimumdiscount"
-                  label="Minimum Discount Amount"
+                  label={`Minimum Discount ${
+                    discountType === "percentage" ? "Percentage" : "Amount"
+                  }`}
                   validation={{
-                    required: "Minimum discount amount is required",
+                    required: `Minimum discount ${
+                      discountType === "percentage" ? "percentage" : "amount"
+                    } is required`,
                   }}
-                  type="price"
+                  type={discountType === "percentage" ? "text" : "price"}
                 />
               </div>
             </div>
@@ -163,6 +188,7 @@ function EditCoupen({ handleClose, coupen }) {
               </div>
             </div>
           </div>
+          <WatchDiscountTypeChange />
 
           <div className="w-100 ms-2 mt-2 form-group mb-0 d-flex justify-content-end">
             <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
@@ -173,7 +199,7 @@ function EditCoupen({ handleClose, coupen }) {
                   aria-hidden="true"
                 ></span>
               )}
-              Create
+              Submit
             </button>
           </div>
         </div>

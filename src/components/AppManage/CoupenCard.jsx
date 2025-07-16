@@ -18,17 +18,14 @@ function getCouponExpiryText(expiryDateISO) {
     expiry.getMonth() === now.getMonth() &&
     expiry.getFullYear() === now.getFullYear();
 
-  const options = { hour: "numeric", minute: "2-digit", hour12: true };
-  const timeStr = expiry.toLocaleTimeString(undefined, options); // local time
-
-  if (isToday) {
-    return `Coupon expires today at ${timeStr}`;
-  }
-
-  const dateOptions = { year: "numeric", month: "long", day: "numeric" };
+  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
   const dateStr = expiry.toLocaleDateString(undefined, dateOptions);
 
-  return `Coupon expires on ${dateStr} at ${timeStr}`;
+  if (isToday) {
+    return `Coupon expires today`;
+  }
+
+  return `Coupon expires on ${dateStr}`;
 }
 
 function CoupenCard({ coupen }) {
@@ -43,14 +40,14 @@ function CoupenCard({ coupen }) {
       setTimeout(() => setCopied(false), 1500);
     });
   };
-  const discountTypeText =
-    coupen?.discount_type === "flat" ? "Flat discount" : "Percentage discount";
-
+  
   const couponMessage = `Get ${
-    discountTypeText === "flat" ? "₹" : "%"
-  } ${parseInt(
+    coupen?.discount_type === "flat" ? "₹" : "" 
+  }${parseInt(
     coupen?.minimum_discount_allowed ?? 0
-  )} off when you spend ₹${parseInt(
+  )}${
+    coupen?.discount_type === "percentage" ? "%" : "" 
+  } discount on minimum spend of ₹${parseInt(
     coupen?.minimum_cart_amount ?? 0
   )} or more.`;
   const limitMessage = ` Coupon valid for ${parseInt(
@@ -129,7 +126,7 @@ function CoupenCard({ coupen }) {
       </div>
 
       <div className="mt-3">
-        <p>{couponMessage}</p>
+        <p className="text-center">{couponMessage}</p>
         <p
           className="fst-italic text-secondary"
           style={{ fontSize: "0.85rem" }}

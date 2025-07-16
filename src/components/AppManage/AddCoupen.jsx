@@ -1,10 +1,11 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import SelectField from "../InputFields/SelectField";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCoupen } from "../../apis/appmanage";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 function AddCoupen({ handleClose }) {
   const methods = useForm();
@@ -56,6 +57,21 @@ function AddCoupen({ handleClose }) {
     });
   };
   const loading = mutation.isPending;
+
+  const [discountType, setDiscountType] = useState("");
+
+  const WatchDiscountTypeChange = () => {
+    const { control } = useFormContext();
+    const discountType = useWatch({ control, name: "discountOptions" }); // replace with your actual `name`
+    useEffect(() => {
+      if (discountType !== undefined) {
+        // You can trigger any side-effect here
+        setDiscountType(discountType.value);
+      }
+    }, [discountType]);
+
+    return null; // no UI output
+  };
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onCreateCoupen)}>
@@ -97,11 +113,15 @@ function AddCoupen({ handleClose }) {
               <div className="form-group">
                 <InputField
                   name="minimumdiscount"
-                  label="Minimum Discount Amount"
+                  label={`Minimum Discount ${
+                    discountType === "percentage" ? "Percentage" : "Amount"
+                  }`}
                   validation={{
-                    required: "Minimum discount amount is required",
+                    required: `Minimum discount ${
+                      discountType === "percentage" ? "percentage" : "amount"
+                    } is required`,
                   }}
-                  type="price"
+                  type={discountType === "percentage" ? "text" : "price"}
                 />
               </div>
             </div>
@@ -136,24 +156,25 @@ function AddCoupen({ handleClose }) {
                   name="expiry"
                   label="Expiry"
                   validation={{ required: "Expiry date is required" }}
-                  type="date" 
+                  type="date"
                 />
               </div>
             </div>
           </div>
+          <WatchDiscountTypeChange />
 
-            <div className="w-100 ms-2 mt-2 form-group mb-0 d-flex justify-content-end">
-              <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
-                {/* {appDetailsLoading || */}
-                {loading && (
-                  <span
-                    className="spinner-border spinner-border-sm"
-                    aria-hidden="true"
-                  ></span>
-                )}
-                Create
-              </button>
-            </div>
+          <div className="w-100 ms-2 mt-2 form-group mb-0 d-flex justify-content-end">
+            <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
+              {/* {appDetailsLoading || */}
+              {loading && (
+                <span
+                  className="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                ></span>
+              )}
+              Create
+            </button>
+          </div>
         </div>
       </form>
     </FormProvider>
