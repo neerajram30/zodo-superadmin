@@ -1,12 +1,13 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import InputField from "../InputFields/InputField";
 import SelectField from "../InputFields/SelectField";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCoupen } from "../../apis/appmanage";
 import PropTypes from "prop-types";
+import { editCoupen } from "../../apis/appmanage";
 import { toast } from "react-toastify";
 
-function AddCoupen({ handleClose }) {
+function EditCoupen({ handleClose, coupen }) {
   const methods = useForm();
   const queryClient = useQueryClient();
   const discountOptions = [
@@ -20,11 +21,27 @@ function AddCoupen({ handleClose }) {
     },
   ];
 
+  useEffect(() => {
+    if (coupen) {
+      methods.reset({
+        coupencode: coupen?.coupon_code || "",
+        discountOptions:
+          discountOptions.find((opt) => opt.value === coupen?.discount_type) ||
+          discountOptions[0],
+        minimumcart: coupen?.minimum_cart_amount || "",
+        minimumdiscount: coupen?.minimum_discount_allowed || "",
+        usagelimit: coupen?.usage_limit || "",
+        usagelimituser: coupen?.usage_limit_per_user || "",
+        expiry: coupen?.valid_untill,
+      });
+    }
+  }, [coupen]);
+
   const mutation = useMutation({
-    mutationFn: createCoupen, // API function to create
+    mutationFn: editCoupen, // API function to create
   });
 
-  const onCreateCoupen = (data) => {
+  const onEditCoupen = (data) => {
     const coupen_data = {
       coupon_code: data?.coupencode,
       discount_type: data?.discountOptions?.value,
@@ -34,31 +51,36 @@ function AddCoupen({ handleClose }) {
       usage_limit: parseInt(data?.usagelimit ?? 0),
       usage_limit_per_user: parseInt(data?.usagelimituser ?? 0),
     };
-
-    mutation.mutate(coupen_data, {
-      onSuccess: (data) => {
-        handleClose();
-        methods.reset();
-        const message = data?.message || "Coupen added successfully";
-        toast.success(message);
-        queryClient.invalidateQueries(["coupens"]);
-      },
-      onError: (error) => {
-        const errorMessage =
-          error?.response?.data?.validationErrors ||
-          error?.response?.data?.message ||
-          "Failed to add coupen";
-        toast.error(errorMessage);
-        queryClient.invalidateQueries(["coupens"]);
-        handleClose();
-        methods.reset();
-      },
-    });
+    const coupenId = coupen?.id;
+    console.log(coupenId);
+    
+    mutation.mutate(
+      { id:coupenId, data:coupen_data },
+      {
+        onSuccess: (data) => {
+          handleClose();
+          methods.reset();
+          const message = data?.message || "Coupen updated successfully";
+          toast.success(message);
+          queryClient.invalidateQueries(["coupens"]);
+        },
+        onError: (error) => {
+          const errorMessage =
+            error?.response?.data?.validationErrors ||
+            error?.response?.data?.message ||
+            "Failed to edit coupen";
+          toast.error(errorMessage);
+          queryClient.invalidateQueries(["coupens"]);
+          handleClose();
+          methods.reset();
+        },
+      }
+    );
   };
   const loading = mutation.isPending;
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onCreateCoupen)}>
+      <form onSubmit={methods.handleSubmit(onEditCoupen)}>
         <div className="settings-form">
           <div className="form-group">
             <InputField
@@ -113,7 +135,7 @@ function AddCoupen({ handleClose }) {
                 name="usagelimit"
                 label="Usage Limit"
                 validation={{ required: "Usage Limit is required" }}
-                type="number"
+                type="text"
               />
             </div>
 
@@ -123,7 +145,7 @@ function AddCoupen({ handleClose }) {
                   name="usagelimituser"
                   label="Usage Limit Per User"
                   validation={{ required: "Usage limit per user is required" }}
-                  type="number"
+                  type="text"
                 />
               </div>
             </div>
@@ -136,32 +158,32 @@ function AddCoupen({ handleClose }) {
                   name="expiry"
                   label="Expiry"
                   validation={{ required: "Expiry date is required" }}
-                  type="date" 
+                  type="date"
                 />
               </div>
             </div>
           </div>
 
-            <div className="w-100 ms-2 mt-2 form-group mb-0 d-flex justify-content-end">
-              <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
-                {/* {appDetailsLoading || */}
-                {loading && (
-                  <span
-                    className="spinner-border spinner-border-sm"
-                    aria-hidden="true"
-                  ></span>
-                )}
-                Create
-              </button>
-            </div>
+          <div className="w-100 ms-2 mt-2 form-group mb-0 d-flex justify-content-end">
+            <button className="border-0 btn btn-primary btn-gradient-primary btn-rounded me-2">
+              {/* {appDetailsLoading || */}
+              {loading && (
+                <span
+                  className="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                ></span>
+              )}
+              Create
+            </button>
+          </div>
         </div>
       </form>
     </FormProvider>
   );
 }
 
-AddCoupen.propTypes = {
+EditCoupen.propTypes = {
   handleClose: PropTypes.func,
+  coupen: PropTypes.object,
 };
-
-export default AddCoupen;
+export default EditCoupen;

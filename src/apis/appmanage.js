@@ -22,8 +22,8 @@ export const editBanner = async ({ id, data }) => {
 
 export const deleteBanner = async (id) => {
   const response = await apiClient.delete(`/banners/${id}`);
-  console.log("delete response ",response?.data);
-  
+  console.log("delete response ", response?.data);
+
   return response?.data;
 };
 
@@ -44,6 +44,16 @@ export const updateAppdetails = async (data) => {
 
 export const createCoupen = async (data) => {
   const response = await apiClient.post("/coupons", data);
+  return response?.data;
+};
+
+export const editCoupen = async ({ id, data }) => {
+  const response = await apiClient.patch(`/coupons/${id}`, data);
+  return response?.data;
+};
+
+export const deleteCoupen = async (id) => {
+  const response = await apiClient.delete(`/coupons/${id}`);
   return response?.data;
 };
 

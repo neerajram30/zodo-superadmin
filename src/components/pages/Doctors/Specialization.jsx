@@ -9,7 +9,6 @@ import AddSpecialization from "../../modals/AddSpecialization";
 function Specialization() {
   const [searchTerm, setSearchterm] = useState("");
   const query = searchTerm ? `name=${searchTerm}` : "";
-  console.log("Query ", query);
   const [show, setShow] = useState(false);
   const { data: specialisationList, isLoading } = useSpecialisationList(query);
   console.log(specialisationList, isLoading);

@@ -36,9 +36,9 @@ function BannerListing() {
     <div className="row mt-2">
       {data?.map((item) => (
         <div className="col-sm-6 col-md-6 col-xl-4" key={item.id}>
-          <div className="blog grid-blog">
+          <div className="blog grid-blog d-flex flex-column banner-card">
             <div className="blog-image">
-              <Link to>
+              <Link to className="">
                 <img className="img-fluid" src={item.url} alt="#" />
               </Link>
             </div>

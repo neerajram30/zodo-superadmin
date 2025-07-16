@@ -61,7 +61,7 @@ function ManageCoupen() {
                     className="col-sm-6 col-lg-4 col-xl-4 d-flex"
                     key={item.id}
                     >
-                      <CoupenCard item={item} />
+                      <CoupenCard coupen={item} />
                       
                       {/* <HospitalCard hospitalData={item} hospitalId={item?.id} /> */}
                     </div>
