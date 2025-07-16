@@ -12,7 +12,6 @@ import { useChangeSettlementStatus } from "../../../hooks/settlements/useChageSe
 function SettlementDetails() {
   const { id } = useParams(); 
   const { data, isLoading } = useViewSettlements(id);
-  console.log("Settlement data ",data);
     
   const [showApprovemodal, setShowApprovemodal] = useState(false);
   const [showDeclineModal, setShowDeclineMoadl] = useState(false);

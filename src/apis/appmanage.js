@@ -22,8 +22,6 @@ export const editBanner = async ({ id, data }) => {
 
 export const deleteBanner = async (id) => {
   const response = await apiClient.delete(`/banners/${id}`);
-  console.log("delete response ", response?.data);
-
   return response?.data;
 };
 

@@ -26,7 +26,6 @@ function DoctorRequestCard(props) {
   const [showDocumentDelete, setShowDocumentdelete] = useState(false);
   const [disableshow, setdisableShow] = useState(false);
   const [disable, setdisable] = useState(false);
-  console.log("Doctor details", doctorDetails);
   const { data: doctorDocuments, isLoading: documentLoading } =
     useDoctorsDocument(id);
   const { mutate: deleteDocument, isLoading: deleteLoading } =

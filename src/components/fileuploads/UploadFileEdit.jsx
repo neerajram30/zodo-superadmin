@@ -59,7 +59,6 @@ const { fileDetails, setFileDetails } = props;
       },
     });
   };
-  console.log("File details", fileDetails);
   return (
     <Dropzone onDrop={handleFile}>
       {({ getRootProps, getInputProps }) => (

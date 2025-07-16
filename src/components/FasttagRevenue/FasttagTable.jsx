@@ -28,7 +28,6 @@ function FasttagTable(props) {
                       {columns.map((column, index) => {
                         return (
                           <td key={column.label + index}>
-                            {console.log("Row ",row)}
                             {" "}
                             <span >
                               {row.image && index == 0 && (

@@ -49,7 +49,6 @@ function BannerEditForm(props) {
         },
       }
     );
-    console.log(data);
   };
   const handleFile = async (e) => {
     const selecteFile = e.target.files[0];

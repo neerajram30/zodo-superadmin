@@ -14,7 +14,6 @@ function DoctorRequest() {
   const [showApprovemodal, setShowApprovemodal] = useState(false);
   const [showDeclineModal, setShowDeclineMoadl] = useState(false);
   const { mutate, isLoading: approveLoading } = useChangeDoctorStatus();
-  console.log("Doctor details ", doctorDetails);
 
   const breadCrumpData = [
     {

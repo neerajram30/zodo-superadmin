@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }) => {
   const loginMutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      console.log("Login",data?.data?.user_type);
       const userType = data?.data?.user_type;
       if(userType === "superAdmin"){
         localStorage.setItem("token", data?.data?.tokens?.accessToken);

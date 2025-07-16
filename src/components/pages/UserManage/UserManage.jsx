@@ -9,7 +9,6 @@ function UserManage() {
   const [searchTerm,setSearchterm] = useState("");
   const query =  searchTerm ? `&name=${searchTerm}` : ""
   const { data , isLoading } = useGetUsers(query);
-  console.log("USER LIST ",data, isLoading);
   const breadCrumpData = [
     {
       name: "Manage Users",

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 function Overview(props) {
   const { analytics } = props;
-  console.log("Hospital analytics ",analytics);
   
   const revenueOverview = [
     {

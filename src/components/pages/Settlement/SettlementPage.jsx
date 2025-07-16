@@ -35,7 +35,6 @@ function SettlementPage() {
       link: "/dashboard/settlement-requests",
     },
   ];
-  console.log("REQUESTED ", requestedSettlements);
 
   const tabData = [
     {

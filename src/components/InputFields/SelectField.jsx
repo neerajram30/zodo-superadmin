@@ -17,7 +17,6 @@ function SelectField(props) {
     control,
     formState: { errors },
   } = useFormContext();
-  console.log(defaultValue);
   
   const selectStyle = {
     control: (baseStyles, state) => ({

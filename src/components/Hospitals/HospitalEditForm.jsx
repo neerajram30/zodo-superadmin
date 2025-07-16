@@ -79,7 +79,6 @@ function HospitalEditForm({ hospitalDetails }) {
       });
     }
     if (hospitalDetails) {
-      console.log("Hospital details", hospitalDetails);
 
       setFileUrl(hospitalDetails?.logo);
       const fastTag = hospitalDetails?.fastTag?.enabled;
@@ -129,7 +128,6 @@ function HospitalEditForm({ hospitalDetails }) {
   };
 
   const onEditHospital = async (data) => {
-    console.log("Fasttag toggle", toggleFasttag);
 
     if (data.accountNumber === data.verifyAccountnumber) {
       const file1Details = {

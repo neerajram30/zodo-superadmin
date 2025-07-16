@@ -27,7 +27,6 @@ function Finance(props) {
 
   const { data: walletDetails } = useFetchWallet(id);
   const requestedDate = walletDetails?.latest_settlement?.created_at;
-  console.log("Wallet Details ", walletDetails);
 
   const status = walletDetails?.latest_settlement?.status;
   const columns = [

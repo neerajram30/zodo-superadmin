@@ -41,7 +41,6 @@ const Login = () => {
     if (token) {
       navigate("/dashboard"); // Redirect to dashboard if token exists
     }
-    console.log("Token", token);
   }, []);
 
   

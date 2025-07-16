@@ -35,7 +35,6 @@ function BannerForm(props) {
         handleClose();
       },
     });
-    console.log(data);
   };
   const handleFile = async (e) => {
     const selecteFile = e.target.files[0];
@@ -131,7 +130,6 @@ function BannerForm(props) {
                   >
                     {!uploadLoading ? (
                       <div>
-                        {console.log("file url", fileurl)}
                         <img src={fileurl} alt="Image" />
                         <Link to="#" className="btn-icon logo-hide-btn">
                           <i

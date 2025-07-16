@@ -15,7 +15,6 @@ function FasttagDetails() {
   
   const { data: requestedHospitals, isLoading: requestedLoading } =
     useRequestedHospitals("pending");
-  console.log(requestedLoading);
   const tabData = [
     {
       id: "all-hospitals",

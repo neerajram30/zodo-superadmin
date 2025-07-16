@@ -28,14 +28,12 @@ function SpecializationList(props) {
 
   // Handler for edit button click
   const handleEdit = (specialisationId) => {
-    console.log(specialisationId);
 
     // Find the selected specialisation by ID
     const selectedSpecialisation = specialisationList?.find(
       (item) => item.id === specialisationId
     );
 
-    console.log("Selected Specialisation", selectedSpecialisation);
 
     setSpecialisation(selectedSpecialisation);
     setShowEdit(true);

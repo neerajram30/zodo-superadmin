@@ -15,12 +15,9 @@ function UserAppointmentTable(props) {
   const handleClose = () => {
     setShow(false);
   };
-  console.log("user appointment list ",appointmentList);
   
   const handleView = (url) => {
     // Logic to handle view action
-    console.log("View action triggered");
-    console.log("Prescription URL: ", url);
     setPrescriptionUrl(url);
     // Open the modal to show the prescription
     setShow(true);

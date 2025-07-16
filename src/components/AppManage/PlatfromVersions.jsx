@@ -16,7 +16,6 @@ function PlatfromVersions() {
   // const { mutate: updateAppdetails, isLoading: appDetailsLoading } =
   //   useUpdateAppDetails();
 
-  console.log("App details <><><", appDetails);
 
   const [iosDate, setIosDate] = useState(null);
   const onPlatformVersion = (data) => {

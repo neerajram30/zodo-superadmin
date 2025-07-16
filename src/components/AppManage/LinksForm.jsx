@@ -12,7 +12,6 @@ function LinksForm() {
   // const { mutate: updateAppdetails, isLoading: appDetailsLoading } =
   //   useUpdateAppDetails();
   const { mutate: createAppdetails, isLoading } = useCreateAppDetails();
-  console.log(appDetails);
   useEffect(() => {
     if (appDetails) {
       methods.reset({
@@ -30,7 +29,6 @@ function LinksForm() {
         terms_and_conditions_link: data?.terms,
         privacy_policy_link: data?.privacyPolicy,
       };
-      console.log(data);
       createAppdetails(links);
     } else {
       const appdetails = {

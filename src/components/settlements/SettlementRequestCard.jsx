@@ -9,7 +9,6 @@ function SettlementRequestCard(props) {
   const { data } = props;
   const [showApprove, setshowApprove] = useState(false);
   const { mutate, isLoading } = useChangeSettlementStatus();
-  console.log(isLoading);
   // const navigate = useNavigate();
   const handleSettlementRequest = async () => {
     const statusUpdate = { status: "approved" };

@@ -4,7 +4,6 @@ import DataTable from "../DataTables/DataTable";
 
 function BannerTable() {
   const { data, isLoading } = useGetBanner();
-  console.log("Banner data ", data);
   const columns = [
     {
       title: "Banner",

@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 
 function HeaderTabs() {
   const location = useLocation();
-  console.log(location.pathname.split("/")[1]);
   const activePath = location.pathname.split("/")[1];
 
   const tabs = [

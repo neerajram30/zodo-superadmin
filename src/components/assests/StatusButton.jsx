@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 
 function StatusButton(props) {
   const { status } = props;
-  console.log("Button status ", status);
 
   return (
     <button

@@ -6,7 +6,6 @@ import ContactHospital from "../../modals/ContactHospital";
 function SettlementOperations(props) {
   const { approveRequest, isLoading, status, declineRequest, hospitalDetails } =
     props;
-    console.log("Doctor details ",hospitalDetails);
     
   const navigate = useNavigate();
   const [show,setShow] = useState(false);

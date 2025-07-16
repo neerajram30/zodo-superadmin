@@ -6,10 +6,8 @@ const PatientChart = (props) => {
   const { data } = props;
   const chartRef = React.useRef(null);
   const chartInstanceRef = React.useRef(null);
-  console.log("Analytics data ",data);
   const countsPeryear = data?.map((item) => item.count);
   const categories = data?.map((item)=> item.month)
-  console.log(categories);
   
   useEffect(() => {
     if (chartInstanceRef.current) {

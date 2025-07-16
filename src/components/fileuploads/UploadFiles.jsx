@@ -20,7 +20,6 @@ function UploadFiles(props) {
 
   const { mutate: uploadDocument, isLoading: documentLoading } =
     useUploadFile();
-  console.log("File details ", fileDetails);
 
   const handleFile = async (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -30,7 +29,6 @@ function UploadFiles(props) {
     try {
       uploadDocument(formData, {
         onSuccess: (response) => {
-          console.log("upload response ", response);
           const message = "File uploaded successfully";
           toast.success(message);
           setFileDetails({

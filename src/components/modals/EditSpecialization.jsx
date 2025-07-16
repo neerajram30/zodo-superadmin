@@ -22,7 +22,6 @@ function EditSpecialization(props) {
   
   const methods = useForm({ defaultValues });
   const onEditSpecialisation = async (data) => {
-    console.log("Edited ", data);
 
     const editedSpecialisation = {
       name: data.specialisationName,
@@ -38,7 +37,6 @@ function EditSpecialization(props) {
     methods.reset(defaultValues); // Update form values when defaultValues change
   }, [specialisation]);
 
-  console.log("Specialisation", specialisation);
   const handleFileURL = (url) => {
     setFileURL(url);
   };

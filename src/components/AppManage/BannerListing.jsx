@@ -11,7 +11,6 @@ function BannerListing() {
   const [showEdit, setShowedit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [bannerId, setBannerId] = useState("");
-  console.log(isLoading);
   const handleClose = () => {
     setShowedit(false);
   };
@@ -31,7 +30,6 @@ function BannerListing() {
       },
     });
   };
-  console.log("Banner data !", data);
 
   return !isLoading ? (
     <>

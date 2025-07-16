@@ -3,7 +3,6 @@ import { Modal } from "react-bootstrap";
 import FeatherIcon from "feather-icons-react/build/FeatherIcon";
 function ContactHospital(props) {
   const { show, setShow, data } = props;
-  console.log(data);
 
   return (
     <Modal

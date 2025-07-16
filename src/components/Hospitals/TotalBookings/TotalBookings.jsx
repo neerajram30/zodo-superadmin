@@ -14,7 +14,6 @@ function TotalBookings() {
   // const fastTagBookingCount = fastTagBookings?.length || 0;
   // const cancelledCount = cancelledBookings?.length || 0;
   const {data: hospitalDashboard} = useHospitalAnalytics(id);
-  console.log("Hospitaal dash",hospitalDashboard)
   
   const bookinsDetails = [
     {

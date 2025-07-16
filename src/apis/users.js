@@ -7,7 +7,6 @@ export const getAllUsers = async () => {
 
 export const getAllUsersByQuery = async (query) => {
   const response = await apiClient.get(`/users/admin?user_type=user&${query}`);
-  console.log("Response ", response?.data?.data);
   return response?.data?.data;
 };
 
@@ -19,7 +18,6 @@ export const updateUserStatus = async (id) => {
 
 export const getUserBookings = async (id) => {
   const response = await apiClient.get(`/bookings/users/${id}`);
-  console.log("Appoments ",response);
   
   return response?.data?.data;
 };

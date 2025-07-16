@@ -30,7 +30,6 @@ function DoctorsList() {
       key: "name",
       render: (text, record) => (
         <>
-          {console.log("record", record)}
 
           <div className="d-flex">
             <div>

@@ -6,7 +6,6 @@ export const uploadFile = async (formData) => {
       "Content-Type": "multipart/form-data",
     },
   });
-  console.log("File upload response !",response.data);
   
   return response.data;
 };
