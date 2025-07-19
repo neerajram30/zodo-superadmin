@@ -1,7 +1,7 @@
 import Layout from "../../layout/Layout";
 import Hero from "../../Dashboard/hero";
 import InfoCards from "../../Dashboard/Info_cards";
-import { fasttag, profile_hospitals, dep_icon1 } from "../../imagepath";
+import { dep_icon1, tag, menuicon13 } from "../../imagepath";
 import RevenueInfo from "../../Dashboard/RevenueInfo";
 import Breadcrumb from "../../breadcrump/Breadcrumb";
 import { useDashboardData } from "../../../hooks/useDashboardData";
@@ -14,7 +14,7 @@ function Dashboard() {
     {
       id: 1,
       title: "Total hospitals",
-      icon: profile_hospitals,
+      icon: menuicon13,
       count: dashboardData?.activeHospitalsCount ?? 0,
       percentageUp: 0,
       link: "/manage-hospitals",
@@ -30,7 +30,7 @@ function Dashboard() {
     {
       id: 3,
       title: "Fast tag Issued",
-      icon: fasttag,
+      icon: tag,
       count: dashboardData?.fast_tag?.count ?? 0,
       percentageUp: 0,
       link: "/dashboard/fasttag-issued",

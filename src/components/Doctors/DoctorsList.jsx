@@ -12,7 +12,6 @@ import { user_profile } from "../imagepath";
 import StatusBadge from "../assests/StatusBadge";
 import { formatDateDDMMYY } from "../configs/fomatDateDDMMYY";
 // import { blogimg12 } from "../imagepath";
-import { FilterFilled } from "@ant-design/icons";
 import { Tag } from "antd";
 function DoctorsList() {
   const [show, setShow] = useState(false);
@@ -47,13 +46,8 @@ function DoctorsList() {
           </div>
         </>
       ),
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      // sorter: (a, b) => a.name.localeCompare(b.name),
     },
-    // {
-    //   title: "Department",
-    //   dataIndex: "Department",
-    //   // sorter: (a, b) => a.Department.length - b.Department.length,
-    // },
     {
       title: "Specialisation",
       dataIndex: "specialisations",
@@ -71,17 +65,17 @@ function DoctorsList() {
     {
       title: "Type",
       dataIndex: "hospital_id",
-      filters: [
-        { text: "online", value: "online" },
-        { text: "ofline", value: "ofline" },
-      ],
-      onFilter: (value, record) => {
-        const type = record.hospital_id ? "ofline" : "online";
-        return type === value;
-      },
-       filterIcon: (filtered) => (
-    <FilterFilled style={{ color: filtered ? "#05A95C" : "#aaa" }} />
-  ),
+  //     filters: [
+  //       { text: "online", value: "online" },
+  //       { text: "ofline", value: "ofline" },
+  //     ],
+  //     onFilter: (value, record) => {
+  //       const type = record.hospital_id ? "ofline" : "online";
+  //       return type === value;
+  //     },
+  //      filterIcon: (filtered) => (
+  //   <FilterFilled style={{ color: filtered ? "#05A95C" : "#aaa" }} />
+  // ),
       render: (item) => (item ? "ofline" : "online"),
     },
     {

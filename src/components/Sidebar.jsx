@@ -1,27 +1,29 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Scrollbars from "react-custom-scrollbars-2";
 import {
   dashboard,
+  emptyWallet,
   logout_01,
   menuicon03,
   menuicon08,
-  menuicon09,
   menuicon16,
 } from "./imagepath";
 import { useAuth } from "../hooks/auth/useAuth";
+import ConfirmLogout from "./modals/ConfirmLogout";
 
-const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
+const Sidebar = ({ isOpen, activeClassName, id, id1 }) => {
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  const [confirm, setConfirm] = useState(false);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
+  const handleLogout = () => {
     localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
     setUser(null);
     navigate("/login");
-    onClose(); // close sidebar on logout
+    // onClose(); // close sidebar on logout
   };
 
   const handleClick = (e, item, item1) => {
@@ -84,7 +86,8 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                   onClick={(e) => handleClick(e, "menu-item3", "menu-items3")}
                   className={
                     activeClassName === "manage-hospitals" ||
-                    activeClassName === "manage-doctors"
+                    activeClassName === "manage-doctors" ||
+                    activeClassName === "manage-settlements"
                       ? "active"
                       : ""
                   }
@@ -122,6 +125,20 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                       Doctors
                     </Link>
                   </li>
+
+                  <li>
+                    <Link
+                      to="/manage-settlements"
+                      className={
+                        activeClassName === "manage-settlements"
+                          ? "submenu-active"
+                          : "submenu-normal"
+                      }
+                      onClick={handleMenuClick}
+                    >
+                      Settlements
+                    </Link>
+                  </li>
                 </ul>
               </li>
               <li className="submenu">
@@ -143,74 +160,11 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
                   onClick={handleMenuClick}
                 >
                   <span className="menu-side">
-                    <img src={menuicon09} alt="" />
+                    <img src={emptyWallet} alt="" />
                   </span>
                   <span>Finance</span>
                 </Link>
               </li>
-
-              
-
-              {/* <li className="submenu">
-                <Link
-                  to="/user-manage"
-                  className={activeClassName === "userManage" ? "active" : ""}
-                  onClick={handleMenuClick}
-                >
-                  <span className="menu-side">
-                    <img src={menuicon03} alt="" />
-                  </span>
-                  <span>User Manage</span>
-                </Link>
-              </li> */}
-
-              {/* <li className="submenu">
-                <Link
-                  to="#"
-                  id="menu-item4"
-                  onClick={(e) => handleClick(e, "menu-item4", "menu-items4")}
-                  className={
-                    activeClassName === "manage-users"
-                      ? "active"
-                      : ""
-                  }
-                >
-                  <span className="menu-side">
-                    <img src={menuicon08} alt="" />
-                  </span>
-                  <span>Manage Users</span>
-                  <span className="menu-arrow" />
-                </Link>
-                <ul className="menu-items4" style={{ display: "none" }}>
-                  <li>
-                    <Link
-                      to="/manage-users"
-                      className={
-                        activeClassName === "manage-users"
-                          ? "submenu-active"
-                          : "submenu-normal"
-                      }
-                      onClick={handleMenuClick}
-                    >
-                      Users
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/create-user"
-                      className={
-                        activeClassName === "create-user"
-                          ? "submenu-active"
-                          : "submenu-normal"
-                      }
-                      onClick={handleMenuClick}
-                    >
-                      Create User
-                    </Link>
-                  </li>
-                </ul>
-              </li> */}
-
               <li className="submenu">
                 <Link
                   to="/app-manage"
@@ -226,7 +180,7 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
             </ul>
 
             <div className="logout-btn submenu">
-              <Link to="#" onClick={handleLogout}>
+              <Link to="#" onClick={() => setConfirm(true)}>
                 <span className="menu-side">
                   <img src={logout_01} alt="" />
                 </span>
@@ -235,6 +189,11 @@ const Sidebar = ({ isOpen, onClose, activeClassName, id, id1 }) => {
             </div>
           </div>
         </div>
+        <ConfirmLogout
+          show={confirm}
+          setShow={setConfirm}
+          handleLogout={handleLogout}
+        />
       </Scrollbars>
     </div>
   );

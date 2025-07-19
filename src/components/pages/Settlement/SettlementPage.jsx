@@ -67,7 +67,7 @@ function SettlementPage() {
     setSearchterm(searchTerm);
   };
   return (
-    <Layout activeClassName="dashboard">
+    <Layout activeClassName="manage-settlements">
       <div className="page-wrapper">
         <div className="content">
           <Breadcrumb data={breadCrumpData} />

@@ -41,6 +41,7 @@ import Platform from "./components/pages/AppManage/Platform";
 import Notifications from "./components/pages/AppManage/Notifications";
 import UserManage from "./components/pages/UserManage/UserManage";
 import ManageCoupen from "./components/pages/AppManage/ManageCoupen";
+import VerifyOtp from "./components/pages/login/VerifyOpt";
 
 //Accounts
 const Approuter = () => {
@@ -59,7 +60,8 @@ const Approuter = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/register" element={<Register />} />
             <Route path="/lockscreen" element={<LockScreen />} />
-            <Route path="/changepassword" element={<ChangePassword />} />
+            <Route path="/forgotpassword/:user_id/reset_password" element={<ChangePassword />} />
+            <Route path="/forgotpassword/:user_id" element={<VerifyOtp />} />
             {/* <Route path="/error" element={<Error />} /> */}
             {/* <Route path="/server-error" element={<ServerError />} /> */}
             {/* <Route path="/blankpage" element={<BlankPage />} /> */}
@@ -94,11 +96,11 @@ const Approuter = () => {
               element={<SettlementRequests />}
             /> */}
             <Route
-              path="/dashboard/settlement-requests"
+              path="/manage-settlements"
               element={<SettlementPage />}
             />
             <Route
-              path="/dashboard/settlement-requests/:id"
+              path="/manage-settlements/:id"
               element={<SettlementDetails />}
             />
             {/* <Route

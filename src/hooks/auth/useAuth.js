@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   const { mutate: getUser } = useGetUser();
   // Fetch user data when the component mounts
   const fetchUserData = async () => {
-    const token = localStorage.getItem("token"); // Get the token from local storage
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token") ; // Get the token from local storage
     if (token) {
       const user = await getUser(); // Fetch user data if token exists
       // console.log("User data from local storage", user);
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     onSuccess: (data) => {
       const userType = data?.data?.user_type;
       if(userType === "superAdmin"){
-        localStorage.setItem("token", data?.data?.tokens?.accessToken);
+        // localStorage.setItem("token", data?.data?.tokens?.accessToken);
         setUser(data.data);
         queryClient.invalidateQueries(["user"]); // Refresh user data
       }

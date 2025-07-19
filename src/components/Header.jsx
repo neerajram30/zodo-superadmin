@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { logo, baricon1, user_profile } from "./imagepath";
+import { logo, baricon1, user_profile, mainLogo } from "./imagepath";
 import { useAuth } from "../hooks/auth/useAuth";
 import CenteredModal from "./modals/CenteredModal";
 import ConfirmLogout from "./modals/ConfirmLogout";
@@ -53,6 +53,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove the token from local storage
+    sessionStorage.removeItem("token"); // Remove the token from session storage
     // const token = localStorage.getItem("token"); // Check if the token is removed
     setUser(null); // Clear the user state
     navigate("/login"); // Redirect to the login page
@@ -65,7 +66,7 @@ const Header = () => {
       <div className="header">
         <div className="header-left">
           <Link to="/" className="logo">
-            <img src={logo} width={108} height={38} alt="" />{" "}
+            <img src={mainLogo} width={108} height={38} alt="" />{" "}
           </Link>
         </div>
 

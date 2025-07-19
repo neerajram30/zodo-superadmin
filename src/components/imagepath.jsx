@@ -1,3 +1,4 @@
+export { default as mainLogo } from "../assets/img/main_logo.png";
 export { default as login02 } from "../assets/img/login-02.png";
 export { default as loginlogo } from "../assets/img/login-logo.png";
 export { default as loginicon01 } from "../assets/img/icons/login-icon-01.svg";
@@ -27,6 +28,7 @@ export { default as menuicon09 } from "../assets/img/icons/menu-icon-09.svg";
 export { default as menuicon10 } from "../assets/img/icons/menu-icon-10.svg";
 export { default as menuicon11 } from "../assets/img/icons/menu-icon-11.svg";
 export { default as menuicon12 } from "../assets/img/icons/menu-icon-12.svg";
+export { default as menuicon13 } from "../assets/img/icons/menu-icon-13.svg";
 export { default as menuicon14 } from "../assets/img/icons/menu-icon-14.svg";
 export { default as menuicon15 } from "../assets/img/icons/menu-icon-15.svg";
 export { default as menuicon16 } from "../assets/img/icons/menu-icon-16.svg";
@@ -126,7 +128,8 @@ export { default as medalicon03 } from "../assets/img/icons/medal-03.svg";
 export { default as profileuser01 } from "../assets/img/profile-user-01.jpg";
 export { default as profileuser02 } from "../assets/img/profile-user-02.jpg";
 export { default as doctor03 } from "../assets/img/doctor-03.jpg";
-
+export { default as emptyWallet } from "../assets/img/icons/empty-wallet.svg";
+export { default as  tickCircle} from "../assets/img/icons/tick-circle.svg";
 export { default as editicon2 } from "../assets/img/icons/edit-2.svg";
 export { default as exporticon } from "../assets/img/icons/export.svg";
 export { default as uploadfiles_icon } from "../assets/img/icons/document-upload.svg";

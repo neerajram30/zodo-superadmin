@@ -32,10 +32,15 @@ function SettlementRequestCard(props) {
                 height="75px"
               />
             </div>
+
+            <div className="col-auto">
+                <h5 style={{fontSize:'1.3rem',fontWeight:'600'}} className="text-primary">₹ {data.amount}</h5>
+              </div>
             <div className="d-flex mt-3 justify-content-between">
               <div className="">
                 <h5>{data?.hospital?.name}</h5>
               </div>
+              
             </div>
 
             <div className="mt-2">
@@ -51,7 +56,7 @@ function SettlementRequestCard(props) {
                   </button>
                 )}
                 <Link
-                  to={`/dashboard/settlement-requests/${data?.id}`}
+                  to={`/manage-settlements/${data?.id}`}
                   // data-bs-toggle="modal"
                   // data-bs-target="#save_invocies_details"
                   className="text-white hospital-add-btn rounded-pill review-btn ms-2"

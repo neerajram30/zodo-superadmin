@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { formatDate } from "fullcalendar/index.js";
 import ImageBox from "../assests/ImageBox";
+import { formatDate } from "../configs/formatDate";
+import StatusBadge from "../assests/StatusBadge";
 
 function SettlementCard(props) {
   const { data } = props;
@@ -16,7 +17,7 @@ function SettlementCard(props) {
   };
   return (
     <div className="card invoices-grid-card w-100">
-      <Link to={`/dashboard/settlement-requests/${data.id}`}>
+      <Link to={`/manage-settlements/${data.id}`}>
         <div className="card-body">
           <div className="row align-items-center hospital-card">
             <div className="col">
@@ -28,7 +29,7 @@ function SettlementCard(props) {
               />
             </div>
             <div className="col-auto">
-              <span
+              {/* <span
                 className={
                   (data.status === "rejected" && `text-danger`) ||
                   (data.status === "requested" && `text-warning`) ||
@@ -36,9 +37,12 @@ function SettlementCard(props) {
                 }
               >
                 ●
-              </span>
+              </span> */}
 
               {/* <h5 className="custom-badgestatus-orange">{data.status}</h5> */}
+
+                <StatusBadge status={data.status}/>
+
             </div>
             <div className="row mt-3">
               <div className="col">
@@ -62,7 +66,7 @@ function SettlementCard(props) {
                 </p>
               </div>
               <div className="col-auto">
-                <h5>₹ {data.amount}</h5>
+                <h5 style={{fontSize:'1.3rem',fontWeight:'600'}}>₹ {data.amount}</h5>
               </div>
             </div>
 

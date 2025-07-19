@@ -12,6 +12,7 @@ const ServerError = () => {
       navigate("/");
     } else {
       localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       navigate("/login");
     }
   };

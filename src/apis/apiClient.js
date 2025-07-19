@@ -11,7 +11,8 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     // const {accessToken} = useAuth();
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -29,6 +30,7 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401) {
       console.error("Token expired. Logging out...");
       localStorage.removeItem("token"); // Remove the token from local storage
+      sessionStorage.removeItem("token");
       window.location.href = "/login"; // Redirect to login page
     }
     if(error?.response?.status === 404){

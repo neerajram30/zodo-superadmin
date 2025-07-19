@@ -26,7 +26,7 @@ function RevenueInfo(props) {
                 />
               </h2>
               <p>
-                <Link to="settlement-requests" className="passive-view">
+                <Link to="/manage-settlements" className="passive-view">
                   See All Request
                 </Link>{" "}
               </p>

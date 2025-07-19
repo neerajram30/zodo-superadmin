@@ -1,17 +1,17 @@
 import { useDashboardData } from "../../hooks/useDashboardData";
 import Analytics from "../Dashboard/Analytics";
-import { doctors, fasttag, profile_hospitals } from "../imagepath";
+import { clock, emptyWallet, fasttag, tickCircle } from "../imagepath";
+import FullscreenLoader from "../loadings/FullscreenLoader";
 import SettlementCard from "./SettlementCard";
 import SettlementTable from "./SettlementTable";
 function Payout() {
   const { data: dashboardAnalytics, isLoading } = useDashboardData();
-  console.log("Dashboard", dashboardAnalytics, isLoading);
 
   const basicInformation = [
     {
       id: 1,
       title: "Total Payout Requests",
-      icon: profile_hospitals,
+      icon: fasttag,
       count: dashboardAnalytics?.settlement?.total ?? 0,
       percentageUp: 20,
       link: "",
@@ -20,7 +20,7 @@ function Payout() {
     {
       id: 2,
       title: "Pending Settlement",
-      icon: doctors,
+      icon: clock,
       count: dashboardAnalytics?.settlement?.requested ?? 0,
       percentageUp: 40,
       link: "",
@@ -29,7 +29,7 @@ function Payout() {
     {
       id: 3,
       title: "Approved Settlements",
-      icon: fasttag,
+      icon: tickCircle,
       count: dashboardAnalytics?.settlement?.approved ?? 0,
       percentageUp: 40,
       link: "",
@@ -38,7 +38,7 @@ function Payout() {
     {
       id: 4,
       title: "Normal Booking Revenue",
-      icon: fasttag,
+      icon: emptyWallet,
       count: dashboardAnalytics?.consultation?.revenue ?? 0,
       percentageUp: 40,
       link: "",
@@ -47,7 +47,7 @@ function Payout() {
     {
       id: 5,
       title: "Fast Tag Revenue",
-      icon: fasttag,
+      icon: emptyWallet,
       count: dashboardAnalytics?.fast_tag?.revenue ?? 0,
       percentageUp: 40,
       link: "",
@@ -56,7 +56,7 @@ function Payout() {
     {
       id: 6,
       title: "Service Revenue",
-      icon: fasttag,
+      icon: emptyWallet,
       count: dashboardAnalytics?.service?.revenue ?? 0,
       percentageUp: 40,
       link: "",
@@ -74,6 +74,8 @@ function Payout() {
       </div>
       <Analytics bookingType={bookingType} id="appointment-chart" />
       <SettlementTable />
+
+      {isLoading && <FullscreenLoader/>}
     </div>
   );
 }

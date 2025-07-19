@@ -12,6 +12,7 @@ const Error = () => {
       navigate("/");
     } else {
       localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       navigate("/login");
     }
   };

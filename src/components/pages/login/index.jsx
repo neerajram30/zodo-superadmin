@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login02, loginlogo } from "../../imagepath";
+import { login02, mainLogo } from "../../imagepath";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { useState } from "react";
@@ -12,6 +12,8 @@ import CenteredModal from "../../modals/CenteredModal";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+
   // const [email, setEmail] = useState("");
   // const { mutate: login, isLoading } = useLogin();
   const { login, validationError, isLoading } = useAuth();
@@ -23,8 +25,38 @@ const Login = () => {
   const handleLogin = (data) => {
     // e.preventDefault();
     login(data, {
-      onSuccess: () => {
-        navigate("/dashboard");
+      onSuccess: (userData) => {
+        const userType = userData?.data?.user_type;
+        const token = userData?.data?.tokens?.accessToken;
+        if (userType === "superAdmin") {
+          if (rememberMe) {
+            localStorage.setItem("token", token);
+          } else {
+            sessionStorage.setItem("token", token);
+          }
+          // localStorage.setItem("token", data?.data?.tokens?.accessToken);
+          navigate("/dashboard");
+        }
+      },
+    });
+
+    login(data, {
+      onSuccess: (userData) => {
+        const token = userData?.data?.tokens?.accessToken;
+
+        if (rememberMe) {
+          localStorage.setItem("token", token);
+        } else {
+          sessionStorage.setItem("token", token);
+        }
+
+        const userRole = userData?.data?.user_type;
+        if (userRole === "hsAdmin") {
+          navigate("/");
+        }
+        if (userRole === "staff") {
+          navigate("/appointment");
+        }
       },
     });
     // login({ email, password });
@@ -42,8 +74,6 @@ const Login = () => {
       navigate("/dashboard"); // Redirect to dashboard if token exists
     }
   }, []);
-
-  
 
   return (
     <>
@@ -64,9 +94,15 @@ const Login = () => {
                 <div className="loginbox">
                   <div className="login-right">
                     <div className="login-right-wrap">
-                      <div className="account-logo">
+                      {/* <div className="account-logo">
                         <Link to="/admin-dashboard">
                           <img src={loginlogo} alt="#" width={150} />
+                        </Link>
+                      </div> */}
+
+                      <div className="account-logo d-flex justify-content-md-start justify-content-center">
+                        <Link to="/login">
+                          <img src={mainLogo} alt="#" width={150} />
                         </Link>
                       </div>
                       <h2>Login</h2>
@@ -141,17 +177,22 @@ const Login = () => {
                           </div>
                         )}
 
-                        {/* <div className="forgotpass">
+                        <div className="forgotpass">
                           <div className="remember-me">
                             <label className="custom_check mr-2 mb-0 d-inline-flex remember-me">
                               {" "}
                               Remember me
-                              <input type="checkbox" name="radio" />
+                              <input
+                                type="checkbox"
+                                name="radio"
+                                checked={rememberMe}
+                                onClick={(e) => setRememberMe(e.target.checked)}
+                              />
                               <span className="checkmark" />
                             </label>
                           </div>
                           <Link to="/forgotpassword">Forgot Password?</Link>
-                        </div> */}
+                        </div>
                         {/* <Link to="/forgotpassword">Forgot Password?</Link> */}
 
                         <div className="form-group login-btn mt-3">
@@ -166,9 +207,7 @@ const Login = () => {
                         </div>
                       </form>
                       <CenteredModal>
-                          <div>
-                            hi
-                          </div>
+                        <div>hi</div>
                       </CenteredModal>
                     </div>
                   </div>

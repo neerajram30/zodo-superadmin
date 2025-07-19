@@ -3,7 +3,7 @@ import { getAnalyticsData } from "../apis/dashboard";
 
 export const useAnalyticsData = (query) => {  
   return useQuery({
-    queryKey: ["analytics"], // Unique query key
+    queryKey: ["analytics",query], // Unique query key
     queryFn: () => getAnalyticsData(query),
   });
 };
